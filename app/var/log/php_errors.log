@@ -1,2 +1,424 @@
-[17-Dec-2022 15:09:37 Europe/Paris] /var/www/controle_tech/
-[17-Dec-2022 15:09:52 Europe/Paris] /var/www/controle_tech/
+[17-Dec-2022 11:46:19 Europe/Paris] user
+[17-Dec-2022 11:46:19 Europe/Paris] 2
+[17-Dec-2022 11:46:19 Europe/Paris] 4
+[17-Dec-2022 11:46:19 Europe/Paris] 4
+[17-Dec-2022 11:46:25 Europe/Paris] 1
+[17-Dec-2022 11:46:25 Europe/Paris] user
+[17-Dec-2022 11:46:25 Europe/Paris] 2
+[17-Dec-2022 11:46:25 Europe/Paris] 4
+[17-Dec-2022 11:46:25 Europe/Paris] 4
+[17-Dec-2022 11:46:28 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:28 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:28 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:30 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:30 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:30 Europe/Paris] UPDATE `controle_tech` SET `state`='1', 
+                    `num_tech`='19' 
+                    WHERE `id_controle`='70'
+[17-Dec-2022 11:46:30 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:30 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:39 Europe/Paris] requete update:
+[17-Dec-2022 11:46:39 Europe/Paris] 1
+[17-Dec-2022 11:46:39 Europe/Paris] 1
+[17-Dec-2022 11:46:41 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:41 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:46:42 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:18 Europe/Paris] NEXT SELECT * FROM `controle_tech` 
+        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`  
+        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+        WHERE `controle_tech`.`state` = '0'
+        AND `time_slot` BETWEEN '1671318000' + 28800
+        AND '1671318000' + 64800
+        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0
+[17-Dec-2022 11:47:19 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671318000' + 28800 
+                        AND '1671318000' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:25 Europe/Paris] user
+[17-Dec-2022 11:47:25 Europe/Paris] 2
+[17-Dec-2022 11:47:25 Europe/Paris] 2
+[17-Dec-2022 11:47:25 Europe/Paris] 4
+[17-Dec-2022 11:47:25 Europe/Paris] 4
+[17-Dec-2022 11:47:30 Europe/Paris] 1
+[17-Dec-2022 11:47:30 Europe/Paris] user
+[17-Dec-2022 11:47:30 Europe/Paris] 2
+[17-Dec-2022 11:47:30 Europe/Paris] 2
+[17-Dec-2022 11:47:30 Europe/Paris] 4
+[17-Dec-2022 11:47:30 Europe/Paris] 4
+[17-Dec-2022 11:47:32 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:32 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:32 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:34 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%71%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:34 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%71%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:35 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%7%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:36 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:37 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%D%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:37 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%DD%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:37 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%DD%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:47:58 Europe/Paris] user
+[17-Dec-2022 11:48:02 Europe/Paris] user
+[17-Dec-2022 11:49:38 Europe/Paris] user
+[17-Dec-2022 11:49:45 Europe/Paris] user
+[17-Dec-2022 11:50:02 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:02 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:02 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:06 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:06 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:06 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:13 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:13 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:13 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:15 Europe/Paris] NEXT SELECT * FROM `controle_tech` 
+        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`  
+        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+        WHERE `controle_tech`.`state` = '0'
+        AND `time_slot` BETWEEN '1671318000' + 28800
+        AND '1671318000' + 64800
+        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0
+[17-Dec-2022 11:50:16 Europe/Paris] PREVIOUS SELECT * FROM `controle_tech` 
+        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`  
+        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+        WHERE `controle_tech`.`state` = '0'
+        AND `time_slot` BETWEEN '1671231600' + 28800
+        AND '1671231600' + 64800
+        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0
+[17-Dec-2022 11:50:19 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:19 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '1'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:19 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:23 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 5 
+[17-Dec-2022 11:50:23 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:26 Europe/Paris] requete update:
+[17-Dec-2022 11:50:26 Europe/Paris] 1
+[17-Dec-2022 11:50:26 Europe/Paris] SELECT * FROM `controle_tech` 
+                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
+                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                    INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                    WHERE `controle_tech`.`state` >= 2
+                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:26 Europe/Paris] SELECT * FROM `controle_tech` 
+                        INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule` 
+                        INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
+                        INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`   
+                        INNER JOIN `users` ON `controle_tech`.`id_user` =   `users`.`id_user`
+                        WHERE `controle_tech`.`state` = '0'
+                        AND `time_slot` BETWEEN '1671231600' + 28800 
+                        AND '1671231600' + 64800
+                        AND `vehicules`.`immat_vehicule` LIKE '%%'
+                        ORDER BY `time_slot` ASC LIMIT 5 OFFSET 0 
+[17-Dec-2022 11:50:29 Europe/Paris] user
+[17-Dec-2022 11:50:29 Europe/Paris] 4
+[17-Dec-2022 11:50:29 Europe/Paris] 2
+[17-Dec-2022 11:50:29 Europe/Paris] 2
+[17-Dec-2022 11:50:29 Europe/Paris] 4
+[17-Dec-2022 11:50:29 Europe/Paris] 4
+[17-Dec-2022 11:50:54 Europe/Paris] user
+[17-Dec-2022 11:50:54 Europe/Paris] 4
+[17-Dec-2022 11:50:54 Europe/Paris] 2
+[17-Dec-2022 11:50:54 Europe/Paris] 2
+[17-Dec-2022 11:50:54 Europe/Paris] 4
+[17-Dec-2022 11:50:54 Europe/Paris] 4
+[17-Dec-2022 18:57:09 Europe/Paris] user
+[17-Dec-2022 18:57:09 Europe/Paris] 4
+[17-Dec-2022 18:57:09 Europe/Paris] 2
+[17-Dec-2022 18:57:09 Europe/Paris] 2
+[17-Dec-2022 18:57:09 Europe/Paris] 4
+[17-Dec-2022 18:57:09 Europe/Paris] 4
+[17-Dec-2022 19:00:10 Europe/Paris] user
+[17-Dec-2022 19:00:10 Europe/Paris] 4
+[17-Dec-2022 19:00:10 Europe/Paris] 2
+[17-Dec-2022 19:00:10 Europe/Paris] 2
+[17-Dec-2022 19:00:10 Europe/Paris] 4
+[17-Dec-2022 19:00:10 Europe/Paris] 4
+[17-Dec-2022 19:14:35 Europe/Paris] user

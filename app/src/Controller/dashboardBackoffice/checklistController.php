@@ -99,7 +99,7 @@ if (!isset($_SESSION['id']) || $currentTime > $_SESSION['expire']) {
                     </div>
                 ';
 
-                $html_inter = 'Intervention n° ' . $id_inter;
+                $html_inter = '<div>Intervention n° <span id="numeroInter">' . $id_inter . '</span></div>';
 
                 echo json_encode(array("html" => $html, "html_inter" => $html_inter));
 

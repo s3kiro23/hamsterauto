@@ -9,7 +9,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require Kernel::ROOT_DIR().'\vendor\autoload.php';
+require Kernel::ROOT_DIR().'/vendor/autoload.php';
 
 class Mailing
 {

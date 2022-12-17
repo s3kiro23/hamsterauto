@@ -25,7 +25,7 @@ Puis taper en ligne de commande administrateur :
 
 -> Si environnement de développement :
 
-    docker compose -f docker-compose.yml -f docker-compose.dev.yml up -d
+    docker compose up -d
 
 *cela aura pour effet de bind le dossier racine de l'application à celui du container pour avoir les changements en live sur le code. (sorte de --watch)*
 
@@ -33,10 +33,6 @@ Puis taper en ligne de commande administrateur :
 
     composer install
 
--> Si environnement de production :
-
-    docker-compose up -d 
-*cela permettra de monter uniquement le dossier racine. Le composer install se fera automatiquement uniquement sur le container*
 
 #### Accès au terminal du docker Apache :
     docker exec -it srv_apache /bin/bash

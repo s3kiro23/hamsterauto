@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.7
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost
--- Généré le : sam. 17 déc. 2022 à 16:17
--- Version du serveur :  10.5.15-MariaDB-0+deb11u1
--- Version de PHP : 7.4.33
+-- Hôte : database
+-- Généré le : sam. 17 déc. 2022 à 17:28
+-- Version du serveur : 8.0.31
+-- Version de PHP : 8.0.19
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,16 +28,27 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `controle_tech` (
-  `id_controle` int(11) NOT NULL,
-  `num_tech` int(11) DEFAULT NULL,
-  `id_user` int(11) DEFAULT NULL,
-  `id_vehicule` int(11) NOT NULL,
-  `time_slot` int(11) NOT NULL,
-  `booked_date` datetime NOT NULL DEFAULT current_timestamp(),
-  `state` int(11) NOT NULL,
-  `report` longtext DEFAULT NULL,
+  `id_controle` int NOT NULL,
+  `num_tech` int DEFAULT NULL,
+  `id_user` int DEFAULT NULL,
+  `id_vehicule` int NOT NULL,
+  `time_slot` int NOT NULL,
+  `booked_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `state` int NOT NULL,
+  `report` longtext,
   `pv` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `controle_tech`
+--
+
+INSERT INTO `controle_tech` (`id_controle`, `num_tech`, `id_user`, `id_vehicule`, `time_slot`, `booked_date`, `state`, `report`, `pv`) VALUES
+(63, NULL, 23, 44, 1671433200, '2022-12-17 18:18:37', 0, NULL, NULL),
+(64, NULL, 24, 45, 1671433200, '2022-12-17 18:19:02', 0, NULL, NULL),
+(65, NULL, 25, 46, 1671433200, '2022-12-17 18:19:47', 0, NULL, NULL),
+(66, NULL, 26, 47, 1671444000, '2022-12-17 18:20:35', 0, NULL, NULL),
+(67, 0, 18, 48, 1671440400, '2022-12-17 18:26:10', 4, '', '');
 
 -- --------------------------------------------------------
 
@@ -47,12 +57,12 @@ CREATE TABLE `controle_tech` (
 --
 
 CREATE TABLE `login_attempts` (
-  `id_login_attempt` int(10) UNSIGNED NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_login_attempt` int UNSIGNED NOT NULL,
+  `id_user` int NOT NULL,
   `email_user` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `remote_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `generated_at` timestamp NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `generated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 -- --------------------------------------------------------
 
@@ -61,9 +71,9 @@ CREATE TABLE `login_attempts` (
 --
 
 CREATE TABLE `marques` (
-  `id_marque` int(11) NOT NULL,
+  `id_marque` int NOT NULL,
   `nom_marque` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `marques`
@@ -185,10 +195,10 @@ INSERT INTO `marques` (`id_marque`, `nom_marque`) VALUES
 --
 
 CREATE TABLE `modeles` (
-  `id_modele` int(11) NOT NULL,
-  `id_marque` int(11) NOT NULL,
+  `id_modele` int NOT NULL,
+  `id_marque` int NOT NULL,
   `nom_modele` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `modeles`
@@ -1715,11 +1725,24 @@ INSERT INTO `modeles` (`id_modele`, `id_marque`, `nom_modele`) VALUES
 --
 
 CREATE TABLE `queued` (
-  `id_queue` int(10) UNSIGNED NOT NULL,
+  `id_queue` int UNSIGNED NOT NULL,
   `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `template` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `template` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `queued`
+--
+
+INSERT INTO `queued` (`id_queue`, `type`, `template`, `created_at`) VALUES
+(96, 'sms', '{\"bodySMS\":\"Bonjour Jean Marie, votre rendez-vous du lundi 19 d\\u00e9cembre 2022 pour le v\\u00e9hicule immatricul\\u00e9 AA-456-AA vient d\'\\u00eatre confirm\\u00e9 sur notre plateforme. Merci pour votre confiance. Votre centre AFLAUTO.\",\"receiver\":\"0616506212\"}', '2022-12-17 18:20:35'),
+(97, 'mail', '{\"subject\":\"Demande d\'information formulaire de contact - Geronimi Jean Marie\",\"body\":\"aa\",\"mail\":\"shadow.s3kir0@gmail.com\",\"reply\":\"jm.geronimi@gmail.com\"}', '2022-12-17 18:21:30'),
+(98, 'mail', '{\"subject\":\"R\\u00e9cup\\u00e9ration de votre compte utilisateur\",\"body\":\"\\r\\n        <div style=\'background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px\'>\\r\\n            <div style=\'display: flex; justify-content: center\'>\\r\\n                <img src=\'cid:logoMail.png\' alt=\'logo_aflauto\'\\/>\\r\\n            <\\/div>\\r\\n            <br>\\r\\n            Bonjour gilbert,\\r\\n            <br><br>\\r\\n             Vous avez oubli\\u00e9 votre mot de passe ?<br>\\r\\n            Nous avons re\\u00e7u une demande de r\\u00e9initialisation pour votre compte .\\r\\n            <br><br>\\r\\n            Pour pouvoir r\\u00e9cup\\u00e9rer ce dernier, veuillez cliquer sur le lien ci - dessous :\\r\\n            <br><br>\\r\\n            <button>\\r\\n                <a style = \'text-decoration: none;\' href = \'http:\\/\\/localhost\\/controle_tech\\/templates\\/change-password.html?token=RTxWE02!Ho@bPbHroOlWKOxcqk588w\'><b> R\\u00e9cup\\u00e9ration de mon compte <\\/b ><\\/a >\\r\\n            <\\/button>\\r\\n            <br><br><br>\\r\\n            Ou copier et coller cette URL dans la barre de recherche de votre navigateur :<br>\\r\\n            <a href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/change-password.html?token=RTxWE02!Ho@bPbHroOlWKOxcqk588w\'> http:\\/\\/localhost\\/controle_tech\\/templates\\/change-password.html?token=RTxWE02!Ho@bPbHroOlWKOxcqk588w<\\/a>\\r\\n            <br><br><br>\\r\\n            L\'\\u00e9quipe d\'<a style=\'text-decoration: none; color: black\' href= \'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' target=\'_blank\' ><b>Afl<span style=\'color: #4bbf73\'>A<\\/span>uto<\\/b><\\/a>.\\r\\n            <br><br>\\r\\n            <p>\\u260e\\ufe0f 06.00.00.00.01<\\/p>\\r\\n            \\ud83c\\udf10<a href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' target = \'_blank\'> Aflauto.com<\\/a>\\r\\n        <\\/div>\\r\\n            \",\"mail\":\"jm.geronimi@gmail.com\"}', '2022-12-17 18:21:40'),
+(99, 'mail', '{\"subject\":\"Confirmation de votre inscription\",\"body\":\"\\r\\n            <div style=\'background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px\'>\\r\\n                <div style=\'display: flex; justify-content: center\'>\\r\\n                    <img src=\'cid:logoMail.png\' alt=\'logo_aflauto\'\\/>\\r\\n                <\\/div>\\r\\n                <br>\\r\\n                    Bonjour Mr. Geronimi,\\r\\n                <br><br>\\r\\n               Votre inscription sur Alfauto.com a \\u00e9t\\u00e9 valid\\u00e9e !\\r\\n                <br><br>\\r\\n                Vous pouvez d\\u00e8s \\u00e0 pr\\u00e9sent vous connecter sur votre espace personnel\\r\\n                <br>\\r\\n                en utilisant votre adresse mail:  jm.geronimi@gmail.de\\r\\n                <br><br>\\r\\n                <a  \\r\\n                href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' \\r\\n                target = \'_blank\'>Je me connecte \\u00e0 mon espace\\r\\n                <\\/a>\\r\\n                <br><br><br>\\r\\n                L\'\\u00e9quipe d\'<a style=\'text-decoration: none; color: black\' \\r\\n                            href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' \\r\\n                            target = \'_blank\'><b>Afl<span style = \'color: #4bbf73\'>A<\\/span>uto<\\/b>\\r\\n                            <\\/a> vous remercie et esp\\u00e8re vous voir lors de vos prochains contr\\u00f4le technique.\\r\\n                <br><br>\\r\\n                <p>\\u260e\\ufe0f 06.00.00.00.01<\\/p>\\r\\n                \\ud83c\\udf10<a href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' target = \'_blank\'> Aflauto.com<\\/a>\\r\\n            <\\/div>\\r\\n            \",\"mail\":\"jm.geronimi@gmail.de\"}', '2022-12-17 18:22:37'),
+(100, 'sms', '{\"bodySMS\":\"Bonjour gilbert, voici votre code SMS pour la connexion \\u00e0 votre compte AFLAUTO : 7477\",\"receiver\":\"0677004692\"}', '2022-12-17 18:24:10'),
+(101, 'sms', '{\"bodySMS\":\"Bonjour gilbert, votre rendez-vous du lundi 19 d\\u00e9cembre 2022 pour le v\\u00e9hicule immatricul\\u00e9 AV-258-AM vient d\'\\u00eatre confirm\\u00e9 sur notre plateforme. Merci pour votre confiance. Votre centre AFLAUTO.\",\"receiver\":\"0677004692\"}', '2022-12-17 18:26:10'),
+(102, 'mail', '{\"subject\":\"Information concernant votre intervention\",\"body\":\"\\r\\n        <div style=\'background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px\'>\\r\\n            <div style=\'display: flex; justify-content: center\'>\\r\\n                <img src=\'cid:logoMail.png\' alt=\'logo_aflauto\'\\/>\\r\\n            <\\/div>\\r\\n            <br>\\r\\n            Bonjour gilbert,\\r\\n            <br><br>\\r\\n            La demande d\'annulation de votre rendez-vous du <b>19\\/12\\/2022 \\u00e0 10:00<\\/b> pour le v\\u00e9hicule immatricul\\u00e9 <b>AV-258-AM<\\/b> a bien \\u00e9t\\u00e9 prise en compte !\\r\\n            <br><br>\\r\\n            Nous esp\\u00e9rons vous revoir prochainement pour le suivi de vos v\\u00e9hicules.\\r\\n            <br><br><br>\\r\\n            L\'\\u00e9quipe d\'<a style=\'text - decoration: none; color: black\' href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' target=\'_blank\'><b>Afl<span style=\'color: #4bbf73\'>A<\\/span>uto<\\/b><\\/a>.\\r\\n            <br><br>\\r\\n            <p>\\u260e\\ufe0f 06.00.00.00.01<\\/p>\\r\\n            \\ud83c\\udf10 <a href=\'http:\\/\\/localhost\\/controle_tech\\/templates\\/\' target=\'_blank\'>Aflauto.com<\\/a>\\r\\n        <\\/div>\\r\\n        \",\"mail\":\"jm.geronimi@gmail.com\"}', '2022-12-17 18:26:12');
 
 -- --------------------------------------------------------
 
@@ -1728,11 +1751,18 @@ CREATE TABLE `queued` (
 --
 
 CREATE TABLE `request` (
-  `id_request` int(10) UNSIGNED NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_request` int UNSIGNED NOT NULL,
+  `id_user` int NOT NULL,
   `hash` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `state` tinyint(1) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `request`
+--
+
+INSERT INTO `request` (`id_request`, `id_user`, `hash`, `state`) VALUES
+(4, 18, 'RTxWE02!Ho@bPbHroOlWKOxcqk588w', 0);
 
 -- --------------------------------------------------------
 
@@ -1741,15 +1771,15 @@ CREATE TABLE `request` (
 --
 
 CREATE TABLE `settings` (
-  `id_settings` int(11) NOT NULL,
-  `slot_interval` int(11) DEFAULT NULL,
-  `start_time_am` int(11) DEFAULT NULL,
-  `end_time_am` int(11) DEFAULT NULL,
-  `start_time_pm` int(11) DEFAULT NULL,
-  `end_time_pm` int(11) DEFAULT NULL,
-  `nb_lifts` int(11) NOT NULL DEFAULT 3,
-  `coordinates` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`coordinates`))
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_settings` int NOT NULL,
+  `slot_interval` int DEFAULT NULL,
+  `start_time_am` int DEFAULT NULL,
+  `end_time_am` int DEFAULT NULL,
+  `start_time_pm` int DEFAULT NULL,
+  `end_time_pm` int DEFAULT NULL,
+  `nb_lifts` int NOT NULL DEFAULT '3',
+  `coordinates` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin
+) ;
 
 --
 -- Déchargement des données de la table `settings`
@@ -1765,12 +1795,19 @@ INSERT INTO `settings` (`id_settings`, `slot_interval`, `start_time_am`, `end_ti
 --
 
 CREATE TABLE `sms` (
-  `id_sms` int(10) UNSIGNED NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `code` int(11) NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT 0,
-  `generated_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_sms` int UNSIGNED NOT NULL,
+  `id_user` int NOT NULL,
+  `code` int NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT '0',
+  `generated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `sms`
+--
+
+INSERT INTO `sms` (`id_sms`, `id_user`, `code`, `state`, `generated_at`) VALUES
+(21, 18, 7477, 1, '2022-12-17 18:24:10');
 
 -- --------------------------------------------------------
 
@@ -1779,12 +1816,35 @@ CREATE TABLE `sms` (
 --
 
 CREATE TABLE `traces` (
-  `id_traces` int(10) UNSIGNED NOT NULL,
-  `id_user` int(11) NOT NULL,
+  `id_traces` int UNSIGNED NOT NULL,
+  `id_user` int NOT NULL,
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `triggered_at` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `triggered_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `traces`
+--
+
+INSERT INTO `traces` (`id_traces`, `id_user`, `type`, `action`, `triggered_at`) VALUES
+(60, 25, 'intervention', 'new', '2022-12-17 18:19:47'),
+(61, 26, 'intervention', 'new', '2022-12-17 18:20:35'),
+(62, 27, 'account', 'new', '2022-12-17 18:22:37'),
+(63, 18, 'account', 'logged', '2022-12-17 18:23:38'),
+(64, 18, 'security', 'a2f-enabled', '2022-12-17 18:23:55'),
+(65, 18, 'session', 'logout', '2022-12-17 18:24:03'),
+(66, 18, 'session', 'logged', '2022-12-17 18:24:43'),
+(67, 18, 'security', 'a2f-disabled', '2022-12-17 18:24:48'),
+(68, 18, 'session', 'logout', '2022-12-17 18:24:53'),
+(69, 18, 'password', 'update', '2022-12-17 18:25:41'),
+(70, 18, 'account', 'logged', '2022-12-17 18:25:45'),
+(71, 18, 'car', 'new', '2022-12-17 18:26:03'),
+(72, 18, 'intervention', 'new', '2022-12-17 18:26:10'),
+(73, 18, 'intervention', 'canceled', '2022-12-17 18:26:12'),
+(74, 18, 'car', 'delete', '2022-12-17 18:26:14'),
+(75, 18, 'car', 'new', '2022-12-17 18:26:26'),
+(76, 18, 'file', 'upload', '2022-12-17 18:26:47');
 
 -- --------------------------------------------------------
 
@@ -1793,11 +1853,18 @@ CREATE TABLE `traces` (
 --
 
 CREATE TABLE `uploads` (
-  `id` int(11) NOT NULL,
+  `id_upload` int NOT NULL,
   `file_name` varchar(255) NOT NULL,
-  `id_vehicule` int(11) NOT NULL,
-  `submitted_on` datetime NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `id_vehicule` int NOT NULL,
+  `submitted_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `uploads`
+--
+
+INSERT INTO `uploads` (`id_upload`, `file_name`, `id_vehicule`, `submitted_on`) VALUES
+(4, 'VWFIWWgzK3FIR3ZZU0lvT2VRbTZ4YzVOcFlVNFlRekgzZzlQQytCKzV6YklDOG9JS013OVN5NTNNaDVPSXJzKzo6LyidC4MIH8H/5hQILwVZow==', 49, '2022-12-17 18:26:47');
 
 -- --------------------------------------------------------
 
@@ -1806,30 +1873,35 @@ CREATE TABLE `uploads` (
 --
 
 CREATE TABLE `users` (
-  `id_user` int(11) NOT NULL,
+  `id_user` int NOT NULL,
   `civilite_user` varchar(15) NOT NULL,
   `nom_user` varchar(255) NOT NULL,
   `prenom_user` varchar(255) NOT NULL,
   `telephone_user` varchar(15) NOT NULL,
   `email_user` varchar(50) NOT NULL,
-  `adresse_user` longtext DEFAULT NULL,
+  `adresse_user` longtext,
   `password_user` varchar(350) NOT NULL,
   `type` varchar(15) NOT NULL,
   `pwdExp_user` datetime DEFAULT NULL,
-  `a2f` tinyint(1) DEFAULT 0,
-  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `a2f` tinyint(1) DEFAULT '0',
+  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `hash` varchar(40) DEFAULT NULL,
-  `is_active` tinyint(4) NOT NULL DEFAULT 1,
-  `img_profile` longtext DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `is_active` tinyint NOT NULL DEFAULT '1',
+  `img_profile` longtext
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`id_user`, `civilite_user`, `nom_user`, `prenom_user`, `telephone_user`, `email_user`, `adresse_user`, `password_user`, `type`, `pwdExp_user`, `a2f`, `created_date`, `hash`, `is_active`, `img_profile`) VALUES
-(18, 'Mr', 'leclient', 'gilbert', '0677004692', 'jm.geronimi@gmail.com', 'ici', '$2y$10$k.LpCT8vXnfxrK/s7VqCy.aY3Z/VyO2MGqku60u/hRL1Vo5thd74O', 'client', '2025-09-28 00:00:00', 0, '2022-09-21 10:16:53', 'zU3W3NMWjQwe#Qa?0T?QNrOl3?9Zw!', 1, ''),
-(19, 'Mr', 'technicien', 'jean-michel', '0987676545', 'b@b.fr', '', '$2y$10$BjNAtcQ6Tk/NURQtbpFbLup9P0Fv4y1XktpS5HJEj0gz9buWL1C5q', 'technicien', '2026-09-22 00:00:00', 0, '2022-09-21 10:35:25', 'EjdVJ@#oxIEWv4CvSSlwipNGvwb9th', 1, NULL);
+(18, 'Mr', 'leclient', 'gilbert', '0677004692', 'jm.geronimi@gmail.com', 'ici', '$2y$10$/4jy8.9fOpR7wE6qIrj8BuIx3Ha.jrgecnZtqFzj3orzqGeGZqzx.', 'client', '2022-12-18 00:00:00', 0, '2022-09-21 10:16:53', 'zU3W3NMWjQwe#Qa?0T?QNrOl3?9Zw!', 1, ''),
+(19, 'Mr', 'technicien', 'jean-michel', '0987676545', 'b@b.fr', '', '$2y$10$BjNAtcQ6Tk/NURQtbpFbLup9P0Fv4y1XktpS5HJEj0gz9buWL1C5q', 'technicien', '2026-09-22 00:00:00', 0, '2022-09-21 10:35:25', 'EjdVJ@#oxIEWv4CvSSlwipNGvwb9th', 1, NULL),
+(23, 'Mr', 'Geronimi', 'Jean Marie', '0616506212', 'jm.geronimi@gmail.aaaa', NULL, '$2y$10$0zp4l/sQAjxqBj9kT4Rt2eLVEA19SnHv8DXdFKY30mc0NAjtZRIQ2', 'temp', '2022-12-18 00:00:00', 0, '2022-12-17 18:18:37', '', 1, NULL),
+(24, 'Mr', 'Geronimi', 'Jean Marie', '0616506212', 'jm.geronimi@gmail.aaaa', NULL, '$2y$10$zKEWGRN/RKGd7xClo8B09uv0kAiTPpcPqeH6D3dSAdnZ/wqCoG9O2', 'temp', '2022-12-18 00:00:00', 0, '2022-12-17 18:19:02', '', 1, NULL),
+(25, 'Mr', 'Geronimi', 'Jean Marie', '0616506212', 'jm.geronimi@gmail.aaaa', NULL, '$2y$10$hz.fF/XgXDIBwNl/Q3bbMO9jYjiVTgg4XJpqlS6MwuLldLLq3fcZC', 'temp', '2022-12-18 00:00:00', 0, '2022-12-17 18:19:47', '', 1, NULL),
+(26, 'Mr', 'Geronimi', 'Jean Marie', '0616506212', 'jm.geronimi@gmail.aaaaa', NULL, '$2y$10$B205qXWiphwutPiBaiJst.OihagnIglvg2oOyEdCyUUxA/pyaSBVS', 'temp', '2022-12-18 00:00:00', 0, '2022-12-17 18:20:35', '', 1, NULL),
+(27, 'Mr', 'Geronimi', 'Jean Marie', '0645787878', 'jm.geronimi@gmail.de', NULL, '$2y$10$sCZfTEJA1hCqVdbr3J9ndOIKwk8mD4Ii4XNI/3firnHokLYAEa6P2', 'client', '2022-12-18 00:00:00', 0, '2022-12-17 18:22:37', 'A28m$l$X#bSe9yKInMcJu3$$!uFf9H', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -1838,15 +1910,27 @@ INSERT INTO `users` (`id_user`, `civilite_user`, `nom_user`, `prenom_user`, `tel
 --
 
 CREATE TABLE `vehicules` (
-  `id_vehicule` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `id_modele` int(11) NOT NULL,
+  `id_vehicule` int NOT NULL,
+  `id_user` int NOT NULL,
+  `id_modele` int NOT NULL,
   `immat_vehicule` varchar(11) NOT NULL,
-  `annee_vehicule` int(11) NOT NULL,
+  `annee_vehicule` int NOT NULL,
   `carburant_vehicule` varchar(35) NOT NULL,
-  `infos_vehicule` longtext DEFAULT NULL,
-  `owned` tinyint(1) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `infos_vehicule` longtext,
+  `owned` tinyint(1) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+--
+-- Déchargement des données de la table `vehicules`
+--
+
+INSERT INTO `vehicules` (`id_vehicule`, `id_user`, `id_modele`, `immat_vehicule`, `annee_vehicule`, `carburant_vehicule`, `infos_vehicule`, `owned`) VALUES
+(44, 23, 68, 'AV-258-AF', 2012, 'Essence', NULL, 0),
+(45, 24, 68, 'AV-258-AV', 2012, 'Essence', NULL, 0),
+(46, 25, 68, 'AV-258-AH', 2012, 'Essence', NULL, 0),
+(47, 26, 752, 'AA-456-AA', 2004, 'Diesel', NULL, 0),
+(48, 18, 696, 'AV-258-AM', 2012, 'Electrique', '', 0),
+(49, 18, 694, 'DD-456-DD', 2020, 'Electrique', NULL, 1);
 
 --
 -- Index pour les tables déchargées
@@ -1916,7 +2000,7 @@ ALTER TABLE `traces`
 -- Index pour la table `uploads`
 --
 ALTER TABLE `uploads`
-  ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id_upload`),
   ADD KEY `id_vehicule` (`id_vehicule`);
 
 --
@@ -1941,73 +2025,73 @@ ALTER TABLE `vehicules`
 -- AUTO_INCREMENT pour la table `controle_tech`
 --
 ALTER TABLE `controle_tech`
-  MODIFY `id_controle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_controle` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
 
 --
 -- AUTO_INCREMENT pour la table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id_login_attempt` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_login_attempt` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `marques`
 --
 ALTER TABLE `marques`
-  MODIFY `id_marque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id_marque` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT pour la table `modeles`
 --
 ALTER TABLE `modeles`
-  MODIFY `id_modele` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1524;
+  MODIFY `id_modele` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1524;
 
 --
 -- AUTO_INCREMENT pour la table `queued`
 --
 ALTER TABLE `queued`
-  MODIFY `id_queue` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id_queue` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=103;
 
 --
 -- AUTO_INCREMENT pour la table `request`
 --
 ALTER TABLE `request`
-  MODIFY `id_request` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_request` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id_settings` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_settings` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT pour la table `sms`
 --
 ALTER TABLE `sms`
-  MODIFY `id_sms` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_sms` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT pour la table `traces`
 --
 ALTER TABLE `traces`
-  MODIFY `id_traces` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_traces` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT pour la table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_upload` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT pour la table `vehicules`
 --
 ALTER TABLE `vehicules`
-  MODIFY `id_vehicule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_vehicule` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=50;
 
 --
 -- Contraintes pour les tables déchargées

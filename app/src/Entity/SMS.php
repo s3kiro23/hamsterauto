@@ -3,7 +3,7 @@
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-require Kernel::ROOT_DIR().'\vendor\autoload.php';
+require Kernel::ROOT_DIR().'/vendor/autoload.php';
 
 use \Ovh\Api;
 
