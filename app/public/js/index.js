@@ -271,7 +271,7 @@ let newRDVHomePage = function () {
         $immat = $('#inputImmatOld').val();
     }
     Swal.fire({
-        title: "Confirmez-vous la demande de rendez-vous ?",
+        title: "Confirmez-vous la demande ?",
         text: "",
         imageUrl: '../public/assets/img/swalicons/interro.png',
         imageWidth: 100,
