@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.9.7
 -- https://www.phpmyadmin.net/
 --
--- Hôte : database
--- Généré le : sam. 17 déc. 2022 à 13:53
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.19
+-- Hôte : localhost
+-- Généré le : sam. 17 déc. 2022 à 16:17
+-- Version du serveur :  10.5.15-MariaDB-0+deb11u1
+-- Version de PHP : 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -28,16 +29,16 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `controle_tech` (
-  `id_controle` int NOT NULL,
-  `num_tech` int DEFAULT NULL,
-  `id_user` int DEFAULT NULL,
-  `id_vehicule` int NOT NULL,
-  `time_slot` int NOT NULL,
-  `booked_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `state` int NOT NULL,
-  `report` longtext,
+  `id_controle` int(11) NOT NULL,
+  `num_tech` int(11) DEFAULT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `id_vehicule` int(11) NOT NULL,
+  `time_slot` int(11) NOT NULL,
+  `booked_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `state` int(11) NOT NULL,
+  `report` longtext DEFAULT NULL,
   `pv` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -46,12 +47,12 @@ CREATE TABLE `controle_tech` (
 --
 
 CREATE TABLE `login_attempts` (
-  `id_login_attempt` int UNSIGNED NOT NULL,
-  `id_user` int NOT NULL,
+  `id_login_attempt` int(10) UNSIGNED NOT NULL,
+  `id_user` int(11) NOT NULL,
   `email_user` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `remote_ip` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `generated_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `generated_at` timestamp NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -60,9 +61,9 @@ CREATE TABLE `login_attempts` (
 --
 
 CREATE TABLE `marques` (
-  `id_marque` int NOT NULL,
+  `id_marque` int(11) NOT NULL,
   `nom_marque` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `marques`
@@ -184,10 +185,10 @@ INSERT INTO `marques` (`id_marque`, `nom_marque`) VALUES
 --
 
 CREATE TABLE `modeles` (
-  `id_modele` int NOT NULL,
-  `id_marque` int NOT NULL,
+  `id_modele` int(11) NOT NULL,
+  `id_marque` int(11) NOT NULL,
   `nom_modele` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `modeles`
@@ -1714,11 +1715,11 @@ INSERT INTO `modeles` (`id_modele`, `id_marque`, `nom_modele`) VALUES
 --
 
 CREATE TABLE `queued` (
-  `id_queue` int UNSIGNED NOT NULL,
+  `id_queue` int(10) UNSIGNED NOT NULL,
   `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `template` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+  `template` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1727,11 +1728,11 @@ CREATE TABLE `queued` (
 --
 
 CREATE TABLE `request` (
-  `id_request` int UNSIGNED NOT NULL,
-  `id_user` int NOT NULL,
+  `id_request` int(10) UNSIGNED NOT NULL,
+  `id_user` int(11) NOT NULL,
   `hash` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `state` tinyint(1) NOT NULL DEFAULT 0
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1740,15 +1741,15 @@ CREATE TABLE `request` (
 --
 
 CREATE TABLE `settings` (
-  `id_settings` int NOT NULL,
-  `slot_interval` int DEFAULT NULL,
-  `start_time_am` int DEFAULT NULL,
-  `end_time_am` int DEFAULT NULL,
-  `start_time_pm` int DEFAULT NULL,
-  `end_time_pm` int DEFAULT NULL,
-  `nb_lifts` int NOT NULL DEFAULT '3',
-  `coordinates` json DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `id_settings` int(11) NOT NULL,
+  `slot_interval` int(11) DEFAULT NULL,
+  `start_time_am` int(11) DEFAULT NULL,
+  `end_time_am` int(11) DEFAULT NULL,
+  `start_time_pm` int(11) DEFAULT NULL,
+  `end_time_pm` int(11) DEFAULT NULL,
+  `nb_lifts` int(11) NOT NULL DEFAULT 3,
+  `coordinates` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`coordinates`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `settings`
@@ -1764,12 +1765,12 @@ INSERT INTO `settings` (`id_settings`, `slot_interval`, `start_time_am`, `end_ti
 --
 
 CREATE TABLE `sms` (
-  `id_sms` int UNSIGNED NOT NULL,
-  `id_user` int NOT NULL,
-  `code` int NOT NULL,
-  `state` tinyint(1) NOT NULL DEFAULT '0',
-  `generated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `id_sms` int(10) UNSIGNED NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `code` int(11) NOT NULL,
+  `state` tinyint(1) NOT NULL DEFAULT 0,
+  `generated_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1778,12 +1779,12 @@ CREATE TABLE `sms` (
 --
 
 CREATE TABLE `traces` (
-  `id_traces` int UNSIGNED NOT NULL,
-  `id_user` int NOT NULL,
+  `id_traces` int(10) UNSIGNED NOT NULL,
+  `id_user` int(11) NOT NULL,
   `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `triggered_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `triggered_at` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1792,11 +1793,11 @@ CREATE TABLE `traces` (
 --
 
 CREATE TABLE `uploads` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `file_name` varchar(255) NOT NULL,
-  `id_vehicule` int NOT NULL,
-  `submitted_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `id_vehicule` int(11) NOT NULL,
+  `submitted_on` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -1805,22 +1806,22 @@ CREATE TABLE `uploads` (
 --
 
 CREATE TABLE `users` (
-  `id_user` int NOT NULL,
+  `id_user` int(11) NOT NULL,
   `civilite_user` varchar(15) NOT NULL,
   `nom_user` varchar(255) NOT NULL,
   `prenom_user` varchar(255) NOT NULL,
   `telephone_user` varchar(15) NOT NULL,
   `email_user` varchar(50) NOT NULL,
-  `adresse_user` longtext,
+  `adresse_user` longtext DEFAULT NULL,
   `password_user` varchar(350) NOT NULL,
   `type` varchar(15) NOT NULL,
   `pwdExp_user` datetime DEFAULT NULL,
-  `a2f` tinyint(1) DEFAULT '0',
-  `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `a2f` tinyint(1) DEFAULT 0,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
   `hash` varchar(40) DEFAULT NULL,
-  `is_active` tinyint NOT NULL DEFAULT '1',
-  `img_profile` longtext
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `is_active` tinyint(4) NOT NULL DEFAULT 1,
+  `img_profile` longtext DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Déchargement des données de la table `users`
@@ -1837,15 +1838,15 @@ INSERT INTO `users` (`id_user`, `civilite_user`, `nom_user`, `prenom_user`, `tel
 --
 
 CREATE TABLE `vehicules` (
-  `id_vehicule` int NOT NULL,
-  `id_user` int NOT NULL,
-  `id_modele` int NOT NULL,
+  `id_vehicule` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `id_modele` int(11) NOT NULL,
   `immat_vehicule` varchar(11) NOT NULL,
-  `annee_vehicule` int NOT NULL,
+  `annee_vehicule` int(11) NOT NULL,
   `carburant_vehicule` varchar(35) NOT NULL,
-  `infos_vehicule` longtext,
-  `owned` tinyint(1) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+  `infos_vehicule` longtext DEFAULT NULL,
+  `owned` tinyint(1) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Index pour les tables déchargées
@@ -1940,73 +1941,73 @@ ALTER TABLE `vehicules`
 -- AUTO_INCREMENT pour la table `controle_tech`
 --
 ALTER TABLE `controle_tech`
-  MODIFY `id_controle` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id_controle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- AUTO_INCREMENT pour la table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-  MODIFY `id_login_attempt` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
+  MODIFY `id_login_attempt` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
 
 --
 -- AUTO_INCREMENT pour la table `marques`
 --
 ALTER TABLE `marques`
-  MODIFY `id_marque` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
+  MODIFY `id_marque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=108;
 
 --
 -- AUTO_INCREMENT pour la table `modeles`
 --
 ALTER TABLE `modeles`
-  MODIFY `id_modele` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1524;
+  MODIFY `id_modele` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1524;
 
 --
 -- AUTO_INCREMENT pour la table `queued`
 --
 ALTER TABLE `queued`
-  MODIFY `id_queue` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `id_queue` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT pour la table `request`
 --
 ALTER TABLE `request`
-  MODIFY `id_request` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_request` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `settings`
 --
 ALTER TABLE `settings`
-  MODIFY `id_settings` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_settings` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT pour la table `sms`
 --
 ALTER TABLE `sms`
-  MODIFY `id_sms` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id_sms` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `traces`
 --
 ALTER TABLE `traces`
-  MODIFY `id_traces` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
+  MODIFY `id_traces` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- AUTO_INCREMENT pour la table `uploads`
 --
 ALTER TABLE `uploads`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT pour la table `vehicules`
 --
 ALTER TABLE `vehicules`
-  MODIFY `id_vehicule` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id_vehicule` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- Contraintes pour les tables déchargées
