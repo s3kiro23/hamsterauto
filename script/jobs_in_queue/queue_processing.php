@@ -1,8 +1,18 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require '../../src/Entity/' . $classe . '.php';
-});
+class Database{
+    private $db;
+    public function __construct(){
+        try{
+            $this->db = mysqli_connect("localhost", "db", "Db123!@20", "hamsterauto");
+        } catch (RuntimeException $e){
+            exit(0);
+        }
+    }
+    public function connexion(){
+        return $this->db;
+    }
+}
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
