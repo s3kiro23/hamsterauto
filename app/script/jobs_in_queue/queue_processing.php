@@ -1,29 +1,13 @@
 <?php
 
-class Database{
-    private $db;
-    public function __construct(){
-        try{
-            $this->db = mysqli_connect("localhost", "db", "Db123!@20", "hamsterauto");
-        } catch (RuntimeException $e){
-            exit(0);
-        }
-    }
-    public function connexion(){
-        return $this->db;
-    }
-}
+spl_autoload_register(function ($classe) {
+    require '../src/Entity/' . $classe . '.php';
+});
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-$jobs_in_queued = [];
-
-$requete = "SELECT * FROM queued";
-$result = mysqli_query($GLOBALS['Database'], $requete) or die;
-while ($data = mysqli_fetch_assoc($result)) {
-    $jobs_in_queued[] = $data;
-}
+$jobs_in_queued = Queued::getJobsQueued();
 
 if (!empty($jobs_in_queued)) {
     $state = 0;
