@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../public/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="../public/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/9414e04596.js" crossorigin="anonymous"></script>
+    <title>Où nous trouver !</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+
+<body>
+
+<!-- ===============================================-->
+<!--    Main Content-->
+<!-- ===============================================-->
+<main class="main" id="top">
+    <div class="container-fluid">
+        <div class="row min-vh-100 flex-center g-0">
+            <div class="col-lg-9 col-xxl-8 py-3 position-relative">
+                <img class="bg-auth-circle-shape"
+                        src="../public/assets/img/icons/spot-illustrations/bg-shape.png"
+                        alt="" width="250">
+                <img
+                    class="bg-auth-circle-shape-2" src="../public/assets/img/icons/spot-illustrations/shape-1.png"
+                    alt="" width="150">
+                <div class="card overflow-hidden z-index-1">
+                    <div class="card-body p-0">
+                        <div class="row g-0 h-100">
+                            <div class="col-md-5 text-center">
+                                <div class="p-4 flex-grow-1">
+                                    <h3 class="text-center text-primary">Contactez-nous</h3>
+                                    <h6 class="text-center">Demande d'information complémentaire</h6>
+                                    <div class="sending mt-4 px-sm-5">
+                                        <form class="d-flex flex-column justify-content-center gap-2"
+                                              action="javascript:contactUS();"
+                                              method="POST">
+                                            <div>
+                                                <label for="contactNom" class="sr-only"></label>
+                                                <input
+                                                        id="contactNom"
+                                                        name="nom"
+                                                        type="text"
+                                                        class="appearance-none form-control rounded-top px-3 py-2 border border-gray-300 text-secondary"
+                                                        placeholder="Nom"
+                                                />
+                                                <div class="invalid-feedback mb-2"></div>
+                                            </div>
+                                            <div>
+                                                <label for="contactPrenom" class="sr-only"></label>
+                                                <input
+                                                        id="contactPrenom"
+                                                        name="prenom"
+                                                        type="text"
+                                                        class="field form-control appearance-none px-3 py-2 border border-gray-300 text-secondary"
+                                                        placeholder="Prénom"
+                                                />
+                                                <div class="invalid-feedback mb-2"></div>
+                                            </div>
+                                            <div>
+                                                <label for="contactEmail" class="sr-only"></label>
+                                                <input
+                                                        id="contactEmail"
+                                                        name="contactEmail"
+                                                        type="email"
+                                                        class="field appearance-none form-control rounded-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
+                                                        placeholder="Email"
+                                                />
+                                                <div class="invalid-feedback mb-2"></div>
+                                            </div>
+                                            <div>
+                                                <label for="contactText" class="sr-only"></label>
+                                                <textarea id="contactText" name="contactText"
+                                                          class="field appearance-none form-control rounded-bottom px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
+                                                          placeholder="Votre message ici !"></textarea>
+                                                <div class="invalid-feedback mb-2"></div>
+                                            </div>
+                                            <div class="rounded-md py-3">
+                                                <div class="px-3 py-2 rounded-top bg-primary text-white">
+                                                    <span>Captcha :</span>
+                                                    <span id="captcha"></span>
+                                                </div>
+                                                <div>
+                                                    <label for="captcha_verif" class="sr-only"></label>
+                                                    <input
+                                                            id="captcha_verif"
+                                                            name="captcha_verif"
+                                                            type="text"
+                                                            class="field form-control appearance-none rounded-bottom relative px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
+                                                            placeholder="Entrez le code captcha."
+                                                    />
+                                                    <div class="invalid-feedback mb-2"></div>
+                                                </div>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="checkbox"
+                                                       id="card-register-checkbox"/>
+                                                <label class="form-label text-start" for="card-register-checkbox">
+                                                    Vous devez accepter nos <a id="to-cgu" class="text-primary" type="button">CGU</a> pour
+                                                    pouvoir nous contacter.
+                                                </label>
+                                            </div>
+                                            <div>
+                                                <button
+                                                        type="submit"
+                                                        id='sign_in'
+                                                        class="group relative w-100 d-flex justify-content-center py-2 px-4 rounded text-white btn btn-primary"
+                                                >
+                                                    Soumettre
+                                                </button>
+                                            </div>
+                                            <div class="text-center">
+                                                <span class="d-flex justify-content-center text-dark ">ou</span>
+                                                <a id="to_logIn"
+                                                   type="button"
+                                                   class="text-decoration-none font-medium"
+                                                >
+                                                    <span class="to_logIn">retour à la page connexion.</span>
+                                                </a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-7 d-flex flex-center">
+                                <div class="col-12 col-md col-lg w-100" id="map"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- ===============================================-->
+<!--    End of Main Content-->
+<!-- ===============================================-->
+
+<modal-mentions></modal-mentions>
+<modal-cgu></modal-cgu>
+<chat-button></chat-button>
+<!--<footer-component></footer-component>-->
+
+<script src="../public/js/components/initMap.js"></script>
+<script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9qfN0hRrvQOZQxCDRNUD1dDgAw9NhhCg&callback=initMap"
+        defer
+></script>
+<script src="../public/js/sharedFunctions/fieldControl.js"></script>
+<script src="../public/js/components/chatButton.js"></script>
+<script src="../public/js/components/sweetAlertToast.js"></script>
+<script src="../public/js/components/footer.js"></script>
+<script src="../public/js/components/modalMentions.js"></script>
+<script src="../public/js/components/modalCGU.js"></script>
+<script src="../public/js/theme/sidenav-control.js"></script>
+
+</body>
+</html>

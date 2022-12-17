@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="../public/assets/css/style.css"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../public/assets/img/favicons/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png"/>
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest"/>
+    <link rel="mask-icon" href="../public/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
+    <meta name="msapplication-TileColor" content="#da532c"/>
+    <meta name="theme-color" content="#ffffff"/>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.6.0/gsap.min.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9414e04596.js"
+            crossorigin="anonymous"></script>
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+    <title>Interface Techniciens</title>
+</head>
+
+<body>
+
+<header-component></header-component>
+
+    <div class="content container-xl">
+        <!--<div class="row">
+            <div class="col-12">
+                
+            </div>
+        </div>-->
+        <div class="row mt-5">
+            <!-- 1er TABLEAU VEHICULES EN ATTENTE -->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mb-5">
+                <div class="card shadow rounded border-0">
+                    <div class="card-header bg-card-gradient bg-opacity-75 rounded-top d-flex justify-content-between align-items-center">
+                        <h5 class="m-0 py-2 start-0 text-dark">Rendez-vous du:</h5>
+                        <div class="btnPrevious position-absolute" style="left: 27%"></div>
+                        <div id="dateDuJour" class="position-absolute" style="left: 36%">
+                            <!-- génération des switch dates-->
+                        </div>
+                        <div class="btnNext position-absolute" style="left: 72%"></div>
+                        <div class="btnBack"></div>                      
+                    </div>
+                    <div class="d-flex align-items-center mt-1">
+                    <div class="text-dark font-13 ms-2">Filtrer par: </div>
+                    <input id="searchImmat" class="filtre rounded ms-1" type="text" style="width: 7.5em" placeholder="Immatriculation">
+                    </div>   
+                    <div class="card-body pt-2">
+                        <div class="table-responsive">
+                            <table class="table table-centered align-middle table-nowrap table-hover mb-0">
+                                <tbody id="vehiculeAttente">
+                                   
+                                <!-- génération des interventions en attente ici-->
+                                </tbody>
+                            </table>
+                            <span id="noAttente" class="d-flex justify-content-center"></span>
+                        </div>
+                    </div>
+                </div>
+                <nav class="d-flex justify-content-center mt-3" aria-label="Page navigation">
+                    <span class="anchor" id="anchorEnCours">&nbsp;</span>
+                    <ul class="pagination justify-content-center" id="pagesHold"></ul>
+                </nav>
+            </div>
+        </div>
+        <div class="row">
+            <!-- 2eme TABLEAU INTERVENTIONS EN COURS -->
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3 mb-5">
+                <div class="card shadow rounded border-0">
+                    <div class="card-header bg-card-gradient rounded-top d-flex justify-content-between align-items-center">
+                        <h5 class="m-0 py-2 text-dark">Interventions en Cours</h5>
+                    </div>
+                    <div class="card-body pt-2">
+                        <div class="table-responsive">
+                            <table class="table table-centered align-middle table-nowrap table-hover mb-0">
+                                <tbody id="interventionTab">
+                                <!-- génération des interventions en charge ici-->
+                                </tbody>
+                            </table>
+                            <span id="noInterv" class="d-flex justify-content-center"></span>
+                        </div>
+                    </div>
+                </div>
+                <nav class="mt-3" aria-label="Page navigation">
+                    <ul class="pagination justify-content-center" id="pagesInProgress"></ul>
+                </nav>
+            </div>
+        </div>
+        <!-- 3eme TABLEAU VEHICULES TERMINES -->
+        <div class="row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 mt-3">
+                <div class="card shadow rounded border-0">
+                    <div class="card-header bg-card-gradient rounded-top d-flex justify-content-between align-items-center">
+                        <h5 class="m-0 py-2 text-dark">Véhicules terminés</h5>
+                        <div class="anchor" id="anchorTermine">&nbsp;</div>
+                    </div>
+                    <div class="card-body pt-2">
+                        <div class="table-responsive">
+                            <table class="table table-centered align-middle table-nowrap table-hover mb-0">
+                                <tbody id="vehiculesTermines">
+                                <!-- génération de l'historique ici-->
+                                </tbody>
+                            </table>
+                            <span id="noHistory" class="d-flex justify-content-center"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="mt-3" aria-label="Page navigation">
+                <ul class="pagination justify-content-center" id="pagesOver"></ul>
+            </nav>
+        </div>
+    </div>
+          
+                <!-- modal debut -->
+                <div id="modalTech" class="modal">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div id="modalTitre" class="modal-header">
+                                <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                >
+                                    <span aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div id="modalBody" class="modal-body">
+                                <p></p>
+                            </div>
+                            <div id="modalFoot" class="modal-footer"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal fin -->
+
+                <!-- Modal rdv -->
+                <div id="modalRDV" class="modal fade">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Infos client liées à l'inter n°</h5>
+                                <span id="modal-rdvID"></span>
+                                <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                >
+                                    <span aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="modal-body d-flex flex-row">
+                                <div class="col-4 d-flex flex-column gap-3" id="modal-body">
+                                    <div>
+                                        <span class="fw-bold font-italic text-gray-700 white:text-dark">Nom :</span>
+                                        <span id="modal-nom_user" class="pl-4 fst-italic">Nom client</span>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold text-gray-700 white:text-dark">Prénom :</span>
+                                        <span id="modal-prenom_user" class="pl-4 fst-italic">User ID</span>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold text-gray-700 white:text-dark">Créneau réservé :</span>
+                                        <span id="modal-timeslotID" class="pl-4 fst-italic">Créneau</span>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold text-gray-700 white:text-dark">Téléphone :</span>
+                                        <span id="modal-tel_user" class="pl-4 fst-italic">Tél</span>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold text-gray-700 white:text-dark">Email :</span>
+                                        <span id="modal-mail_user" class="pl-4 fst-italic">Email</span>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold text-gray-700 white:text-dark">RDV confirmé le :</span>
+                                        <span id="modal-booked_date" class="pl-4 fst-italic">Créneau</span>
+                                    </div>
+                                </div>
+                                <div class="col d-flex justify-content-center align-items-center" id="modal-CG"></div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                                    Fermer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal RDV fin -->
+
+                <!-- modal contre visite debut -->
+                <div id="modalContreVisite" class="modal fade">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Procès-verbal du CT n°</h5>
+                                <span id="modal-contreID"></span>
+                                <button
+                                        type="button"
+                                        class="btn-close"
+                                        data-bs-dismiss="modal"
+                                        aria-label="Close"
+                                >
+                                    <span aria-hidden="true"></span>
+                                </button>
+                            </div>
+                            <div class="modal-body d-flex flex-column gap-2">
+                                <div>
+                                    <div id="rapportInter"></div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-success rounded px-2 py-1" data-bs-dismiss="modal">
+                                    Fermer
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- modal contre visite fin -->
+     
+    <btn-top-component></btn-top-component>
+
+<script src="../public/js/theme/sidenav-control.js"></script>
+<!-- <script src="../public/js/theme.js"></script> -->
+<!-- <script src="../public/assets/js/config.js"></script> -->
+<script src="../public/js/components/header.js"></script>
+<script src="../public/js/components/backTopBtn.js"></script>
+<script src="../public/js/components/sweetAlertToast.js"></script>
+<script src="../public/js/backOfficeDashboard/mainBackOffice.js"></script>
+<script src="../public/js/backOfficeDashboard/tabsControl.js" async></script>
+
+<!--<script src="../public/js/clock.js" async></script>-->
+</body>
+
+</html>

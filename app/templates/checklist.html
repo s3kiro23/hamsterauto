@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="180x180" href="../public/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="../public/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/9414e04596.js" crossorigin="anonymous"></script>
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+    <title>Checklist</title>
+
+</head>
+<body class="text-black">
+
+<!-- debut horloge -->
+<!-- <div class="container">
+    <div id='clock' class="row gx-5 flex-nowrap">
+        <div id='h10' class='num col-2'>
+            <div class='upper'></div>
+            <div class='base upper'></div>
+            <div class='base lower'></div>
+            <div class='lower'></div>
+        </div>
+        <div id='h0' class='num col-2'>
+            <div class='upper'></div>
+            <div class='base upper'></div>
+            <div class='base lower'></div>
+            <div class='lower'></div>
+            <div class='colon'>:</div>
+        </div>
+        <div id='m10' class='num col-2'>
+            <div class='upper'></div>
+            <div class='base upper'></div>
+            <div class='base lower'></div>
+            <div class='lower'></div>
+        </div>
+        <div id='m0' class='num col-2'>
+            <div class='upper'></div>
+            <div class='base upper'></div>
+            <div class='base lower'></div>
+            <div class='lower'></div>
+            <div class='colon'>:</div>
+        </div>
+        <div id='s10' class='num col-2'>
+            <div class='upper'></div>
+            <div class='base upper'></div>
+            <div class='base lower'></div>
+            <div class='lower'></div>
+        </div>
+        <div id='s0' class='num col-2'>
+            <div class='upper'></div>
+            <div class='base upper'></div>
+            <div class='base lower'></div>
+            <div class='lower'></div>
+        </div>
+    </div>
+</div> -->
+<!-- fin horloge -->
+
+<modal-checklist></modal-checklist>
+
+<div class="container-xl">
+    <div class="row flex-column flex-sm-row justify-content-center align-items-center my-3 mb-xl-5 position-relative gap-3 gap-sm-0">
+        <a role="button" id="btn-info-clist">
+            <i class="fa-solid fa-circle-info fs-5 fs-md-7 text-info position-absolute" style="top:0px; left: 135px;"></i>
+        </a>
+        <div class="col d-flex justify-content-center justify-content-sm-end align-items-center order-1 order-sm-0">
+            <button class="btn btn-falcon-default rounded-pill bg-danger"
+                    type="button"
+                    onclick="window.location.href = 'back-office.html';">
+            Annuler
+            </button>
+        </div>
+        <h1 class="col text-center order-0 order-sm-1 fs-3">
+            Checklist du véhicule
+        </h1>
+        <div class="col d-flex justify-content-center justify-content-sm-start align-items-center order-last">
+            <div class="d-flex justify-content-center align-items-center gap-3">
+                <button class="btn btn-falcon-default rounded-pill bg-success" type="button"
+                        onclick="validationCT()">Valider CT
+                </button>
+                <div class="d-flex justify-content-center align-items-center form-check gap-2">
+                    <input class="form-check-input border-2 border-dark" type="checkbox" value=""
+                           id="checkAllbtn">
+                    <label class="form-check-label mb-0" for="checkAllbtn">
+                        Tout cocher
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center gap-5">
+        <div class="col-12 col-sm-5 col-md-3 p-0 card overflow-hidden d-flex flex-column align-items-center">
+            <div class="card-img-top d-flex flex-column align-items-center">
+                <img class="img-fluid"
+                     src="../public/assets/img/checklist/freins.png  "
+                     alt="Card image cap"/>
+            </div>
+            <div class="card-body container py-0">
+                <h4 class="text-center">Freinage</h4>
+                <div class="row justify-content-center">
+                    <div class="form-check col pe-0">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="freinService">
+                        <label class="form-check-label fs--2" for="freinService">
+                            Frein de service
+                        </label>
+                    </div>
+                    <div class="form-check col pe-0">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="freinStationnement">
+                        <label class="form-check-label fs--2" for="freinStationnement">
+                            Frein de stationnement
+                        </label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="pedaleFrein">
+                        <label class="form-check-label fs--2" for="pedaleFrein">
+                            Frein de service
+                        </label>
+                    </div>
+
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="disqueFrein">
+                        <label class="form-check-label fs--2" for="disqueFrein">
+                            Disque de frein
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 p-0 card overflow-hidden d-flex flex-column align-items-center">
+            <div class="card-img-top d-flex flex-column align-items-center">
+                <img class="img-fluid"
+                     src="../public/assets/img/checklist/struct.png"
+                     alt="Card image cap"/>
+            </div>
+            <div class="card-body container py-0">
+                <h4 class="text-center">Structure</h4>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="plancher">
+                        <label class="form-check-label fs--2" for="plancher">
+                            Planchers
+                        </label>
+                    </div>
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="coque">
+                        <label class="form-check-label fs--2" for="coque">
+                            Carroserie
+                        </label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="chassis">
+                        <label class="form-check-label fs--2" for="chassis">
+                            Chassis
+                        </label>
+                    </div>
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="aile">
+                        <label class="form-check-label fs--2" for="aile">
+                            Passages de roues
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 p-0 card overflow-hidden d-flex flex-column align-items-center">
+            <div class="card-img-top d-flex flex-column align-items-center">
+                <img class="img-fluid"
+                     src="../public/assets/img/checklist/visib.png"
+                     alt="Card image cap"/>
+            </div>
+            <div class="card-body container py-0">
+                <h4 class="text-center">Visibilité</h4>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="pareBrise">
+                        <label class="form-check-label fs--2" for="pareBrise">
+                            Pare brise
+                        </label>
+                    </div>
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="retro">
+                        <label class="form-check-label fs--2" for="retro">
+                            Rétroviseurs
+                        </label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="essuieGlace">
+                        <label class="form-check-label fs--2" for="essuieGlace">
+                            Essuie-glaces
+                        </label>
+                    </div>
+                    <div class="form-check col">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 p-0 card overflow-hidden d-flex flex-column align-items-center">
+            <div class="card-img-top d-flex flex-column align-items-center">
+                <img class="img-fluid"
+                     src="../public/assets/img/checklist/eclairage.png"
+                     alt="Card image cap"/>
+            </div>
+            <div class="card-body container py-0">
+                <h4 class="text-center">Eclairage</h4>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="feuRoute">
+                        <label class="form-check-label fs--2" for="feuRoute">
+                            Feux de route
+                        </label>
+                    </div>
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="feuCroisement">
+                        <label class="form-check-label fs--2" for="feuCroisement">
+                            Feux de croisement
+                        </label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="feuDetresse">
+                        <label class="form-check-label fs--2" for="feuCroisement">
+                            Feux de détresse
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 p-0 card overflow-hidden d-flex flex-column align-items-center">
+            <div class="card-img-top d-flex flex-column align-items-center">
+                <img class="img-fluid"
+                     src="../public/assets/img/checklist/direction.png"
+                     alt="Card image cap"/>
+            </div>
+            <div class="card-body container py-0">
+                <h4 class="text-center">Direction</h4>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="volantDirection">
+                        <label class="form-check-label fs--2" for="volantDirection">
+                            Volant
+                        </label>
+                    </div>
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="colonneDirection">
+                        <label class="form-check-label fs--2" for="colonneDirection">
+                            Colonne de direction
+                        </label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="pompe">
+                        <label class="form-check-label fs--2" for="pompe">
+                            Pompe d'assistance
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-sm-5 col-md-3 p-0 card overflow-hidden d-flex flex-column align-items-center">
+            <div class="card-img-top d-flex flex-column align-items-center">
+                <img class="img-fluid"
+                     src="../public/assets/img/checklist/moteur.png"
+                     alt="Card image cap"/>
+            </div>
+            <div class="card-body container py-0">
+                <h4 class="text-center">Mécanique</h4>
+                <div class="row justify-content-center">
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="moteur">
+                        <label class="form-check-label fs--2" for="moteur">
+                            Moteur
+                        </label>
+                    </div>
+                    <div class="form-check col">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="boiteVitesse">
+                        <label class="form-check-label fs--2" for="boiteVitesse">
+                            Boite de vitesses
+                        </label>
+                    </div>
+                </div>
+                <div class="row justify-content-center">
+                    <div class="form-check">
+                        <input class="checkBox form-check-input border-2 border-dark" type="checkbox"
+                               value=""
+                               id="transmission">
+                        <label class="form-check-label fs--2" for="transmission">
+                            Transmission
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<btn-top-component></btn-top-component>
+<footer-component-main></footer-component-main>
+
+
+<script src="../public/js/components/backTopBtn.js"></script>
+<script src="../public/js/components/sweetAlertToast.js"></script>
+<script src="../public/js/checkList.js"></script>
+<script src="../public/js/components/footer-main.js"></script>
+<script src="../public/js/components/modalChecklist.js"></script>
+<!--<script src="../public/js/clock.js" async></script>-->
+
+</body>
+</html>

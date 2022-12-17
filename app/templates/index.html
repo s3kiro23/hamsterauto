@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="apple-touch-icon" sizes="152x152" href="../public/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png">
+    <link rel="mask-icon" href="../public/assets/img/safari-pinned-tab.svg" color="#5bbad5">
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <link rel="stylesheet" href="../vendor/jackocnr/intl-tel-input/build/css/intlTelInput.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap"
+          rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://kit.fontawesome.com/9414e04596.js" crossorigin="anonymous"></script>
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+
+    <title>Connexion</title>
+</head>
+
+<body>
+<main class="main" id="content-request">
+    <div class="content container d-flex justify-content-center align-items-center h-auto">
+        <div class="row text-center pt-4 pt-lg-2 fixed-top z-index--1">
+            <div class="col">
+                <img id="logoIndex" src="../public/assets/img/animated-icons/hamsterauto.gif" class="img-fluid"
+                     style="width:12rem" alt="logo_agence">
+            </div>
+        </div>
+
+        <!-- <chat-button></chat-button> -->
+
+        <div class="row w-100 w-md-100 w-xxl-75 h-auto mt-6 mt-sm-7 mt-xl-8 mt-xxl-5 pt-5 justify-content-center position-static position-xl-sticky position-xxl-fixed gx-6 gy-5 gy-lg-5 gy-xl-0 gy-xxl-0"
+             style="top:5rem;">
+
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-5 px-0 px-xl-2">
+                <img
+                        class="bg-auth-circle-shape-2 overflow-hidden"
+                        src="../public/assets/img/icons/spot-illustrations/shape-1.png" alt="" width="170"
+                        style="position:fixed;top:38rem;left:17rem">
+                <div class="card z-index-1"
+                     style="background-image:url(../public/assets/img/authentication-corner1.png); background-size: cover;">
+                    <div class="card-body p-0">
+                        <div class="row g-0 h-75">
+                            <div class="col-md-5 text-center d-flex flex-column align-items-center justify-content-end bg-card-gradient">
+
+                                <div class="p-4 pt-md-6 pt-xl-4 pb-md-9 light">
+                                    <div class="bg-holder bg-auth-card-shape"
+                                         style="background-image:url(../public/assets/img/icons/spot-illustrations/half-circle.png);">
+
+                                    </div>
+                                    <h3 class="text-light pb-1 pb-xl-0 pt-xl-3">Bienvenue sur le réseau du Hamster</h3>
+                                    <div class="text-center position-relative">
+                                        <span class="d-flex justify-content-center text-light mt-2 mt-xl-5">Prenez rendez-vous grâce au formulaire de réservation</span>
+                                        <br><span class="text-light">ou</span><br><br>
+                                        <a id="to_signIn"
+                                           type="button"
+                                           class="btn btn-outline-light mt-sm-2 m-lg-0 px-3 ">
+                                            <span class="to_signIn">Créer un compte</span>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="theme-control-toggle px-2 pb-3 z-index-2">
+                                    <input class="form-check-input ms-0 theme-control-toggle-input switchLogo"
+                                           id="themeControlToggle"
+                                           type="checkbox" data-theme-control="theme" value="dark"/>
+                                    <label class="mb-0 theme-control-toggle-label theme-control-toggle-light"
+                                           for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                           title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
+                                    <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark"
+                                           for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                           title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-7 d-flex flex-center z-index-2">
+                                <div class="p-4 pt-xl-0 pt-xxl-3 p-md-5 flex-grow-1">
+                                    <div class="row flex-between-center">
+                                        <div class="col-auto">
+                                            <p>Déjà inscrit?</p>
+                                            <h4 class="text-center text-primary">Accédez à votre espace</h4>
+                                        </div>
+                                    </div>
+                                    <form action="javascript:javascript:connect();" method="POST">
+                                        <div class="mb-3">
+                                            <label class="form-label" for="inputLogin">Identifiants</label>
+                                            <input
+                                                    id="inputLogin"
+                                                    name="inputLogin"
+                                                    type="email"
+                                                    class="field form-control rounded-top border border-1"
+                                                    placeholder="(Adresse Email)"/>
+                                            <!-- <div class="invalid-feedback mb-2"></div> -->
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="inputPassword" class="form-label">Mot de passe</label>
+                                            <input
+                                                    id="inputPassword"
+                                                    name="inputPassword"
+                                                    type="password"
+                                                    class="field form-control rounded-bottom border border-1"
+                                                    placeholder="******"/>
+                                            <div class="invalid-feedback mb-2"></div>
+                                        </div>
+                                        <div class="row justify-content-center w-100">
+                                            <div class="col-auto p-0">
+                                                <div class="form-check mb-0">
+                                                    <input class="form-check-input" type="checkbox" id="card-checkbox"
+                                                           checked="checked"/>
+                                                    <label class="form-check-label mb-0" for="card-checkbox">Remember
+                                                        me</label>
+                                                </div>
+                                            </div>
+                                            <div id="toRequestMail" class="col-auto fs--1 p-0">
+                                                <a type="button" class="text-primary">Mot de passe oublié?</a>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <button class="btn btn-primary d-block w-100 mt-3" type="submit"
+                                                    name="submit" id='signIn'>Connexion
+                                            </button>
+                                        </div>
+                                        <div class='mb-0 mt-5 mt-md-5 fs--1 fw-semi-bold text-dark opacity-75 d-flex flex-column justify-content-end'>
+                                            <a class='text-decoration-underline text-primary cursor-pointer'
+                                               id='to-mentions'>Mentions légales</a><br>
+                                            <a class='text-decoration-underline text-primary' id='to-cgu'
+                                               href='./contact-us.html'>Nous contacter</a>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-6 mt-xl-0 px-0 px-xl-4">
+                <img class="bg-auth-circle-shape overflow-hidden d-none d-xl-inline"
+                     src="../public/assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250"
+                     style="position:fixed;top:5rem;right:8rem">
+                <div class="card theme-wizard mb-5 mb-md-0" id="wizard"
+                     style="background-image:url(../public/assets/img/authentication-corner1.png); background-size: cover;">
+                    <div class="card-header bg-light pt-3 pb-2">
+                        <div class="form-title">
+                            <h4 class="text-primary text-center">Formulaire de réservation</h4>
+                            <h6 class="mb-3 text-center">Réservez sans créer de compte</h6>
+                        </div>
+                        <ul class="nav justify-content-between nav-wizard" hidden>
+                            <li class="nav-item">
+                                <a id="idStep" class="nav-link active fw-semi-bold">
+                                        <span class="nav-item-circle-parent">
+                                            <span class="nav-item-circle">
+                                                <span class="fas fa-user"></span>
+                                            </span>
+                                        </span>
+                                    <span class="d-none d-md-block mt-1 fs--1">Identité</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="carStep" class="nav-link fw-semi-bold">
+                                        <span class="nav-item-circle-parent">
+                                            <span class="nav-item-circle">
+                                                <span class="fas fa-car"></span>
+                                            </span>
+                                        </span>
+                                    <span class="d-none d-md-block mt-1 fs--1">Véhicule</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="slotStep" class="nav-link fw-semi-bold">
+                                        <span class="nav-item-circle-parent">
+                                            <span class="nav-item-circle">
+                                                <span class="fas fa-clock"></span>
+                                            </span>
+                                        </span>
+                                    <span class="d-none d-md-block mt-1 fs--1">Horaires</span>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="doneStep" class="nav-link fw-semi-bold">
+                                        <span class="nav-item-circle-parent">
+                                            <span class="nav-item-circle">
+                                                <span class="fas fa-thumbs-up"></span>
+                                            </span>
+                                        </span>
+                                    <span class="d-none d-md-block mt-1 fs--1">Done</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <form action="javascript:newRDVHomePage();" method="POST">
+                        <div class="card-body py-3" id="wizard-controller">
+                            <div class="tab-content">
+                                <div class="tab-pane active px-sm-3 px-md-5 text-center mt-md-8 py-md-7"
+                                     role="tabpanel"
+                                     aria-labelledby="bootstrap-wizard-tabHello" id="bootstrap-wizard-tabHello">
+                                    <p>Ne pensez plus à votre contrôle technique, <br>nous le faisons pour vous!</p>
+                                    <button class="changeStep btn btn-primary mt-5" type="button"
+                                            id="new-btn">Commencer
+                                    </button>
+                                </div>
+                                <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
+                                     aria-labelledby="bootstrap-wizard-tab0" id="bootstrap-wizard-tab0">
+                                    <fieldset class="rounded px-2 px-md-4 px-lg-4 py-md-6">
+                                        <div class="d-flex gap-3">
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                       name="optionsCivilite"
+                                                       id="optionsRadios1"
+                                                       value="Mr">
+                                                <label class="form-check-label text-dark" for="optionsRadios1">
+                                                    Mr.
+                                                </label>
+                                            </div>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio"
+                                                       name="optionsCivilite"
+                                                       id="optionsRadios2"
+                                                       value="Mme">
+                                                <label class="form-check-label text-dark" for="optionsRadios2">
+                                                    Mme.
+                                                </label>
+                                            </div>
+                                            <div class="form-check d-none d-md-inline">
+                                                <input class="form-check-input" type="radio"
+                                                       name="optionsCivilite"
+                                                       id="optionsRadios3"
+                                                       value="Mlle">
+                                                <label class="form-check-label text-dark" for="optionsRadios3">
+                                                    Mlle.
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group mt-3 mb-2">
+                                            <label for="inputNom" class="sr-only">Nom</label>
+                                            <input type="text"
+                                                   class="form-control bg-light border border-light"
+                                                   id="inputNom"
+                                                   aria-describedby="nomHelp"
+                                                   placeholder="Nom">
+                                            <div class="invalid-feedback mb-2"></div>
+                                        </div>
+                                        <div class="form-group mb-2">
+                                            <label for="inputPrenom" class="sr-only">Prenom</label>
+                                            <input type="text"
+                                                   class="form-control bg-light border border-light"
+                                                   id="inputPrenom"
+                                                   aria-describedby="nomHelp"
+                                                   placeholder="Prenom">
+                                            <div class="invalid-feedback mb-2"></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="inputEmail" class="sr-only">Email</label>
+                                            <input type="email"
+                                                   class="form-control bg-light border border-light"
+                                                   id="inputEmail"
+                                                   aria-describedby="emailHelp"
+                                                   placeholder="Email">
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                        <div class="form-group my-2">
+                                            <label for="inputTel" class="sr-only">Téléphone</label>
+                                            <input type="tel"
+                                                   name="inputTel"
+                                                   class="form-control bg-light border border-light"
+                                                   id="inputTel"
+                                                   placeholder="">
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </fieldset>
+                                </div>
+                                <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
+                                     aria-labelledby="bootstrap-wizard-tab1" id="bootstrap-wizard-tab1">
+                                    <div class="text-dark mb-3 form-label text-dark" style="font-weight: 500">
+                                        Sélectionner le format de votre
+                                        immatriculation :
+                                    </div>
+                                    <div class="form-group d-flex gap-5 justify-content-center">
+                                        <div class="form-check">
+                                            <input class="form-check-input fw-bold" type="radio"
+                                                   name="radioImmat"
+                                                   id="newImmat"
+                                                   value="newImmat" checked>
+                                            <label class="form-check-label text-dark fw-bold fst-italic"
+                                                   for="newImmat">
+                                                Nouveau
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input " type="radio" name="radioImmat"
+                                                   id="oldImmat"
+                                                   value="oldImmat">
+                                            <label class="form-check-label text-dark fw-bold fst-italic"
+                                                   for="oldImmat">
+                                                Ancien
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="input-group mb-3 licenseplate" id="licence-plate-new"
+                                         data-country="EU">
+                                        <label for="inputImmatNew"
+                                               class="sr-only">Immatriculation</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="inputImmatNew"
+                                               aria-describedby="textHelp"
+                                               placeholder="AA-1234-AA"
+                                               pattern="^[A-Z]{2} ?- ?\d{3} ?- ?[A-Z]{2}$">
+                                    </div>
+                                    <div class="invalid-feedback"></div>
+                                    <div class="input-group mb-3 licenseplate" id="licence-plate-old"
+                                         data-country="EU" hidden>
+                                        <label for="inputImmatOld"
+                                               class="sr-only">Immatriculation</label>
+                                        <input type="text"
+                                               class="form-control"
+                                               id="inputImmatOld"
+                                               aria-describedby="textHelp"
+                                               placeholder="1234-AA-0A"
+                                               pattern="^[0-9]{1,4} ?- ?[A-Z]{1,4} ?- ?[0-9]{1,2}$">
+                                    </div>
+                                    <div class="invalid-feedback"></div>
+                                    <div class="d-flex flex-row justify-content-between">
+                                        <div class="col-5">
+                                            <label for="selectMarque" class="form-label text-dark">Sélectionner la
+                                                marque</label>
+                                            <select class="form-select" id="selectMarque">
+                                                <option>-</option>
+                                            </select>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                        <div class="col-5">
+                                            <label for="selectModele" class="form-label text-dark">Sélectionner le
+                                                modèle</label>
+                                            <select class="form-select" id="selectModele">
+                                                <option>-</option>
+                                            </select>
+                                            <div class="invalid-feedback"></div>
+                                        </div>
+                                    </div>
+                                    <div class="mt-3 form-label text-dark" style="font-weight: 500">Type de
+                                        carburant
+                                    </div>
+                                    <div class="row form-group mt-2">
+                                        <div class="form-check col">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="optionsCarbu"
+                                                    id="Essence"
+                                                    value="Essence"
+                                            />
+                                            <label class="form-check-label text-dark fw-bold fst-italic"
+                                                   for="Essence">
+                                                Essence
+                                            </label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="optionsCarbu"
+                                                    id="Diesel"
+                                                    value="Diesel"
+                                            />
+                                            <label class="form-check-label text-dark fw-bold fst-italic"
+                                                   for="Diesel">
+                                                Diesel
+                                            </label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="optionsCarbu"
+                                                    id="Electrique"
+                                                    value="Electrique"
+                                            />
+                                            <label
+                                                    class="form-check-label text-dark fw-bold fst-italic"
+                                                    for="Electrique"
+                                            >
+                                                Electrique
+                                            </label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input
+                                                    class="form-check-input"
+                                                    type="radio"
+                                                    name="optionsCarbu"
+                                                    id="Hybride"
+                                                    value="Hybride"
+                                            />
+                                            <label class="form-check-label text-dark fw-bold fst-italic"
+                                                   for="Hybride">
+                                                Hybride
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="inputAnnee" class="form-label mt-2 text-dark"
+                                        >Année de 1ère mise en circulation</label
+                                        >
+                                        <input
+                                                type="text"
+                                                class="form-control"
+                                                id="inputAnnee"
+                                                placeholder="Entrez l'année ici"
+                                        />
+                                        <div class="invalid-feedback"></div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane px-sm-3 px-md-5 py-md-6" role="tabpanel"
+                                     aria-labelledby="bootstrap-wizard-tab2" id="bootstrap-wizard-tab2">
+                                    <div class="mb-3 d-flex flex-column">
+                                        <span class="fs-2">Horaires disponibles</span>
+                                        <span class="fs--1">(réservation possible jusqu'à 15 minutes avant l'heure souhaitée)</span>
+                                    </div>
+                                    <div class="col-12 col-md-12 max-w-4xl mx-auto">
+                                        <div id="rdvContainer" class="mt-2 shadow rounded">
+                                            &lt;!&ndash;Contenu des créneaux ici, généré avec class HTML &ndash;&gt;
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tab-pane text-center" role="tabpanel"
+                                     aria-labelledby="bootstrap-wizard-tab4" id="bootstrap-wizard-tab4">
+                                    <img src="../public/assets/img/animated-icons/doneStep-greenday.gif"
+                                         alt="logo-step-gd" class="mb-3" width="60%">
+                                    <h4 class="mb-1">Bravo, votre créneau est réservé!</h4>
+                                    <p>Un mail de confirmation a été envoyé.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-light" hidden>
+                            <div class="px-sm-3 px-md-5">
+                                <ul class="pager wizard list-inline mb-0">
+                                    <li class="previous">
+                                        <button class="changeStep btn btn-link ps-0" type="button" id="prev-btn">
+                                                <span class="fas fa-chevron-left me-2"
+                                                      data-fa-transform="shrink-3"></span>
+                                            Préc.
+                                        </button>
+                                    </li>
+                                    <li class="next">
+                                        <button class="changeStep btn btn-primary" type="button"
+                                                id="next-btn">Suivant<span
+                                                class="fas fa-chevron-right ms-2"
+                                                data-fa-transform="shrink-3"></span>
+                                        </button>
+                                    </li>
+                                    <li class="renew d-none">
+                                        <button class="btn btn-primary" type="button"
+                                                id="renew-btn">Recommencer
+                                            <i class="fa-solid fa-arrow-rotate-left ms-2"></i>
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!--<div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-6 mt-xl-0 px-0 px-xl-4">
+                <img class="bg-auth-circle-shape overflow-hidden d-none d-xl-inline" src="../public/assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250" style="position:fixed;top:5rem;right:14rem">
+                <div class="card pt-5 h-100 d-flex flex-column justify-content-center" style="background-image:url(../public/assets/img/authentication-corner2.png); background-size: cover;">
+                    &lt;!&ndash; <div class="container mb-3">
+                        <header class="row align-items-center g-3 position-relative">
+                            <div class="col"><img src="../public/assets/img/hamsterauto.gif" class="img-fluid"
+                                                                    style="width:7rem"
+                                                                    alt="logo_agence"></div>
+
+                        </header>
+                    </div> &ndash;&gt;
+                    <h4 class="text-primary text-center">Formulaire de réservation</h4>
+                    <h6 class="mb-3 text-center">Réservez sans créer de compte</h6>
+                    <form action="javascript:newRDVHomePage();" method="POST">
+                        <div class="container accordion pb-4 pb-lg-1" id="accordionExample">
+                            &lt;!&ndash; <div class="accordion-item shadow"></div> &ndash;&gt;
+                            <div class="accordion-item bg-transparent rounded-top" style="border:none" >
+                                <h2 class="accordion-header d-flex align-items-center" id="headingOne">
+
+                                    <button id="1"
+                                            class="flex-row accordion-button collapsed rounded-top"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseOne"
+                                            aria-expanded="true" aria-controls="collapseOne">
+                                        <img src="..\public\assets\img\1.png" alt="step1" class="me-2 me-md-4 steplogo">
+                                        Informations personnelles
+                                    </button>
+                                </h2>
+                                <div id="collapseOne" class="accordion-collapse collapse"
+                                     aria-labelledby="headingOne"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-primary bg-opacity-10">
+                                        <fieldset class="rounded px-2 px-md-4 px-lg-4">
+                                            <div class="d-flex gap-3">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="optionsCivilite"
+                                                           id="optionsRadios1"
+                                                           value="Mr">
+                                                    <label class="form-check-label text-dark" for="optionsRadios1">
+                                                        Mr.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="optionsCivilite"
+                                                           id="optionsRadios2"
+                                                           value="Mme">
+                                                    <label class="form-check-label text-dark" for="optionsRadios2">
+                                                        Mme.
+                                                    </label>
+                                                </div>
+                                                <div class="form-check d-none d-md-inline">
+                                                    <input class="form-check-input" type="radio"
+                                                           name="optionsCivilite"
+                                                           id="optionsRadios3"
+                                                           value="Mlle">
+                                                    <label class="form-check-label text-dark" for="optionsRadios3">
+                                                        Mlle.
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="form-group mt-3 mb-2">
+                                                <label for="inputNom" class="sr-only">Nom</label>
+                                                <input type="text"
+                                                       class="form-control bg-light border border-light"
+                                                       id="inputNom"
+                                                       aria-describedby="nomHelp"
+                                                       placeholder="Nom">
+                                                <div class="invalid-feedback mb-2"></div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="inputPrenom" class="sr-only">Prenom</label>
+                                                <input type="text"
+                                                       class="form-control bg-light border border-light"
+                                                       id="inputPrenom"
+                                                       aria-describedby="nomHelp"
+                                                       placeholder="Prenom">
+                                                <div class="invalid-feedback mb-2"></div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="inputEmail" class="sr-only">Email</label>
+                                                <input type="email"
+                                                       class="form-control bg-light border border-light"
+                                                       id="inputEmail"
+                                                       aria-describedby="emailHelp"
+                                                       placeholder="Email">
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group my-2">
+                                                <label for="inputTel" class="sr-only">Téléphone</label>
+                                                <input type="tel"
+                                                       name="inputTel"
+                                                       class="form-control bg-light border border-light"
+                                                       id="inputTel"
+                                                       placeholder="">
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            &lt;!&ndash; <div class="accordion-item shadow"></div> &ndash;&gt;
+                            <div class="accordion-item" style="border:none">
+                                <h2 class="accordion-header d-flex align-items-center me-1 me-sm-0" id="headingTwo">
+                                    <button id="2"
+                                            class="flex-row text-center accordion-button collapsed"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseTwo"
+                                            aria-expanded="false" aria-controls="collapseTwo">
+                                        <img src="..\public\assets\img\2.png" alt="step2" class="me-2 me-md-4 steplogo">
+                                        Informations du véhicule
+                                    </button>
+                                </h2>
+                                <div id="collapseTwo" class="accordion-collapse collapse"
+                                     aria-labelledby="headingTwo"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-primary bg-opacity-10">
+                                        <fieldset class="rounded px-2 px-md-4 px-lg-4">
+                                            <div class="text-dark mb-2">Sélectionner le format de votre
+                                                immatriculation
+                                            </div>
+                                            <div class="form-group d-flex gap-5 mb-1 justify-content-center">
+                                                <div class="form-check">
+                                                    <input class="form-check-input " type="radio" name="radioImmat"
+                                                           id="newImmat"
+                                                           value="newImmat" checked>
+                                                    <label class="form-check-label text-dark" for="newImmat">
+                                                        Nouveau
+                                                    </label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input " type="radio" name="radioImmat"
+                                                           id="oldImmat"
+                                                           value="oldImmat">
+                                                    <label class="form-check-label text-dark" for="oldImmat">
+                                                        Ancien
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3 licenseplate" id="licence-plate-new"
+                                                 data-country="EU">
+                                                <label for="inputImmatNew"
+                                                       class="sr-only">Immatriculation</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="inputImmatNew"
+                                                       aria-describedby="textHelp"
+                                                       placeholder="AA-1234-AA"
+                                                       pattern="^[A-Z]{2} ?- ?\d{3} ?- ?[A-Z]{2}$">
+                                            </div>
+                                            <div class="invalid-feedback"></div>
+                                            <div class="input-group mb-3 licenseplate" id="licence-plate-old"
+                                                 data-country="EU" hidden>
+                                                <label for="inputImmatOld"
+                                                       class="sr-only">Immatriculation</label>
+                                                <input type="text"
+                                                       class="form-control"
+                                                       id="inputImmatOld"
+                                                       aria-describedby="textHelp"
+                                                       placeholder="1234-AA-0A"
+                                                       pattern="^[0-9]{1,4} ?- ?[A-Z]{1,4} ?- ?[0-9]{1,2}$">
+                                            </div>
+                                            <div class="invalid-feedback"></div>
+                                            <div class="form-group mb-2">
+                                                <label for="selectMarque" class="sr-only">Marque</label>
+                                                <select class="form-control bg-light border border-light"
+                                                        id="selectMarque">
+                                                    <option>Marque</option>
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="selectModele" class="sr-only">Modèle</label>
+                                                <select class="form-control bg-light border border-light"
+                                                        id="selectModele">
+                                                    <option>Modèle</option>
+                                                </select>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="inputAnnee" class="sr-only">Année </label>
+                                                <input type="number"
+                                                       class="form-control bg-light border border-light"
+                                                       id="inputAnnee"
+                                                       placeholder="Année 1ère mise en circulation"
+                                                       pattern='^(?:19|20)\d{2}$'>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="text-dark mt-4 mb-2">Type de carburant :</div>
+                                            <div class="form-group d-flex gap-2">
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="optionsCarbu"
+                                                               id="Essence"
+                                                               value="Essence">
+                                                        <label class="form-check-label text-dark" for="Essence">
+                                                            Essence
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="optionsCarbu"
+                                                               id="Diesel"
+                                                               value="Diesel">
+                                                        <label class="form-check-label text-dark" for="Diesel">
+                                                            Diesel
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="optionsCarbu"
+                                                               id="Electrique"
+                                                               value="Electrique">
+                                                        <label class="form-check-label text-dark" for="Electrique">
+                                                            Electrique
+                                                        </label>
+                                                    </div>
+                                                    <div class="form-check">
+                                                        <input class="form-check-input" type="radio"
+                                                               name="optionsCarbu"
+                                                               id="Hybride"
+                                                               value="Hybride">
+                                                        <label class="form-check-label text-dark" for="Hybride">
+                                                            Hybride
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                            &lt;!&ndash; <div class="accordion-item shadow"></div> &ndash;&gt;
+                            <div class="accordion-item" style="border:none">
+                                <h2 class="accordion-header d-flex align-items-center" id="headingThree">
+
+                                    <button id="3"
+                                            class="d-flex flex-row accordion-button collapsed position-relative"
+                                            type="button"
+                                            data-bs-toggle="collapse"
+                                            data-bs-target="#collapseThree" aria-expanded="false"
+                                            aria-controls="collapseThree">
+                                        <img src="..\public\assets\img\3.png" alt="step1" class="me-2 me-md-4 steplogo">
+                                        <span class="me-1 me-md-0"> Horaires disponibles</span>
+                                    </button>
+                                </h2>
+                                <div id="collapseThree" class="accordion-collapse collapse"
+                                     aria-labelledby="headingThree"
+                                     data-bs-parent="#accordionExample">
+                                    <div class="accordion-body bg-primary row bg-opacity-10 d-flex justify-content-center">
+                                        <fieldset class="p-0">
+                                            <span class="d-flex flex-column align-items-center">
+                                                <div id="horaires" class="justify-self-center mt-2"></div>
+                                                <div id="statutOuverture"></div>
+                                            </span>
+                                            <div class="col-12 col-md-12 max-w-4xl mx-auto">
+                                                <div id="rdvContainer" class="mt-2 rounded shadow">
+                                                    &lt;!&ndash;Contenu des créneaux ici, généré avec class HTML &ndash;&gt;
+                                                </div>
+                                            </div>
+                                        </fieldset>
+                                        <div class="d-flex mt-5">
+                                            <input type="checkbox" name="cgu" id="cgu">
+                                            <label for="cgu" class="ps-2 mb-0">Vous devez accepter nos <a
+                                                    class="text-primary" id="to-cgu" type="button">CGU</a> pour pouvoir
+                                                faire une
+                                                demande d'intervention.</label>
+                                        </div>
+                                        <fieldset hidden class="form-group px-2 px-md-4 px-lg-4">
+                                            <legend class="mt-4">Newsletters</legend>
+                                            <div class="form-check form-switch">
+                                                <input class="form-check-input rounded" type="checkbox"
+                                                       id="newsletter">
+                                                <label class="form-check-label" for="newsletter">
+                                                    Inscrivez vous à la
+                                                    newsletter
+                                                    pour suivre vos prochains contrôles technique !
+                                                </label>
+                                            </div>
+                                        </fieldset>
+                                        <div class="d-flex justify-content-center">
+                                            <button type="submit" id="reserved"
+                                                    class="btn btn-success p-2 mt-4 rounded w-100">
+                                                Réserver !
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>-->
+        </div>
+    </div>
+</main>
+
+<modal-mentions></modal-mentions>
+<modal-cgu></modal-cgu>
+
+<script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="../public/js/index.js"></script>
+<script src="../public/js/recoveryRequests.js"></script>
+<script src="../public/js/sharedFunctions/formLoader.js"></script>
+<!--<script src="../public/js/components/horaires.js"></script>-->
+<script src="../public/js/sharedFunctions/fieldControl.js"></script>
+<script src="../public/js/components/chatButton.js"></script>
+<script src="../public/js/components/sweetAlertToast.js"></script>
+<script src="../public/js/components/footer.js"></script>
+<script src="../public/js/components/modalMentions.js"></script>
+<script src="../public/js/components/modalCGU.js"></script>
+<script src="../vendor/jackocnr/intl-tel-input/build/js/intlTelInput-jquery.min.js"></script>
+<script src="../public/js/theme/sidenav-control.js"></script>
+
+
+</body>
+</html>

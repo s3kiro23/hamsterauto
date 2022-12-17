@@ -1,0 +1,1 @@
+ALTER TABLE `users` ADD `img_profile` VARCHAR(255) NULL AFTER `a2f`;

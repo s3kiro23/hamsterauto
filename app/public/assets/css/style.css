@@ -1,0 +1,462 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Slab');
+
+*, ::after ::before {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.row {
+    margin: 0!important;
+}
+
+
+/*h5 {
+    text-shadow: 0.1em 0.1em 0.2em lightgray;
+}*/
+
+/* css horloge dashboardBackoffice */
+/* #clock {
+    position: absolute;
+    top:0; bottom:0; left:50%; right:0;
+    margin:auto;
+    margin-left:-465px;
+    width:930px;
+    height:200px;
+    text-align:center;
+    background-color: rgb(255, 255, 255);
+  } */
+/* #clock {
+    position: fixed;
+
+    width: 20%;
+    height: 65px;
+    text-align: center;
+    background-color: transparent;
+    z-index: 1070;
+  }
+  
+  .num {
+    position:relative;
+    width:auto;
+    height:70px;
+    font: 45px 'Roboto Slab', sans-serif;
+    color:#0f7c02;
+    background:rgba(90,90,90,1);
+    border:solid 3px #404040;
+    box-sizing:border-box;
+    border-radius:18px;
+  }
+  
+  .colon {
+    position:relative;
+    display:inline-block;
+    font: 65px 'Roboto Slab', sans-serif;
+    top:-18px;
+    left:40px;
+    color:#404040;
+  }
+  
+  .base span {
+    position:absolute;
+    display:block;
+    width:100%;
+  }
+  .lower span {
+    position:relative;
+    top:-100%;
+  }
+  
+  .upper {
+    transform: translate(-24px);
+    position:absolute;  
+    width:100%;
+    height:50%;
+    background:linear-gradient(0deg, rgba(200,200,200,1), rgba(255,255,255,1) 15%);
+    border-radius:15px 15px 0 0;  
+    box-shadow: inset 0 1px 8px rgba(0,0,0,.1);
+    overflow:hidden;
+    border-bottom:solid 1px rgba(0,0,0,.5);
+    box-sizing:border-box;
+  }
+  
+  .lower {
+    position:absolute;
+    top:50%;
+    width:100%;
+    height:50%;
+    background:linear-gradient(180deg, rgb(240, 237, 237), rgba(255,255,255,1) 15%);
+    border-radius:0 0 15px 15px;  
+    box-shadow: inset 0 -3px 5px rgba(179, 176, 176, 0.2);
+    overflow:hidden;
+    border-top:solid 1px #ddd;
+    box-sizing:border-box;
+    transform: translate(-24px);
+  }
+   */
+
+/* css horloge dashboardBackoffice */
+
+/* mediaQuery Horloge */
+/* @media screen and (max-width: 1023px){
+    #clock{
+        display: none;
+    }
+}
+@media all and (min-width: 1024px) and (max-width: 1079px){
+    #clock{
+        justify-content: center;
+        margin-left: 320px;
+    }
+}
+@media all and (min-width: 1080px) and (max-width: 1179px){
+    #clock{
+        justify-content: center;
+        margin-left: 200px;  
+    }
+}
+@media all and (min-width: 1180px) and (max-width: 1279px){
+    #clock{
+        margin-left: 300px;    
+    }
+}
+@media all and (min-width: 1280px) and (max-width: 1439px){
+    #clock{
+        margin-left: 380px;    
+    }
+}
+@media all and (min-width: 1440px){
+    #clock{
+        margin-left: 420px;
+    }
+} */
+/* @media all and (min-width: 2160px){
+    #clock{
+        margin-left: 1000px;
+    }
+} */
+/* mediaQuery Horloge */
+.steplogo {
+    height: 35px;
+    width: 35px;
+}
+
+#modalTech {
+    z-index: 1500;
+}
+
+.btn {
+    text-transform: none !important;
+}
+
+.content {
+    min-height: calc(100vh - 8.9rem)!important;
+}
+
+.content-form {
+    min-height: calc(100vh - 9.9rem)!important;
+}
+
+.content-signin {
+    min-height: calc(100vh - 3.6rem) !important;
+}
+
+.content-contact {
+    min-height: calc(100vh - 3.6rem) !important;
+}
+
+.content-pwd {
+    min-height: calc(100vh - 18.4rem) !important;
+}
+
+.iziToast-bold {
+    font-weight: bold;
+}
+
+.row {
+    --bs-gutter-x: 0 !important;
+}
+
+/*Bouton retour haut DEBUT*/
+
+#btn-back-to-top {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    display: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/*Bouton retour haut FIN*/
+
+.changerDate:hover {
+    color: #4bbf73 !important;
+}
+
+.hover-bnt-switch:hover {
+    cursor: pointer;
+}
+
+.modal-lg {
+    max-width: 80% !important;
+}
+
+.cg-Size {
+    max-width: 100% !important;
+}
+
+.ui-datepicker {
+    z-index: 20000 !important;
+}
+
+.to_signIn:hover, #toRequestMail:hover, .to_logIn:hover {
+    color: #287dec !important;
+}
+
+#back:hover {
+    color: red;
+}
+
+/*Datepicker CSS DEBUT*/
+#datepicker {
+    background-color: inherit !important;
+    border: none !important;
+    color: white !important;
+}
+
+/*Datepicker CSS FIN*/
+
+#map {
+    height: 600px;
+    width: 50%;
+    margin: auto;
+}
+
+/*Layout Menu DropDown User DEBUT*/
+#logout::before {
+    content: "🚪";
+    margin-right: 0.5rem
+}
+
+#settings::before {
+    content: "⚙️";
+    margin-right: 0.3rem
+}
+
+#pwd-modify::before {
+    content: "🔑";
+    margin-right: 0.3rem
+}
+
+#profil::before {
+    content: "👤";
+    margin-right: 0.3rem
+}
+
+/*#profil_dropdown::before {
+    content: "👤";
+}*/
+
+#profil_dropdown {
+    margin-right: 2.7% !important;
+}
+
+
+.first-name, .last-name {
+    text-transform: none;
+}
+
+
+@media (max-width: 576px) {
+    .first-name, .last-name {
+        display: none;
+    }
+    .data_modify {
+        font-size: .9rem!important;
+    }
+    .logo_agence{
+        width: 50% !important;
+    }
+
+    .fa-circle-info{
+        top:70px!important;
+        left:0px!important;
+    }
+}
+
+.scrolled-down{
+    transform:translateY(-100%); transition: all 0.3s ease-in-out;
+}
+.scrolled-up{
+    transform:translateY(0); transition: all 0.3s ease-in-out;
+}
+
+/*Layout Menu DropDown User FIN*/
+
+/*PLAQUE IMMAT DEBUT*/
+.licenseplate {
+    position: relative !important;
+    font-size: 1.2rem !important;
+    -ms-flex-positive: 1 !important;
+    flex-grow: 1 !important;
+    padding: 0 1.9em !important;
+    background: #144880 url(../img/european_stars.svg) no-repeat 8px 8px/15px 15px !important;
+    max-width: 250px !important;
+    margin: 0 auto!important;
+    border: 2px solid #000 !important;
+    border-radius: 4px !important;
+}
+
+.licenseplate ::-webkit-input-placeholder {
+    text-align: center !important;
+    font-size: 1.2rem!important;
+    font-family: 'Segoe UI', Arial, sans-serif !important;
+    font-weight: bold !important;
+    color: #a0a0a0 !important;
+    padding: 0.25em !important;
+}
+
+.licenseplate input {
+    text-align: center !important;
+    font-size: 1.2rem!important;
+    font-family: 'Segoe UI', Arial, sans-serif !important;
+    font-weight: bold !important;
+}
+
+.licenseplate .form-control {
+    border-radius: 0 !important;
+}
+
+.licenseplate::before {
+    content: attr(data-country)!important;
+    position: absolute!important;
+    left: 0!important;
+    bottom: 0.125rem!important;
+    width: 2rem!important;
+    text-align: center!important;
+    font-size: 0.75rem!important;
+    color: #fff!important;
+}
+
+/*PLAQUE IMMAT FIN*/
+
+#inputAnnee ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
+    -moz-appearance: textfield!important;
+    -webkit-appearance: none!important;
+}
+
+/* || Layout Bouton Pulse DEBUT*/
+
+.chat-container {
+    margin: 0 auto 0!important;
+    position: fixed!important;
+    right: 1%!important;
+    top: 70%!important;
+    z-index: 30000 !important;
+}
+
+.livechat-container {
+    position: fixed!important;
+    right: 1%!important;
+    top: 23%!important;
+    width: 20rem !important;
+    height: 21rem !important;
+    border: solid!important;
+}
+
+.livechat-body-container {
+}
+
+.pulse-button {
+    position: relative!important;
+    width: 60px!important;
+    height: 60px!important;
+    border: none!important;
+    box-shadow: 0 0 0 0 rgba(60, 179, 113, 0.7)!important;
+    border-radius: 50%!important;
+    cursor: pointer!important;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1)!important;
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1)!important;
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1)!important;
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1)!important;
+}
+
+.pulse-button:hover {
+    -webkit-animation: none!important;
+    -moz-animation: none!important;
+    -ms-animation: none!important;
+    animation: none!important;
+}
+
+@-webkit-keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0)!important;
+    }
+}
+
+@-moz-keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0)!important;
+    }
+}
+
+@-ms-keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0)!important;
+    }
+}
+
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0)!important;
+    }
+}
+
+/* || Layout Bouton Pulse FIN*/
+
+
+/* Toasts SweetAlert DEBUT */
+.colored-toast.swal2-icon-success {
+    background-color: #a5dc86 !important;
+}
+
+.colored-toast.swal2-icon-error {
+    background-color: #f27474 !important;
+}
+
+.colored-toast.swal2-icon-warning {
+    background-color: #f8bb86 !important;
+}
+
+.colored-toast.swal2-icon-info {
+    background-color: #3fc3ee !important;
+}
+
+.colored-toast.swal2-icon-question {
+    background-color: #87adbd !important;
+}
+
+.colored-toast .swal2-title {
+    color: white;
+}
+
+.colored-toast .swal2-close {
+    color: white;
+}
+
+.colored-toast .swal2-html-container {
+    color: white;
+}
+
+/* Toasts SweetAlert FIN */
+
+.img_profile {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.upload-logo {
+    position: absolute;
+    left: 37%;
+    top: 72.4%;
+}

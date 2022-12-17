@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Hamester Auto | Login Admin</title>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+            <script src="https://kit.fontawesome.com/9414e04596.js" crossorigin="anonymous"></script>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    <link rel="apple-touch-icon" sizes="180x180" href="../public/assets/img/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png">
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest">
+    <link rel="mask-icon" href="../public/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="theme-color" content="#ffffff">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="../vendor/intl-tel-input/build/css/intlTelInput.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap" rel="stylesheet">
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+  </head>
+  <body>
+
+
+    <main class="main" id="top">
+      <div class="container-fluid">
+        <div class="row min-vh-100 flex-center g-0">
+          <div class="col-lg-8 col-xxl-5 py-3 position-relative"><img class="bg-auth-circle-shape" src="../public/assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250"><img class="bg-auth-circle-shape-2" src="../public/assets/img/icons/spot-illustrations/shape-1.png" alt="" width="150">
+            <div class="card overflow-hidden z-index-1" style="background-image:url(../public/assets/img/authentication-corner1.png); background-size: cover;">
+              <div class="card-body p-0" >
+                <div class="row g-0 h-100">
+                  <div class="col-md-5 text-center d-flex flex-column align-items-center justify-content-end pb-5 bg-card-gradient">
+                    <div class="position-relative p-4 pt-md-7 pb-md-7 light">
+                      <div class="bg-holder bg-auth-card-shape" style="background-image:url(../public/assets/img/icons/spot-illustrations/half-circle.png);">
+                      </div>
+                      <!--/.bg-holder-->
+                      <img id="logo" src="../public/assets/img/hamsterautoNuit-unscreen.gif" class="img-fluid" style="width:12rem" alt="logo_agence">
+                      <div class="z-index-1 position-relative"><a class="link-light mb-4 font-sans-serif fs-4 d-inline-block fw-bolder" href="./index.html"></a>
+                        <p class="opacity-75 text-white">Bienvenue sur le réseau du Hamster</p>
+                      </div>
+                      
+                    </div>
+                    <div class="theme-control-toggle px-2">
+                      <input class="form-check-input ms-0 theme-control-toggle-input" id="themeControlToggle"
+                             type="checkbox" data-theme-control="theme" value="dark"/>
+                      <label class="mb-0 theme-control-toggle-label theme-control-toggle-light"
+                             for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
+                             title="Switch to light theme"><span class="fas fa-sun fs-0"></span></label>
+                      <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark"
+                             for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
+                             title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
+                    </div>
+                  </div>
+                  
+                  <div class="col-md-7 d-flex flex-center">
+                    <div class="p-4 p-md-5 flex-grow-1">
+                      <div class="row flex-between-center">
+                        <div class="col-auto">
+                          <h3>Accédez à votre espace de travail</h3>
+                        </div>
+                      </div>
+                      <form action="javascript:private_connect();" method="POST">
+                        <div class="mb-3">
+                            <label class="form-label" for="inputLogin">Identifiants</label>
+                            <input
+                                    id="inputLogin"
+                                    name="inputLogin"
+                                    type="email"
+                                    class="field form-control rounded-top border border-1"
+                                    placeholder="(Adresse Email)"/>
+                            <!-- <div class="invalid-feedback mb-2"></div> -->
+                        </div>
+                        <div class="mb-3">
+                            <label for="inputPassword" class="form-label">Mot de passe</label>
+                            <input
+                                    id="inputPassword"
+                                    name="inputPassword"
+                                    type="password"
+                                    class="field form-control rounded-bottom border border-1"
+                                    placeholder="******"/>
+                            <div class="invalid-feedback mb-2"></div>
+                        </div>
+                        <div class="row flex-between-center">
+                          <div class="col-auto">
+                            <div class="form-check mb-0">
+                              <input class="form-check-input" type="checkbox" id="card-checkbox" checked="checked" />
+                              <label class="form-check-label mb-0" for="card-checkbox">Remember me</label>
+                            </div>
+                          </div>
+                          <div id="toRequestMail" class="col-auto"><a class="fs--1" type="button">Mot de passe oublié?</a></div>
+                        </div>
+                        <div class="mb-3">
+                          <button class="btn btn-primary d-block w-100 mt-3" type="submit" name="submit" id='signIn'>Connexion</button>
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- ===============================================-->
+    <!--    End of Main Content-->
+    <!-- ===============================================-->
+
+    <!-- ===============================================-->
+    <!--    JavaScripts-->
+    <!-- ===============================================-->
+   
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+    <script src="../public/js/recoveryRequests.js"></script>
+    <script src="../public/js/privateLogin.js"></script>
+    <script src="../public/js/sharedFunctions/formLoader.js"></script>
+    <script src="../public/js/sharedFunctions/fieldControl.js"></script>
+    <script src="../public/js/components/sweetAlertToast.js"></script>
+    <script src="../public/js/components/footer.js"></script>
+    <script src="../public/js/components/modalMentions.js"></script>
+    <script src="../public/js/components/modalCGU.js"></script>
+    <script src="../public/assets/js/config.js"></script>
+    <script src="../public/js/theme/sidenav-control.js"></script>
+
+  </body>
+
+</html>

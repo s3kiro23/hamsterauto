@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../public/assets/img/favicons/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png"/>
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest"/>
+    <link rel="mask-icon" href="../public/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <meta name="msapplication-TileColor" content="#da532c"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <link rel="stylesheet" href="../public/assets/css/test-sidebar.css"/>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+</head>
+<body>
+<div class="container accordion" id="accordionExample">
+    <div class="accordion-item rounded-top shadow">
+        <h2 class="accordion-header d-flex align-items-center" id="headingOne">
+
+            <button id="1"
+                    class="flex-row text-center accordion-button collapsed rounded-top"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapseOne"
+                    aria-expanded="true" aria-controls="collapseOne">
+                <img src="..\public\assets\img\1.png" alt="step1" class="me-4 steplogo">
+                Renseignement de vos informations personnelles
+            </button>
+        </h2>
+        <div id="collapseOne" class="accordion-collapse collapse"
+             aria-labelledby="headingOne"
+             data-bs-parent="#accordionExample">
+            <div class="accordion-body bg-primary bg-opacity-10">
+                <tr>
+                    <td onclick="showInfoCar(' . $id_vehicule . ')" style="cursor: pointer;" class="text-center">
+                        <img src="../public/assets/img/logo/' . strtoupper($nomMarque) . '.png" alt="logo_marque">
+                    </td>
+                    <td onclick="showInfoCar(' . $id_vehicule . ')" style="cursor: pointer">
+                        <span class="text-muted font-13">Modèle</span>
+                        <br>
+                        <span class="text-muted fs-1">' . $modele . '</span>
+                    </td>
+                    <td onclick="showInfoCar(' . $id_vehicule . ')" style="cursor: pointer">
+                        <span class="text-muted font-13">Immatriculation</span>
+                        <br>
+                        <span class="text-muted fs-1">' . $immat . '</span>
+                    </td>
+                    <td>
+                        <a id = "addCG" onclick= "modalCG(' . $id_vehicule . ')" class="border-0 bg-transparent" type="button" data-toggle = "tooltip" data-placement = "bottom" title = "Ajouter une carte grise" >
+                            <i class="fa-solid fa-file-circle-plus text-info"></i>
+                        </a>
+                        <a id = "addCG" onclick= "deleteCar(' . $id_vehicule . ')" class="border-0 bg-transparent ps-lg-1" type = "button" data-toggle = "tooltip" data-placement = "bottom" title = "Supprimer ce véhicule" >
+                            <i class="fa-solid fa-trash text-dark"></i>
+                        </a>
+                    </td>
+                </tr>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<!--Javascript-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/9414e04596.js"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+</html>

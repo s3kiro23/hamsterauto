@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+            crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/9414e04596.js"
+            crossorigin="anonymous"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<chat-button></chat-button>
+
+<div class="livechat-container">
+    <div class="title-container w-100 py-5 bg-success">
+        <span> Une question? Discutons!</span>
+        <span></span>
+        <span><i class="fa-solid fa-xmark fa-xl"></i></span>
+    </div>
+    <div class="livechat-body-container"></div>
+    <div class="answer-container w-100 py-4 bg-info">
+        <form action="#">
+            <label for="livechat"></label>
+            <input id="livechat" type="text">
+        </form>
+    </div>
+</div>
+
+<script src="../public/js/components/chatButton.js"></script>
+
+</body>
+</html>

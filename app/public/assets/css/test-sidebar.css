@@ -1,0 +1,204 @@
+/* *, ::after ::before {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.content {
+    min-height: calc(100vh - 16.4rem);
+}
+
+.content-signin {
+    min-height: calc(100vh - 3.6rem) !important;
+}
+
+.iziToast-bold {
+    font-weight: bold;
+}
+
+.row {
+    --bs-gutter-x: 0!important;
+} */
+
+/*Bouton retour haut DEBUT*/
+/* #btn-back-to-top {
+    position: fixed;
+    bottom: 5%;
+    right: 5%;
+    display: none;
+} */
+
+/*Bouton retour haut FIN*/
+
+/* .changerDate:hover {
+    color: #4bbf73 !important;
+}
+
+.modal-lg {
+    max-width: 80% !important;
+}
+
+.cg-Size {
+    max-width: 100% !important;
+}
+
+.ui-datepicker {
+    z-index: 20000 !important;
+}
+
+#to_signIn:hover, #toRequestMail:hover, #to_logIn:hover {
+    color: #4bbf73 !important;
+} */
+
+/*Datepicker CSS DEBUT*/
+/* #datepicker {
+    background-color: inherit !important;
+    border: none !important;
+    color: white !important;
+} */
+
+/*Datepicker CSS FIN*/
+
+/* #map {
+    height: 600px;
+    width: 50%;
+    margin: auto;
+} */
+
+/*Layout Menu DropDown User DEBUT*/
+/* #logout::before {
+    content: "🚪";
+    margin-right: 0.5rem
+}
+
+#settings::before {
+    content: "⚙️";
+    margin-right: 0.5rem
+}
+
+#profil::before {
+    content: "👤";
+    margin-right: 0.5rem
+}
+
+#profil_dropdown::before {
+    content: "👤";
+} */
+
+/*Layout Menu DropDown User FIN*/
+
+/*PLAQUE IMMAT DEBUT*/
+/* .licenseplate {
+    position: relative !important;
+    font-size: 1.2rem !important;
+    -ms-flex-positive: 1 !important;
+    flex-grow: 1 !important;
+    padding: 0 1.9em !important;
+    background: #144880 url(../img/european_stars.svg) no-repeat 8px 8px/15px 15px !important;
+    max-width: 250px !important;
+    margin: 0 auto;
+    border: 2px solid #000 !important;
+    border-radius: 4px !important;
+}
+
+.licenseplate ::-webkit-input-placeholder {
+    text-align: center !important;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Arial, sans-serif !important;
+    font-weight: bold !important;
+    color: #a0a0a0 !important;
+}
+
+.licenseplate input {
+    text-align: center !important;
+    font-size: 1.2rem;
+    font-family: 'Segoe UI', Arial, sans-serif !important;
+    font-weight: bold !important;
+}
+
+.licenseplate::before {
+    content: attr(data-country);
+    position: absolute;
+    left: 0;
+    bottom: 0.125rem;
+    width: 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: #fff;
+} */
+
+/*PLAQUE IMMAT FIN*/
+
+/* #inputAnnee ::-webkit-outer-spin-button, ::-webkit-inner-spin-button {
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
+} */
+
+/* || Layout Bouton Pulse DEBUT*/
+
+/* .chat-container {
+    margin: 0 auto 0;
+    position: fixed;
+    right: 1%;
+    top: 70%;
+    z-index: 30000 !important;
+}
+
+.livechat-container{
+    position: fixed;
+    right: 1%;
+    top: 23%;
+    width: 20rem!important;
+    height: 21rem!important;
+    border: solid;
+}
+
+.livechat-body-container{
+}
+
+.pulse-button {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    border: none;
+    box-shadow: 0 0 0 0 rgba(60, 179, 113, 0.7);
+    border-radius: 50%;
+    cursor: pointer;
+    -webkit-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -moz-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    -ms-animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+    animation: pulse 1.25s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+.pulse-button:hover {
+    -webkit-animation: none;
+    -moz-animation: none;
+    -ms-animation: none;
+    animation: none;
+}
+
+@-webkit-keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+}
+
+@-moz-keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+}
+
+@-ms-keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+}
+
+@keyframes pulse {
+    to {
+        box-shadow: 0 0 0 10px rgba(255, 255, 255, 0);
+    }
+} */
+
+/* || Layout Bouton Pulse FIN*/
+
