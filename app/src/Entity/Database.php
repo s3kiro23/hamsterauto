@@ -7,7 +7,7 @@ class Database{
     public function __construct(){
 
         try{
-            $this->db = mysqli_connect("localhost", "db", "Db123!@20", "aflauto");
+            $this->db = mysqli_connect("localhost", "db", "Db123!@20", "hamsterauto");
         } catch (RuntimeException $e){
             exit(0);
         }
