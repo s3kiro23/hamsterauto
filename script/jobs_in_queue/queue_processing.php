@@ -17,7 +17,13 @@ class Database{
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-$jobs_in_queued = Queued::getJobsQueued();
+$jobs_in_queued = [];
+
+$requete = "SELECT * FROM queued";
+$result = mysqli_query($GLOBALS['Database'], $requete) or die;
+while ($data = mysqli_fetch_assoc($result)) {
+    $jobs_in_queued[] = $data;
+}
 
 if (!empty($jobs_in_queued)) {
     $state = 0;
