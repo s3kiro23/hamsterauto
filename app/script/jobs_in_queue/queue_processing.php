@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function ($classe) {
-    require '../src/Entity/' . $classe . '.php';
+    require '../../src/Entity/' . $classe . '.php';
 });
 
 $db = new Database();
