@@ -65,7 +65,7 @@ class SMS
     public function getRDV($user, $carUser, $CT): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
-        $bodySMS = "Bonjour {$user->getPrenom_user()}, votre rendez-vous du " . utf8_encode(strftime("%A %d %B %G", $CT->getId_time_slot())) . " pour le véhicule immatriculé {$carUser->getImmat_vehicule()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre AFLAUTO.";
+        $bodySMS = "Bonjour {$user->getPrenom_user()}, votre rendez-vous du " . utf8_encode(strftime("%A %d %B %G", $CT->getTime_slot())) . " pour le véhicule immatriculé {$carUser->getImmat_vehicule()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre AFLAUTO.";
 
         return array("bodySMS" => $bodySMS, "receiver" => $user->getTelephone_user());
     }

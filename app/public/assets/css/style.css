@@ -460,3 +460,20 @@
     left: 37%;
     top: 72.4%;
 }
+
+@media all and (min-width: 1921px) {
+    #loginLeftCol{
+        padding-top: 3.6em;
+        padding-bottom: 4em;
+    }
+}
+@media all and (max-width: 1919px) {
+    #clock{
+       display: none;
+    }
+}
+@media all and (min-width: 1921px) {
+    #rdvContainer{
+        width: 70%!important;
+    }
+}

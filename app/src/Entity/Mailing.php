@@ -48,7 +48,7 @@ class Mailing
 
             $mail->isHTML(true);     //Set email format to HTML
             $mail->Subject = $data['subject'];
-            $mail->AddEmbeddedImage("../../public/assets/img/logoMail.png", "logo", "logoMail.png");
+            $mail->AddEmbeddedImage("../../public/assets/img/logoDark.png", "logo", "logoDark.png");
             $mail->Body = $data['body'];
             $mail->send();
             error_log('Le mail a été envoyé !');
@@ -130,7 +130,7 @@ class Mailing
         ";
         $subject = "Compte rendu d'intervention";
         $mail = $user->getEmail_user();
-        $attachment = '../var/generate/minutes/' . decrypt($CT->getMinute(), $user->getHash());
+        $attachment = '../var/generate/minutes/' . decrypt($CT->getPv(), $user->getHash());
 
         return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment);
     }
@@ -162,7 +162,7 @@ class Mailing
         ";
         $subject = "Compte rendu d'intervention";
         $mail = $user->getEmail_user();
-        $attachment = '../var/generate/minutes/' . decrypt($CT->getMinute(), $user->getHash());
+        $attachment = '../var/generate/minutes/' . decrypt($CT->getPv(), $user->getHash());
 
         return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment);
     }
@@ -170,8 +170,8 @@ class Mailing
     public function getCT_Canceled($user, $CT, $carUser): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
-        $rdvDate = date("d/m/Y", $CT->getId_time_slot());
-        $rdvTime = date("H:i", $CT->getId_time_slot());
+        $rdvDate = date("d/m/Y", $CT->getTime_slot());
+        $rdvTime = date("H:i", $CT->getTime_slot());
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>

@@ -77,11 +77,12 @@ class PDF extends TCPDF
             'module_height' => 1 // height of a single module in points
         );
 
-        $pdf->write2DBarcode('https://aflokkat.com/', 'QRCODE,H', 4, 0, 30, 30, $style, 'N');
+        $pdf->write2DBarcode('https://hamsterauto.com/', 'QRCODE,H', 4, 0, 30, 30, $style, 'N');
 
         //Header
         $pdf->writeHTMLCell(85, 2, '62', 10, $data['headerTitle'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(46, 2, '157', 0, $data['headerLogo'], 0, 0, 0, true, 'C', true);
+        $pdf->writeHTMLCell(46, 2, '157', 25, $data['headerSub'], 0, 0, 0, true, 'C', true);
 
         //Body
         $pdf->writeHTMLCell(75, 2, '5', 30, $data['nature'], 0, 0, 0, true, 'C', true);
@@ -116,7 +117,7 @@ class PDF extends TCPDF
         return 'pv_' . $data['nb_agrement'] . '_' . $data['PV'] . '.pdf';
     }
 
-    public function minute($car, $CT, $client): array
+    public function pv($car, $CT, $client): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
         $report = json_decode($CT->getReport(), true);
@@ -129,7 +130,7 @@ class PDF extends TCPDF
             }
         }
 
-        $dateTimestamp = $CT->getId_time_slot();
+        $dateTimestamp = $CT->getTime_slot();
         $nb_agrement = "S654789741";
         $rdvDate = date("d/m/Y", $dateTimestamp);
         $nextDate = date("d/m/Y", $dateTimestamp + 63097119);
@@ -152,11 +153,16 @@ class PDF extends TCPDF
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
-                        <img src="' . Kernel::ROOT_DIR() . '\public\assets\img\logoMail.png" alt="" width="80" height="80" border="0">
+                        <img src="' . Kernel::ROOT_DIR() . '\public\assets\img\logoDark.png" alt="" width="110" height="110" border="0">
                     </td>
                 </tr>
+            </table>
+            ';
+
+        $headerSub = '
+            <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
-                    <td style="font-weight: bolder; color: #4bbf73;">' . mb_strtoupper("exemplaire remis à l'usager") . '</td>
+                   <td style="font-weight: bolder; color: #4bbf73;">' . mb_strtoupper("exemplaire remis à l'usager") . '</td> 
                 </tr>
             </table>
             ';
@@ -488,6 +494,7 @@ class PDF extends TCPDF
         return array(
             "headerTitle" => $headerTitle,
             "headerLogo" => $headerLogo,
+            "headerSub" => $headerSub,
             "nature" => $nature,
             "id_tech" => $id_tech,
             "id_center" => $id_center,

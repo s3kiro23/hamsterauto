@@ -35,35 +35,35 @@
     <div class="content container d-flex justify-content-center align-items-center h-auto">
         <div class="row text-center pt-4 pt-lg-2 fixed-top z-index--1">
             <div class="col">
-                <img id="logoIndex" src="../public/assets/img/animated-icons/hamsterauto.gif" class="img-fluid"
+                <img id="logoIndex" src="../public/assets/img/animated-icons/hamsterauto-unscreen.gif" class="img-fluid"
                      style="width:12rem" alt="logo_agence">
             </div>
         </div>
 
         <!-- <chat-button></chat-button> -->
 
-        <div class="row w-100 w-md-100 w-xxl-75 h-auto mt-6 mt-sm-7 mt-xl-8 mt-xxl-5 pt-5 justify-content-center position-static position-xl-sticky position-xxl-fixed gx-6 gy-5 gy-lg-5 gy-xl-0 gy-xxl-0"
+        <div class="row w-100 w-md-100 w-xxl-75 h-auto mt-6 mt-sm-7 mt-xl-8 mt-xxl-5 pt-5 pt-xl-2 pt-xxl-6 justify-content-center position-static position-xl-sticky position-xxl-fixed gx-6 gy-5 gy-lg-5 gy-xl-0 gy-xxl-0"
              style="top:5rem;">
 
             <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-5 px-0 px-xl-2">
                 <img
                         class="bg-auth-circle-shape-2 overflow-hidden"
                         src="../public/assets/img/icons/spot-illustrations/shape-1.png" alt="" width="170"
-                        style="position:fixed;top:38rem;left:17rem">
+                        style="position:fixed;top:40rem;left:17rem">
                 <div class="card z-index-1"
                      style="background-image:url(../public/assets/img/authentication-corner1.png); background-size: cover;">
                     <div class="card-body p-0">
                         <div class="row g-0 h-75">
                             <div class="col-md-5 text-center d-flex flex-column align-items-center justify-content-end bg-card-gradient">
 
-                                <div class="p-4 pt-md-6 pt-xl-4 pb-md-9 light">
+                                <div class="p-4 pt-md-6 pt-xl-4 pt-xxl-8 pb-md-9 pb-xl-8 light">
                                     <div class="bg-holder bg-auth-card-shape"
                                          style="background-image:url(../public/assets/img/icons/spot-illustrations/half-circle.png);">
 
                                     </div>
-                                    <h3 class="text-light pb-1 pb-xl-0 pt-xl-3">Bienvenue sur le réseau du Hamster</h3>
+                                    <h3 class="text-light pb-1 pb-xl-0 pt-xl-3 pt-xxl-0">Bienvenue sur le réseau du Hamster</h3>
                                     <div class="text-center position-relative">
-                                        <span class="d-flex justify-content-center text-light mt-2 mt-xl-5">Prenez rendez-vous grâce au formulaire de réservation</span>
+                                        <span class="d-flex justify-content-center text-light mt-2 mt-xl-3">Prenez rendez-vous grâce au formulaire de réservation</span>
                                         <br><span class="text-light">ou</span><br><br>
                                         <a id="to_signIn"
                                            type="button"
@@ -72,7 +72,7 @@
                                         </a>
                                     </div>
                                 </div>
-                                <div class="theme-control-toggle px-2 pb-3 z-index-2">
+                                <div class="theme-control-toggle px-2 pb-4 z-index-2">
                                     <input class="form-check-input ms-0 theme-control-toggle-input switchLogo"
                                            id="themeControlToggle"
                                            type="checkbox" data-theme-control="theme" value="dark"/>
@@ -85,10 +85,10 @@
                                 </div>
                             </div>
 
-                            <div class="col-md-7 d-flex flex-center z-index-2">
-                                <div class="p-4 pt-xl-0 pt-xxl-3 p-md-5 flex-grow-1">
+                            <div class="col-md-7 d-flex flex-center text-center z-index-2">
+                                <div class="p-4 pt-xl-2 pt-xxl-0 p-md-5 flex-grow-1">
                                     <div class="row flex-between-center">
-                                        <div class="col-auto">
+                                        <div id="loginLeftCol" class="col-auto">
                                             <p>Déjà inscrit?</p>
                                             <h4 class="text-center text-primary">Accédez à votre espace</h4>
                                         </div>
@@ -114,12 +114,12 @@
                                                     placeholder="******"/>
                                             <div class="invalid-feedback mb-2"></div>
                                         </div>
-                                        <div class="row justify-content-center w-100">
+                                        <div class="row justify-content-center align-items-center w-100">
                                             <div class="col-auto p-0">
                                                 <div class="form-check mb-0">
                                                     <input class="form-check-input" type="checkbox" id="card-checkbox"
                                                            checked="checked"/>
-                                                    <label class="form-check-label mb-0" for="card-checkbox">Remember
+                                                    <label class="form-check-label mb-0 me-xxl-3" for="card-checkbox">Remember
                                                         me</label>
                                                 </div>
                                             </div>
@@ -132,7 +132,7 @@
                                                     name="submit" id='signIn'>Connexion
                                             </button>
                                         </div>
-                                        <div class='mb-0 mt-5 mt-md-5 fs--1 fw-semi-bold text-dark opacity-75 d-flex flex-column justify-content-end'>
+                                        <div class='mb-0 mt-5 mt-md-5 mt-xl- fs--1 fw-semi-bold text-dark opacity-75 d-flex flex-column justify-content-end'>
                                             <a class='text-decoration-underline text-primary cursor-pointer'
                                                id='to-mentions'>Mentions légales</a><br>
                                             <a class='text-decoration-underline text-primary' id='to-cgu'
@@ -145,15 +145,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-6 mt-xl-0 px-0 px-xl-4">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-6 col-xxl-5 mt-xl-0 px-0 px-xl-4">
                 <img class="bg-auth-circle-shape overflow-hidden d-none d-xl-inline"
                      src="../public/assets/img/icons/spot-illustrations/bg-shape.png" alt="" width="250"
-                     style="position:fixed;top:5rem;right:8rem">
+                     style="position:fixed;top:5rem;right:15rem">
                 <div class="card theme-wizard mb-5 mb-md-0" id="wizard"
                      style="background-image:url(../public/assets/img/authentication-corner1.png); background-size: cover;">
-                    <div class="card-header bg-light pt-3 pb-2">
+                    <div class="card-header bg-transparent pt-3 pt-xxl-4 pb-2">
                         <div class="form-title">
-                            <h4 class="text-primary text-center">Formulaire de réservation</h4>
+                            <h4 class="text-primary text-center pt-xl-2 pt-xxl-4">Formulaire de réservation</h4>
                             <h6 class="mb-3 text-center">Réservez sans créer de compte</h6>
                         </div>
                         <ul class="nav justify-content-between nav-wizard" hidden>
@@ -210,7 +210,7 @@
                                             id="new-btn">Commencer
                                     </button>
                                 </div>
-                                <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
+                                <div class="tab-pane px-sm-3 px-md-5 pt-xxl-3" role="tabpanel"
                                      aria-labelledby="bootstrap-wizard-tab0" id="bootstrap-wizard-tab0">
                                     <fieldset class="rounded px-2 px-md-4 px-lg-4 py-md-6">
                                         <div class="d-flex gap-3">
@@ -280,7 +280,7 @@
                                         </div>
                                     </fieldset>
                                 </div>
-                                <div class="tab-pane px-sm-3 px-md-5" role="tabpanel"
+                                <div class="tab-pane px-sm-3 px-md-5 pt-xxl-3" role="tabpanel"
                                      aria-labelledby="bootstrap-wizard-tab1" id="bootstrap-wizard-tab1">
                                     <div class="text-dark mb-3 form-label text-dark" style="font-weight: 500">
                                         Sélectionner le format de votre
@@ -333,16 +333,14 @@
                                     <div class="invalid-feedback"></div>
                                     <div class="d-flex flex-row justify-content-between">
                                         <div class="col-5">
-                                            <label for="selectMarque" class="form-label text-dark">Sélectionner la
-                                                marque</label>
+                                            <label for="selectMarque" class="form-label text-dark">Marque</label>
                                             <select class="form-select" id="selectMarque">
                                                 <option>-</option>
                                             </select>
                                             <div class="invalid-feedback"></div>
                                         </div>
                                         <div class="col-5">
-                                            <label for="selectModele" class="form-label text-dark">Sélectionner le
-                                                modèle</label>
+                                            <label for="selectModele" class="form-label text-dark">Modèle</label>
                                             <select class="form-select" id="selectModele">
                                                 <option>-</option>
                                             </select>
@@ -353,7 +351,7 @@
                                         carburant
                                     </div>
                                     <div class="row form-group mt-2">
-                                        <div class="form-check col">
+                                        <div class="form-check col-3 me-xl-1">
                                             <input
                                                     class="form-check-input"
                                                     type="radio"
@@ -366,7 +364,7 @@
                                                 Essence
                                             </label>
                                         </div>
-                                        <div class="form-check col">
+                                        <div class="form-check col-3">
                                             <input
                                                     class="form-check-input"
                                                     type="radio"
@@ -379,7 +377,7 @@
                                                 Diesel
                                             </label>
                                         </div>
-                                        <div class="form-check col">
+                                        <div class="form-check col-2 me-xl-1">
                                             <input
                                                     class="form-check-input"
                                                     type="radio"
@@ -391,10 +389,10 @@
                                                     class="form-check-label text-dark fw-bold fst-italic"
                                                     for="Electrique"
                                             >
-                                                Electrique
+                                                Elec
                                             </label>
                                         </div>
-                                        <div class="form-check col">
+                                        <div class="form-check col-3">
                                             <input
                                                     class="form-check-input"
                                                     type="radio"
@@ -421,14 +419,19 @@
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
-                                <div class="tab-pane px-sm-3 px-md-5 py-md-6" role="tabpanel"
+                                <div class="tab-pane px-sm-3 px-md-5 py-md-6 py-xl-4 pt-xxl-5" role="tabpanel"
                                      aria-labelledby="bootstrap-wizard-tab2" id="bootstrap-wizard-tab2">
-                                    <div class="mb-3 d-flex flex-column">
+                                     <span id="clock" class="d-flex justify-content-center" >
+                                        <div id="horaires" class="justify-self-center me-3"></div>
+                                        <div id="statutOuverture"></div>
+                                     </span>
+                                    <div class="mb-3 mb-xxl-2 d-flex flex-column align-items-center">
+                                        
                                         <span class="fs-2">Horaires disponibles</span>
                                         <span class="fs--1">(réservation possible jusqu'à 15 minutes avant l'heure souhaitée)</span>
                                     </div>
-                                    <div class="col-12 col-md-12 max-w-4xl mx-auto">
-                                        <div id="rdvContainer" class="mt-2 shadow rounded">
+                                    <div class="col-12 col-md-12 max-w-4xl mx-auto d-flex justify-content-center">
+                                        <div id="rdvContainer" class="mt-2 mt-xxl-0 shadow rounded w-75 w-xxl-100 overflow-hidden">
                                             &lt;!&ndash;Contenu des créneaux ici, généré avec class HTML &ndash;&gt;
                                         </div>
                                     </div>
@@ -781,7 +784,7 @@
 <script src="../public/js/index.js"></script>
 <script src="../public/js/recoveryRequests.js"></script>
 <script src="../public/js/sharedFunctions/formLoader.js"></script>
-<!--<script src="../public/js/components/horaires.js"></script>-->
+<script src="../public/js/components/horaires.js"></script>
 <script src="../public/js/sharedFunctions/fieldControl.js"></script>
 <script src="../public/js/components/chatButton.js"></script>
 <script src="../public/js/components/sweetAlertToast.js"></script>

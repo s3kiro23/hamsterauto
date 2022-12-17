@@ -1,10 +1,9 @@
 <?php session_start();
+require_once '../../Controller/shared.php';
 
 spl_autoload_register(function ($classe) {
     require '../../Entity/' . $classe . '.php';
 });
-
-require_once Kernel::ROOT_DIR().'/src/Controller/shared.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -32,8 +31,8 @@ switch ($_POST['request']) {
             $timeSlotCheck = ControleTech::checkTimeSlotReserved(strtotime($currentDate));
             if ($timeSlotCheck) {
                 for ($a = 0; $a <= count($timeSlotCheck) - 1; $a++) {
-                    if ((int)$timeSlotCheck[$a]['id_time_slot'] > strtotime($currentDate)) {
-                        $tab_reserved[] = (int)$timeSlotCheck[$a]['id_time_slot'];
+                    if ((int)$timeSlotCheck[$a]['time_slot'] > strtotime($currentDate)) {
+                        $tab_reserved[] = (int)$timeSlotCheck[$a]['time_slot'];
                     }
                 }
             }
@@ -44,8 +43,8 @@ switch ($_POST['request']) {
             $timeSlotCheck = ControleTech::checkTimeSlotReserved($_POST['currentDate']);
             if ($timeSlotCheck) {
                 for ($a = 0; $a <= count($timeSlotCheck) - 1; $a++) {
-                    if ((int)$timeSlotCheck[$a]['id_time_slot'] > strtotime($currentDate)) {
-                        $tab_reserved[] = (int)$timeSlotCheck[$a]['id_time_slot'];
+                    if ((int)$timeSlotCheck[$a]['time_slot'] > strtotime($currentDate)) {
+                        $tab_reserved[] = (int)$timeSlotCheck[$a]['time_slot'];
                     }
                 }
             }

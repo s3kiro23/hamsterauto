@@ -6,7 +6,7 @@ $(function () {
     $(".form-control").on("change", checkField);
     $('#inputTel').intlTelInput({
         preferredCountries: ["fr", "gb"],
-        utilsScript: "../vendor/jackocnr/intl-tel-input/build/js/utils.js",
+        utilsScript: "/controle_tech/vendor/jackocnr/intl-tel-input/build/js/utils.js",
         initialCountry: "fr",
         geoIpLookup: function (success, failure) {
             $.get("https://ipinfo.io", function () {

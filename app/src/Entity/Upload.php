@@ -10,7 +10,7 @@ $GLOBALS['Database'] = $db->connexion();
 
 class Upload
 {
-    private $id;
+    private $id_upload;
     private $file_name;
     private $id_vehicule;
     private $submitted_on;
@@ -30,7 +30,7 @@ class Upload
         $requete = "SELECT * FROM `uploads` WHERE `id_vehicule` = '" .filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
-            $this->id = $data['id'];
+            $this->id_upload = $data['id_upload'];
             $this->file_name = $data['file_name'];
             $this->id_vehicule = $data['id_vehicule'];
             $this->submitted_on = $data['submitted_on'];
@@ -67,14 +67,14 @@ class Upload
 
     }
 
-    public function getId()
+    public function getIdUpload()
     {
-        return $this->id;
+        return $this->id_upload;
     }
 
-    public function setId($id)
+    public function setIdUpload($id)
     {
-        $this->id = $id;
+        $this->id_upload = $id;
     }
 
     public function getFile_name()

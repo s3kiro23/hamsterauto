@@ -101,10 +101,10 @@ $(function () {
 });
 
 function switchLogo(){
-    if ($('#logoIndex').attr('src') === "../public/assets/img/animated-icons/hamsterauto.gif"){
-        $('#logoIndex').attr('src',"../public/assets/img/animated-icons/hamsterautoNuit.gif")
-    }else if ($('#logoIndex').attr('src') === "../public/assets/img/animated-icons/hamsterautoNuit.gif"){
-        $('#logoIndex').attr('src', "../public/assets/img/animated-icons/hamsterauto.gif")
+    if ($('#logoIndex').attr('src') === "../public/assets/img/animated-icons/hamsterauto-unscreen.gif"){
+        $('#logoIndex').attr('src',"../public/assets/img/animated-icons/hamsterautoNuit-unscreen.gif")
+    }else if ($('#logoIndex').attr('src') === "../public/assets/img/animated-icons/hamsterautoNuit-unscreen.gif"){
+        $('#logoIndex').attr('src', "../public/assets/img/animated-icons/hamsterauto-unscreen.gif")
     }
 }
 

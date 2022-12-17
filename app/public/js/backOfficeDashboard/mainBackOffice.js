@@ -40,7 +40,7 @@ function priseEnCharge(data) {
                     idControle: data,
                 },
                 success: function (response) {
-                   basculerIntervention(data, response['id_tech']);
+                   basculerIntervention(data, response['num_tech']);
                     $("#noAttente").html("");
                     loadIntervEnCours(1);
                     vehicule_attente(1);

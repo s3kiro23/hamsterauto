@@ -54,7 +54,7 @@ if (!getAuthorizationUser($whoIs)){
             $timestamp = strtotime(date('d-m-Y'));
             $jourRDV = HTML::generateDateBackOffice(date("d-m-Y"), $timestamp);
             foreach ($tab_cars as $car) {
-                $html .= HTML::loadInterventions($car['id_controle'], $car['id_time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $currentDate);
+                $html .= HTML::loadInterventions($car['id_controle'], $car['time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $currentDate);
                 $status = 1;
             }
             for ($i = 1; $i <= $totalPages; $i++) {
@@ -83,8 +83,8 @@ if (!getAuthorizationUser($whoIs)){
             $nbr_of_rdv = ControleTech::countRdv($state, $currentDate);
             $totalPages = ceil($nbr_of_rdv / 5);
             foreach ($tab_cars as $car) {
-                $tech = new User($car['id_tech']);
-                $html .= HTML::loadInterventionsEnCours($car['id_controle'], $car['id_time_slot'], $tech->getPrenom_user(), $car['nom_marque'], $car['immat_vehicule']);
+                $tech = new User($car['num_tech']);
+                $html .= HTML::loadInterventionsEnCours($car['id_controle'], $car['time_slot'], $tech->getPrenom_user(), $car['nom_marque'], $car['immat_vehicule']);
                 $status = 1;
             }
             for ($i = 1; $i <= $totalPages; $i++) {

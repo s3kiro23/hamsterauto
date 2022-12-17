@@ -7,7 +7,7 @@ class Database{
     public function __construct(){
 
         try{
-            $this->db = mysqli_connect("localhost", "db", "Db123!@20", "hamsterauto");
+            $this->db = mysqli_connect("localhost", "db", "Db123!@20", "aflauto");
         } catch (RuntimeException $e){
             exit(0);
         }
@@ -20,5 +20,6 @@ class Database{
 }
 function filter($value): string
 {
+
 	return mysqli_real_escape_string($GLOBALS['Database'], $value);
 }

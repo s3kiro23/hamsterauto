@@ -7,15 +7,15 @@ $GLOBALS['Database'] = $db->connexion();
 
 class Queued
 {
-    private $id;
+    private $id_queue;
     private $type;
     private $template;
 
     public function __construct($id)
     {
         error_log(1);
-        $this->id = $id;
-        if ($this->id != 0) {
+        $this->id_queue = $id;
+        if ($this->id_queue != 0) {
             $this->checkData($id);
         }
     }
@@ -69,14 +69,14 @@ class Queued
         mysqli_query($GLOBALS['Database'], $requete) or die;
     }
 
-    public function getId(): int
+    public function getIdQueue(): int
     {
-        return $this->id;
+        return $this->id_queue;
     }
 
-    public function setId($id)
+    public function setIdQueue($id)
     {
-        $this->id = $id;
+        $this->id_queue = $id;
     }
 
     public function getType()

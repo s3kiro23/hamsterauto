@@ -36,7 +36,7 @@ $GLOBALS['Database'] = $db->connexion();
             $paginationHoldNext = "";
             $tab_cars = ControleTech::checkRdvNextDays($off7, $state, $_POST['nextDate']);
             foreach ($tab_cars as $car) {
-                $html .= HTML::loadInterventions($car['id_controle'], $car['id_time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $_POST['nextDate']);
+                $html .= HTML::loadInterventions($car['id_controle'], $car['time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $_POST['nextDate']);
                 $status = 1;
             }
             for ($i = 1; $i <= $totalPages; $i++) {
@@ -56,7 +56,7 @@ $GLOBALS['Database'] = $db->connexion();
             $paginationHoldPrevious = "";
             $tab_cars = ControleTech::checkRdvPreviousDays($off7, $state, $_POST['previousDate']);
             foreach ($tab_cars as $car) {
-                $html .= HTML::loadInterventions($car['id_controle'], $car['id_time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $_POST['previousDate']);
+                $html .= HTML::loadInterventions($car['id_controle'], $car['time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $_POST['previousDate']);
                 $status = 1;
             }
             for ($i = 1; $i <= $totalPages; $i++) {
@@ -75,7 +75,7 @@ $GLOBALS['Database'] = $db->connexion();
             $totalPages = ceil($nbr_of_rdv / 5);
             $tab_cars = ControleTech::checkRdvPreviousDays($off7, $state, $_POST['currentDate']);
             foreach ($tab_cars as $car) {
-                $html .= HTML::loadInterventions($car['id_controle'], $car['id_time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $_POST['currentDate']);
+                $html .= HTML::loadInterventions($car['id_controle'], $car['time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $_POST['currentDate']);
                 $status = 1;
             }
             for ($i = 1; $i <= $totalPages; $i++) {
@@ -95,8 +95,8 @@ $GLOBALS['Database'] = $db->connexion();
                 $timeSlotCheck = ControleTech::checkTimeSlotReserved(strtotime($currentDate));
                 if ($timeSlotCheck) {
                     for ($a = 0; $a <= count($timeSlotCheck) - 1; $a++) {
-                        if ((int)$timeSlotCheck[$a]['id_time_slot'] > strtotime($currentDate)) {
-                            $tab_reserved[] = (int)$timeSlotCheck[$a]['id_time_slot'];
+                        if ((int)$timeSlotCheck[$a]['time_slot'] > strtotime($currentDate)) {
+                            $tab_reserved[] = (int)$timeSlotCheck[$a]['time_slot'];
                         }
                     }
                 }
@@ -119,7 +119,7 @@ $GLOBALS['Database'] = $db->connexion();
             $idUser = $user->getId_user();
             $idControle = $_POST['idControle'];
             $msg = 'Véhicule pris en charge';
-            echo json_encode(array("status" => $status, "msg" => $msg, "id_tech" => $idUser));
+            echo json_encode(array("status" => $status, "msg" => $msg, "num_tech" => $idUser));
             break;
 
         case 'basculer_intervention':
@@ -127,7 +127,7 @@ $GLOBALS['Database'] = $db->connexion();
             $idControle = $_POST['idControle'];
             $idTech = $_POST['idTech'];
             $requete = "UPDATE `controle_tech` SET `state`='" . mysqli_real_escape_string($GLOBALS['Database'], '1') . "', 
-                    `id_tech`='" . mysqli_real_escape_string($GLOBALS['Database'], $idTech) . "' 
+                    `num_tech`='" . mysqli_real_escape_string($GLOBALS['Database'], $idTech) . "' 
                     WHERE `id_controle`='" . mysqli_real_escape_string($GLOBALS['Database'], $idControle) . "'";
             error_log($requete);
             $result = mysqli_query($GLOBALS['Database'], $requete) or die;
@@ -138,7 +138,7 @@ $GLOBALS['Database'] = $db->connexion();
             $msg = "Retour en liste d'attente";
             $ct = new ControleTech($_POST['idRdv']);
             $ct->setState(0);
-            $ct->setId_tech(0);
+            $ct->setNum_tech(0);
             $ct->update();
             echo json_encode(array("msg" => $msg));
             break;

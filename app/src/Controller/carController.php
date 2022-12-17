@@ -34,8 +34,8 @@ switch ($_POST['request']) {
 
         echo json_encode(array(
             "rdvID" => $_POST['rdvID'],
-            "timeslotID" => utf8_encode(strftime("%A %d %B %G", $current_CT->getId_time_slot())) . " à " . strftime("%H" . "h" . "%M", $current_CT->getId_time_slot()),
-            "booked_date" => utf8_encode(strftime("%A %d %B %G", $current_CT->getId_time_slot())) . " à " . strftime("%H" . "h" . "%M", $bookedConvert),
+            "timeslotID" => utf8_encode(strftime("%A %d %B %G", $current_CT->getTime_slot())) . " à " . strftime("%H" . "h" . "%M", $current_CT->getTime_slot()),
+            "booked_date" => utf8_encode(strftime("%A %d %B %G", $current_CT->getTime_slot())) . " à " . strftime("%H" . "h" . "%M", $bookedConvert),
             "nom_user" => $owner->getNom_user(),
             "prenom_user" => $owner->getPrenom_user(),
             "tel_user" => $owner->getTelephone_user(),

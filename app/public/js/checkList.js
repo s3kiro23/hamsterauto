@@ -60,7 +60,8 @@ function checkListLoader() {
                     window.location.replace('index.html')
                 }, 3000);
             } else {
-                $("#content-modal-clist").html(response["msg"]);
+                $("#content-modal-clist").html(response["html"]);
+                $("#inter-id").html(response["html_inter"]);
             }
         },
         error: function () {

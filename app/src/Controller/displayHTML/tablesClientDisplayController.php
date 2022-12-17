@@ -49,17 +49,17 @@ if (!getAuthorizationAll()) {
             foreach ($tab_rdv as $rdv) {
                 $tech = new User($rdv['id_user']);
                 $htmlRDV .= HTML::loadRdvRecap(
-                    date("d  M  Y", $rdv['id_time_slot']) . " à " . strftime("%H" . "h" . "%M", $rdv['id_time_slot']),
+                    date("d  M  Y", $rdv['time_slot']) . " à " . strftime("%H" . "h" . "%M", $rdv['time_slot']),
                     $rdv['state'],
                     $rdv['immat_vehicule'],
                     $rdv['id_controle']
                 );
             }
             foreach ($tab_history as $history) {
-                $tech = new User($history['id_tech']);
+                $tech = new User($history['num_tech']);
                 $htmlHistory .= HTML::loadHistory(
                     $history['id_controle'], date("d  M  Y",
-                    $history['id_time_slot']),
+                    $history['time_slot']),
                     $tech->getPrenom_user(),
                     $history['immat_vehicule'], $history['state']
                 );

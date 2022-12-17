@@ -195,7 +195,7 @@ let formProfil = function () {
     phone.val(tab_fields[4]);
     phone.intlTelInput({
         preferredCountries: ["fr", "gb"],
-        utilsScript: "../vendor/jackocnr/intl-tel-input/build/js/utils.js",
+        utilsScript: "/controle_tech/jackocnr/vendor/intl-tel-input/build/js/utils.js",
         initialCountry: "fr",
         geoIpLookup: function (success, failure) {
             $.get("https://ipinfo.io", function () {

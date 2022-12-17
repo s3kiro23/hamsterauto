@@ -94,7 +94,7 @@ if (!isset($_SESSION['id']) || $currentTime > $_SESSION['expire']) {
             $user = new User($userID);
             $carUser = new Vehicule($CT->getId_vehicule());
             $CT->setState(4);
-            $CT->setId_tech(0);
+            $CT->setNum_tech(0);
             $CT->update();
 
             //Add Job mail in Queue table
@@ -119,7 +119,7 @@ if (!isset($_SESSION['id']) || $currentTime > $_SESSION['expire']) {
             $rapportContreVisite = '';
             $current_CT = new ControleTech($_POST['rdvID']);
             $client = new User($current_CT->getId_user());
-            $pathPV = $current_CT->getCarMinute($client);
+            $pathPV = $current_CT->getCarPv($client);
             $rapportContreVisite = "<iframe src='../var/generate/minutes/$pathPV' height='600' class='w-100'></iframe>";
 
             echo json_encode(array("rdvID" => $_POST['rdvID'], "rapport" => $rapportContreVisite));
