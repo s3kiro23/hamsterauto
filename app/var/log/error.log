@@ -167,3 +167,22 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Sat Dec 17 20:09:01.275431 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
 [Sat Dec 17 20:09:01.275782 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
 [Sat Dec 17 20:09:57.138026 2022] [autoindex:error] [pid 17] [client 192.168.32.1:44738] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Sat Dec 17 21:20:43.072555 2022] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 192.168.32.4. Set the 'ServerName' directive globally to suppress this message
+[Wed Dec 21 15:02:25.509860 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Wed Dec 21 15:02:25.510279 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Wed Dec 21 15:06:32.672658 2022] [core:alert] [pid 20] [client 192.168.32.1:57742] /var/www/controle_tech/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Dec 21 15:06:33.294470 2022] [core:alert] [pid 17] [client 192.168.32.1:57744] /var/www/controle_tech/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Dec 21 15:06:33.527013 2022] [core:alert] [pid 18] [client 192.168.32.1:57746] /var/www/controle_tech/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration, referer: http://controle-tech.local:8001/
+[Wed Dec 21 15:06:45.271827 2022] [core:alert] [pid 20] [client 192.168.32.1:57752] /var/www/controle_tech/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Dec 21 15:06:45.476417 2022] [core:alert] [pid 22] [client 192.168.32.1:57756] /var/www/controle_tech/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration, referer: http://controle-tech.local:8001/templates/index.html
+[Wed Dec 21 15:07:35.212528 2022] [core:alert] [pid 25] [client 192.168.32.1:57774] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Dec 21 15:07:35.319776 2022] [core:alert] [pid 26] [client 192.168.32.1:57776] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration, referer: http://controle-tech.local:8001/templates/index.html
+[Wed Dec 21 15:07:36.414832 2022] [core:alert] [pid 27] [client 192.168.32.1:57778] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Dec 21 15:07:36.520388 2022] [core:alert] [pid 28] [client 192.168.32.1:57780] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration, referer: http://controle-tech.local:8001/templates/index.html
+[Wed Dec 21 15:48:20.856535 2022] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 192.168.32.4. Set the 'ServerName' directive globally to suppress this message
+[Wed Dec 21 16:57:52.936576 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Wed Dec 21 16:57:52.936926 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Wed Dec 21 16:57:53.290355 2022] [core:alert] [pid 20] [client 192.168.32.1:41728] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration
+[Wed Dec 21 16:57:53.574777 2022] [core:alert] [pid 18] [client 192.168.32.1:41730] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration, referer: http://controle-tech.local:8001/

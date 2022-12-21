@@ -51,8 +51,8 @@ switch ($_POST['request']) {
         $contentBIA = '
             <div id="content">
                 <div class="d-flex flex-row gap-2" id="siteNotice">
-                    <img class="align-middle" src="../public/assets/img/logo_simple.svg" style="width: 2rem" alt="logo-contact">
-                    <h4 id="firstHeading" class="align-content-center firstHeading">Afl<span style="color: #4bbf73">a</span>uto <span style="color:lightskyblue;">Bastia</span></h4>
+                    <img class="align-middle" src="../public/assets/img/logoDark.png" style="width: 4rem" alt="logo-contact">
+                    <h4 id="firstHeading" class="align-content-center firstHeading"><span style="color:lightskyblue;">Bastia</span></h4>
                 </div>
                 <div id="bodyContent">
                     <p>' . $coordinates['aflo_bia']['addr'] . '</p>
@@ -66,8 +66,8 @@ switch ($_POST['request']) {
         $contentAJA = '
             <div id="content">
                 <div class="d-flex flex-row gap-2" id="siteNotice">
-                    <img class="align-middle" src="../public/assets/img/logo_simple.svg" style="width: 2rem" alt="logo-contact">
-                    <h4 id="firstHeading" class="align-content-center firstHeading">Afl<span style="color: #4bbf73">a</span>uto <span style="color:lightcoral;">Ajaccio</span></h4>
+                    <img class="align-middle" src="../public/assets/img/logoDark.png" style="width: 4rem" alt="logo-contact">
+                    <h4 id="firstHeading" class="align-content-center firstHeading"><span style="color:lightcoral;">Ajaccio</span></h4>
                 </div>
                 <div id="bodyContent">
                     <p>' . $coordinates['aflo_aja']['addr'] . '</p>
