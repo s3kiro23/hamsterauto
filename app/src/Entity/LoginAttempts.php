@@ -1,10 +1,8 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require $classe . ".php";
-});
+require_once 'Database.php';
 
-require_once Kernel::ROOT_DIR().'/src/Controller/shared.php';
+require_once ROOT_DIR().'/src/Controller/shared.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();

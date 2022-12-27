@@ -1,8 +1,6 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require '../Entity/' . $classe . '.php';
-});
+require_once 'Database.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -11,7 +9,7 @@ $GLOBALS['Database'] = $db->connexion();
 require __DIR__ . '\..\..\vendor\autoload.php';*/
 
 //Load Composer's autoloader
-require Kernel::ROOT_DIR() . '/vendor/autoload.php';
+require ROOT_DIR() . '/vendor/autoload.php';
 
 class PDF extends TCPDF
 {
@@ -71,7 +69,7 @@ class PDF extends TCPDF
         $style = array(
             'vpadding' => 'auto',
             'hpadding' => 'auto',
-            'fgcolor' => array(0,0,0),
+            'fgcolor' => array(0, 0, 0),
             'bgcolor' => false, //array(255,255,255)
             'module_width' => 1, // width of a single module in points
             'module_height' => 1 // height of a single module in points
@@ -139,7 +137,7 @@ class PDF extends TCPDF
         $PV = $CT->getId_controle();
         $tech = new User($CT->getId_user());
         $brand = new Brand($car->getId_marque());
-        $path = Kernel::ROOT_DIR().'/var/generate/minutes/pv_';
+        $path = Kernel::ROOT_DIR() . '/var/generate/minutes/pv_';
 
         $headerTitle = '
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="4">

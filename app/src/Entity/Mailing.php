@@ -1,15 +1,13 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require $classe . ".php";
-});
+require_once 'Database.php';
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require Kernel::ROOT_DIR().'/vendor/autoload.php';
+require ROOT_DIR().'/vendor/autoload.php';
 
 class Mailing
 {

@@ -1,13 +1,11 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require $classe . ".php";
-});
+require_once 'Database.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-require Kernel::ROOT_DIR().'/vendor/autoload.php';
+require ROOT_DIR().'/vendor/autoload.php';
 
 use \Ovh\Api;
 

@@ -20,6 +20,10 @@ class Database{
 }
 function filter($value): string
 {
-
 	return mysqli_real_escape_string($GLOBALS['Database'], $value);
+}
+
+function ROOT_DIR() : string
+{
+    return $_SERVER['DOCUMENT_ROOT'];
 }
