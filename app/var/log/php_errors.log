@@ -1,6 +1,8 @@
-[27-Dec-2022 18:12:14 Europe/Paris] insideSendFct
-[27-Dec-2022 18:12:15 Europe/Paris] Captured Throwable: cURL error 77: error setting certificate verify locations:  CAfile: \etc\apache2\ssl CApath: /etc/ssl/certs
+[27-Dec-2022 23:42:14 Europe/Paris] insideSendFct
+[27-Dec-2022 23:42:14 Europe/Paris] Captured Throwable: cURL error 77: error setting certificate verify locations:  CAfile: \etc\apache2\ssl CApath: /etc/ssl/certs
 
-[27-Dec-2022 18:14:03 Europe/Paris] insideSendFct
-[27-Dec-2022 18:14:03 Europe/Paris] Captured Throwable: cURL error 77: error setting certificate verify locations:  CAfile: \etc\apache2\ssl CApath: /etc/ssl/certs
-
+[27-Dec-2022 23:46:21 Europe/Paris] insideSendFct
+[27-Dec-2022 23:46:22 Europe/Paris] "sms-gj1214086-1"
+[27-Dec-2022 23:46:23 Europe/Paris] {"totalCreditsRemoved":3,"validReceivers":["+330616506212"],"invalidReceivers":[],"ids":[456638328]}
+[27-Dec-2022 23:46:23 Europe/Paris] []
+[27-Dec-2022 23:46:23 Europe/Paris] 1

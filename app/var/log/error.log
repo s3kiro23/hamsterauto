@@ -201,3 +201,10 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Tue Dec 27 17:11:47.433104 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
 [Tue Dec 27 17:11:47.433445 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
 [Tue Dec 27 22:49:16.695472 2022] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Dec 27 23:30:39.957911 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Dec 27 23:30:39.958065 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Tue Dec 27 23:37:26.193973 2022] [autoindex:error] [pid 33] [client 172.18.0.1:46276] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+[Tue Dec 27 23:44:27.133566 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Dec 27 23:44:27.133851 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'

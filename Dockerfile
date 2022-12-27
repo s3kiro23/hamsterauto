@@ -7,6 +7,7 @@ ENV COMPOSER_ALLOW_SUPERUSER=1
 RUN apt-get update -qq && \
     apt-get install -qy  \
     curl  \
+    nano \
     openssl \
     git  \
     wget  \
@@ -87,8 +88,6 @@ COPY config/hamsterauto.conf /etc/apache2/sites-available/hamsterauto.conf
 RUN a2ensite hamsterauto.conf
 RUN mkdir /var/www/hamsterauto
 COPY ./app/ /var/www/hamsterauto
-RUN mkdir -p /etc/apache2/ssl
-COPY config/SSL/cacert.pem /etc/apache2/ssl
 
 #Add rights & install link to between db & php
 RUN chown -R www-data:www-data /var/www/hamsterauto
