@@ -186,3 +186,18 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Wed Dec 21 16:57:52.936926 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
 [Wed Dec 21 16:57:53.290355 2022] [core:alert] [pid 20] [client 192.168.32.1:41728] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration
 [Wed Dec 21 16:57:53.574777 2022] [core:alert] [pid 18] [client 192.168.32.1:41730] /var/www/controle_tech/.htaccess: Invalid command 'RewriteRule', perhaps misspelled or defined by a module not included in the server configuration, referer: http://controle-tech.local:8001/
+[Wed Dec 21 16:59:53.368222 2022] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.3. Set the 'ServerName' directive globally to suppress this message
+[Tue Dec 27 17:07:52.718525 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Dec 27 17:07:52.718769 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+AH00112: Warning: DocumentRoot [/var/www/controle_tech/] does not exist
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Dec 27 17:09:57.855269 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Dec 27 17:09:57.855465 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Dec 27 17:10:25.270591 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Dec 27 17:10:25.270890 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Dec 27 17:11:47.433104 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Dec 27 17:11:47.433445 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Tue Dec 27 22:49:16.695472 2022] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully

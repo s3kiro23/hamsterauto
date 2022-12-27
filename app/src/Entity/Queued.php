@@ -22,10 +22,10 @@ class Queued
 
     public function checkData($id)
     {
-        $requete = "SELECT * FROM `queued` WHERE id = '" .filter($id) . "'";
+        $requete = "SELECT * FROM `queued` WHERE id_queue = '" .filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_array($result)) {
-            $this->id = $data['id'];
+            $this->id_queue = $data['id_queue'];
             $this->type = $data['type'];
             $this->template = $data['template'];
         }
@@ -65,7 +65,7 @@ class Queued
 
     public function delete()
     {
-        $requete = "DELETE FROM `queued` WHERE `id` ='" .filter($this->id) . "'";
+        $requete = "DELETE FROM `queued` WHERE `id_queue` ='" .filter($this->id_queue) . "'";
         mysqli_query($GLOBALS['Database'], $requete) or die;
     }
 

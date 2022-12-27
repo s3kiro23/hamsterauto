@@ -83,22 +83,22 @@ RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY config/php.ini "$PHP_INI_DIR/php.ini"
 
 #Apache config
-COPY config/controle-tech.conf /etc/apache2/sites-available/controle-tech.conf
-RUN a2ensite controle-tech.conf
-RUN mkdir /var/www/controle_tech
-COPY ./app/ /var/www/controle_tech
+COPY config/hamsterauto.conf /etc/apache2/sites-available/hamsterauto.conf
+RUN a2ensite hamsterauto.conf
+RUN mkdir /var/www/hamsterauto
+COPY ./app/ /var/www/hamsterauto
 RUN mkdir -p /etc/apache2/ssl
 COPY config/SSL/cacert.pem /etc/apache2/ssl
 
 #Add rights & install link to between db & php
-RUN chown -R www-data:www-data /var/www/controle_tech
+RUN chown -R www-data:www-data /var/www/hamsterauto
 
 #Set Timezone in docker ENV
 ENV TZ Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #Set default project directory
-WORKDIR /var/www/controle_tech
+WORKDIR /var/www/hamsterauto
 
 #Install dependencies
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader

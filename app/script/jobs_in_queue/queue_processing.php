@@ -25,7 +25,7 @@ if (!empty($jobs_in_queued)) {
                 $state = 1;
             }
             if ($state != 0) {
-                $job_object = new Queued($job['id']);
+                $job_object = new Queued($job['id_queue']);
                 $job_object->delete();
             }
         } catch (Throwable $e) {

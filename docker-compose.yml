@@ -12,7 +12,7 @@ services:
     depends_on:
       - database
     volumes:
-      - ./app:/var/www/controle_tech/
+      - ./app:/var/www/hamsterauto/
       - ./app/var/log:/var/log/apache2/
       #- ./conf/SSL/aflautocert.crt:/etc/ssl/certs/aflautocert.crt
       #- ./conf/SSL/aflautocert.key:/etc/ssl/private/aflautocert.key
