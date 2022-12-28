@@ -9,7 +9,7 @@ $GLOBALS['Database'] = $db->connexion();
 require __DIR__ . '\..\..\vendor\autoload.php';*/
 
 //Load Composer's autoloader
-require '../../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 class PDF extends TCPDF
 {

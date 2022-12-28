@@ -7,3 +7,9 @@
 [27-Dec-2022 23:46:23 Europe/Paris] []
 [27-Dec-2022 23:46:23 Europe/Paris] 1
 [28-Dec-2022 00:17:09 Europe/Paris] 1
+[28-Dec-2022 03:12:45 Europe/Paris] 1
+[28-Dec-2022 03:15:00 Europe/Paris] PHP Warning:  require(/var/www/hamsterauto/src/Entity\..\..\vendor\autoload.php): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Entity/Mailing.php on line 10
+[28-Dec-2022 03:15:00 Europe/Paris] PHP Fatal error:  require(): Failed opening required '/var/www/hamsterauto/src/Entity\..\..\vendor\autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/hamsterauto/src/Entity/Mailing.php on line 10
+[28-Dec-2022 03:15:02 Europe/Paris] PHP Warning:  require(/var/www/hamsterauto/src/Entity\..\..\vendor\autoload.php): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Entity/Mailing.php on line 10
+[28-Dec-2022 03:15:02 Europe/Paris] PHP Fatal error:  require(): Failed opening required '/var/www/hamsterauto/src/Entity\..\..\vendor\autoload.php' (include_path='.:/usr/local/lib/php') in /var/www/hamsterauto/src/Entity/Mailing.php on line 10
+[28-Dec-2022 03:15:07 Europe/Paris] 1

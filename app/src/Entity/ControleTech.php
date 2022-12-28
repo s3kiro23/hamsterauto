@@ -70,7 +70,6 @@ class ControleTech
                             `report`='" .filter($this->report) . "',
                             `pv`='" .filter($this->pv) . "'
         WHERE `id_controle` ='" .filter($this->id_controle) . "'";
-        error_log('requete update:');
         mysqli_query($GLOBALS['Database'], $requete) or die;
     }
 
@@ -153,7 +152,6 @@ class ControleTech
                         ORDER BY `time_slot` ASC LIMIT 5 OFFSET $off7 ";
                         
         }
-        error_log($requete);
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $list_vehicule[] = $data;
@@ -178,7 +176,6 @@ class ControleTech
         AND '" .filter($currentDate) . "' + 64800
         ORDER BY `time_slot` ASC LIMIT 5 OFFSET $off7";
         }
-        error_log('NEXT '.$requete);
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $list_vehicule[] = $data;
@@ -202,7 +199,6 @@ class ControleTech
         AND '" .filter($currentDate) . "' + 64800
         ORDER BY `time_slot` ASC LIMIT 5 OFFSET $off7";
         }
-        error_log('PREVIOUS '.$requete);
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $list_vehicule2[] = $data;

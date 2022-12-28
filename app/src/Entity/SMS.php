@@ -5,7 +5,7 @@ require_once 'Database.php';
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-require '../../vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 use \Ovh\Api;
 
