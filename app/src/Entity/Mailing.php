@@ -7,7 +7,7 @@ use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
 
 //Load Composer's autoloader
-require ROOT_DIR().'/vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 class Mailing
 {
