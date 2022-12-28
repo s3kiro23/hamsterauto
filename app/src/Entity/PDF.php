@@ -137,7 +137,7 @@ class PDF extends TCPDF
         $PV = $CT->getId_controle();
         $tech = new User($CT->getId_user());
         $brand = new Brand($car->getId_marque());
-        $path = Kernel::ROOT_DIR() . '/var/generate/minutes/pv_';
+        $path = ROOT_DIR() . '/var/generate/minutes/pv_';
 
         $headerTitle = '
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="4">
@@ -151,7 +151,7 @@ class PDF extends TCPDF
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
-                        <img src="' . Kernel::ROOT_DIR() . '/public/assets/img/logoDark.png" alt="" width="110" height="110" border="0">
+                        <img src="' . ROOT_DIR() . '/public/assets/img/logoDark.png" alt="" width="110" height="110" border="0">
                     </td>
                 </tr>
             </table>
@@ -384,7 +384,7 @@ class PDF extends TCPDF
         }
 
         $bgThumbnail = '
-                <img src="' . Kernel::ROOT_DIR() . '/public/assets/img/background_thumbnail_ct.png" alt="" width="130" height="130" border="0">
+                <img src="' . ROOT_DIR() . '/public/assets/img/background_thumbnail_ct.png" alt="" width="130" height="130" border="0">
             ';
 
         $tinyThumbnail = '
