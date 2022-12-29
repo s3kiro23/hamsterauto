@@ -27,3 +27,11 @@
 [28-Dec-2022 03:22:05 Europe/Paris] PHP Fatal error:  require(): Failed opening required '../../Entity/Kernel.php' (include_path='.:/usr/local/lib/php') in /var/www/hamsterauto/src/Controller/authorization.php on line 5
 [28-Dec-2022 03:28:11 Europe/Paris] 1
 [28-Dec-2022 03:28:11 Europe/Paris] 1
+[29-Dec-2022 22:33:27 Europe/Paris] user
+[29-Dec-2022 22:33:27 Europe/Paris] 2
+[29-Dec-2022 22:33:27 Europe/Paris] 4
+[29-Dec-2022 22:40:27 Europe/Paris] user
+[29-Dec-2022 22:40:27 Europe/Paris] 2
+[29-Dec-2022 22:40:27 Europe/Paris] 4
+[29-Dec-2022 22:40:46 Europe/Paris] 1
+[29-Dec-2022 22:46:15 Europe/Paris] 1

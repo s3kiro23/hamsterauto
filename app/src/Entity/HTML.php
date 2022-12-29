@@ -767,13 +767,12 @@ class HTML
     public static function mailSending($mail): string
     {
         return "
-            <div class='col-md-7 d-flex flex-center'
-                <div class='p-4 p-md-5 flex-grow-1'>
-                    <div class='text-center'><img class='d-block mx-auto mb-4' src='../public/assets/img/icons/spot-illustrations/16.png' alt='Email' width='100' />
-                        <h3 class='mb-2'>Merci de consulter vos mails!</h3>
-                        <p>Un mail a été envoyé à l'adresse <strong>$mail</strong>. Veuillez cliquer sur le lien <br class='d-none d-sm-block d-md-none' />inclus pour réinitialiser votre mot de passe.</p>
-                        <a class='btn btn-primary btn-sm mt-3' id='reload'><span class='fas fa-chevron-left me-1' data-fa-transform='shrink-4 down-1'></span>Retour au login</a>
-                    </div>
+            <div class='p-4 p-md-5 flex-grow-1'>
+                <div class='text-center'>
+                    <img class='d-block mx-auto mb-4' src='../public/assets/img/icons/spot-illustrations/16.png' alt='Email' width='100' />
+                    <h3 class='mb-2'>Merci de consulter vos mails!</h3>
+                    <p>Un mail a été envoyé à l'adresse <strong>$mail</strong>. Veuillez cliquer sur le lien <br class='d-none d-sm-block d-md-none' />inclus pour réinitialiser votre mot de passe.</p>
+                    <a class='btn btn-primary btn-sm mt-3' id='reload'><span class='fas fa-chevron-left me-1' data-fa-transform='shrink-4 down-1'></span>Retour au login</a>
                 </div>
             </div>
         ";

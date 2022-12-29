@@ -165,7 +165,7 @@
 }
 
 .content-pwd {
-    min-height: calc(100vh - 18.4rem) !important;
+    min-height: calc(100vh - 23rem) !important;
 }
 
 .iziToast-bold {
@@ -280,6 +280,9 @@
     .fa-circle-info{
         top:70px!important;
         left:0px!important;
+    }
+    .content-pwd {
+        min-height: calc(100vh - 26.6rem) !important;
     }
 }
 
