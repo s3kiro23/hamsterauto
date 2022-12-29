@@ -51,7 +51,7 @@ class SMS
 
     public function getCT_Finish($user, $carUser): array
     {
-        $bodySMS = "Bonjour {$user->getPrenom_user()}, le contrôle technique de votre véhicule immatriculé {$carUser->getImmat_vehicule()} est terminé ! Vous pouvez dès à présent venir le récupérer.";
+        $bodySMS = "Bonjour {$user->getPrenom_user()}, le contrôle technique de votre véhicule immatriculé {$carUser->getImmat_vehicule()} est terminé ! Vous pouvez dès à présent venir le récupérer. Merci pour votre confiance. Votre centre Hamsterauto.";
 
         return array("bodySMS" => $bodySMS, "receiver" => $user->getTelephone_user());
     }
@@ -59,7 +59,7 @@ class SMS
     public function getA2F($user): array
     {
         $fetchSMS = User::sms($user->getId_user());
-        $bodySMS = "Bonjour {$user->getPrenom_user()}, voici votre code SMS pour la connexion à votre compte AFLAUTO : " . $fetchSMS;
+        $bodySMS = "Voici votre code SMS pour la connexion à votre compte Hamsterauto : " . $fetchSMS;
 
         return array("bodySMS" => $bodySMS, "receiver" => $user->getTelephone_user());
     }
@@ -67,7 +67,7 @@ class SMS
     public function getRDV($user, $carUser, $CT): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
-        $bodySMS = "Bonjour {$user->getPrenom_user()}, votre rendez-vous du " . utf8_encode(strftime("%A %d %B %G", $CT->getTime_slot())) . " pour le véhicule immatriculé {$carUser->getImmat_vehicule()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre AFLAUTO.";
+        $bodySMS = "Bonjour {$user->getPrenom_user()}, votre rendez-vous du " . utf8_encode(strftime("%A %d %B %G", $CT->getTime_slot())) . " pour le véhicule immatriculé {$carUser->getImmat_vehicule()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre Hamsterauto.";
 
         return array("bodySMS" => $bodySMS, "receiver" => $user->getTelephone_user());
     }

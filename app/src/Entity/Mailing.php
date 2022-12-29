@@ -30,7 +30,7 @@ class Mailing
             $mail->CharSet = 'UTF-8';                           //Format d'encodage à utiliser pour les caractères
 
             //Recipients
-            $mail->setFrom('contact@outlook.fr', 'AFLAUTO');
+            $mail->setFrom('contact@outlook.fr', 'HAMSTERAUTO');
             /*    $mail->addAddress('joe@example.net', 'Joe User');*/     //Add a recipient
             /*    $mail->addAddress($client->getEmail_user());            //Name is optional*/
             $mail->addAddress($data['mail']);           //Name is optional
@@ -70,29 +70,29 @@ class Mailing
         $body = "
             <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
                 <div style='display: flex; justify-content: center'>
-                    <img src='cid:logoMail.png' alt='logo_aflauto'/>
+                    <img src='cid:logoDark.png' alt='logo_hamsterauto'/>
                 </div>
                 <br>
                     Bonjour {$civilite}. {$nom},
                 <br><br>
-               Votre inscription sur Alfauto.com a été validée !
+               Votre inscription sur Hamsterauto.com a été validée !
                 <br><br>
                 Vous pouvez dès à présent vous connecter sur votre espace personnel
                 <br>
                 en utilisant votre adresse mail:  {$mailUser}
                 <br><br>
                 <a  
-                href='http://localhost/controle_tech/templates/' 
+                href='https://hamsterauto.com/' 
                 target = '_blank'>Je me connecte à mon espace
                 </a>
                 <br><br><br>
                 L'équipe d'<a style='text-decoration: none; color: black' 
-                            href='http://localhost/controle_tech/templates/' 
-                            target = '_blank'><b>Afl<span style = 'color: #4bbf73'>A</span>uto</b>
+                            href='https://hamsterauto.com/' 
+                            target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
                             </a> vous remercie et espère vous voir lors de vos prochains contrôle technique.
                 <br><br>
                 <p>☎️ 06.00.00.00.01</p>
-                🌐<a href='http://localhost/controle_tech/templates/' target = '_blank'> Aflauto.com</a>
+                🌐<a href='https://hamsterauto.com/' target = '_blank'> Hamsterauto.com</a>
             </div>
             ";
         $subject = "Confirmation de votre inscription";
@@ -106,7 +106,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoMail.png' alt='logo_aflauto'/>
+                <img src='cid:logoDark.png' alt='logo_hamsterauto'/>
             </div>
             <br>
                 Bonjour {$user->getPrenom_user()},
@@ -118,12 +118,12 @@ class Mailing
             Une facture est jointe à ce mail, récapitulant l'ensemble des prestations réalisées sur votre véhicule.
             <br><br><br>
             L'équipe d'<a style='text-decoration: none; color: black' 
-                        href='http://localhost/controle_tech/templates/' 
-                        target = '_blank'><b>Afl<span style = 'color: #4bbf73'>A</span>uto</b>
+                        href='https://hamsterauto.com/' 
+                        target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
                         </a> vous remercie et espère vous revoir lors de vos prochains contrôle technique.
                         <br><br>
                         <p>☎️ 06.00.00.00.01</p>
-                        🌐<a href='http://localhost/controle_tech/templates/' target = '_blank'> Aflauto.com</a>
+                        🌐<a href='https://hamsterauto.com/' target = '_blank'> Hamsterauto.com</a>
         </div>
         ";
         $subject = "Compte rendu d'intervention";
@@ -138,7 +138,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoMail.png' alt='logo_aflauto'/>
+                <img src='cid:logoDark.png' alt='logo_hamsterauto'/>
             </div>
             <br>
             Bonjour {$user->getPrenom_user()}, 
@@ -150,12 +150,12 @@ class Mailing
             Un récapitulatif des points à faire contrôler en garage dans un délai de 2 mois dès réception du présent mail, vous est adressé en pièce-jointe.
             <br><br><br>
             L'équipe d'<a style='text - decoration: none; color: black' 
-                        href='http://localhost/controle_tech/templates/'
-                        target = '_blank' ><b>Afl<span style = 'color: #4bbf73' >A</span>uto</b>
+                        href='https://hamsterauto.com/'
+                        target = '_blank' ><b>Hamster<span style = 'color: #4bbf73' >A</span>uto</b>
                         </a > reste à votre disposition pour tout complément d'information.
                         <br><br>
                         <p>☎️ 06.00.00.00.01</p>
-                        🌐<a href='http://localhost/controle_tech/templates/' target = '_blank'> Aflauto.com</a>
+                        🌐<a href='https://hamsterauto.com/' target = '_blank'> Hamsterauto.com</a>
         </div>
         ";
         $subject = "Compte rendu d'intervention";
@@ -173,7 +173,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoMail.png' alt='logo_aflauto'/>
+                <img src='cid:logoDark.png' alt='logo_hamsterauto'/>
             </div>
             <br>
             Bonjour {$user->getPrenom_user()},
@@ -182,10 +182,10 @@ class Mailing
             <br><br>
             Nous espérons vous revoir prochainement pour le suivi de vos véhicules.
             <br><br><br>
-            L'équipe d'<a style='text - decoration: none; color: black' href='http://localhost/controle_tech/templates/' target='_blank'><b>Afl<span style='color: #4bbf73'>A</span>uto</b></a>.
+            L'équipe d'<a style='text - decoration: none; color: black' href='https://hamsterauto.com/' target='_blank'><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
             <br><br>
             <p>☎️ 06.00.00.00.01</p>
-            🌐 <a href='http://localhost/controle_tech/templates/' target='_blank'>Aflauto.com</a>
+            🌐 <a href='https://hamsterauto.com/' target='_blank'>Hamsterauto.com</a>
         </div>
         ";
         $subject = "Information concernant votre intervention";
@@ -199,7 +199,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoMail.png' alt='logo_aflauto'/>
+                <img src='cid:logoDark.png' alt='logo_hamsterauto'/>
             </div>
             <br>
             Bonjour {$user->getPrenom_user()},
@@ -210,16 +210,16 @@ class Mailing
             Pour pouvoir récupérer ce dernier, veuillez cliquer sur le lien ci - dessous :
             <br><br>
             <button>
-                <a style = 'text-decoration: none;' href = 'http://localhost/controle_tech/templates/change-password.html?token=$token'><b> Récupération de mon compte </b ></a >
+                <a style = 'text-decoration: none;' href = 'https://hamsterauto.com/templates/change-password.html?token=$token'><b> Récupération de mon compte </b ></a >
             </button>
             <br><br><br>
             Ou copier et coller cette URL dans la barre de recherche de votre navigateur :<br>
-            <a href='http://localhost/controle_tech/templates/change-password.html?token=$token'> http://localhost/controle_tech/templates/change-password.html?token=$token</a>
+            <a href='https://hamsterauto.com/templates/change-password.html?token=$token'> https://hamsterauto.com/templates/change-password.html?token=$token</a>
             <br><br><br>
-            L'équipe d'<a style='text-decoration: none; color: black' href= 'http://localhost/controle_tech/templates/' target='_blank' ><b>Afl<span style='color: #4bbf73'>A</span>uto</b></a>.
+            L'équipe d'<a style='text-decoration: none; color: black' href= 'https://hamsterauto.com/' target='_blank' ><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
             <br><br>
             <p>☎️ 06.00.00.00.01</p>
-            🌐<a href='http://localhost/controle_tech/templates/' target = '_blank'> Aflauto.com</a>
+            🌐<a href='https://hamsterauto.com/' target = '_blank'> Hamsterauto.com</a>
         </div>
             ";
         $subject = "Récupération de votre compte utilisateur";
