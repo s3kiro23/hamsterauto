@@ -4,6 +4,9 @@
 - pwd = @flaut0!@20
 - pwd appli (générer compte gmail) = qfujcjiaoxuuhqni
 
+### Config CRON pour l'envoi des mails et SMS :
+
+Une tâche cron tourne toutes les minutes et execute un script ("/usr/sbin/cron.10sec") qui va parcourir le dossier "/etc/cron.10sec" toutes les 10sec pendant 50sec et lancer les commandes présentent.
 
 ## Procédure d'installation du projet avec docker :
 
@@ -33,16 +36,15 @@ Puis taper en ligne de commande administrateur :
 
     composer install
 
-
 #### Accès au terminal du docker Apache :
     docker exec -it srv_apache /bin/bash
 
 ### URL d'accès au projet :
 
 #### Ajouté au fichier host de la machine local en admin (C:\Windows\System32\drivers\etc) la ligne suivante :
-    127.0.0.1 control-tech.local
+    127.0.0.1 hamsterauto.local
 
 #### URL 
-    controle-tech.local:8001
+    hamsterauto.local:8001
 
 
