@@ -35,3 +35,32 @@
 [29-Dec-2022 22:40:27 Europe/Paris] 4
 [29-Dec-2022 22:40:46 Europe/Paris] 1
 [29-Dec-2022 22:46:15 Europe/Paris] 1
+[30-Dec-2022 19:42:45 Europe/Paris] Le mail a été envoyé !
+[30-Dec-2022 19:42:45 Europe/Paris] 1
+[30-Dec-2022 19:42:46 Europe/Paris] Le mail a été envoyé !
+[30-Dec-2022 19:42:46 Europe/Paris] 1
+[30-Dec-2022 19:42:48 Europe/Paris] Le mail a été envoyé !
+[30-Dec-2022 19:42:48 Europe/Paris] 1
+[30-Dec-2022 19:42:48 Europe/Paris] insideSendFct
+[30-Dec-2022 19:42:49 Europe/Paris] "sms-gj1214086-1"
+[30-Dec-2022 19:42:49 Europe/Paris] Captured Throwable: Client error response [url] https://api.ovh.com/1.0/sms/sms-gj1214086-1/jobs [status code] 402 [reason phrase] Payment Required
+
+[30-Dec-2022 19:42:49 Europe/Paris] Erreur lors de l'envoi du mail. Logs: Could not access file: ../var/generate/minutes/pv_S654789741_68.pdf
+[30-Dec-2022 19:42:49 Europe/Paris] 1
+[30-Dec-2022 19:42:49 Europe/Paris] insideSendFct
+[30-Dec-2022 19:42:50 Europe/Paris] "sms-gj1214086-1"
+[30-Dec-2022 19:42:50 Europe/Paris] Captured Throwable: Client error response [url] https://api.ovh.com/1.0/sms/sms-gj1214086-1/jobs [status code] 402 [reason phrase] Payment Required
+
+[30-Dec-2022 19:42:51 Europe/Paris] Le mail a été envoyé !
+[30-Dec-2022 19:42:51 Europe/Paris] 1
+[30-Dec-2022 19:42:53 Europe/Paris] Le mail a été envoyé !
+[30-Dec-2022 19:42:53 Europe/Paris] 1
+[30-Dec-2022 20:00:21 Europe/Paris] user
+[30-Dec-2022 20:00:21 Europe/Paris] 2
+[30-Dec-2022 20:00:21 Europe/Paris] 4
+[30-Dec-2022 20:01:40 Europe/Paris] user
+[30-Dec-2022 20:01:40 Europe/Paris] 2
+[30-Dec-2022 20:01:40 Europe/Paris] 4
+[30-Dec-2022 20:01:51 Europe/Paris] user
+[30-Dec-2022 20:01:51 Europe/Paris] 2
+[30-Dec-2022 20:01:51 Europe/Paris] 4

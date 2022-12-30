@@ -224,7 +224,7 @@ class HTML
                     </div>
                 </div>
                 <div class='form-group'>
-                    <label for='inputAnnee' class='form-label mt-4 text-dark'>Année de 1ère mise en circulation</label>
+                    <label for='inputAnnee' class='form-label mt-2 mt-md-4 text-dark'>Année de 1ère mise en circulation</label>
                     <input
                       type='text'
                       class='form-control'
