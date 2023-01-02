@@ -111,7 +111,7 @@ function captcha() {
 }
 
 let to_logIn = function () {
-    window.location.replace('index.html')
+    window.location.replace('/')
 };
 
 

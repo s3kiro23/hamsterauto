@@ -173,7 +173,7 @@ let disableAccount = function () {
                 })
             );
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "/";
             }, 2300);
         }
     });

@@ -220,3 +220,15 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.18.0.4. Set the 'ServerName' directive globally to suppress this message
 [Fri Dec 30 19:42:37.799931 2022] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
 [Fri Dec 30 19:42:37.800263 2022] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.4. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 02 16:00:44.042734 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Mon Jan 02 16:00:44.043604 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'
+[Mon Jan 02 16:01:20.155516 2023] [autoindex:error] [pid 17] [client 172.19.0.1:42968] AH01276: Cannot serve directory /var/www/html/: No matching DirectoryIndex (index.php,index.html) found, and server-generated directory index forbidden by Options directive
+[Mon Jan 02 16:04:40.622926 2023] [core:alert] [pid 20] [client 172.19.0.1:43032] /var/www/hamsterauto/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+[Mon Jan 02 16:04:40.879693 2023] [core:alert] [pid 21] [client 172.19.0.1:43034] /var/www/hamsterauto/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration, referer: http://hamsterauto.local:8001/private_admin
+[Mon Jan 02 16:05:09.791319 2023] [core:alert] [pid 19] [client 172.19.0.1:43038] /var/www/hamsterauto/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration
+[Mon Jan 02 16:05:09.966566 2023] [core:alert] [pid 23] [client 172.19.0.1:43036] /var/www/hamsterauto/.htaccess: Invalid command 'RewriteEngine', perhaps misspelled or defined by a module not included in the server configuration, referer: http://hamsterauto.local:8001/private_admin
+[Mon Jan 02 16:07:22.100504 2023] [mpm_prefork:notice] [pid 1] AH00169: caught SIGTERM, shutting down
+AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.19.0.4. Set the 'ServerName' directive globally to suppress this message
+[Mon Jan 02 16:10:06.347735 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Mon Jan 02 16:10:06.348200 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'

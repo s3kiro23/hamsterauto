@@ -1,0 +1,25 @@
+Options +FollowSymLinks -MultiViews
+
+RewriteEngine On
+
+RewriteBase /
+
+RewriteRule ^/?$ /templates/index.html [L,NC]
+
+RewriteRule ^private-login/?$ /templates/private-login.html [L,NC]
+
+RewriteRule ^dashboards-tech?$ /templates/back-office.html [L,NC]
+
+RewriteRule ^change-password/?$ /templates/change-password.html [L,NC]
+
+RewriteRule ^checklist/?$ /templates/checklist.html [L,NC]
+
+RewriteRule ^dashboards?$ /templates/client-dashboard.html [L,NC]
+
+RewriteRule ^reservation/?$ /templates/client-form.html [L,NC]
+
+RewriteRule ^contact?$ /templates/contact-us.html [L,NC]
+
+RewriteRule ^profil/?$ /templates/profil.html [L,NC]
+
+RewriteRule ^inscription?$ /templates/sign-in.html [L,NC]

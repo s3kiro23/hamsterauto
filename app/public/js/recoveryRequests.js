@@ -22,7 +22,7 @@ let newPwd = function () {
                     timer: 1500,
                 });
                 setTimeout(() => {
-                    window.location.replace("index.html");
+                    window.location.replace("/");
                 }, 1500);
             } else {
                 Swal.fire({

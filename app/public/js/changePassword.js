@@ -30,7 +30,7 @@ let getAuthorization = function () {
         });
         $('#btn-modify').prop('disabled', true);
         setTimeout(() => {
-            window.location.replace('index.html')
+            window.location.replace('/')
         }, 3000);
     }
     if (token === "pwd-modify") {
@@ -74,7 +74,7 @@ let changePassword = function () {
                     }
                 } else {
                     setTimeout(() => {
-                        window.location.replace('index.html')
+                        window.location.replace('/')
                     }, 1500);
                 }
             } else {
@@ -95,11 +95,11 @@ let changePassword = function () {
 }
 
 let toClientDash = function () {
-    window.location.replace('client-dashboard.html')
+    window.location.replace('dashboards/')
 }
 
 let toTechDash = function () {
-    window.location.replace('client-dashboard.html')
+    window.location.replace('dashboards-tech/')
 }
 
 let historyBack = function () {
