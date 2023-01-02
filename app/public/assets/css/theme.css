@@ -23154,7 +23154,7 @@ table.dataTable thead tr {
   color: #748194;
 }
 .dataTables_wrapper .dtr-details {
-  margin-left: 1.875rem !important;
+  margin-left: 0 !important;
 }
 .dataTables_wrapper .sort:before {
   display: none !important;
