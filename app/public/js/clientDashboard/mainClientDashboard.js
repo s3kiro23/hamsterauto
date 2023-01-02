@@ -127,8 +127,8 @@ function formAddCar() {
             request: "formAddCar",
         },
         success: function (response) {
-            $("#modalAddCar").modal("show");
-            $("#bodyAddCar").html(response['html'])
+            $("#modalFormCar").modal("show");
+            $("#bodyFormCar").html(response['html'])
             $('#selectMarque').on("change", selectedCar)
             $("#inputImmatNew").on("keyup", checkNewValueRegEx)
             $("#inputImmatOld").on("keyup", checkOldValueRegEx)
@@ -232,7 +232,7 @@ let addCar = function () {
                             animation: true,
                             title: response["msg"]
                           });
-                        $("#modalAddCar").modal("hide");
+                        $("#modalFormCar").modal("hide");
                         carsRecap(1)
                     } else {
                         toastMixin.fire({
