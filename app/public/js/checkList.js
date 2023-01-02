@@ -57,7 +57,7 @@ function checkListLoader() {
                     title: response['msg']
                 });
                 setTimeout(() => {
-                    window.location.replace('index.html')
+                    window.location.replace('/')
                 }, 3000);
             } else {
                 $("#content-modal-clist").html(response["html"]);
@@ -125,7 +125,7 @@ function validationCT() {
                         })
                     /*}).then(() => {*/
                         setTimeout(() => {
-                            window.location.replace("back-office.html");
+                            window.location.replace("dashboards-tech/");
                         }, 2000);
                     /*});*/
                 },

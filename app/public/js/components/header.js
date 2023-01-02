@@ -103,7 +103,7 @@ let generateNavbar = function () {
                     icon: error,
                 });
                 setTimeout(() => {
-                    window.location.href = "index.html";
+                    window.location.href = "/";
                 }, 2000);
             } else if (response['status'] === 2) {
                 toastMixin.fire({
@@ -113,7 +113,7 @@ let generateNavbar = function () {
                     title: response['msg']
                 });
                 setTimeout(() => {
-                    window.location.replace('index.html')
+                    window.location.replace('/')
                 }, 3000);
             } else {
                 $("#nav-items-gen").html(response['navbarHTML'][0]);
@@ -158,7 +158,7 @@ let logout = function () {
                 title: response["msg"]
             });
             setTimeout(() => {
-                window.location.href = "index.html";
+                window.location.href = "/";
             }, 2000);
         },
         error: function () {
@@ -180,7 +180,7 @@ let logoutTech = function () {
                 title: response["msg"]
             });
             setTimeout(() => {
-                window.location.href = "private-login.html";
+                window.location.href = "private-login/";
             }, 2000);
         },
         error: function () {
@@ -189,23 +189,23 @@ let logoutTech = function () {
 };
 
 let toPwdModify = function () {
-    window.location.href = "change-password.html?token=pwd-modify"
+    window.location.href = "change-password/?token=pwd-modify"
 }
 
 let toHomeClient = function () {
-    window.location.replace("client-dashboard.html");
+    window.location.replace("dashboards");
 };
 
 function toHomeTech() {
-    window.location.href = "back-office.html";
+    window.location.href = "dashboards-tech";
 }
 
 let toProfil = function () {
-    window.location.replace("profil.html");
+    window.location.replace("profil/");
 };
 
 let toFormClient = function () {
-    window.location.replace("client-form.html");
+    window.location.replace("reservation/");
 };
 
 let toHolidayForm = function () {

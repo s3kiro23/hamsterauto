@@ -6,7 +6,7 @@ $(function () {
     $(".form-control").on("change", checkField);
     $('#inputTel').intlTelInput({
         preferredCountries: ["fr", "gb"],
-        utilsScript: "../vendor/jackocnr/intl-tel-input/build/js/utils.js",
+        utilsScript: "/vendor/jackocnr/intl-tel-input/build/js/utils.js",
         initialCountry: "fr",
         geoIpLookup: function (success, failure) {
             $.get("https://ipinfo.io", function () {
@@ -31,7 +31,7 @@ let signIn = function () {
         $civilite = $selectedCivilite;
     }
     $.ajax({
-        url: '../src/Controller/index/signInController.php',
+        url: '/src/Controller/index/signInController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
@@ -68,7 +68,7 @@ let signIn = function () {
                 });
                 console.log('Success');
                 setTimeout(() => {
-                    window.location.replace("index.html");
+                    window.location.replace("/");
                 }, 1600);
 
             }
@@ -128,6 +128,6 @@ let to_logIn = function () {
                 }
             })
             setTimeout(() => {
-                window.location.replace('index.html')
+                window.location.replace('/')
             }, 2000);
 };

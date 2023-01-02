@@ -482,7 +482,7 @@ function sessionEnding(){
                 animation: true,
                 title: response["msg"]
               });
-              location.assign("index.html")
+              location.assign("/")
           
         },
         error: function () {

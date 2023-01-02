@@ -25,7 +25,7 @@ let private_connect = function () {
                     icon: 'error',
                     
                 });setTimeout(() => {
-                    window.location.replace("index.html");
+                    window.location.replace("/");
                 }, 1500);
             } else if (response["status"] === 2) {
                 toastMixin.fire({
@@ -47,7 +47,7 @@ let private_connect = function () {
                 });
                 if (response["typeUser"] === "technicien") {
                     setTimeout(() => {
-                        window.location.replace("back-office.html");
+                        window.location.replace("dashboards-tech/");
                     }, 1500);
                 } 
             }
