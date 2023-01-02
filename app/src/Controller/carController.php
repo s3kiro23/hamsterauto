@@ -45,28 +45,28 @@ switch ($_POST['request']) {
 
         break;
 
-    case 'showInfoCar':
-
-        $CG = "";
-        $msg = "test";
-        $user = new User(decrypt($_SESSION['id'], false));
-        $check_currentCar = User::checkCars(decrypt($_SESSION['id'], false), $_POST['carID']);
-        $carFile = new Upload($_POST['carID']);
-        $car = new Vehicule($_POST['carID']);
-        if ($carFile->checkFile()) {
-            $CG = $car->getCG($carFile->getFile_name(), $user->getHash());
-        }
-
-        echo json_encode(array(
-            "marque" => $check_currentCar[0]['nom_marque'],
-            "modele" => $check_currentCar[0]['nom_modele'],
-            "immat" => $check_currentCar[0]['immat_vehicule'],
-            "annee" => $check_currentCar[0]['annee_vehicule'],
-            "carburant" => $check_currentCar[0]['carburant_vehicule'],
-            "carteGrise" => $CG,
-            "infos" => $check_currentCar[0]['infos_vehicule'],
-        ));
-        break;
+//    case 'showInfoCar':
+//
+//        $CG = "";
+//        $msg = "test";
+//        $user = new User(decrypt($_SESSION['id'], false));
+//        $check_currentCar = User::checkCars(decrypt($_SESSION['id'], false), $_POST['carID']);
+//        $carFile = new Upload($_POST['carID']);
+//        $car = new Vehicule($_POST['carID']);
+//        if ($carFile->checkFile()) {
+//            $CG = $car->getCG($carFile->getFile_name(), $user->getHash());
+//        }
+//
+//        echo json_encode(array(
+//            "marque" => $check_currentCar[0]['nom_marque'],
+//            "modele" => $check_currentCar[0]['nom_modele'],
+//            "immat" => $check_currentCar[0]['immat_vehicule'],
+//            "annee" => $check_currentCar[0]['annee_vehicule'],
+//            "carburant" => $check_currentCar[0]['carburant_vehicule'],
+//            "carteGrise" => $CG,
+//            "infos" => $check_currentCar[0]['infos_vehicule'],
+//        ));
+//        break;
 
     case 'addCar':
         $msg = "Véhicule enregistré !";
@@ -97,6 +97,27 @@ switch ($_POST['request']) {
                 $traces->create();
             }
         }
+
+        echo json_encode(array("msg" => $msg, 'status' => $status));
+
+        break;
+
+    case 'modifyCar':
+        $msg = "Véhicule modifié !";
+        $status = 1;
+        $car = new Vehicule($_POST['idCar']);
+        $car->setId_modele($_POST['modele']);
+        $car->setImmat_vehicule($_POST['immat']);
+        $car->setAnnee_vehicule($_POST['annee']);
+        $car->setCarburant_vehicule($_POST['carburant']);
+        $car->update();
+
+        //Add traces in BDD
+        $traces = new Traces(0);
+        $traces->setId_user(decrypt($_SESSION['id'], false));
+        $traces->setType('car');
+        $traces->setAction('modify');
+        $traces->create();
 
         echo json_encode(array("msg" => $msg, 'status' => $status));
 

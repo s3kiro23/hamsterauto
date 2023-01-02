@@ -165,7 +165,7 @@
 }
 
 .content-pwd {
-    min-height: calc(100vh - 23rem) !important;
+    min-height: calc(100vh - 18.4rem) !important;
 }
 
 .iziToast-bold {
@@ -260,7 +260,6 @@
     margin-right: 2.7% !important;
 }
 
-
 .first-name, .last-name {
     text-transform: none;
 }
@@ -270,9 +269,11 @@
     .first-name, .last-name {
         display: none;
     }
+
     .data_modify {
         font-size: .9rem!important;
     }
+
     .logo_agence{
         width: 50% !important;
     }
@@ -281,8 +282,13 @@
         top:70px!important;
         left:0px!important;
     }
-    .content-pwd {
-        min-height: calc(100vh - 26.6rem) !important;
+
+    #logo {
+        height: 3rem !important;
+    }
+
+    #tab-car, #tab-rdv{
+        margin-bottom: 2rem !important;
     }
 }
 
@@ -472,7 +478,7 @@
 }
 @media all and (max-width: 1919px) {
     #clock{
-       display: none;
+        display: none;
     }
 }
 @media all and (min-width: 1921px) {
@@ -480,3 +486,51 @@
         width: 70%!important;
     }
 }
+
+/* START bouton toggle sur mobile */
+
+.navbar-toggler {
+    background: none !important;
+    border: none !important;
+}
+
+.navbar-toggler .icon-bar {
+    display: block !important;
+    width: 35px !important;
+    height: 5px !important;
+    border-radius: 5px !important;
+    margin: 5px 0 5px 0 !important;
+    transition: all 0.2s !important;
+}
+
+.navbar-toggler .icon-bar:nth-of-type(1) {
+    transform: rotate(50deg) !important;
+    transform-origin: 10% 10% !important;
+}
+
+.navbar-toggler .icon-bar:nth-of-type(2) {
+    opacity: 0 !important;
+    filter: alpha(opacity=0) !important;
+}
+
+.navbar-toggler .icon-bar:nth-of-type(3) {
+    transform: rotate(-50deg) !important;
+    transform-origin: 10% 98% !important;
+}
+
+.navbar-toggler.collapsed .icon-bar:nth-of-type(1) {
+    transform: rotate(0) !important;
+}
+
+.navbar-toggler.collapsed .icon-bar:nth-of-type(2) {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+}
+
+.navbar-toggler.collapsed .icon-bar:nth-of-type(3) {
+    transform: rotate(0) !important;
+}
+
+/*- END bouton toggle -*/
+/* --------------------- */
+

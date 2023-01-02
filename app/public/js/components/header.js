@@ -25,9 +25,12 @@ class Header extends HTMLElement {
             <nav class='autohide navbar navbar-expand-lg bg-light fixed-top shadow mb-5'>
                 <div class='container-xl'>
                     <div class="d-flex align-items-center align-items-lg-end order-0">
-                        <button class='navbar-toggler' type='button' data-bs-toggle='collapse' data-bs-target='#navbar-main'
+                        <button class='navbar-toggler collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#navbar-main'
                                 aria-controls='navbar-main' aria-expanded='false' aria-label='Toggle navigation'>
-                            <span class='navbar-toggler-icon'></span>
+<!--                            <span class='navbar-toggler-icon'></span>-->
+                            <span class="icon-bar bg-primary"></span>
+                            <span class="icon-bar bg-primary"></span>
+                            <span class="icon-bar bg-primary"></span>
                         </button>
                         <a class='navbar-brand'>
                             <a class='logo text-decoration-none text-center' type='button' id='logoHome'>
@@ -59,7 +62,7 @@ class Header extends HTMLElement {
                         <a class="text-decoration-none" role="button" data-bs-toggle="dropdown">
                             <span class="first-name me-md-1"></span>
                             <span class="last-name me-sm-2"></span>
-                            <img class="img-profile rounded-circle" width="70" height="70"
+                            <img class="img-profile rounded-circle" width="55" height="55"
                                  src="" alt="70x70">
                         </a>
                         <ul class='dropdown-menu dropdown-menu-end' id="profil_dropdown">
@@ -180,7 +183,7 @@ let logoutTech = function () {
                 title: response["msg"]
             });
             setTimeout(() => {
-                window.location.href = "private-login/";
+                window.location.href = "/private-login";
             }, 2000);
         },
         error: function () {
@@ -189,27 +192,27 @@ let logoutTech = function () {
 };
 
 let toPwdModify = function () {
-    window.location.href = "change-password/?token=pwd-modify"
+    window.location.href = "/change-password?token=pwd-modify"
 }
 
 let toHomeClient = function () {
-    window.location.replace("dashboards");
+    window.location.replace("/dashboards");
 };
 
 function toHomeTech() {
-    window.location.href = "dashboards-tech";
+    window.location.href = "/dashboards-tech";
 }
 
 let toProfil = function () {
-    window.location.replace("profil/");
+    window.location.replace("/profil");
 };
 
 let toFormClient = function () {
-    window.location.replace("reservation/");
+    window.location.replace("/reservation");
 };
 
 let toHolidayForm = function () {
-    window.location.replace("holiday-request.html")
+    window.location.replace("/holiday-request.html")
 };
 
 let elAutoHide = function () {

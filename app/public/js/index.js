@@ -150,12 +150,12 @@ let connect = function () {
                 if (response["typeUser"] === "technicien") {
                     $('#signIn').prop('disabled', true);
                     setTimeout(() => {
-                        window.location.replace("dashboards-tech");
+                        window.location.replace("/dashboards-tech");
                     }, 1500);
                 } else {
                     $('#signIn').prop('disabled', true);
                     setTimeout(() => {
-                        window.location.replace("dashboards");
+                        window.location.replace("/dashboards");
                     }, 1500);
                 }
             }
@@ -185,11 +185,11 @@ let smsVerif = function () {
                 });
                 if (response["type"] === "technicien") {
                     setTimeout(() => {
-                        window.location.replace("dashboards-tech");
+                        window.location.replace("/dashboards-tech");
                     }, 1500);
                 } else {
                     setTimeout(() => {
-                        window.location.replace("dashboards");
+                        window.location.replace("/dashboards");
                     }, 1500);
                 }
             } else {
@@ -244,7 +244,7 @@ let toSignIn = function () {
             }
         });
         setTimeout(() => {
-            window.location.replace("inscription");
+            window.location.replace("/inscription");
         }, 2000);  
 };
 let newRDVHomePage = function () {

@@ -242,6 +242,152 @@ class HTML
     ";
     }
 
+    public static function formModifyCar($data): string
+    {
+        $html = "         
+            <div class='rounded p-3'>
+                <div class='text-dark form-label mb-2' style='font-weight: 500'>Sélectionner le format de votre immatriculation :</div>
+                    <div class='form-group d-flex gap-5 mb-1 justify-content-center'>
+                        <div class='form-check'>
+                            <input class='form-check-input' type='radio' name='radioImmat'
+                                   id='newImmat'
+                                   value='newImmat' checked>
+                            <label class='form-check-label text-dark fw-bold fst-italic' for='newImmat'>
+                                Nouveau
+                            </label>
+                        </div>
+                        <div class='form-check'>
+                            <input class='form-check-input' type='radio' name='radioImmat'
+                                   id='oldImmat'
+                                   value='oldImmat'>
+                            <label class='form-check-label text-dark fw-bold fst-italic' for='oldImmat'>
+                                Ancien
+                            </label>
+                        </div>
+                    </div>
+                    <div class='input-group mb-3 licenseplate' id='licence-plate-new' data-country='EU'>
+                        <label for='inputImmatNew'
+                               class='sr-only'>Immatriculation</label>
+                        <input type='text'
+                               class='form-control'
+                               id='inputImmatNew'
+                               aria-describedby='textHelp'
+                               placeholder='AA-456-AA'
+                               pattern='^[A-Z]{2} ?- ?\d{3} ?- ?[A-Z]{2}$'>
+                    </div>
+                    <div class='invalid-feedback'></div>
+                    <div class='input-group mb-3 licenseplate' id='licence-plate-old' data-country='EU' hidden>
+                        <label for='inputImmatOld'
+                               class='sr-only'>Immatriculation</label>
+                        <input type='text'
+                               class='form-control'
+                               id='inputImmatOld'
+                               value=''
+                               aria-describedby='textHelp'
+                               placeholder='1234-AA-0A'
+                               pattern='^[0-9]{1,4} ?- ?[A-Z]{1,4} ?- ?[0-9]{1,2}$'>
+                    </div>
+                    <div class='invalid-feedback'></div>
+                    <div class='d-flex flex-row justify-content-between'>
+                        <div class='col-5'>
+                            <label for='selectMarque' class='form-label text-dark'>Sélectionner une marque</label>
+                            <select class='form-select' id='selectMarque'>
+                                " . $data['brand'] . "
+                            </select>
+                            <div class='invalid-feedback'></div>
+                        </div>
+                        <div class='col-5'>
+                            <label for='selectModele' class='form-label text-dark'>Sélectionner un modèle</label>
+                            <select class='form-select' id='selectModele'>
+                                " . $data['model'] . "
+                            </select>
+                            <div class='invalid-feedback'></div>
+                        </div>
+                    </div>
+                <div class='mb-2 mt-4 form-label text-dark' style='font-weight: 500'>Type de carburant</div>
+                <div class='d-flex gap-2 form-group'>
+                    <div>
+                        <div class='form-check'>
+                            <input
+                                class='form-check-input'
+                                type='radio'
+                                name='optionsCarbu'
+                                id='Essence'
+                                value='Essence'";
+        if ($data['fuel'] == 'Essence'){
+            $html .= 'checked';
+        }
+        $html .= " />
+                            <label class='form-check-label text-dark fw-bold fst-italic' for='Essence'>Essence</label>
+                        </div>
+                        <div class='form-check'>
+                            <input
+                                class='form-check-input'
+                                type='radio'
+                                name='optionsCarbu'
+                                id='Diesel'
+                                value='Diesel'";
+        if ($data['fuel'] == 'Diesel'){
+            $html .= 'checked';
+        }
+        $html .= " />
+                            <label class='form-check-label text-dark fw-bold fst-italic' for='Diesel'>Diesel</label>
+                        </div>
+                    </div>
+                    <div>
+                        <div class='form-check'>
+                            <input
+                                class='form-check-input'
+                                type='radio'
+                                name='optionsCarbu'
+                                id='Electrique'
+                                value='Electrique'";
+        if ($data['fuel'] == 'Electrique'){
+            $html .= 'checked';
+        }
+        $html .= " />
+                            <label
+                                class='form-check-label text-dark fw-bold fst-italic'
+                                for='Electrique'>
+                            Electrique
+                            </label>
+                        </div>
+                        <div class='form-check'>
+                            <input
+                                class='form-check-input'
+                                type='radio'
+                                name='optionsCarbu'
+                                id='Hybride'
+                                value='Hybride'";
+        if ($data['fuel'] == 'Hybride'){
+            $html .= 'checked';
+        }
+        $html .= " />
+                            <label class='form-check-label text-dark fw-bold fst-italic' for='Hybride'>Hybride</label>
+                        </div>
+                    </div>
+                </div>
+                <div class='form-group'>
+                    <label for='inputAnnee' class='form-label mt-4 text-dark'>Année de 1ère mise en circulation</label>
+                    <input
+                      type='text'
+                      class='form-control'
+                      id='inputAnnee'
+                      placeholder='Année ici'/>        
+                <div class='invalid-feedback'></div>          
+                </div>
+                <div class='d-flex justify-content-center'>
+                    <button type='submit' id='validateFormCar'
+                        class='btn btn-primary p-2 mt-5 mb-1 rounded w-100'>
+                    Modifier
+                    </button>
+                </div>
+            </div>
+    ";
+
+        return $html;
+    }
+
     public static function formAddRDV($car_user): string
     {
 
@@ -495,31 +641,58 @@ class HTML
         ';
     }
 
-    public static function loadCarsRecap($nomMarque, $modele, $immat, $id_vehicule)
+    public static function loadCarsRecap($nomMarque, $modele, $immat, $id_vehicule): string
     {
         $nomMarque = strtoupper($nomMarque);
         return '
-            <tr>
-                <td onclick="showInfoCar(' . $id_vehicule . ')" style="cursor: pointer;" class="text-center">
-                    <img src="../public/assets/img/logo/' . strtoupper($nomMarque) . '.png" alt="logo_marque">
-                </td>
-                <td onclick="showInfoCar(' . $id_vehicule . ')" style="cursor: pointer">
-                    <span class="text-muted font-13">Modèle</span>
-                    <br>
-                    <span class="text-muted fs-1">' . $modele . '</span>
-                </td>
-                <td onclick="showInfoCar(' . $id_vehicule . ')" style="cursor: pointer">
-                    <span class="text-muted font-13">Immatriculation</span>
-                    <br>
-                    <span class="text-muted fs-1">' . $immat . '</span>
+            <tr style="cursor: pointer">
+                <td>
+                    <img src="../public/assets/img/logo/' . strtoupper($nomMarque) . '.png" alt="' . $nomMarque . '">
                 </td>
                 <td>
-                    <a id = "addCG" onclick= "modalCG(' . $id_vehicule . ')" class="border-0 bg-transparent" type="button" data-toggle = "tooltip" data-placement = "bottom" title = "Ajouter une carte grise" >
-                        <i class="fa-solid fa-file-circle-plus text-info"></i>
+                    <span class="text-muted">' . $modele . '</span>
+                </td>
+                <td>
+                    <span class="text-muted">' . $immat . '</span>
+                </td>
+                <td class="text-center">
+                    <a class="text-decoration-none" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        data-toggle="tooltip" 
+                        data-placement="bottom" 
+                        title = "Actions sur le véhicule">
+                        <i class="fa-solid fa-ellipsis fa-xl"></i>
                     </a>
-                    <a id = "addCG" onclick= "deleteCar(' . $id_vehicule . ')" class="border-0 bg-transparent ps-lg-1" type = "button" data-toggle = "tooltip" data-placement = "bottom" title = "Supprimer ce véhicule" >
-                        <i class="fa-solid fa-trash text-dark"></i>
-                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                            <button 
+                                id="addCG" 
+                                class="dropdown-item"
+                                onclick= "modalCG(' . $id_vehicule . ')" 
+                                type="button">
+                                📑 Ajout carte grise
+                            </button>
+                        </li>
+                        <li>
+                            <button 
+                                id="modifyCar" 
+                                class="dropdown-item"
+                                onclick= "formModifyCar(' . $id_vehicule . ')" 
+                                type="button">
+                                🖊️ Modifier
+                            </button>
+                        </li>
+                        <li>                            
+                            <button 
+                                id="deleteCar" 
+                                class="dropdown-item"
+                                onclick= "deleteCar(' . $id_vehicule . ')"
+                                type="button">
+                                🗑️ Supprimer
+                            </button>
+                        </li>
+                    </ul>
                 </td>
             </tr> 
         ';
@@ -530,18 +703,13 @@ class HTML
         $html = '
             <tr>
                 <td>
-                    <span class="text-muted font-13">Date</span>
-                    <br>
-                    <span class="text-muted fs-1">' . $interv . '</span>
+                    <span class="text-muted">' . $interv . '</span>
                 </td>
                 <td>
-                    <span class="text-muted font-13">Immatriculation</span>
-                    <br>
-                    <span class="text-muted fs-1">' . $immat . '</span>
+                    <span class="text-muted">' . $immat . '</span>
                 </td>
                 <td>
-                <span class="text-muted font-13">Status</span>
-                    <br>';
+        ';
         if ($state == 0) {
             $html .= '
                 <div class="badge rounded-pill text-secondary bg-soft-secondary">
@@ -559,7 +727,7 @@ class HTML
         }
 
         $html .= '
-                <td>
+                <td class="text-center">
                     <button onclick="deleteRdvUser(' . $idCT . ')" 
                             id="deleteRdv" 
                             type="button" 
@@ -662,7 +830,7 @@ class HTML
                                     <div class='mt-3 mb-4 mt-md-4 mb-md-5 light'>
                                         <p class='mb-0 mt-4 mt-md-5 fs--1 fw-semi-bold text-white opacity-75 d-flex flex-column'>
                                             <span>Lisez nos <a class='text-decoration-underline text-white cursor-pointer' id='to-mentions'>mentions légales</a></span>
-                                            <span>et restons <a class='text-decoration-underline text-white' id='to-cgu' href='./contact-us.html'>en contact!</a></span>
+                                            <span>et restons <a class='text-decoration-underline text-white' id='to-cgu' href='/contact'>en contact!</a></span>
                                         </p>
                                     </div>
                                 </div>
@@ -732,7 +900,7 @@ class HTML
                                     <div class='mt-3 mb-4 mt-md-4 mb-md-5 light'>
                                         <p class='mb-0 mt-4 mt-md-5 fs--1 fw-semi-bold text-white opacity-75 d-flex flex-column'>
                                             <span>Lisez nos <a class='text-decoration-underline text-white cursor-pointer' id='to-mentions'>mentions légales</a></span>
-                                            <span>et restons <a class='text-decoration-underline text-white' id='to-cgu' href='./contact-us.html'>en contact!</a></span>
+                                            <span>et restons <a class='text-decoration-underline text-white' id='to-cgu' href='/contact'>en contact!</a></span>
                                         </p>
                                     </div>
                                 </div>
@@ -805,7 +973,7 @@ class HTML
                                     <div class='mb-4 mt-md-4 mb-md-5 light'>
                                         <p class='mb-0 mt-md-5 fs--1 fw-semi-bold text-white opacity-75 d-flex flex-column'>
                                             <span>Lisez nos <a class='text-decoration-underline text-white cursor-pointer' id='to-mentions'>mentions légales</a></span>
-                                            <span>et restons <a class='text-decoration-underline text-white' id='to-cgu' href='./contact-us.html'>en contact!</a></span>
+                                            <span>et restons <a class='text-decoration-underline text-white' id='to-cgu' href='/contact'>en contact!</a></span>
                                         </p>
                                     </div>
                                 </div>

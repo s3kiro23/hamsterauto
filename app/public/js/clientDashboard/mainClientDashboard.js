@@ -62,14 +62,60 @@ let carsRecap = function (page) {
                 $("#myhistory").html("");
                 $("#noHistory").html("Aucun historique consultable");
             }
+            $('#tab-car, #tab-rdv').DataTable({
+                "pageLength": 3,
+                "lengthMenu": [ [3, 5, 10, 25, 50, 75, 100, -1], [3, 5, 10, 25, 50, 75, 100, "All"] ],
+                retrieve: true,
+                responsive: {
+                    details: {
+                        type: 'none'
+                    }
+                },
+                columnDefs: [
+                    { responsivePriority: 1, targets: 0 },
+                    { responsivePriority: 2, targets: -1 },
+                    {
+                        "targets": 3,
+                        "orderable": false
+                    }
+                ],
+                language: {
+                    "sEmptyTable": "Aucunes données n'est disponible",
+                    "sInfo": "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+                    "sInfoEmpty": "Affichage de l'élément 0 à 0 sur 0 élément",
+                    "sInfoFiltered": "(filtré à partir de _MAX_ éléments au total)",
+                    "sInfoPostFix": "",
+                    "sInfoThousands": ",",
+                    "sLengthMenu": "Afficher _MENU_ éléments",
+                    "sLoadingRecords": "Chargement...",
+                    "sProcessing": "Traitement...",
+                    "sSearch": "Rechercher :",
+                    "sZeroRecords": "Aucun élément correspondant trouvé",
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sLast": "Dernier",
+                        "sNext": "Suivant",
+                        "sPrevious": "Précédent"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre décroissant"
+                    },
+                    "select": {
+                        "rows": {
+                            "_": "%d lignes sélectionnées",
+                            "0": "Aucune ligne sélectionnée",
+                            "1": "1 ligne sélectionnée"
+                        }
+                    }
+                }
+            });
         },
         error: function () {
             console.log('errorClient')
         },
     });
 }
-
-
 
 /*Fonctions de gestion d'une fiche véhicule DEBUT*/
 function formAddCar() {
@@ -112,6 +158,37 @@ function selectedCar() {
         },
     });
 }
+
+function formModifyCar(id) {
+    $.ajax({
+        url: "../src/Controller/displayHTML/formsDisplayController.php",
+        dataType: "JSON",
+        type: "POST",
+        data: {
+            request: "formModifyCar",
+            idCar: id
+        },
+        success: function (response) {
+            $("#modalFormCar").modal("show");
+            $("#bodyFormCar").html(response['html'])
+            $(".modal-title").html('Modification de votre véhicule :')
+            $("#modal-addID").html(id)
+            $("#inputAnnee").val(response['data']['year'])
+            $("#inputImmatNew").val(response['data']['immat'])
+            $("#bodyFormCar").attr('action',"javascript:modifyCar();")
+            $('#selectMarque').on("change", selectedCar)
+            $("#inputImmatNew").on("keyup", checkNewValueRegEx)
+            $("#inputImmatOld").on("keyup", checkOldValueRegEx)
+            $("#inputAnnee").on("keyup", checkOldValueYear)
+            $(".form-control").on('change', checkField)
+            $('input[name=radioImmat]').on("click", selectedImmatFormat);
+        },
+        error: function () {
+            console.log("errorAddShow");
+        },
+    });
+}
+
 let addCar = function () {
     let $fuel = "";
     let $selectedFuel = $('input[name=optionsCarbu]:checked').val();
@@ -173,6 +250,65 @@ let addCar = function () {
         }
     })
 };
+
+let modifyCar = function () {
+    let $selectedFuel = $('input[name=optionsCarbu]:checked').val();
+    let $immat = "";
+    let selectedFormatPlate = $('input[name=radioImmat]:checked').val();
+    if (selectedFormatPlate === "newImmat"){
+        $immat = $('#inputImmatNew').val();
+    } else {
+        $immat = $('#inputImmatOld').val();
+    }
+    Swal.fire({
+        title: 'Confirmez-vous la modification de ce véhicule?',
+        text: "",
+        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageWidth: 100,
+        showCancelButton: true,
+        confirmButtonColor: '#62C462',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Oui',
+        cancelButtonText: 'Annuler',
+    }).then((result) => {
+        if (result.isConfirmed) {
+            $.ajax({
+                url: '../src/Controller/carController.php',
+                dataType: 'JSON',
+                type: 'POST',
+                data: {
+                    request: 'modifyCar',
+                    idCar: $('#modal-addID').html(),
+                    immat: $immat,
+                    marque: $('#selectMarque').val(),
+                    modele: $('#selectModele option:selected').val(),
+                    carburant: $selectedFuel,
+                    annee: $('#inputAnnee').val(),
+                },
+                success: function (response) {
+                    if (response['status'] === 1) {
+                        toastMixin.fire({
+                            animation: true,
+                            title: response["msg"]
+                        });
+                        $("#modalFormCar").modal("hide");
+                        carsRecap(1)
+                    } else {
+                        toastMixin.fire({
+                            animation: true,
+                            title: response["msg"],
+                            icon: "error",
+                        });
+                    }
+                },
+                error: function () {
+                    console.log('errorModCar');
+                }
+            })
+        }
+    })
+};
+
 function deleteCar(id) {
     Swal.fire({
         title: "Confirmez-vous la suppression de ce véhicule?",

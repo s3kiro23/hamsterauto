@@ -125,7 +125,7 @@ function validationCT() {
                         })
                     /*}).then(() => {*/
                         setTimeout(() => {
-                            window.location.replace("dashboards-tech/");
+                            window.location.replace("/dashboards-tech");
                         }, 2000);
                     /*});*/
                 },

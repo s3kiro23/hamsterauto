@@ -7,7 +7,7 @@ class BackTopBtn extends HTMLElement {
         this.innerHTML = `
             <button
                 type='button'
-                class='btn btn-success btn-floating btn-lg rounded-circle py-xl-2 px-xl-3 py-md-2 px-md-3 py-lg-2 px-lg-3 py-2 px-3'
+                class='btn btn-success btn-floating btn-lg rounded-circle py-xl-2 px-xl-3 py-md-2 px-md-3 py-lg-2 px-lg-3 py-2 px-3 z-index-2'
                 id='btn-back-to-top'
             >
                 <i class='fas fa-arrow-up'></i>

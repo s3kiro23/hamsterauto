@@ -95,11 +95,11 @@ let changePassword = function () {
 }
 
 let toClientDash = function () {
-    window.location.replace('dashboards/')
+    window.location.replace('/dashboards')
 }
 
 let toTechDash = function () {
-    window.location.replace('dashboards-tech/')
+    window.location.replace('/dashboards-tech')
 }
 
 let historyBack = function () {

@@ -55,7 +55,7 @@ function vehicule_attente(page) {
                     title: response['msg']
                 });
                 setTimeout(() => {
-                    window.location.replace('index.html')
+                    window.location.replace('/')
                 }, 3000);
             } else {
                 $("#noAttente").html(response["msg2"]);

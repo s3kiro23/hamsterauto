@@ -47,7 +47,7 @@ let private_connect = function () {
                 });
                 if (response["typeUser"] === "technicien") {
                     setTimeout(() => {
-                        window.location.replace("dashboards-tech/");
+                        window.location.replace("/dashboards-tech");
                     }, 1500);
                 } 
             }

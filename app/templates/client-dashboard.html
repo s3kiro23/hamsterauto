@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../public/assets/css/test-sidebar.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
     <title>Interface Client</title>
 </head>
 
@@ -49,20 +51,26 @@
                             <i class="fa-solid fa-car fa-xl text-info align-middle"></i>
                         </button>
                     </div>
-                    <div class="card-body pt-2">
-                        <div class="table-responsive">
-                            <table class="table table-centered table-striped align-middle table-nowrap table-hover mb-0" id="tab-car">
-                                <tbody id="mycars">
-                                <!-- génération des véhicules users ici-->
-                                </tbody>
-                            </table>
-                            <span id="noCar" class="d-flex justify-content-center"></span>
-                        </div>
+                    <div class="card-body">
+                        <table class="table table-centered table-striped align-middle table-nowrap table-hover" id="tab-car">
+                            <thead>
+                            <tr>
+                                <th data-priority="1">Marque</th>
+                                <th>Modèle</th>
+                                <th>Immatriculation</th>
+                                <th data-priority="2">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="mycars">
+                            <!-- génération des véhicules users ici-->
+                            </tbody>
+                        </table>
+                        <span id="noCar" class="d-flex justify-content-center"></span>
                     </div>
                 </div>
             </div>
             <!-- 2ᵉ TABLEAU rdv prévu -->
-            <div class="col-12 col-sm-12 col-md-12 col-lg col-xl col-xxl">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl col-xxl">
                 <div class="card shadow rounded border-0">
                     <div class="card-header bg-primary bg-opacity-10 rounded-top d-flex justify-content-between align-items-center">
                         <h5 class="m-0 py-2 text-primary">Mes rendez-vous</h5>
@@ -73,15 +81,20 @@
                             <i class="fa-regular fa-calendar-plus fa-xl text-info align-middle"></i>
                         </button>
                     </div>
-                    <div class="card-body pt-2">
-                        <div class="table-responsive">
-                            <table class="table table-centered align-middle table-nowrap table-hover mb-0">
-                                <tbody id="myrdv">
-                                <!-- génération des rdv user ici-->
-                                </tbody>
-                            </table>
-                            <span id="noRDV" class="d-flex justify-content-center"></span>
-                        </div>
+                    <div class="card-body">
+                        <table id="tab-rdv" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0">
+                            <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Immatriculation</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody id="myrdv">
+                            <!-- génération des rdv user ici-->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
@@ -133,6 +146,7 @@
         </div>
     </main>
 </div>
+
 <!-- modal véhicule -->
 <div id="modalCar" class="modal fade w-100">
     <div class="modal-dialog modal-lg" role="document">
@@ -271,12 +285,12 @@
 <!-- modal contre visite fin -->
 
 <!-- modal ajout véhicule  debut -->
-<div id="modalAddCar" class="modal fade">
+<div id="modalFormCar" class="modal fade">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header bg-primary bg-opacity-10">
                 <h5 class="modal-title">Ajout d'un nouveau véhicule</h5>
-                <span id="modal-addID"></span>
+                <span id="modal-addID" hidden></span>
                 <button
                         type="button"
                         class="btn-close"
@@ -286,7 +300,7 @@
                 </button>
             </div>
             <div class="modal-body d-flex flex-column gap-2">
-                <form id="bodyAddCar" action="javascript:addCar();" method="POST">
+                <form id="bodyFormCar" action="javascript:addCar();" method="POST">
                     Erreur, veuillez recharger la page
                 </form>
             </div>
@@ -335,6 +349,9 @@
         integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
         crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
 
 <script src="../public/js/theme/sidenav-control.js"></script>
 <script src="../public/js/sharedFunctions/fieldControl.js"></script>

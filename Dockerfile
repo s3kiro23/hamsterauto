@@ -86,6 +86,7 @@ COPY config/php.ini "$PHP_INI_DIR/php.ini"
 #Apache config
 COPY config/hamsterauto.conf /etc/apache2/sites-available/hamsterauto.conf
 RUN a2ensite hamsterauto.conf
+RUN a2enmod rewrite
 RUN mkdir /var/www/hamsterauto
 COPY ./app/ /var/www/hamsterauto
 
