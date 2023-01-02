@@ -210,11 +210,11 @@ class Mailing
             Pour pouvoir récupérer ce dernier, veuillez cliquer sur le lien ci - dessous :
             <br><br>
             <button>
-                <a style = 'text-decoration: none;' href = 'https://hamsterauto.com/templates/change-password.html?token=$token'><b> Récupération de mon compte </b ></a >
+                <a style = 'text-decoration: none;' href = 'https://hamsterauto.com/change-password?token=$token'><b> Récupération de mon compte </b ></a >
             </button>
             <br><br><br>
             Ou copier et coller cette URL dans la barre de recherche de votre navigateur :<br>
-            <a href='https://hamsterauto.com/templates/change-password.html?token=$token'> https://hamsterauto.com/templates/change-password.html?token=$token</a>
+            <a href='https://hamsterauto.com/templates/change-password?token=$token'> https://hamsterauto.com/change-password?token=$token</a>
             <br><br><br>
             L'équipe d'<a style='text-decoration: none; color: black' href= 'https://hamsterauto.com/' target='_blank' ><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
             <br><br>
