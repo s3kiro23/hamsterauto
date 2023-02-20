@@ -35,8 +35,8 @@ CREATE TABLE `archive` (
   `time_slot` int NOT NULL,
   `booked_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `state` int NOT NULL,
-  `report` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `pv` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `report` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `pv` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `notified` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -54,8 +54,8 @@ CREATE TABLE `awaiting_intervention` (
   `time_slot` int NOT NULL,
   `booked_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `state` int NOT NULL,
-  `report` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `pv` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `report` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `pv` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `notified` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -67,7 +67,7 @@ CREATE TABLE `awaiting_intervention` (
 
 CREATE TABLE `brand` (
   `id_brand` int NOT NULL,
-  `brand_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `brand_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -206,7 +206,7 @@ CREATE TABLE `login_attempt` (
 CREATE TABLE `model` (
   `id_model` int NOT NULL,
   `id_brand` int NOT NULL,
-  `model_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL
+  `model_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1735,13 +1735,13 @@ INSERT INTO `model` (`id_model`, `id_brand`, `model_name`) VALUES
 
 CREATE TABLE `notification` (
   `id_notif` int NOT NULL,
-  `next_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `confirmed_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `deleted_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `finished_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `next_control` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `car_support` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
-  `send_pv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci
+  `next_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `confirmed_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `deleted_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `finished_rdv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `next_control` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `car_support` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `send_pv` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1835,8 +1835,8 @@ CREATE TABLE `sms` (
 CREATE TABLE `trace` (
   `id_trace` int UNSIGNED NOT NULL,
   `id_user` int NOT NULL,
-  `type` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `action` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `type` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `action` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `triggered_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -1848,7 +1848,7 @@ CREATE TABLE `trace` (
 
 CREATE TABLE `upload` (
   `id_upload` int NOT NULL,
-  `file_name` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `file_name` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `id_vehicle` int NOT NULL,
   `submitted_on` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -1861,20 +1861,20 @@ CREATE TABLE `upload` (
 
 CREATE TABLE `user` (
   `id_user` int NOT NULL,
-  `civilite_user` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `lastname_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `firstname_user` varchar(255) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `phone_user` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `email_user` varchar(50) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `adress_user` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci,
-  `password_user` varchar(350) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
-  `type` varchar(15) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `civilite_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `lastname_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `firstname_user` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `phone_user` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email_user` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `adress_user` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci,
+  `password_user` varchar(350) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `type` varchar(15) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `pwdExp_user` datetime DEFAULT NULL,
   `a2f` tinyint(1) DEFAULT '0',
   `created_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `hash` varchar(40) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
+  `hash` varchar(40) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `is_active` tinyint NOT NULL DEFAULT '1',
-  `img_profile` longtext CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci
+  `img_profile` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -1896,9 +1896,9 @@ CREATE TABLE `vehicle` (
   `id_vehicle` int NOT NULL,
   `id_user` int NOT NULL,
   `id_model` int NOT NULL,
-  `registration` varchar(11) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `registration` varchar(11) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `first_release` int NOT NULL,
-  `fuel` varchar(35) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci NOT NULL,
+  `fuel` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
   `next_control` int DEFAULT NULL,
   `notified` tinyint(1) NOT NULL DEFAULT '0',
   `owned` tinyint(1) NOT NULL DEFAULT '1'
