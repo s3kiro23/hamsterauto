@@ -1,111 +1,98 @@
 <?php
 session_start();
-$currentTime = time();
-if (!isset($_SESSION['id'])) {
-    $status = 2;
-    $msg = 'Nécessite une authentification, retour à la page de connexion';
-    session_unset();
-    session_destroy();
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-} elseif ($currentTime > $_SESSION['expire']) {
-    $status = 2;
-    $msg = 'Session expirée, retour à la page principale';
-    session_unset();
-    session_destroy();
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-} else {
+spl_autoload_register(function ($classe) {
+    require '../Entity/' . $classe . '.php';
+});
 
+$db = new Database();
+$GLOBALS['db'] = $db->connexion();
 
-    spl_autoload_register(function ($classe) {
-        require '../Entity/' . $classe . '.php';
-    });
-    require_once './shared.php';
+switch ($_POST['request']) {
 
-    $db = new Database();
-    $GLOBALS['db'] = $db->connexion();
+    case 'profil_content' :
+        $user = new User(Security::decrypt($_SESSION['id'], false));
+        echo json_encode(array("login" => $user->getEmail_user(),
+            "lastname" => $user->getLastname_user(),
+            "firstname" => $user->getFirstname_user(),
+            "phone" => $user->getPhone_user(),
+            "adress" => $user->getAdress_user(),
+            "a2f" => $user->getA2f(),
+            "image" => $user->getImg_profile(),
+        ));
 
-    switch ($_POST['request']) {
+        break;
 
-        case 'profil_content' :
-            $user = new User(decrypt($_SESSION['id'], false));
-            echo json_encode(array("login" => $user->getEmail_user(),
-                "nom" => $user->getNom_user(),
-                "prenom" => $user->getPrenom_user(),
-                "tel" => $user->getTelephone_user(),
-                "adresse" => $user->getAdresse_user(),
-                "a2f" => $user->getA2f(),
-                "image" => $user->getImg_profile(),
-            ));
+    case 'modify' :
+        $data = json_decode($_POST['values'], true);
+        $init_control = new Control();
+        $check = $init_control->check_fields($data);
 
-            break;
-
-        case 'modify' :
+        if ($check['status'] == 0) {
+            $msg = $check['msg'];
+            $status = $check['status'];
+        } else {
             $status = 1;
             $msg = 'Les modifications ont bien été prises en compte!';
-            $user = new User(decrypt($_SESSION['id'], false));
-            $data = json_decode($_POST['values']);
-            $user->setEmail_user($data[0]);
-            $user->setNom_user($data[1]);
-            $user->setPrenom_user($data[2]);
-            $user->setTelephone_user($data[3]);
-            $user->setAdresse_user($data[4]);
+            $user = new User(Security::decrypt($_SESSION['id'], false));
+            $user->setEmail_user($data['inputLogin']);
+            $user->setLastname_user($data['inputNom']);
+            $user->setFirstname_user($data['inputPrenom']);
+            $user->setPhone_user($data['inputTel']);
+            $user->setAdress_user($data['inputAddr']);
             $user->update();
 
             //Add traces in BDD
-            $traces = new Traces(0);
-            $traces->setId_user(decrypt($_SESSION['id'], false));
-            $traces->setType('account');
-            $traces->setAction('modify');
-            $traces->create();
+            $traces = new Trace(0);
+            $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'modify', 'account');
+        }
 
-            echo json_encode(array("status" => $status, "msg" => $msg));
-            break;
+        echo json_encode(array("status" => $status, "msg" => $msg));
+        break;
 
-        case 'disableAccount' :
-            $msg = "Erreur";
-            $id = decrypt($_SESSION['id'], false);
-            if (isset($id) & !empty($id)) {
-                $user = new User($id);
-                $user->disable($id);
-
-                //Add traces in BDD
-                $traces = new Traces(0);
-                $traces->setId_user($id);
-                $traces->setType('account');
-                $traces->setAction('disabled');
-                $traces->create();
-
-                $msg = 'Success';
-            }
-            echo json_encode(array('msg' => $msg));
-            break;
-
-        case 'activationA2F':
-            $status = 0;
-            $msg = "Désactivation 2FA réussie !";
-            $id = decrypt($_SESSION['id'], false);
+    case 'disableAccount' :
+        $msg = "Erreur";
+        $id = Security::decrypt($_SESSION['id'], false);
+        if (isset($id) && !empty($id)) {
             $user = new User($id);
+            $notif = new Notification();
+            $notification_user = $notif->check_if_notify($id);
+            $notif->uncheck_notification($notification_user, $id);
+            $car_check = count(User::check_cars($id, ""));
+            $rdv_check = count(User::check_rdv($id, ""));
+            $user->disable($car_check, $rdv_check);
 
             //Add traces in BDD
-            $traces = new Traces(0);
-            $traces->setId_user($id);
-            $traces->setType('security');
+            $traces = new Trace(0);
+            $traces->setTracesIN($id, 'disabled', 'account');
 
-            if (!$user->getA2f()) {
-                $user->setA2f(1);
-                $status = 1;
-                $msg = "Activation 2FA réussie !";
-                $traces->setAction('a2f-enabled');
-            } else {
-                $user->setA2f(0);
-                $traces->setAction('a2f-disabled');
-            }
-            $traces->create();
-            $user->update();
+            $msg = 'Success';
+        }
+        echo json_encode(array('msg' => $msg));
+        break;
 
-            echo json_encode(array("status" => $status, "msg" => $msg));
-            break;
-    }
+    case 'activationA2F':
+        $status = 0;
+        $msg = "Désactivation 2FA réussie !";
+        $id = Security::decrypt($_SESSION['id'], false);
+        $user = new User($id);
+
+        //Add traces in BDD
+        $traces = new Trace(0);
+
+        if (!$user->getA2f()) {
+            $user->setA2f(1);
+            $status = 1;
+            $msg = "Activation 2FA réussie !";
+            $traces->setTracesIN($id, 'a2f-enabled', 'security');
+        } else {
+            $user->setA2f(0);
+            $traces->setTracesIN($id, 'a2f-disabled', 'security');
+        }
+        $user->update();
+
+        echo json_encode(array("status" => $status, "msg" => $msg));
+        break;
 }
+
 
 

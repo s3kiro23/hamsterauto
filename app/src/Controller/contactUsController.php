@@ -1,9 +1,12 @@
 <?php
 
-require_once '../Controller/shared.php';
+use HTML\ContactHTML;
+
 spl_autoload_register(function ($classe) {
     require '../Entity/' . $classe . '.php';
 });
+
+require "../Entity/HTML/ContactHTML.php";
 
 $db = new Database();
 $GLOBALS['db'] = $db->connexion();
@@ -11,27 +14,19 @@ $GLOBALS['db'] = $db->connexion();
 switch ($_POST['request']) {
 
     case 'contact-form':
-        $tab_input = json_decode($_POST['tabInput'], true);
+        $data = json_decode($_POST['tabInput'], true);
         $status = 1;
-        $msg = HTML::messageHamster();
-        if (checkField()) {
-            $status = 0;
-            $msg = checkField();
-        } else if (!checkCaptcha($tab_input[4], $_POST['captcha'])) {
-            $status = 0;
-            $msg = "Les captcha ne correspondent pas !";
-        }else if ($_POST['rgpd'] = false){
-            error_log(1);
-            $status = 0;
-            $msg = "Veuillez accepter les conditions RGPD !";
+        $msg = ContactHTML::messageHamster();
+        $init_control = new Control();
+        $check = $init_control->check_fields($data);
+
+        if ($check['status'] == 0) {
+            $msg = $check['msg'];
+            $status = $check['status'];
         } else {
             //Add Job mail in Queue table
             $mail = new Mailing();
-            $mailTemplate = $mail->getContact($tab_input);
-            $queued = new Queued(0);
-            $queued->setType("mail");
-            $queued->setTemplate(json_encode($mailTemplate));
-            $queued->create();
+            $mail->setContact_Job($data);
         }
 
         echo json_encode(array("status" => $status, "msg" => $msg));
@@ -39,47 +34,20 @@ switch ($_POST['request']) {
 
     case 'getTimes':
 
+        $dataBIA = [];
+        $dataAJA = [];
         $times = new Setting(1);
         $opening = date("H:i", $times->getStart_time_am());
         $close = date("H:i", $times->getEnd_time_pm());
         $days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
         $coordinates = json_decode($times->getCoordinates(), true);
-        $htmlContent = "";
+        $html_content = "";
         foreach ($days as $day) {
-            $htmlContent .= $day . ' ' . $opening . ' – ' . $close . '<br>';
+            $html_content .= $day . ' ' . $opening . ' – ' . $close . '<br>';
         }
-        $contentBIA = '
-            <div id="content">
-                <div class="d-flex flex-row gap-2" id="siteNotice">
-                    <img class="align-middle" src="../public/assets/img/logoDark.png" style="width: 4rem" alt="logo-contact">
-                    <h4 id="firstHeading" class="align-content-center firstHeading"><span style="color:lightskyblue;">Bastia</span></h4>
-                </div>
-                <div id="bodyContent">
-                    <p>' . $coordinates['aflo_bia']['addr'] . '</p>
-                    <p><b>Horaires : </b><br>
-                    ' . $htmlContent . '
-                    dimanche Fermé<br>
-                    <p>Site : <a target="_blank" href="https://www.aflokkat.com/">https://www.aflokkat.com/</a>
-                </div>
-            </div>
-        ';
-        $contentAJA = '
-            <div id="content">
-                <div class="d-flex flex-row gap-2" id="siteNotice">
-                    <img class="align-middle" src="../public/assets/img/logoDark.png" style="width: 4rem" alt="logo-contact">
-                    <h4 id="firstHeading" class="align-content-center firstHeading"><span style="color:lightcoral;">Ajaccio</span></h4>
-                </div>
-                <div id="bodyContent">
-                    <p>' . $coordinates['aflo_aja']['addr'] . '</p>
-                    <p><b>Horaires : </b><br>
-                    ' . $htmlContent . '
-                    dimanche Fermé<br>
-                    <p>Site : <a target="_blank" href="https://www.aflokkat.com/">https://www.aflokkat.com/</a>
-                </div>
-            </div>
-        ';
+        $content = ContactHTML::mapContent($coordinates, $html_content);
 
-        echo json_encode(array("contentBIA" => $contentBIA, "contentAJA" => $contentAJA, "coordinates" => $coordinates));
+        echo json_encode(array("content" => $content, "coordinates" => $coordinates));
         break;
 
     default :

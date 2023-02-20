@@ -7,7 +7,7 @@ spl_autoload_register(function ($classe) {
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-$jobs_in_queued = Queued::getJobsQueued();
+$jobs_in_queued = Queued::getJobs_queued();
 
 if (!empty($jobs_in_queued)) {
     $state = 0;
@@ -20,7 +20,7 @@ if (!empty($jobs_in_queued)) {
                 $state = 1;
             } else if ($job['type'] == "sms") {
                 $parsed_template = (json_decode($job['template'], true));
-                $sms = new SMS();
+                $sms = new SMS(0);
                 $sms->send($parsed_template);
                 $state = 1;
             }

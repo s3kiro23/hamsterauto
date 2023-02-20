@@ -3,17 +3,21 @@ $(function () {
 });
 
 let newPwd = function () {
+    let tabInput = {};
+    $('.field').each(function () {
+        tabInput[this.id] = $("#" + this.id).val();
+    });
     $.ajax({
-        url: "../src/Controller/index/loginController.php",
+        url: "../src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {
             request: "newPwd",
-            user: $("#user").val(),
-            password: $("#password").val(),
+            tabInput: JSON.stringify(tabInput)
         },
         success: function (response) {
             if (response["status"] === 1) {
+                $('#newPwd').prop('disabled', true);
                 Swal.fire({
                     position: 'top',
                     icon: "success",
@@ -37,16 +41,14 @@ let newPwd = function () {
                 });
             }
         },
-
         error: function () {
-            console.log("errNewPwd");
         },
     });
 };
 
 let toRequestMail = function () {
     $.ajax({
-        url: "../src/Controller/index/recoveryController.php",
+        url: "../src/Controller/Index/RecoveryController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -60,23 +62,25 @@ let toRequestMail = function () {
                 title: response["msg"]
             });
             $("#content-request").html(response["contentForgot"]);
-            $('#to-mentions').on("click", modalMentions)
+            $('#to-mentions').on("click", modalMentions);
+            $(".form-control").on("change", checkField);
+            $(".form-control").on("click", placeholderAnimation);
+            $(".form-control").on("focusout", placeholderAnimation);
         },
 
         error: function () {
-            console.log("errToRequestMail");
         },
     });
 };
 
 let genToken = function () {
     $.ajax({
-        url: "../src/Controller/index/recoveryController.php",
+        url: "../src/Controller/Index/RecoveryController.php",
         dataType: "JSON",
         type: "POST",
         data: {
             request: "genToken",
-            mail: $("#email").val(),
+            mail: $("#inputEmail").val(),
         },
         success: function (response) {
             if (response["status"] === 1) {
@@ -85,43 +89,20 @@ let genToken = function () {
                     position: 'top',
                     title: response["msg"]
                 });
-                /*$('#sendToken').prop("disabled", true);
-                setTimeout(() => {
-                    window.location.replace("index.html");
-                }, 3000);*/
                 $("#mail-sending").html(response["htmlMail"]);
                 $('#to-mentions').on("click", modalMentions)
                 $("#reload").on("click", reload);
             } else {
                 toastMixin.fire({
                     animation: true,
-                    icon: "error",
+                    icon: "warning",
+                    position: 'top',
+                    width: 500,
                     title: response["msg"]
                 });
             }
         },
         error: function () {
-            console.log("errGenToken");
         },
     });
 };
-
-/*let tokenLink = function () {
-    $.ajax({
-        url: "../src/Controller/index/recoveryController.php",
-        dataType: "JSON",
-        type: "POST",
-        data: {
-            request: "tokenLink",
-        },
-        success: function () {
-            window.location.replace(
-                "change-password.html?token=" + $("#tokenLink").html()
-            );
-        },
-
-        error: function () {
-            console.log("errTokenLink");
-        },
-    });
-};*/

@@ -1,21 +1,19 @@
 <?php
+
+use HTML\MenuHTML;
+
+require "../../Entity/HTML/MenuHTML.php";
+
 session_start();
-$currentTime = time();
+
 if (!isset($_SESSION['id'])) {
     $status = 2;
-    $msg = 'Nécessite une authentification, retour à la page de connexion';
-    session_unset();
-    session_destroy();
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-} elseif ($currentTime > $_SESSION['expire']) {
-    $status = 2;
-    $msg = 'Session expirée, retour à la page principale';
+    $msg = "Vous n'êtes pas authentifié";
     session_unset();
     session_destroy();
     echo json_encode(array('msg' => $msg, 'status' => $status));
 } else {
 
-    require_once '../../Controller/shared.php';
     spl_autoload_register(function ($classe) {
         require '../../Entity/' . $classe . '.php';
     });
@@ -25,40 +23,80 @@ if (!isset($_SESSION['id'])) {
 
     switch ($_POST['request']) {
 
-        /*Cases de redirection liens header DEBUT*/
-        case 'generateNavbar' :
+            /*Cases de redirection liens header DEBUT*/
+        case 'generateNavbar':
             $status = 1;
-            $user = new User(decrypt($_SESSION['id'], false));
-            $userInfo = [
-                "firstName" => $user->getPrenom_user(),
-                "lastName" => $user->getNom_user(),
+            $user = new User(Security::decrypt($_SESSION['id'], false));
+            $user_info = [
+                "firstName" => $user->getFirstname_user(),
+                "lastName" => $user->getLastname_user(),
                 "image" => $user->getImg_profile()
             ];
-            $navbarHTML = HTML::navBarType($user);
-            echo json_encode(array("navbarHTML" => $navbarHTML, "status" => $status, "userInfo" => $userInfo));
+            $navbar_HTML = MenuHTML::navBarType($user);
+            echo json_encode(array("navbarHTML" => $navbar_HTML, "status" => $status, "userInfo" => $user_info));
             break;
 
-        case 'to_login' :
+        case 'notificationManager':
+            $id = Security::decrypt($_SESSION['id'], false);
+            $notif = new Notification();
+            $result = $notif->check_if_notify($id);
+
+            echo json_encode($result);
+            break;
+
+        case 'notificationModify':
+            $id = Security::decrypt($_SESSION['id'], false);
+            $user = new User($id);
+            $notif = new Notification();
+            $notification_types = [
+                'btn-rdv' => 'next_rdv',
+                'btn-confirmed' => 'confirmed_rdv',
+                'btn-deleted' => 'deleted_rdv',
+                'btn-finished' => 'finished_rdv',
+                'btn-car' => 'car_support',
+                'btn-control' => 'next_control',
+                'btn-pv' => 'send_pv',
+            ];
+
+            if (is_array($_POST['values'])) {
+                foreach ($_POST['values'] as $id_value) {
+                    if (isset($notification_types[$id_value])) {
+                        $notification_list = json_decode($notif->getData($notification_types[$id_value]), true);
+                        if (!in_array($id, $notification_list)) {
+                            $notification_list[] = $id;
+                        } else {
+                            unset($notification_list[array_search($id, $notification_list)]);
+                        }
+                        $notif->setData($notification_types[$id_value], json_encode($notification_list));
+                        $notif->update();
+                    }
+                }
+            } elseif (isset($notification_types[$_POST['values']])) {
+                $notification_list = json_decode($notif->getData($notification_types[$_POST['values']]), true);
+                if (!in_array($id, $notification_list)) {
+                    $notification_list[] = $id;
+                } else {
+                    unset($notification_list[array_search($id, $notification_list)]);
+                }
+                $notif->setData($notification_types[$_POST['values']], json_encode($notification_list));
+                $notif->update();
+            }
+            //Add traces in BDD
+            $traces = new Trace(0);
+            $traces->setTracesIN($id, 'change', 'notification');
+
+            echo json_encode(1);
+            break;
+
+
+        case 'to_login':
             $msg = "Redirection vers la page de connexion";
             echo json_encode(array("msg" => $msg));
             break;
 
         case 'modalUploadCG':
-            $msg = "test1";
-            $_SESSION['carID'] = encrypt($_POST['carID'], false);
-            echo json_encode(array("msg" => $msg));
-            break;
-
-        case 'session_ending_soon':
-            $tempsActuel = time();
-            $msg = '';
-            $statut = 0;
-            if ($tempsActuel >=  ($_SESSION['expire'] - 60 )){
-                $msg = 'Etes-vous toujours là ?';
-                $statut = 1;
-            }
-            echo json_encode(array("msg" => $msg, "statut" => $statut));
+            $_SESSION['carID'] = $_POST['carID'];
+            echo json_encode(1);
             break;
     }
 }
-

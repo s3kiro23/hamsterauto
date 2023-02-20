@@ -81,10 +81,10 @@ RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
-COPY config/php.ini "$PHP_INI_DIR/php.ini"
+COPY tools/php.ini "$PHP_INI_DIR/php.ini"
 
 #Apache config
-COPY config/hamsterauto.conf /etc/apache2/sites-available/hamsterauto.conf
+COPY tools/hamsterauto.conf /etc/apache2/sites-available/hamsterauto.conf
 RUN a2ensite hamsterauto.conf
 RUN a2enmod rewrite
 RUN mkdir /var/www/hamsterauto

@@ -12,14 +12,18 @@ RewriteRule ^dashboards/technicien?$ /templates/back-office.html [L,NC]
 
 RewriteRule ^change-password?$ /templates/change-password.html [L,NC]
 
-RewriteRule ^dashboards/checklist?$ /templates/checklist.html [L,NC]
+RewriteRule ^checklist?$ /templates/checklist.html [L,NC]
 
 RewriteRule ^dashboards/client?$ /templates/client-dashboard.html [L,NC]
 
-RewriteRule ^dashboards/reservation?$ /templates/client-form.html [L,NC]
+RewriteRule ^administration?$ /templates/admin.php [L,NC]
+
+RewriteRule ^reservation?$ /templates/client-form.html [L,NC]
 
 RewriteRule ^contact?$ /templates/contact-us.html [L,NC]
 
 RewriteRule ^profil?$ /templates/profil.html [L,NC]
 
 RewriteRule ^inscription?$ /templates/sign-in.html [L,NC]
+
+RewriteRule ^erreur-403?$ /templates/403.html [L,NC]

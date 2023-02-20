@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/html" dir="ltr" class="chrome windows fontawesome-i2svg-active fontawesome-i2svg-complete">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- ===============================================-->
+    <!--    Favicons-->
+    <!-- ===============================================-->
+    {% block favicon %}
+        {% include 'elements/favicons.html.twig' %}
+    {% endblock %}
+
+    <!-- ===============================================-->
+    <!--    Stylesheets-->
+    <!-- ===============================================-->
+    {% block stylesheets %}
+        {% include 'elements/stylesheets.html.twig' %}
+    {% endblock %}
+
+    <!-- ===============================================-->
+    <!--    Page Title-->
+    <!-- ===============================================-->
+   <title>Hamster Auto | {% block title %}{% endblock %}</title>
+</head>
+
+<body>
+
+<!-- ===============================================-->
+<!--    START Structure-->
+<!-- ===============================================-->
+{% include 'templates/navbars_structure_admin.html.twig' %}
+
+<!-- ===============================================-->
+<!--    START Main Content-->
+<!-- ===============================================-->
+{% block content %}{% endblock %}
+
+<footer-component-main></footer-component-main>
+
+</div>
+</div>
+</div>
+</main>
+
+<!-- ===============================================-->
+<!--    END Structure-->
+<!-- ===============================================-->
+
+
+<!-- DEBUT modals admin -->
+<modal-cvisite></modal-cvisite>
+<modal-rdv-info></modal-rdv-info>
+<modal-profil-admin></modal-profil-admin>
+<modal-user-admin></modal-user-admin>
+<!-- FIN modals admin -->
+
+<btn-top-component></btn-top-component>
+
+<!-- ===============================================-->
+<!--    START JavaScripts-->
+<!-- ===============================================-->
+{% block javascripts %}
+    {% include 'elements/scripts.html.twig' %}
+{% endblock %}
+
+
+</body>
+
+</html>

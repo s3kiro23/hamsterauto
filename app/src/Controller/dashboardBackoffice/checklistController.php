@@ -1,110 +1,112 @@
 <?php
+
+use HTML\LoadTechHTML;
+
 session_start();
-$currentTime = time();
-if (!isset($_SESSION['id']) || $currentTime > $_SESSION['expire']) {
-    $status = 2;
-    $msg = 'Nécessite une authentification, retour à la page de connexion';
-    session_unset();
-    session_destroy();
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-} else {
 
-    require_once '../../Controller/shared.php';
-    require_once '../../Controller/authorization.php';
+require_once '../../Controller/authorization.php';
 
-    spl_autoload_register(function ($classe) {
-        require '../../Entity/' . $classe . '.php';
-    });
+spl_autoload_register(function ($classe) {
+    require '../../Entity/' . $classe . '.php';
+});
 
-    $db = new Database();
-    $GLOBALS['Database'] = $db->connexion();
+require "../../Entity/HTML/LoadTechHTML.php";
 
-    $whoIs = false;
-    if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-        $whoIs = new User(decrypt($_SESSION['id'], false));
-    }
-    if (!getAuthorizationUser($whoIs)) {
-        $status = 2;
-        session_destroy();
-        $msg = "Vous n'êtes pas autorisé à accéder à cette page ! <br> Redirection vers la page de login...";
-        echo json_encode(array('msg' => $msg, 'status' => $status));
-    } else {
+
+$db = new Database();
+$GLOBALS['Database'] = $db->connexion();
+
+
+if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
+    $check = Security::check_security();
+    if ($check === 'technicien') {
 
         switch ($_POST['request']) {
 
-            case 'validationCT' :
+            case 'autorisationCT':
+                $msg = "";
+                $status = 1;
+                echo json_encode(array('msg' => $msg, 'status' => $status));
+                break;
 
-                $idControle = $_POST['id_controle'];
+            case 'display_check_list':
+                error_log(1);
+                $html = LoadTechHTML::checklist_content();
+                echo json_encode($html);
+                break;
+
+            case 'validationCT' :
+                error_log(1);
+                $id_intervention = $_POST['id_intervention'];
                 $msg = 'Intervention en cours de validation...';
                 $report = json_decode($_POST['tab_checkbox'], true);
-
-                $CT = new ControleTech($idControle);
-                $carUser = new Vehicule($CT->getId_vehicule());
+                $CT = new Intervention($id_intervention);
+                $car_user = new Vehicle($CT->getId_vehicle());
                 $user = new User($CT->getId_user());
+                $user_hash = $user->getHash();
                 $mail = new Mailing();
-                $PvPDF = new PDF();
+                $pv_pdf = new PDF();
+                $notif = new Notification();
+                $notify = $notif->check_if_notify($CT->getId_user());
 
                 if (sizeof($report) == 0) {
+                    $next_control = $CT->getTime_slot() + 63097119;
                     $CT->setState(2);
-                    $PDFTemplate = $PvPDF->pv($carUser, $CT, $user);
-                    $CT->setPv(encrypt($PvPDF->generatePDF($PDFTemplate), $user->getHash()));
-                    $mailTemplate = $mail->getCT_OK($user, $CT, $carUser);
+                    $car_user->setNext_control($next_control);
+                    $car_user->setNotified(0);
+                    $car_user->update();
+                    $pdf_template = $pv_pdf->pv($car_user, $CT, $user);
+                    $CT->setPv(Security::encrypt($pv_pdf->generate_pdf($pdf_template, $user_hash), $user_hash));
+                    $mail_template = $mail->getCT_OK($user, $CT, $car_user);
                 } else {
                     $CT->setState(3);
                     $CT->setReport(json_encode($report));
-                    $PDFTemplate = $PvPDF->pv($carUser, $CT, $user);
-                    $CT->setPv(encrypt($PvPDF->generatePDF($PDFTemplate), $user->getHash()));
-                    $mailTemplate = $mail->getCT_KO($user, $CT, $carUser);
+                    $pdf_template = $pv_pdf->pv($car_user, $CT, $user);
+                    $CT->setPv(Security::encrypt($pv_pdf->generate_pdf($pdf_template, $user_hash), $user_hash));
+                    $mail_template = $mail->getCT_KO($user, $CT, $car_user);
                 }
                 $CT->update();
 
-                //Add Job mail in Queue table
-                $queued = new Queued(0);
-                $queued->setType("mail");
-                $queued->setTemplate(json_encode($mailTemplate));
-                $queued->create();
+                //Add Job mail in Queue tables
+                if ($notify['pv']) {
+                    $mail->setFinished_Job($user, $mail_template);
+                }
 
                 //Add Job Sms in Queue table
-                $sms = new SMS();
-                $smsTemplate = $sms->getCT_Finish($user, $carUser);
-                $queued = new Queued(0);
-                $queued->setType("sms");
-                $queued->setTemplate(json_encode($smsTemplate));
-                $queued->create();
+                if ($notify['finished']) {
+                    $sms = new SMS(0);
+                    $dataSMS = ["car" => $car_user, "user" => $user];
+                    $sms->setSMS_JobFinish($dataSMS);
+                }
+
+                //Add traces in BDD
+                $traces = new Trace(0);
+                $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'validate', 'intervention');
 
                 echo json_encode(array("msg" => $msg));
-
                 break;
 
             case 'load_check_list':
                 $html = '';
                 $id_inter = $_POST['intervention'];
-                $data = ControleTech::infoChecklist($id_inter);
+                $data = Intervention::info_checklist($id_inter);
                 $tech = new User($data['num_tech']);
+                $html = LoadTechHTML::checklist_info($data, $tech);
+                $html_inter = 'Intervention n° ' . $id_inter;
 
-                $html = '
-                    <div class="col-12">
-                        <li class="fw-bold">Technicien: 
-                            <span id="numeroTech" class="fw-normal"> ' . $tech->getPrenom_user() . '</span>
-                        </li>
-                        <li class="fw-bold">Marque: 
-                            <span id="marqueInter" class="fw-normal"> ' . $data['nom_marque'] . '</span>
-                        </li>
-                        <li class="fw-bold">Modèle: 
-                            <span id="modeleInter" class="fw-normal"> ' . $data['nom_modele'] . '</span>
-                        </li>
-                        <li class="fw-bold">Immat: 
-                            <span id="immatInter" class="fw-normal"> ' . $data['immat_vehicule'] . '</span>
-                        </li>
-                    </div>
-                ';
-
-                $html_inter = '<div>Intervention n° <span id="numeroInter">' . $id_inter . '</span></div>';
-
-                echo json_encode(array("html" => $html, "html_inter" => $html_inter));
+                echo json_encode(array("html" => $html, "html_inter" => $html_inter, "id_inter" => $id_inter));
 
                 break;
-
         }
+    } else {
+        $msg = "Accès interdit";
+        $status = 0;
+        session_destroy();
+        echo json_encode(array('msg' => $msg, 'status' => $status));
     }
-}                
+} else {
+    $msg = "Vous n'êtes pas authentifié";
+    $status = 0;
+    echo json_encode(array('msg' => $msg, 'status' => $status));
+}
+        

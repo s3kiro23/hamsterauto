@@ -1,0 +1,234 @@
+<main class="main" id="top">
+    <div class="container-fluid" data-layout="container">
+        <!-- ===============================================-->
+        <!--    Start SidenavBar-->
+        <!-- ===============================================-->
+        <nav id='sidebar' class="navbar navbar-light navbar-vertical navbar-expand-xl">
+            <div class="d-flex align-items-center">
+                <div class="toggle-icon-wrapper">
+                    <button class="btn navbar-toggler-humburger-icon navbar-vertical-toggle" data-bs-toggle="tooltip"
+                            data-bs-placement="left" title="Toggle Navigation">
+                        <span class="navbar-toggle-icon">
+                            <span class="toggle-line"></span>
+                        </span>
+                    </button>
+                </div>
+                <a class="navbar-brand" href="../templates/admin.php">
+                    <div class="d-flex align-items-center">
+                        <img class="logo me-2 py-2" src='../public/assets/img/hamsterauto-unscreen.gif' alt='logo_hamsterauto'
+                             width="100"/>
+                    </div>
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbarVerticalCollapse">
+                <div class="navbar-vertical-content scrollbar mt-md-5">
+                    <ul class="navbar-nav flex-column mb-3" id="navbarVerticalNav">
+                        <li class="nav-item">
+                            <!-- parent pages-->
+                            <a class="nav-link cursor-pointer" role="button" onclick="adminIndex()">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-home"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Accueil</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- label-->
+                            <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                <div class="col-auto navbar-vertical-label">Gestion
+                                </div>
+                                <div class="col ps-0">
+                                    <hr class="mb-0 navbar-vertical-divider"/>
+                                </div>
+                            </div>
+                            <!-- parent pages-->
+                            <a id='intervention' class="nav-link" role="button" onclick="displayRdvTab()">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-share-alt"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Interventions</span>
+                                </div>
+                            </a>
+                            <!-- parent pages-->
+                            <a class="nav-link" role="button" onclick="displayUsersTab()">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-users"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Utilisateurs</span>
+                                </div>
+                            </a>
+                             <!-- parent pages-->
+                            <a class="nav-link" role="button" onclick="displayBanTab()">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fa-solid fa-user-slash"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Comptes bannis</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- label-->
+                            <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                <div class="col-auto navbar-vertical-label">Consultation
+                                </div>
+                                <div class="col ps-0">
+                                    <hr class="mb-0 navbar-vertical-divider"/>
+                                </div>
+                            </div>
+                            <!-- parent pages-->
+                            <a class="nav-link" role="button">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-box-archive"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1" role="button" onclick="displayAdminArchives()">Archives</span>
+                                </div>
+                            </a>
+                            <!-- parent pages-->
+                            <a class="nav-link" role="button">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-poll"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1" role="button" onclick="displayLogs()">Surveillance</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <!-- label-->
+                            <div class="row navbar-vertical-label-wrapper mt-3 mb-2">
+                                <div class="col-auto navbar-vertical-label">Paramétrage
+                                </div>
+                                <div class="col ps-0">
+                                    <hr class="mb-0 navbar-vertical-divider"/>
+                                </div>
+                            </div>
+                            <!-- parent pages-->
+                            <a class="nav-link" href="#">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-school-lock"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1" role="button" onclick="displaySettings()">Disponibilités</span>
+                                </div>
+                            </a>
+                            <!-- parent pages-->
+                            {# <a class="nav-link" href="#">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-bell"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Notifications</span>
+                                </div>
+                            </a> #}
+                            <!-- parent pages-->
+                            {# <a class="nav-link" href="#">
+                                <div class="d-flex align-items-center">
+                                    <span class="nav-link-icon">
+                                        <span class="fas fa-map-location-dot"></span>
+                                    </span>
+                                    <span class="nav-link-text ps-1">Localisation</span>
+                                </div>
+                            </a> #}
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="content">
+            <!-- ===============================================-->
+            <!--    Start Navbar-->
+            <!-- ===============================================-->
+            <nav id='topBar' class="navbar navbar-light navbar-glass navbar-top navbar-expand">
+                <button class="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button"
+                        data-bs-toggle="collapse" data-bs-target="#navbarVerticalCollapse"
+                        aria-controls="navbarVerticalCollapse" aria-expanded="false" aria-label="Toggle Navigation">
+                    <span class="navbar-toggle-icon">
+                        <span class="toggle-line"></span>
+                    </span>
+                </button>
+                <a class="navbar-brand me-1 me-sm-3" href="../index.html.twig">
+                    <div class="d-flex align-items-center">
+                        <img class="logo me-md-2 ms-3" src='../public/assets/img/hamsterauto-unscreen.gif' alt='logo_hamsterauto' width="80"/>
+                    </div>
+                </a>
+                <ul class="navbar-nav align-items-center d-none d-lg-block">
+                    <li class="nav-item">
+                        <div class="search-box" data-list='{"valueNames":["title"]}'>
+                            <form class="position-relative" data-bs-toggle="search" data-bs-display="static">
+                                <input class="form-control search-input fuzzy-search" type="search"
+                                       placeholder="Recherche..." aria-label="Search"/>
+                                <span class="fas fa-search search-box-icon"></span>
+                            </form>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav navbar-nav-icons ms-auto flex-row align-items-center gap-3 gap-md-5">
+                    <li class="nav-item">
+                        <div class="theme-control-toggle fa-icon-wait px-2">
+                            <input class="form-check-input ms-0 theme-control-toggle-input switchLogoAdmin" id="themeControlToggle"
+                                   type="checkbox" data-theme-control="theme" value="dark"/>
+                            <label class="mb-0 theme-control-toggle-label theme-control-toggle-light"
+                                   for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                   title="Switch to light theme">
+                                <span class="fas fa-sun fs-0"></span>
+                            </label>
+                            <label class="mb-0 theme-control-toggle-label theme-control-toggle-dark"
+                                   for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
+                                   title="Switch to dark theme">
+                                <span class="fas fa-moon fs-0"></span>
+                            </label>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait"
+                           id="navbarDropdownNotification" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
+                           aria-expanded="false" data-hide-on-body-scroll="data-hide-on-body-scroll">
+                            <span class="fas fa-bell" data-fa-transform="shrink-6"
+                                    style="font-size: 33px;"></span>
+                        </a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="text-decoration-none" role="button" data-bs-toggle="dropdown">
+                            <span class="first-name me-md-1"></span>
+                            <span class="last-name me-sm-2"></span>
+                            <img class="img-profile rounded-circle" width="55" height="55"
+                                 src="https://picsum.photos/200" alt="70x70">
+                        </a>
+                        <ul class='dropdown-menu dropdown-menu-end' id="profil_dropdown">
+{#                            <li>#}
+{#                                <button class='dropdown-item' id='profil' type='button'>Mon profil</button>#}
+{#                            </li>#}
+{#                            <li>#}
+{#                                <button class='dropdown-item' id='pwd-modify' type='button'>Modifier mot de passe#}
+{#                                </button>#}
+{#                            </li>#}
+                            <li>
+                                <button class='dropdown-item' id='settings' type='button'>Paramètres</button>
+                            </li>
+                            <div class='dropdown-divider'></div>
+                            <li>
+                                <button class='dropdown-item' id='sessionEnding' type='button'>Se déconnecter</button>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <!-- ===============================================-->
+            <!--    Start of Main Content-->
+            <!-- ===============================================-->
+            <div class="row">
+                <div class="col-12">
+                    <nav class="my-4" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item active"><a href="../templates/admin.php">Accueil</a></li>
+                            <li class="breadcrumb-item" aria-current="page"></li>
+                        </ol>
+                    </nav>
+                </div>
+            </div>

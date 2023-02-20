@@ -7,54 +7,77 @@ $GLOBALS['Database'] = $db->connexion();
 
 class Setting
 {
-    private $id_settings;
+    private $id_setting;
     private $slot_interval;
     private $start_time_am;
     private $end_time_am;
     private $start_time_pm;
     private $end_time_pm;
-    private $nb_lifts;
+    private $nb_lift;
+    private $session_user;
+    private $session_internal;
     private $coordinates;
 
     public function __construct($id)
     {
-        $this->id_settings = $id;
-        if ($this->id_settings != 0) {
-            $this->checkData($id);
+        $this->id_setting = $id;
+        if ($this->id_setting != 0) {
+            $this->check_data($id);
         }
     }
 
-    public function checkData($id)
+    public function check_data($id)
     {
-        $requete = "SELECT * FROM `settings` WHERE id_settings = '" .filter($id) . "'";
+        $requete = "SELECT * FROM `setting` WHERE id_setting = '" .filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_array($result)) {
-            $this->id_settings = $data['id_settings'];
+            $this->id_setting = $data['id_setting'];
             $this->slot_interval = $data['slot_interval'];
             $this->start_time_am = $data['start_time_am'];
             $this->end_time_am = $data['end_time_am'];
             $this->start_time_pm = $data['start_time_pm'];
             $this->end_time_pm = $data['end_time_pm'];
-            $this->nb_lifts = $data['nb_lifts'];
+            $this->nb_lift = $data['nb_lift'];
+            $this->session_user = $data['session_duration_user'];
+            $this->session_internal = $data['session_duration_internal'];
             $this->coordinates = $data['coordinates'];
         }
     }
 
-    static public function getSettings()
+    static public function get_settings()
     {
-
-        $requete = "SELECT * FROM `settings`";
+        $requete = "SELECT * FROM `setting`";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
-
         return mysqli_fetch_assoc($result);
     }
 
-    public function getId_settings(){
-        return $this->id_settings;
+
+    static public function change_time_settings($slot,$time){
+        $requete = "UPDATE `setting` SET `$slot`='" .filter($time) . "' ";
+        mysqli_query($GLOBALS['Database'], $requete) or die;
     }
 
-    public function setId_settings($id_settings){
-        $this->id_settings = $id_settings;
+    static public function change_slot_interval($time){
+        $requete = "UPDATE `setting` SET `slot_interval` ='" .filter($time) . "' ";
+        mysqli_query($GLOBALS['Database'], $requete) or die;
+    }
+
+    static public function change_session_settings($context,$time){
+        $requete = "UPDATE `setting` SET `session_duration_$context`='" .filter($time) . "' ";
+        mysqli_query($GLOBALS['Database'], $requete) or die;
+    }
+    
+    static public function change_lifts($lifts){
+        $requete = "UPDATE `setting` SET `nb_lift`='" .filter($lifts) . "' ";
+        mysqli_query($GLOBALS['Database'], $requete) or die;
+    }
+
+    public function getId_setting(){
+        return $this->id_setting;
+    }
+
+    public function setId_setting($id_setting){
+        $this->id_setting = $id_setting;
     }
 
     public function getSlot_interval(){
@@ -97,13 +120,30 @@ class Setting
         $this->end_time_pm = $end_time_pm;
     }
 
-    public function getNb_lifts(){
-        return $this->nb_lifts;
+    public function getNb_lift(){
+        return $this->nb_lift;
     }
 
-    public function setNb_lifts($nb_lifts){
-        $this->nb_lifts = $nb_lifts;
+    public function setNb_lift($nb_lift){
+        $this->nb_lift = $nb_lift;
     }
+
+    public function getSession_User(){
+        return $this->session_user;
+    }
+
+    public function setSession_User($session_user){
+        $this->session_user = $session_user;
+    }
+
+    public function getSession_Internal(){
+        return $this->session_internal;
+    }
+
+    public function setSession_Internal($session_internal){
+        $this->session_internal = $session_internal;
+    }
+
 
     public function getCoordinates(){
         return $this->coordinates;

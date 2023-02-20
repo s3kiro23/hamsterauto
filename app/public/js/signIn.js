@@ -4,6 +4,8 @@ $(function () {
     $('#to-mentions').on("click", modalMentions)
     $('#to_logIn').on('click', to_logIn);
     $(".form-control").on("change", checkField);
+    $(".form-control").on("focusin", placeholderAnimation);
+    $(".form-control").on("focusout", placeholderAnimation);
     $('#inputTel').intlTelInput({
         preferredCountries: ["fr", "gb"],
         utilsScript: "/vendor/jackocnr/intl-tel-input/build/js/utils.js",
@@ -16,39 +18,28 @@ $(function () {
             });
         },
     });
-    /*$('#inputTel').on("countrychange", fetchDialCountry)*/
 });
-/*let fetchDialCountry = function () {
-    let input = $("#inputTel");
-    let countryData = input.intlTelInput("getSelectedCountryData");
-    $('#inputTel').val("+" + countryData.dialCode)
-}*/
+
+
 
 let signIn = function () {
-    let $civilite = "";
-    let $selectedCivilite = $('input[name=optionsCivilite]:checked').val();
-    if ($selectedCivilite) {
-        $civilite = $selectedCivilite;
-    }
+    let tabInput = {};
+    tabInput[$('input[name=civilite]:checked').attr('name')] = $('input[name=civilite]:checked').val();
+    tabInput[$('#captcha').attr('id')] = $('#captcha').html();
+    $('.field').each(
+        function () {
+            tabInput[$(this).attr('id')] = $(this).val();
+        });
     $.ajax({
-        url: '/src/Controller/index/signInController.php',
+        url: '/src/Controller/Index/SignInController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
             request: 'signIn',
-            civilite: $civilite,
-            nom: $('#inputNom').val(),
-            prenom: $('#inputPrenom').val(),
-            tel: $('#inputTel').val(),
-            email: $('#inputEmail').val(),
-            passwd: $('#inputPassword').val(),
-            passwd2: $('#inputPassword2').val(),
-            checkCap: $('#captcha_verif').val(),
-            captcha: $('#captcha').html(),
+            tabInput: JSON.stringify(tabInput)
         },
         success: function (response) {
             if (response['status'] === 0) {
-                console.log('error');
                 Swal.fire({
                     title: 'Erreur',
                     text: response['msg'],
@@ -59,6 +50,7 @@ let signIn = function () {
                     cancelButtonText: 'Retry!'
                 });
             } else {
+                $('#sign-in').prop('disabled', true);
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -66,25 +58,23 @@ let signIn = function () {
                     showConfirmButton: false,
                     timer: 1500
                 });
-                console.log('Success');
                 setTimeout(() => {
                     window.location.replace("/");
                 }, 1600);
-
             }
-
         },
 
         error: function () {
-            console.log('errorSign');
         }
 
     });
 }
 
+
+
 function captcha() {
     $.ajax({
-        url: '../src/Controller/index/signInController.php',
+        url: '/src/Controller/Index/SignInController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
@@ -94,40 +84,24 @@ function captcha() {
             $("#captcha").html(response['get_captcha']);
         },
         error: function () {
-            console.log(3);
         }
     });
 }
 
 let to_logIn = function () {
-            let timerInterval
-            Swal.fire({
-                title: "Redirection vers la page de connexion",
-                imageUrl: '../public/assets/img/swalicons/spinner.gif',
-                imageWidth: 220,
-                imageHeight: 220,
-                allowEscapeKey: false,
-                allowOutsideClick: false,
-                showCancelButton: false,
-                showConfirmButton: false,
-                timer: 2000,
-                didOpen: () => {
-                    Swal.showLoading()
-                    const b = Swal.getHtmlContainer().querySelector('b')
-                    timerInterval = setInterval(() => {
-                        b.textContent = Swal.getTimerLeft()
-                    }, 100)
-                },
-                willClose: () => {
-                    clearInterval(timerInterval)
-                }
-            }).then((result) => {
-                /* Read more about handling dismissals below */
-                if (result.dismiss === Swal.DismissReason.timer) {
-                    console.log('I was closed by the timer')
-                }
-            })
-            setTimeout(() => {
-                window.location.replace('/')
-            }, 2000);
+  
+    Swal.fire({
+        title: "Redirection vers la page de connexion",
+        imageUrl: '../public/assets/img/swalicons/spinner.gif',
+        imageWidth: 220,
+        imageHeight: 220,
+        allowEscapeKey: false,
+        allowOutsideClick: false,
+        showCancelButton: false,
+        showConfirmButton: false,
+        timer: 2000,
+    })
+    setTimeout(() => {
+        window.location.replace('/')
+    }, 2000);
 };

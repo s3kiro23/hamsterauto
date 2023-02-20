@@ -48,48 +48,48 @@
                                     <h3 class="text-center text-primary">Contactez-nous</h3>
                                     <h6 class="text-center">Demande d'information complémentaire</h6>
                                     <div class="sending mt-4 px-sm-5">
-                                        <form class="d-flex flex-column justify-content-center gap-2"
+                                        <form class="d-flex flex-column justify-content-center gap-3"
                                               action="javascript:contactUS();"
                                               method="POST">
-                                            <div>
-                                                <label for="contactNom" class="sr-only"></label>
+                                            <div class="form-group position-relative">
                                                 <input
-                                                        id="contactNom"
-                                                        name="nom"
-                                                        type="text"
-                                                        class="appearance-none form-control rounded-top px-3 py-2 border border-gray-300 text-secondary"
-                                                        placeholder="Nom"
+                                                    id="inputNom"
+                                                    name="nom"
+                                                    type="text"
+                                                    class="form-control"
+                                                    placeholder=" "
                                                 />
-                                                <div class="invalid-feedback mb-2"></div>
+                                                <label for="inputNom" class="form-label-group m-0">Nom</label>
+                                                <div class="text-start invalid-feedback"></div>
                                             </div>
-                                            <div>
-                                                <label for="contactPrenom" class="sr-only"></label>
+                                            <div class="form-group position-relative">
                                                 <input
-                                                        id="contactPrenom"
-                                                        name="prenom"
-                                                        type="text"
-                                                        class="field form-control appearance-none px-3 py-2 border border-gray-300 text-secondary"
-                                                        placeholder="Prénom"
+                                                    id="inputPrenom"
+                                                    name="inputPrenom"
+                                                    type="text"
+                                                    class="field form-control"
+                                                    placeholder=" "
                                                 />
-                                                <div class="invalid-feedback mb-2"></div>
+                                                <label for="inputPrenom" class="form-label-group m-0">Prénom</label>
+                                                <div class="text-start invalid-feedback"></div>
                                             </div>
-                                            <div>
-                                                <label for="contactEmail" class="sr-only"></label>
+                                            <div class="form-group position-relative">
                                                 <input
-                                                        id="contactEmail"
-                                                        name="contactEmail"
-                                                        type="email"
-                                                        class="field appearance-none form-control rounded-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                        placeholder="Email"
+                                                    id="inputEmail"
+                                                    name="contactEmail"
+                                                    type="email"
+                                                    class="field form-control"
+                                                    placeholder=" "
                                                 />
-                                                <div class="invalid-feedback mb-2"></div>
+                                                <label for="inputEmail" class="form-label-group m-0">Email</label>
+                                                <div class="text-start invalid-feedback"></div>
                                             </div>
-                                            <div>
-                                                <label for="contactText" class="sr-only"></label>
-                                                <textarea id="contactText" name="contactText"
-                                                          class="field appearance-none form-control rounded-bottom px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                          placeholder="Votre message ici !"></textarea>
-                                                <div class="invalid-feedback mb-2"></div>
+                                            <div class="form-group position-relative">
+                                                <textarea id="inputTexte" name="contactText"
+                                                    class="field form-control"
+                                                    placeholder=" "></textarea>
+                                                <label for="inputTexte" class="form-label-group contact-text">Message</label>
+                                                <div class="text-start invalid-feedback"></div>
                                             </div>
                                             <div class="rounded-md py-3">
                                                 <div class="px-3 py-2 rounded-top bg-primary text-white">
@@ -97,30 +97,30 @@
                                                     <span id="captcha"></span>
                                                 </div>
                                                 <div>
-                                                    <label for="captcha_verif" class="sr-only"></label>
                                                     <input
-                                                            id="captcha_verif"
-                                                            name="captcha_verif"
-                                                            type="text"
-                                                            class="field form-control appearance-none rounded-bottom relative px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                            placeholder="Entrez le code captcha."
+                                                        id="inputCaptcha"
+                                                        name="inputCaptcha"
+                                                        type="number"
+                                                        class="field form-control"
+                                                        placeholder="Entrez le code captcha."
                                                     />
-                                                    <div class="invalid-feedback mb-2"></div>
+                                                    <label for="inputCaptcha" class="sr-only"></label>
+                                                    <div class="text-start invalid-feedback"></div>
                                                 </div>
                                             </div>
                                             <div class="form-check">
                                                 <input class="form-check-input" type="checkbox"
-                                                       id="card-register-checkbox"/>
+                                                       id="card-register-checkbox" required/>
                                                 <label class="form-label text-start" for="card-register-checkbox">
-                                                    Vous devez accepter nos <a id="to-cgu" class="text-primary" type="button">CGU</a> pour
+                                                    Vous devez accepter nos <a id="to-cgu" class="cursor-pointer text-primary">CGU</a> pour
                                                     pouvoir nous contacter.
                                                 </label>
                                             </div>
                                             <div>
                                                 <button
-                                                        type="submit"
-                                                        id='sign_in'
-                                                        class="group relative w-100 d-flex justify-content-center py-2 px-4 rounded text-white btn btn-primary"
+                                                    type="submit"
+                                                    id='sign_in'
+                                                    class="group relative w-100 d-flex justify-content-center py-2 px-4 rounded text-white btn btn-primary"
                                                 >
                                                     Soumettre
                                                 </button>
@@ -131,14 +131,14 @@
                                                    type="button"
                                                    class="text-decoration-none font-medium"
                                                 >
-                                                    <span class="to_logIn">retour à la page connexion.</span>
+                                                    <span class="to_logIn">revenir à la page précédente.</span>
                                                 </a>
                                             </div>
                                         </form>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-7 d-flex flex-center">
+                            <div class="col-md-7 d-flex flex-center pe-md-4">
                                 <div class="col-12 col-md col-lg w-100" id="map"></div>
                             </div>
                         </div>
@@ -158,17 +158,16 @@
 <chat-button></chat-button>
 <!--<footer-component></footer-component>-->
 
-<script src="../public/js/components/initMap.js"></script>
+<script src="../public/js/contactUs.js"></script>
 <script async
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9qfN0hRrvQOZQxCDRNUD1dDgAw9NhhCg&callback=initMap"
         defer
 ></script>
-<script src="../public/js/sharedFunctions/fieldControl.js"></script>
+<script src="../public/js/shared/fieldControl.js"></script>
 <script src="../public/js/components/chatButton.js"></script>
 <script src="../public/js/components/sweetAlertToast.js"></script>
-<script src="../public/js/components/footer.js"></script>
-<script src="../public/js/components/modalMentions.js"></script>
-<script src="../public/js/components/modalCGU.js"></script>
+<script src="../public/js/components/modals/modalMentions.js"></script>
+<script src="../public/js/components/modals/modalCGU.js"></script>
 <script src="../public/js/theme/sidenav-control.js"></script>
 
 </body>

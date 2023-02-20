@@ -1,8 +1,6 @@
 $(function () {
-    generateNavbar();
-    sweetToast();
+    load();
     $('[data-toggle="tooltip"]').tooltip();
-  
     $('.switchLogo').on("click", switchLogo);
 });
 //
@@ -15,9 +13,13 @@ function switchLogo(){
         $('#logo').attr('src', "../public/assets/img/hamsterauto-unscreen.gif")
     }
 }
+function load() {
+    sweetToast();
+    generateNavbar();
+    $('[data-toggle="tooltip"]').tooltip();
+}
 
-
-function priseEnCharge(data) {
+function priseEnCharge(id) {
     Swal.fire({
         className: "swalWarning",
         title: "Voulez-vous prendre en charge cette intervention?",
@@ -32,18 +34,17 @@ function priseEnCharge(data) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/dashboardBackoffice/backofficeController.php",
+                url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
                     request: "prise_en_charge",
-                    idControle: data,
+                    idControle: id,
                 },
                 success: function (response) {
-                   basculerIntervention(data, response['num_tech']);
-                    $("#noAttente").html("");
-                    loadIntervEnCours(1);
-                    vehicule_attente(1);
+                    basculerIntervention(id, response['num_tech']);
+                    loadAwaiting(1);
+                    loadInProgress(1);
                 },
                 error: function () {
                     console.log("PHP");
@@ -60,7 +61,7 @@ function priseEnCharge(data) {
 function basculerIntervention(id, id_tech) {
    
     $.ajax({
-        url: "../src/Controller/dashboardBackoffice/backofficeController.php",
+        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -78,10 +79,8 @@ function basculerIntervention(id, id_tech) {
             } else {
                 alert("ErreurDDDDDD");
             }
-            $("#modalTech").modal("hide");
-            $("#noInterv").html("");
-            loadIntervEnCours(1);
-            vehicule_attente(1);
+            loadAwaiting(1);
+            loadInProgress(1);
         },
         error: function () {
             console.log("PHP");
@@ -107,7 +106,7 @@ function switchToHold(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/dashboardBackoffice/backofficeController.php",
+                url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -119,9 +118,8 @@ function switchToHold(id) {
                         animation: true,
                         title: response["msg"]
                     });
-                    $("#noAttente").html("");
-                    loadIntervEnCours(1);
-                    vehicule_attente(1);
+                    loadAwaiting(1);
+                    loadInProgress(1);
                 },
                 error: function () {
                     console.log("PHP");
@@ -135,7 +133,7 @@ function switchToHold(id) {
 //
 //
 
-function deleteRdv(id) {
+function deleteRdv(rdvId) {
     Swal.fire({
         title: "Confirmez vous la suppression de cette intervention?",
         text: "",
@@ -149,32 +147,20 @@ function deleteRdv(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/rdvController.php",
+                url: "../src/Controller/RdvController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
                     request: "deleteRdv",
-                    idRdv: id,
+                    idRdv: rdvId,
                 },
                 success: function (response) {
-                    /*Swal.fire({
-                        title: 'Annulation en cours...',
-                        imageUrl: '../public/assets/img/swalicons/spinner.gif',
-                        allowOutsideClick: false,
-                        allowEscapeKey: false,
-                        imageWidth: 220,
-                        imageHeight: 220,
-                        showCancelButton: false,
-                        showConfirmButton: false,
-                        timer: 2000
-                    }).then(() => {*/
                         toastMixin.fire({
                             animation: true,
                             title: 'Cette intervention a été annulée',
                         });
-                  /*  });*/
-                    loadTermines(1);
-                    vehicule_attente(1);
+                    loadAwaiting(1);
+                    loadArchives(1);
                     generateDateBO();
                 },
                 error: function () {
@@ -187,7 +173,7 @@ function deleteRdv(id) {
 
 let showInfo = function (id) {
     $.ajax({
-        url: "../src/Controller/carController.php",
+        url: "../src/Controller/CarController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -199,9 +185,9 @@ let showInfo = function (id) {
             $("#modal-rdvID").html(response["rdvID"]);
             $("#modal-timeslotID").html(response["timeslotID"]);
             $("#modal-booked_date").html(response["booked_date"]);
-            $("#modal-nom_user").html(response["nom_user"]);
-            $("#modal-prenom_user").html(response["prenom_user"]);
-            $("#modal-tel_user").html(response["tel_user"]);
+            $("#modal-nom_user").html(response["lastname_user"]);
+            $("#modal-prenom_user").html(response["firstname_user"]);
+            $("#modal-tel_user").html(response["phone_user"]);
             $("#modal-mail_user").html(response["mail_user"]);
             if (!response["CG"]) {
                 $("#modal-CG").html("Aucune carte grise n'est associée à ce véhicule.");
@@ -215,25 +201,7 @@ let showInfo = function (id) {
     });
 };
 
-function showContreVisite(id) {
-    $.ajax({
-        url: "../src/Controller/rdvController.php",
-        dataType: "JSON",
-        type: "POST",
-        data: {
-            request: "show_contre_visite",
-            rdvID: id,
-        },
-        success: function (response) {
-            $("#modalContreVisite").modal("show");
-            $("#modal-contreID").html(response["rdvID"]);
-            $("#rapportInter").html(response["rapport"]);
-        },
-        error: function () {
-            console.log("errorShow");
-        },
-    });
-}
+
 
 //
 //

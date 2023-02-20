@@ -34,9 +34,8 @@ function checkType() {
 /*Vérification du type de fichier upload FIN*/
 
 function load() {
-    // console.log(1);
     $.ajax({
-        url: "../src/Controller/accountController.php",
+        url: "../src/Controller/AccountController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -44,11 +43,12 @@ function load() {
         },
         success: function (response) {
             let badgeA2F = $('.badge-a2f');
-            $(".profile_login").html(response["login"]);
-            $(".profile_tel").html(response["tel"]);
-            $(".profile_addr").html(response["adresse"]);
-            $(".profile_nom").html(response["nom"]);
-            $(".profile_prenom").html(response["prenom"]);
+            generateNavbar();
+            $("#profile_login").html(response["login"]);
+            $("#profile_tel").html(response["phone"]);
+            $("#profile_addr").html(response["adress"]);
+            $("#profile_nom").html(response["lastname"]);
+            $("#profile_prenom").html(response["firstname"]);
             $('.img_profile').attr("src", response["image"]);
             if (response['a2f'] == 1) {
                 $("#btnA2f").prop("checked", true);
@@ -61,6 +61,18 @@ function load() {
                 badgeA2F.removeClass('bg-success text-success');
                 badgeA2F.html('Inactive');
             }
+            $("#inputTel").intlTelInput({
+                preferredCountries: ["fr", "gb"],
+                utilsScript: "/vendor/jackocnr/intl-tel-input/build/js/utils.js",
+                initialCountry: "fr",
+                geoIpLookup: function (success, failure) {
+                    $.get("https://ipinfo.io", function () {
+                    }, "jsonp").always(function (resp) {
+                        const countryCode = (resp && resp.country) ? resp.country : "fr";
+                        success(countryCode);
+                    });
+                },
+            });
         },
         error: function () {
         },
@@ -71,7 +83,7 @@ let uploadImgProfile = function () {
     let data = new FormData($("form")[1]);
 
     $.ajax({
-        url: "../src/Controller/profileUploadController.php",
+        url: "../src/Controller/ProfileUploadController.php",
         type: "POST",
         dataType: "JSON",
         enctype: "multipart/form-data",
@@ -94,21 +106,19 @@ let uploadImgProfile = function () {
             generateNavbar();
         },
         error: function () {
-            console.log("errorUpload");
         },
     });
 }
 
 let modify = function () {
-    let tab_fields_modal = [];
-
+    let tab_fields_modal = {};
     $(".data-modal").each(
         function () {
-            tab_fields_modal.push($(this).val());
+            tab_fields_modal[$(this).attr('id')] = $(this).val();
         }
     );
     $.ajax({
-        url: "../src/Controller/accountController.php",
+        url: "../src/Controller/AccountController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -136,7 +146,6 @@ let modify = function () {
             }
         },
         error: function () {
-            console.log("moderror");
         },
     });
 };
@@ -159,7 +168,7 @@ let disableAccount = function () {
                 "Votre compte à bien été désactivé.",
                 "success",
                 $.ajax({
-                    url: "../src/Controller/accountController.php",
+                    url: "../src/Controller/AccountController.php",
                     dataType: "JSON",
                     type: "POST",
                     data: {
@@ -168,7 +177,6 @@ let disableAccount = function () {
                     success: function (response) {
                     },
                     error: function () {
-                        console.log("delError");
                     },
                 })
             );
@@ -180,45 +188,22 @@ let disableAccount = function () {
 };
 
 let formProfil = function () {
-    let tab_fields = [];
-    let phone = $("#modal-tel_user");
+    let tab_fields = {};
     $(".data").each(
         function () {
-            tab_fields.push($(this).html())
+            tab_fields[$(this).attr('id')] = $(this).html();
         }
     );
     $('#modal-profil').modal("show");
-    $("#modal-mail_user").val(tab_fields[0]);
-    $("#modal-nom_user").val(tab_fields[1]);
-    $("#modal-prenom_user").val(tab_fields[2]);
-    $("#modal-addr").html(tab_fields[3]);
-    phone.val(tab_fields[4]);
-    phone.intlTelInput({
-        preferredCountries: ["fr", "gb"],
-        utilsScript: "/controle_tech/jackocnr/vendor/intl-tel-input/build/js/utils.js",
-        initialCountry: "fr",
-        geoIpLookup: function (success, failure) {
-            $.get("https://ipinfo.io", function () {
-            }, "jsonp").always(function (resp) {
-                const countryCode = (resp && resp.country) ? resp.country : "fr";
-                success(countryCode);
-            });
-        },
-    });
-    /*phone.on("countrychange", fetchDialCountry)*/
+    $("#inputLogin").val(tab_fields['profile_login']);
+    $("#inputNom").val(tab_fields['profile_nom']);
+    $("#inputPrenom").val(tab_fields['profile_prenom']);
+    $("#inputAddr").html(tab_fields['profile_addr']);
+    $(".form-control").on("change", checkField);
+    $("#inputTel").val(tab_fields['profile_tel']);
 }
 
-/*let fetchDialCountry = function () {
-    let input = $("#modal-tel_user");
-    let countryData = input.intlTelInput("getSelectedCountryData");
-    input.val("+" + countryData.dialCode)
-}*/
-
 let activationA2F = function () {
-    /*    let titleSwal = "Activation de la double authentification par SMS"
-        if ($("input[name=btnA2f]:checked")){
-            titleSwal = "Désactivation de la double authentification par SMS"
-        }*/
     Swal.fire({
         title: "Action sur la double authentification par SMS",
         text: "êtes-vous sûr?",
@@ -232,7 +217,7 @@ let activationA2F = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/accountController.php",
+                url: "../src/Controller/AccountController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {

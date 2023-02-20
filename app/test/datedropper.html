@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+
+    <!-- datedropper -->
+    <script src="../public/js/components/datedropper-jquery.js"></script>
+    <title>Title</title>
+</head>
+<body>
+
+<input id="date-input" type="text">
+
+<!-- datedropper init -->
+<script>
+    $('#date-input').dateDropper({
+        onChange: function (date) {
+            function toTimestamp(strDate) {
+                let datum = Date.parse(strDate);
+                return datum / 1000;
+            }
+
+            changeDate(toTimestamp(date))
+        },
+        defaultDate: function (date) {
+            let day = date.getDay();
+            return [(day !== 0), ''];
+        },
+    });
+</script>
+
+</body>
+</html>

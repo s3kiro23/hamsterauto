@@ -13,6 +13,31 @@ let toastMixin =
             toast.addEventListener('mouseleave', Swal.resumeTimer)
         }
     });
+    function showContreVisite(id) {
+        $.ajax({
+            url: "../src/Controller/RdvController.php",
+            dataType: "JSON",
+            type: "POST",
+            data: {
+                request: "show_contre_visite",
+                rdvID: id,
+            },
+            success: function (response) {
+                modalCVisite(response);
+            },
+            error: function () {
+                console.log("errorShow");
+            },
+        });
+    }
+    function switchLogo(){
+        if ($('#logo').attr('src') === "../public/assets/img/hamsterauto-unscreen.gif"){
+            $('#logo').attr('src',"../public/assets/img/hamsterautoNuit-unscreen.gif") 
+        }else if ($('#logo').attr('src') === "../public/assets/img/hamsterautoNuit-unscreen.gif"){
+            $('#logo').attr('src', "../public/assets/img/hamsterauto-unscreen.gif")
+        }
+    }
+
 
 class Header extends HTMLElement {
     constructor() {
@@ -22,8 +47,8 @@ class Header extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
 
-            <nav class='autohide navbar navbar-expand-lg bg-light fixed-top shadow mb-5'>
-                <div class='container-xl'>
+            <nav class='autohide navbar navbar-expand-lg fixed-top bg-light shadow mb-5' id='navbar-dash-user'>
+                <div class='container-xl p-0'>
                     <div class="d-flex align-items-center align-items-lg-end order-0">
                         <button class='navbar-toggler collapsed' type='button' data-bs-toggle='collapse' data-bs-target='#navbar-main'
                                 aria-controls='navbar-main' aria-expanded='false' aria-label='Toggle navigation'>
@@ -59,7 +84,7 @@ class Header extends HTMLElement {
                                    for="themeControlToggle" data-bs-toggle="tooltip" data-bs-placement="left"
                                    title="Switch to dark theme"><span class="fas fa-moon fs-0"></span></label>
                         </div>
-                        <a class="text-decoration-none" role="button" data-bs-toggle="dropdown">
+                        <a class="text-decoration-none fw-bold" role="button" data-bs-toggle="dropdown">
                             <span class="first-name me-md-1"></span>
                             <span class="last-name me-sm-2"></span>
                             <img class="img-profile rounded-circle" width="55" height="55"
@@ -73,11 +98,11 @@ class Header extends HTMLElement {
                                 <button class='dropdown-item' id='pwd-modify' type='button'>Modifier mot de passe</button>
                             </li>
                             <li>
-                                <button class='dropdown-item' id='settings' type='button'>Paramètres</button>
+                                <button class='dropdown-item' id='settings' type='button'>Notifications</button>
                             </li>
                             <div class='dropdown-divider'></div>
-                            <li>
-                                <button class='dropdown-item' id='logout' type='button'>Se déconnecter</button>
+                            <li class="d-flex flex-row">
+                                <button class='dropdown-item' id='sessionEnding' type='button'>Se déconnecter</button>
                             </li>
                         </ul>
                     </div>
@@ -91,7 +116,7 @@ customElements.define("header-component", Header);
 
 let generateNavbar = function () {
     $.ajax({
-        url: "../src/Controller/dashboardClient/clientController.php",
+        url: "../src/Controller/DashboardClient/ClientController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -129,14 +154,16 @@ let generateNavbar = function () {
                 btnToTop();
                 elAutoHide();
                 if (response['navbarHTML'][1] === 'client') {
+                    $("#settings").on("click", notificationManager);
                     $("#client").on("click", toHomeClient);
                     $(".linkToClient").on("click", toHomeClient);
                     $('#formClient').on("click", toFormClient)
-                    $("#logout").on("click", logout);
+                    $("#sessionEnding").on("click", sessionEnding);
+                    $('#check-all-list').on("click", checkThemAll)
                 } else {
                     $("#technicien").on("click", toHomeTech);
                     $("#linkToTech").on("click", toHomeTech);
-                    $("#logout").on("click", logoutTech);
+                    $("#sessionEnding").on("click", sessionEnding);
                 }
             }
         },
@@ -146,61 +173,17 @@ let generateNavbar = function () {
     });
 }
 
-let logout = function () {
-    $.ajax({
-        url: "../src/Controller/index/loginController.php",
-        dataType: "JSON",
-        type: "POST",
-        data: {
-            request: "logout",
-        },
-        success: function (response) {
-
-            toastMixin.fire({
-                animation: true,
-                title: response["msg"]
-            });
-            setTimeout(() => {
-                window.location.href = "/";
-            }, 2000);
-        },
-        error: function () {
-        },
-    });
-};
-let logoutTech = function () {
-    $.ajax({
-        url: "../src/Controller/index/privateLogin.php",
-        dataType: "JSON",
-        type: "POST",
-        data: {
-            request: "logout_tech",
-        },
-        success: function (response) {
-
-            toastMixin.fire({
-                animation: true,
-                title: response["msg"]
-            });
-            setTimeout(() => {
-                window.location.href = "/private-login";
-            }, 2000);
-        },
-        error: function () {
-        },
-    });
-};
 
 let toPwdModify = function () {
     window.location.href = "/change-password?token=pwd-modify"
 }
 
 let toHomeClient = function () {
-    window.location.replace("/dashboards");
+    window.location.replace("/dashboards/client");
 };
 
 function toHomeTech() {
-    window.location.href = "/dashboards-tech";
+    window.location.href = "/dashboards/technicien";
 }
 
 let toProfil = function () {
@@ -211,9 +194,9 @@ let toFormClient = function () {
     window.location.replace("/reservation");
 };
 
-let toHolidayForm = function () {
-    window.location.replace("/holiday-request.html")
-};
+// let toHolidayForm = function () {
+//     window.location.replace("holiday-request.html")
+// };
 
 let elAutoHide = function () {
     let el_autohide = document.querySelector('.autohide');

@@ -1,6 +1,7 @@
 $(function () {
     getAuthorization();
     sweetToast();
+    $(".form-control").on("change", checkField);
 });
 
 function $_GET(param) {
@@ -41,20 +42,27 @@ let getAuthorization = function () {
 }
 
 let changePassword = function () {
-    let token = $_GET('token');
+    let tabInput = {};
+    tabInput['token'] = $_GET('token');
+    $('.field').each(
+        function () {
+            if (tabInput['token'] !== 'pwd-modify' && this.id !== 'old-password') {
+                tabInput[this.id] = $(this).val();
+            } else if (tabInput['token'] === 'pwd-modify') {
+                tabInput[this.id] = $(this).val();
+            }
+        });
     $.ajax({
-        url: '../src/Controller/index/recoveryController.php',
+        url: '../src/Controller/Index/RecoveryController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
             request: 'modify_password',
-            oldPassword: $('#old_password').val(),
-            password: $('#password').val(),
-            password2: $('#password2').val(),
-            token: token
+            tabInput: JSON.stringify(tabInput),
         },
         success: function (response) {
             if (response['status'] === 1) {
+                $('#btn-modify').prop('disabled', true);
                 Swal.fire({
                     position: 'center',
                     icon: 'success',
@@ -63,6 +71,7 @@ let changePassword = function () {
                     timer: 1500
                 });
                 if (response['type'] == "profile") {
+                    console.log(response['userType']);
                     if (response['userType'] == "client") {
                         setTimeout(() => {
                             toClientDash();
@@ -77,29 +86,39 @@ let changePassword = function () {
                         window.location.replace('/')
                     }, 1500);
                 }
-            } else {
+            } else if (response['status'] === 0) {
                 toastMixin.fire({
                     position: 'top',
                     animation: true,
                     icon: "error",
                     width: 500,
                     title: response['msg'],
-                    timer: 1400
+                    timer: 3000
                 });
+            } else if (response["status"] === 2) {
+                toastMixin.fire({
+                    animation: true,
+                    icon: "warning",
+                    position: 'top',
+                    width: 500,
+                    title: response["msg"]
+                });
+                setTimeout(() => {
+                    window.location.replace("/");
+                }, 3000);
             }
         },
         error: function () {
-            console.log('errChgPwd')
         }
     });
 }
 
 let toClientDash = function () {
-    window.location.replace('/dashboards')
+    window.location.replace('/dashboards/client')
 }
 
 let toTechDash = function () {
-    window.location.replace('/dashboards-tech')
+    window.location.replace('/dashboards/technicien')
 }
 
 let historyBack = function () {

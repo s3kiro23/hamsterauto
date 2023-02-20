@@ -1,0 +1,15 @@
+{% for ban in banAccounts %}
+    
+    <tr id='{{ ban['id_user'] }}' align='center' class='text-dark'>
+
+        <td>{{ ban['email_user'] }}</td>
+
+        <td>{{ ban['remote_ip'] }} </td>  
+
+        <td>{{ ban['lastDate'] }}</td>
+
+        <td> <span role='button' onclick='debanUser(`{{ ban['id_user'] }}`)'><i class="fa-solid fa-rotate-right"></i></span></td>
+
+    </tr>
+
+{% endfor %}

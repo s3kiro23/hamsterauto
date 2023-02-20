@@ -10,7 +10,7 @@ function uploadCG() {
     let data = new FormData($("form")[0]);
 
     $.ajax({
-        url: "../src/Controller/uploadController.php",
+        url: "../src/Controller/UploadController.php",
         type: "POST",
         dataType: "JSON",
         enctype: "multipart/form-data",
@@ -31,7 +31,6 @@ function uploadCG() {
             });
         },
         error: function () {
-            console.log("errorUpload");
         },
     });
 }

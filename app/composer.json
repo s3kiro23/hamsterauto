@@ -1,11 +1,14 @@
 {
-    "require": {
-        "ovh/php-ovh-sms": "^1.0",
-      "ext-json": "*",
-      "ext-mysqli": "*",
-      "ext-openssl": "*",
-        "phpmailer/phpmailer": "^6.6",
-        "tecnickcom/tcpdf": "^6.5",
-        "jackocnr/intl-tel-input": "^17.0"
-    }
+  "require": {
+    "ovh/php-ovh-sms": "^1.0",
+    "ext-json": "*",
+    "ext-mysqli": "*",
+    "ext-openssl": "*",
+    "phpmailer/phpmailer": "^6.6",
+    "jackocnr/intl-tel-input": "^17.0",
+    "ext-mbstring": "*",
+    "twig/twig": "3.0",
+    "ext-intl": "*",
+    "tecnickcom/tcpdf": "^6.6"
+  }
 }

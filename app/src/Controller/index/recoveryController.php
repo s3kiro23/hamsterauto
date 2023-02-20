@@ -1,10 +1,14 @@
-<?php 
+<?php
+
+use HTML\RequestHTML;
+
 session_start();
-require_once __DIR__.'/../shared.php';
 
 spl_autoload_register(function ($classe) {
     require '../../Entity/' . $classe . '.php';
 });
+
+require "../../Entity/HTML/RequestHTML.php";
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -13,36 +17,33 @@ switch ($_POST['request']) {
 
     case 'toRequestMail':
         $msg = "Demande de nouveau mot de passe en cours!";
-        $contentForgot = HTML::toRequestMail();
-        echo json_encode(array("msg" => $msg, "contentForgot" => $contentForgot));
+        $content_forgot = RequestHTML::toRequestMail();
+        echo json_encode(array("msg" => $msg, "contentForgot" => $content_forgot));
         break;
 
     case 'genToken':
         $status = 0;
         $msg = "Cet e-mail n'existe pas!";
-        $contentToken = '';
+        $content_token = '';
         $token = '';
-        $user = '';
+        $user_check = '';
         $html_mail = '';
+        $user = '';
         if (isset($_POST['mail']) && !empty($_POST['mail'])) {
-            $user = User::checkUser($_POST['mail']);
-            if ($user) {
-                $hash = User::request($user[0]['id_user']);
-                $checkToken = User::checkRequest($hash);
-                $token = $checkToken['hash'];
-                $status = 1;
-                $msg = "Token généré avec succès ! Un e-mail a été envoyé.";
-
-                //Add Job mail in Queue table
-                $userMail = new User($user[0]['id_user']);
-                $mail = new Mailing();
-                $mailTemplate = $mail->getToken($userMail, $token);
-                $queued = new Queued(0);
-                $queued->setType("mail");
-                $queued->setTemplate(json_encode($mailTemplate));
-                $queued->create();
-/*                $contentToken = HTML::genToken();*/
-                $html_mail = HTML::mailSending($userMail->getEmail_user());
+            $user_check = User::check_user($_POST['mail']);
+            if ($user_check) {
+                $user = new User($user_check['id_user']);
+                if (count($user->check_request()) < 1) {
+                    $token = $user->request();
+                    $status = 1;
+                    $msg = "Token généré avec succès ! Un e-mail a été envoyé.";
+                    //Add Job mail in Queue table
+                    $mail = new Mailing();
+                    $mail->setToken_Job($user, $token);
+                    $html_mail = RequestHTML::mailSending($user->getEmail_user());
+                } else {
+                    $msg = 'Un demande de récupération de mot de passe est déjà en cours pour ce compte!';
+                }
             }
         }
         echo json_encode(array("status" => $status, "msg" => $msg, "user" => $user, "htmlMail" => $html_mail));
@@ -54,56 +55,60 @@ switch ($_POST['request']) {
         break;
 
     case 'modify_password' :
+        $data = json_decode($_POST['tabInput'], true);
         $status = 1;
         $type = "";
-        $userType ="";
+        $user_type = "";
         $msg = "Votre mot de passe a été modifié !";
-        $currenPwdExp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
-        $token = $_POST['token'];
+        $current_pwd_exp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
+        $get_token = $data['token'];
+        $init_control = new Control();
+        $check = $init_control->check_fields($data);
+        $traces = new Trace(0);
 
-        $traces = new Traces(0);
-        $traces->setType('password');
-        $traces->setAction('recovery');
-
-        if($token == "pwd-modify"){
-            $user = new User(decrypt($_SESSION['id'], false));
-            if (!password_verify($_POST['oldPassword'], $user->getPassword_user())){
+        if ($get_token == "pwd-modify") {
+            $user = new User(Security::decrypt($_SESSION['id'], false));
+            if (!password_verify($data['old-password'], $user->getPassword_user())) {
                 $status = 0;
                 $msg = "L'ancien mot de passe ne correspond pas!";
-            } else if (!checkPassword($_POST['password'], $_POST['password2'])) {
+            } else if ($check['status'] == 0) {
+                $msg = $check['msg'];
+                $status = $check['status'];
+            } else if ($data['inputPassword'] == $data['old-password']){
                 $status = 0;
-                $msg = "Les mots de passe ne correspondent pas!";
+                $msg = "Le nouveau mot de passe ne peut être identique à l'ancien!";
             } else {
-                $user->setPassword_user($_POST['password']);
-                $user->setPwdExp_user($currenPwdExp);
+                $user->setPassword_user($data['inputPassword']);
+                $user->setPwdExp_user($current_pwd_exp);
                 $user->update();
                 $type = "profile";
-                $userType = $user->getType();
+                $user_type = $user->getType();
 
                 //Add traces in BDD
-                $traces->setId_user(decrypt($_SESSION['id'], false));
-                $traces->create();
+                $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'recovery', 'password');
             }
         } else {
-            if (!checkPassword($_POST['password'], $_POST['password2'])) {
-                $status = 0;
-                $msg = "Les mots de passe ne correspondent pas!";
-            } else if (isset($token) && !empty($token)) {
-                $checkHash = User::checkRequest($token);
-                if (!$checkHash) {
-                    $status = 0;
-                    $msg = "Ce token n'est plus valide!";
-                } else if ($token == $checkHash['hash']) {
-                    $user_hash = $checkHash['hash'];
-                    $user = new User($checkHash['id_user']);
-                    $user->setPassword_user($_POST['password']);
-                    $user->setPwdExp_user($currenPwdExp);
+            if ($check['status'] == 0) {
+                $msg = $check['msg'];
+                $status = $check['status'];
+            } else if (isset($get_token) && !empty($get_token)) {
+                $request = new Request(0);
+                $request->check_expiration();
+                $user_token = User::check_token($get_token);
+                if (!$user_token) {
+                    $status = 2;
+                    $msg = "Votre token n'est plus valide! La modification de votre mot de passe a échoué.";
+                } else if ($get_token == $user_token['hash']) {
+                    $user_hash = $user_token['hash'];
+                    $user = new User($user_token['id_user']);
+                    $user->setPassword_user($data['inputPassword']);
+                    $user->setPwdExp_user($current_pwd_exp);
                     $user->update();
-                    User::updateRequest($checkHash['id_user']);
+                    User::update_request($user_token['id_user']);
 
                     //Add traces in BDD
-                    $traces->setId_user($checkHash['id_user']);
-                    $traces->create();
+                    $traces->setTracesIN($user_token['id_user'], 'recovery', 'password');
+
                     $type = "request";
                 }
             }

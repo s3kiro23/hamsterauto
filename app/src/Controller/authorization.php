@@ -1,27 +1,28 @@
 <?php
-require_once 'shared.php';
 
 spl_autoload_register(function ($classe) {
     require '../../Entity/' . $classe . '.php';
 });
 
+require "../../Entity/HTML/PaginationHTML.php";
+require "../../Entity/HTML/LoadClientHTML.php";
+
 $db = new Database();
 $GLOBALS['db'] = $db->connexion();
 
-function getAuthorizationUser($whoIs): bool
+function getAuthorization_User($whoIs): bool
 {
     $status = true;
-    if (!$whoIs || $whoIs->getType() != "technicien" || !is_logged()) {
+    if (!$whoIs || $whoIs->getType() != "technicien" || !Control::is_logged()) {
         $status = false;
     }
     return $status;
 }
 
-function getAuthorizationAll(): bool
+function getAuthorization_All(): bool
 {
-    error_log("user");
     $status = true;
-    if (!is_logged()) {
+    if (!Control::is_logged()) {
         $status = false;
     }
     return $status;

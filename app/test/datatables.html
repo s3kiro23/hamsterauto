@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="../public/assets/img/favicons/apple-touch-icon.png"/>
+    <link rel="icon" type="image/png" sizes="32x32" href="../public/assets/img/favicons/favicon-32x32.png"/>
+    <link rel="icon" type="image/png" sizes="16x16" href="../public/assets/img/favicons/favicon-16x16.png"/>
+    <link rel="manifest" href="../public/assets/img/favicons/site.webmanifest"/>
+    <link rel="mask-icon" href="../public/assets/img/favicons/safari-pinned-tab.svg" color="#5bbad5"/>
+    <link rel="stylesheet" href="../public/assets/css/style.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.1/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.0/css/responsive.dataTables.min.css">
+    <meta name="msapplication-TileColor" content="#da532c"/>
+    <meta name="theme-color" content="#ffffff"/>
+    <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
+    <title>Test DT</title>
+</head>
+
+<body>
+
+<div class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 col-xxl-5">
+    <div class="card shadow rounded border-0">
+        <div class="card-header bg-primary bg-opacity-10 rounded-top d-flex justify-content-between align-items-center">
+            <h5 class="m-0 py-2 text-primary">Mes véhicules</h5>
+            <button id="formAddCar"
+                    class="border-0 bg-transparent align-middle" type="button"
+                    data-toggle="tooltip"
+                    data-placement="bottom" title="créer un nouveau véhicule">
+                <i class="fa-solid fa-car fa-xl text-info align-middle"></i>
+            </button>
+        </div>
+        <div class="card-body pt-2">
+            <table class="table table-centered table-striped align-middle table-nowrap table-hover mb-0"
+                   id="tab-car">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Office</th>
+                    <th>Age</th>
+                    <th>Start Date</th>
+                </tr>
+                </thead>
+                <tbody id="mycars">
+                <tr>
+                    <th class="fw-light">Ades</th>
+                    <th class="fw-light">Hell</th>
+                    <th class="fw-light">OfficeHell</th>
+                    <th class="fw-light">?</th>
+                    <th class="fw-light">Before you</th>
+                </tr>
+                <tr>
+                    <th class="fw-light">Hercule</th>
+                    <th class="fw-light">Earth</th>
+                    <th class="fw-light">Father</th>
+                    <th class="fw-light">28</th>
+                    <th class="fw-light">You</th>
+                </tr>
+                </tbody>
+            </table>
+            <span id="noCar" class="d-flex justify-content-center"></span>
+        </div>
+    </div>
+</div>
+
+<!--Javascript-->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/9414e04596.js"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.1/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://cdn.datatables.net/responsive/2.4.0/js/dataTables.responsive.min.js"></script>
+
+<script src="dtables.js"></script>
+
+</body>
+
+</html>

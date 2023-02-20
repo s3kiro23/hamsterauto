@@ -1,19 +1,18 @@
 <?php
 
-require_once 'Database.php';
+spl_autoload_register(function ($classe) {
+    require '../Entity/' . $classe . '.php';
+});
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-/*//Load Composer's autoloader
-require __DIR__ . '\..\..\vendor\autoload.php';*/
-
 //Load Composer's autoloader
-require __DIR__.'/../../vendor/autoload.php';
+require ROOT_DIR() . '/vendor/autoload.php';
 
 class PDF extends TCPDF
 {
-    public function generatePDF($data): string
+    public function generate_PDF($data, $userHash): string
     {
         $outputFile = "";
         // create new PDF document
@@ -78,9 +77,9 @@ class PDF extends TCPDF
         $pdf->write2DBarcode('https://hamsterauto.com/', 'QRCODE,H', 4, 0, 30, 30, $style, 'N');
 
         //Header
-        $pdf->writeHTMLCell(85, 2, '62', 10, $data['headerTitle'], 0, 0, 0, true, 'C', true);
-        $pdf->writeHTMLCell(46, 2, '157', 0, $data['headerLogo'], 0, 0, 0, true, 'C', true);
-        $pdf->writeHTMLCell(46, 2, '157', 25, $data['headerSub'], 0, 0, 0, true, 'C', true);
+        $pdf->writeHTMLCell(85, 2, '62', 10, $data['header_title'], 0, 0, 0, true, 'C', true);
+        $pdf->writeHTMLCell(46, 2, '157', 0, $data['header_logo'], 0, 0, 0, true, 'C', true);
+        $pdf->writeHTMLCell(46, 2, '157', 25, $data['header_sub'], 0, 0, 0, true, 'C', true);
 
         //Body
         $pdf->writeHTMLCell(75, 2, '5', 30, $data['nature'], 0, 0, 0, true, 'C', true);
@@ -88,7 +87,7 @@ class PDF extends TCPDF
         $pdf->writeHTMLCell(75, 2, '128', 30, $data['nb_pv'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(85, 2, '5', 42, $data['id_center'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(85, 2, '5', 75.5, $data['id_tech'], 0, 0, 0, true, 'C', true);
-        $pdf->writeHTMLCell(85, 2, '5', 104, $data['info_CTNotOK'], 0, 0, 0, true, 'C', true);
+        $pdf->writeHTMLCell(85, 2, '5', 104, $data['info_ct_notOK'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(85, 2, '5', 127, $data['id_car'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(85, 2, '5', 189, $data['info_client'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(85, 2, '5', 209.5, $data['result_CT'], 0, 0, 0, true, 'C', true);
@@ -96,7 +95,7 @@ class PDF extends TCPDF
         $pdf->writeHTMLCell(112, 2, '91', 209.5, $data['measures'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(42, 2, '5.5', 227.5, $data['bg_thumbnail'], 0, 0, 0, true, 'C', true);
         $pdf->writeHTMLCell(42, 2, '6', 228.5, $data['thumbnail'], 0, 0, 0, true, 'C', true);
-        $pdf->writeHTMLCell(15, 2, '53', 228.5, $data['tinyThumbnail'], 0, 1, 1, true, 'C', true);
+        $pdf->writeHTMLCell(15, 2, '53', 228.5, $data['tiny_thumbnail'], 0, 1, 1, true, 'C', true);
 
         // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -108,11 +107,17 @@ class PDF extends TCPDF
         // This method has several options, check the source code documentation for more information.
         $pdf->Output($data['path'] . $data['nb_agrement'] . '_' . $data['PV'] . '.pdf', 'F');
 
+        //Encryption file
+        $path_file = $data['path'] . $data['nb_agrement'] . '_' . $data['PV'] . '.pdf';
+        $pdf_content = file_get_contents($path_file);
+        $encrypted_content = Security::encrypt($pdf_content, $userHash);
+        file_put_contents($path_file, $encrypted_content);
+
         //============================================================+
         // END OF FILE
         //============================================================+
 
-        return trim('pv_' . $data['nb_agrement'] . '_' . $data['PV'] . '.pdf');
+        return 'pv_' . $data['nb_agrement'] . '_' . $data['PV'] . '.pdf';
     }
 
     public function pv($car, $CT, $client): array
@@ -120,26 +125,26 @@ class PDF extends TCPDF
         setlocale(LC_TIME, "fr_FR", "French");
         $report = json_decode($CT->getReport(), true);
         $nb_report = 0;
-        $todoList = "";
+        $todo_list = "";
         if (!is_null($report)) {
-            foreach ($report as $item) {
-                $todoList .= $item . '<br>';
+            foreach ($report as $key => $value) {
+                $todo_list .= $value . '<br>';
                 $nb_report = count($report);
             }
         }
 
-        $dateTimestamp = $CT->getTime_slot();
+        $date_timestamp = $CT->getTime_slot();
         $nb_agrement = "S654789741";
-        $rdvDate = date("d/m/Y", $dateTimestamp);
-        $nextDate = date("d/m/Y", $dateTimestamp + 63097119);
-        $thumbnailDate = date("m/y", $dateTimestamp + 63097119);
-        $thumbnailDay = date("d", $dateTimestamp + 63097119);
-        $PV = $CT->getId_controle();
+        $rdv_date = date("d/m/Y", $date_timestamp);
+        $next_date = date("d/m/Y", $date_timestamp + 63097119);
+        $thumbnail_date = date("m/y", $date_timestamp + 63097119);
+        $thumbnail_day = date("d", $date_timestamp + 63097119);
+        $PV = $CT->getId_intervention();
         $tech = new User($CT->getId_user());
-        $brand = new Brand($car->getId_marque());
-        $path = ROOT_DIR() . '/var/generate/minutes/pv_';
+        $brand = new Brand($car->getId_brand());
+        $path = ROOT_DIR().'/var/generate/minutes/pv_';
 
-        $headerTitle = '
+        $header_title = '
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="4">
                 <tr>
                     <td style="font-size: larger; font-weight: bolder; color: royalblue;">' . mb_strtoupper("procès-verbal de contrôle technique d'un véhicule automobile") . '</td>
@@ -147,17 +152,17 @@ class PDF extends TCPDF
             </table>
             ';
 
-        $headerLogo = '
+        $header_logo = '
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
-                        <img src="' . ROOT_DIR() . '/public/assets/img/logoDark.png" alt="" width="110" height="110" border="0">
+                        <img src="' . ROOT_DIR() . '\public\assets\img\logoDark.png" alt="" width="110" height="90" border="0">
                     </td>
                 </tr>
             </table>
             ';
 
-        $headerSub = '
+        $header_sub = '
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                    <td style="font-weight: bolder; color: #4bbf73;">' . mb_strtoupper("exemplaire remis à l'usager") . '</td> 
@@ -181,7 +186,7 @@ class PDF extends TCPDF
                         <td style="background-color: #4bbf73; color: white; ">' . mb_strtoupper("date du contrôle") . '</td>
                     </tr>
                     <tr>
-                        <td>' . $rdvDate . '</td>
+                        <td>' . $rdv_date . '</td>
                     </tr>
                 </table>
             ';
@@ -191,7 +196,7 @@ class PDF extends TCPDF
                         <td style="background-color: #4bbf73; color: white; ">' . mb_strtoupper("n° du procès-verbal") . '</td>
                     </tr>
                     <tr>
-                        <td>' . $CT->getId_controle() . '</td>
+                        <td>' . $CT->getId_intervention() . '</td>
                     </tr>
                 </table>
             ';
@@ -223,7 +228,7 @@ class PDF extends TCPDF
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <b>NOM & ' . mb_strtoupper("prénom") . ' :</b> <span>' . $tech->getNom_user() . ' ' . $tech->getPrenom_user() . '</span>
+                        <b>NOM & ' . mb_strtoupper("prénom") . ' :</b> <span>' . $tech->getLastname_user() . ' ' . $tech->getLastname_user() . '</span>
                         <br><br>
                         <b>' . mb_strtoupper("n° d'agrément") . ' :</b> <span>' . $tech->getId_user() . '</span>
                         <br><br>
@@ -234,7 +239,7 @@ class PDF extends TCPDF
                 </tr>
             </table>
         ';
-        $info_CTNotOK = '
+        $info_ct_notOK = '
         <table style="text-align: center; font-size: xx-small" border="0.5" cellspacing="0" cellpadding="4">
                 <tr>
                     <td style="background-color: #4bbf73; color: white; ">' . mb_strtoupper("informations sur la visite technique périodique défavorable") . '</td>
@@ -264,9 +269,9 @@ class PDF extends TCPDF
                                 <td><b>Date de 1ère mise en circulation</b></td>
                             </tr>
                             <tr>
-                                <td style="border: 0.5px solid black">' . $car->getImmat_vehicule() . '</td>
+                                <td style="border: 0.5px solid black">' . $car->getRegistration() . '</td>
                                 <td style="border: 0.5px solid black">?</td>
-                                <td style="border: 0.5px solid black">' . $car->getAnnee_vehicule() . '</td>
+                                <td style="border: 0.5px solid black">' . $car->getFirst_release() . '</td>
                             </tr>
                             <tr>
                                 <td><b>Genre</b></td>
@@ -275,7 +280,7 @@ class PDF extends TCPDF
                             </tr>
                             <tr>
                                 <td style="border: 0.5px solid black">?</td>
-                                <td style="border: 0.5px solid black">' . $brand->getNom_marque() . '</td>
+                                <td style="border: 0.5px solid black">' . $brand->getBrand_name() . '</td>
                                 <td style="border: 0.5px solid black">?</td>
                             </tr>
                             <tr>
@@ -284,7 +289,7 @@ class PDF extends TCPDF
                             </tr>
                             <tr>
                                 <td colspan="2" style="border: 0.5px solid black"> ? </td>
-                                <td style="border: 0.5px solid black">' . $car->getCarburant_vehicule() . '</td>
+                                <td style="border: 0.5px solid black">' . $car->getFuel() . '</td>
                             </tr>
                             <tr>
                                 <td colspan="2"><b>Kilométrage inscrit au compteur</b></td>
@@ -292,7 +297,7 @@ class PDF extends TCPDF
                             </tr>
                             <tr>
                                 <td colspan="2" style="border: 0.5px solid black">?</td>
-                                <td style="border: 0.5px solid black">' . $car->getAnnee_vehicule() . '</td>
+                                <td style="border: 0.5px solid black">' . $car->getFirst_release() . '</td>
                             </tr>
                         </table>
                     </td>
@@ -306,28 +311,36 @@ class PDF extends TCPDF
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        <b>NOM, ' . mb_strtoupper("prénom") . ' OU RAISON SOCIAL :</b> <span>' . $client->getNom_user() . ' ' . $client->getPrenom_user() . '</span>
+                        <b>NOM, ' . mb_strtoupper("prénom") . ' OU RAISON SOCIAL :</b> <span>' . $client->getLastname_user() . ' ' . $client->getFirstname_user() . '</span>
                         <br><br>
-                        <b>ADRESSE :</b> <span>' . $client->getAdresse_user() . '</span>
+                        <b>ADRESSE :</b> <span>' . $client->getAdress_user() . '</span>
                         <br>
                     </td>
                 </tr>
             </table>
         ';
+
         $result_CT = '
-        <table style="text-align: center; font-size: xx-small" border="0.5" cellspacing="0" cellpadding="4">
+            <table style="text-align: center; font-size: xx-small" border="0.5" cellspacing="0" cellpadding="4">
                 <tr>
                     <td style="background-color: #4bbf73; color: white; text-align: center;">' . mb_strtoupper("résultat du contrôle technique") . '</td>
                 </tr>
                 <tr>
                     <td style="text-align: left;">
-                        NATURE ET DATE DU PROCHAIN ' . mb_strtoupper("contrôle") . ' :
+                        NATURE ET DATE DU PROCHAIN ' . mb_strtoupper("contrôle") . ' :';
+        if (is_null($report)) {
+            $result_CT .= '
                         <br><br>
-                        <b>VISITE TECHNIQUE ' . mb_strtoupper("périodique") . ' AU PLUS TARD LE ' . $nextDate . '</b>
+                        <b>VISITE TECHNIQUE ' . mb_strtoupper("périodique") . ' AU PLUS TARD LE ' . $next_date . '</b>
                     </td>
                 </tr>
-            </table>
-        ';
+            </table>';
+        } else {
+            $result_CT .= '
+                    </td>
+                </tr>
+            </table>';
+        }
 
         $todo = '
         <table style="font-size: xx-small; height: 300px" border="0.5" cellspacing="0" cellpadding="4">
@@ -344,7 +357,7 @@ class PDF extends TCPDF
                         <br><br>
                         <b>1 - Défauts à corriger avec contre visite : </b><span>' . $nb_report . '</span>
                         <br><br>
-                        <span>' . $todoList . '</span>
+                        <span>' . $todo_list . '</span>
                         <br><br>
                         <b>2 - Défauts à corriger sans contre visite : </b> 0
                         <br><br>
@@ -360,9 +373,9 @@ class PDF extends TCPDF
                         <tr>
                             <td style="text-align: center;">
                                 <br><br>
-                                <b style="font-size: larger;">' . $car->getImmat_vehicule() . '</b>
+                                <b style="font-size: larger;">' . $car->getRegistration() . '</b>
                                 <br><br><br>
-                                <b style="font-size: 10rem;">' . $thumbnailDay . ' </b><b style="font-size: 17rem;">' . $thumbnailDate . '</b>
+                                <b style="font-size: 10rem;">' . $thumbnail_day . ' </b><b style="font-size: 17rem;">' . $thumbnail_date . '</b>
                                 <br><br>
                                 <div style="text-align: left;">
                                     <b style="font-size: 5.7rem">N° d\'agrément : ' . $nb_agrement . '</b>
@@ -383,19 +396,19 @@ class PDF extends TCPDF
                 ';
         }
 
-        $bgThumbnail = '
-                <img src="' . ROOT_DIR() . '/public/assets/img/background_thumbnail_ct.png" alt="" width="130" height="130" border="0">
+        $bg_thumbnail = '
+                <img src="' . ROOT_DIR() . '\public\assets\img\background_thumbnail_ct.png" alt="" width="130" height="130" border="0">
             ';
 
-        $tinyThumbnail = '
+        $tiny_thumbnail = '
             <table style="font-size: xx-small; background-color: #bdd7ff;" border="0" cellspacing="0" cellpadding="2">';
         if (is_null($report)) {
-            $tinyThumbnail .= '
+            $tiny_thumbnail .= '
                     <tr>
                         <td style="text-align: center;">
                             <b style="font-size: medium;">Afl<span style="color: #4bbf73;">A</span>uto</b>
                             <br>
-                            <b style="font-size: small;">' . $nextDate . '</b>
+                            <b style="font-size: small;">' . $next_date . '</b>
                             <br>
                             <span style="font-size: small;"> ' . $nb_agrement . '</span>
                         </td>
@@ -403,7 +416,7 @@ class PDF extends TCPDF
                 </table>
             ';
         } else {
-            $tinyThumbnail .= '
+            $tiny_thumbnail .= '
                     <tr><td></td></tr>
                 </table>
             ';
@@ -490,13 +503,13 @@ class PDF extends TCPDF
         ';
 
         return array(
-            "headerTitle" => $headerTitle,
-            "headerLogo" => $headerLogo,
-            "headerSub" => $headerSub,
+            "header_title" => $header_title,
+            "header_logo" => $header_logo,
+            "header_sub" => $header_sub,
             "nature" => $nature,
             "id_tech" => $id_tech,
             "id_center" => $id_center,
-            "info_CTNotOK" => $info_CTNotOK,
+            "info_ct_notOK" => $info_ct_notOK,
             "info_client" => $info_client,
             "result_CT" => $result_CT,
             "id_car" => $id_car,
@@ -505,10 +518,10 @@ class PDF extends TCPDF
             "nb_pv" => $nb_pv,
             "PV" => $PV,
             "path" => $path,
-            "PV_ID" => $CT->getId_controle(),
+            "PV_ID" => $CT->getId_intervention(),
             "thumbnail" => $thumbnail,
-            "bg_thumbnail" => $bgThumbnail,
-            "tinyThumbnail" => $tinyThumbnail,
+            "bg_thumbnail" => $bg_thumbnail,
+            "tiny_thumbnail" => $tiny_thumbnail,
             "measures" => $measures,
             "nb_agrement" => $nb_agrement
         );

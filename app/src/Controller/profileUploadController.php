@@ -12,8 +12,6 @@ else {
         header('location:index.html');
     }else {
 
-        require_once 'shared.php';
-
         spl_autoload_register(function ($classe) {
             require '../Entity/' . $classe . '.php';
         });
@@ -24,43 +22,37 @@ else {
         if (isset($_FILES['file']) && !empty($_FILES['file'])) {
 
             $msg = "";
-            $allowTypes = array('jpg', 'png', 'jpeg');
+            $allow_types = array('jpg', 'png', 'jpeg');
             $status = 0;
 
             if ($_FILES['file']['error'] != 4) {
 
                 $target_dir = "../../upload/profiles/";
-                $fileName = basename($_FILES['file']['name']);
-                $target_file = $target_dir . $fileName;
-                $fileType = pathinfo($target_file, PATHINFO_EXTENSION);
-                $uploadedFile = "";
+                $file_name = basename($_FILES['file']['name']);
+                $target_file = $target_dir . $file_name;
+                $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
+                $uploaded_file = "";
                 $date = date("dMy");
 
-                if (in_array($fileType, $allowTypes)) {
+                if (in_array($file_type, $allow_types)) {
                     if (move_uploaded_file($_FILES['file']['tmp_name'], $target_dir . $date . "_" . $_FILES['file']['name'])) {
-                        $uploadedFile = $date . "_" . $_FILES['file']['name'];
+                        $uploaded_file = $date . "_" . $_FILES['file']['name'];
                         $msg = "Upload réalisé avec succès!";
                         $status = 1;
                     } else {
                         $msg = "Erreur lors de l'upload du fichier!";
                     }
                 } else {
-                    $msg = "Erreur, seulement les extensions " . implode('/', $allowTypes) . "sont autorisés pour l'upload!";
+                    $msg = "Erreur, seulement les extensions " . implode('/', $allow_types) . "sont autorisés pour l'upload!";
                 }
                 if ($status == 1) {
-                    $user = new User(decrypt($_SESSION['id'], false));
-                    /*error_log($fileE);
-                    error_log(decrypt($fileE, $user->getHash()));*/
-                    $user->setImg_profile($uploadedFile);
+                    $user = new User(Security::decrypt($_SESSION['id'], false));
+                    $user->setImg_profile($uploaded_file);
                     $user->update();
 
                     //Add traces in BDD
-                    $traces = new Traces(0);
-                    $traces->setId_user(decrypt($_SESSION['id'], false));
-                    $traces->setType('account');
-                    $traces->setAction('modify');
-                    $traces->create();
-
+                    $traces = new Trace(0);
+                    $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'modify', 'account');
                 }
 
             }

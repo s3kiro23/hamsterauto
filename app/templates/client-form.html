@@ -12,18 +12,7 @@
     <link rel="stylesheet" href="../public/assets/css/style.css">
     <meta name="msapplication-TileColor" content="#da532c"/>
     <meta name="theme-color" content="#ffffff"/>
-    <link rel="stylesheet" href="../public/assets/css/test-sidebar.css"/>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
-            crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/9414e04596.js"
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
-            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-            crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <link href="../public/assets/css/theme.css" rel="stylesheet" id="style-default">
     <title>Formulaire d'intervention</title>
 </head>
@@ -83,7 +72,7 @@
                             </li>
                         </ul>
                     </div>
-                    <form action="javascript:newRDVDashboardClient();" method="POST">
+                    <form action="javascript:newRDVFormClient();" method="POST">
                         <div class="card-body py-4" id="wizard-controller">
                             <div class="tab-content">
                                 <div class="tab-pane active px-sm-3 px-md-5" role="tabpanel"
@@ -141,15 +130,15 @@
                                         <div class="col-5">
                                             <label for="selectMarque" class="form-label text-dark">Sélectionner la
                                                 marque</label>
-                                            <select class="form-select" id="selectMarque">
+                                            <select class="field form-select" id="selectMarque">
                                                 <option>-</option>
                                             </select>
                                             <div class="invalid-feedback"></div>
                                         </div>
                                         <div class="col-5">
-                                            <label for="selectModele" class="form-label text-dark">Sélectionner le
+                                            <label for="selectedModel" class="form-label text-dark">Sélectionner le
                                                 modèle</label>
-                                            <select class="form-select" id="selectModele">
+                                            <select class="field form-select" id="selectedModel">
                                                 <option>-</option>
                                             </select>
                                             <div class="invalid-feedback"></div>
@@ -210,16 +199,17 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="inputAnnee" class="form-label mt-2 text-dark"
-                                        >Année de 1ère mise en circulation</label
-                                        >
+                                    <div class='mb-3 mt-2 form-label text-dark' style='font-weight: 500'>Première mise en circulation</div>
+                                    <div class="form-group position-relative">
                                         <input
-                                                type="text"
-                                                class="form-control"
-                                                id="inputAnnee"
-                                                placeholder="Entrez l'année ici"
+                                            type="text"
+                                            class="field form-control"
+                                            id="inputYear"
+                                            placeholder=" "
                                         />
+                                        <label for="inputYear" class="form-label-group m-0">
+                                            Année
+                                        </label>
                                         <div class="invalid-feedback"></div>
                                     </div>
                                 </div>
@@ -278,22 +268,36 @@
 <!--    End of Main Content-->
 <!-- ===============================================-->
 
-
+<modal-settings></modal-settings>
 <btn-top-component></btn-top-component>
 <footer-component-main></footer-component-main>
 
 
 <!--Javascript-->
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
+        crossorigin="anonymous"></script>
+<script src="https://kit.fontawesome.com/9414e04596.js"
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+        crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+<!-- datedropper -->
+<script src="../public/js/components/datedropper-jquery.js"></script>
 
 <script src="../public/js/theme/sidenav-control.js"></script>
 <script src="../public/js/clientDashboard/clientForm.js"></script>
-<script src="../public/js/sharedFunctions/fieldControl.js"></script>
-<script src="../public/js/sharedFunctions/formLoader.js"></script>
+<script src="../public/js/shared/fieldControl.js"></script>
+<script src="../public/js/shared/formLoader.js"></script>
 <script src="../public/js/components/chatButton.js"></script>
 <script src="../public/js/components/header.js"></script>
 <script src="../public/js/components/backTopBtn.js"></script>
 <script src="../public/js/components/sweetAlertToast.js"></script>
 <script src="../public/js/components/footer-main.js"></script>
+<script src="../public/js/components/modals/modalSettings.js"></script>
+<script src="../public/js/session.js"></script>
 
 </body>
 </html>

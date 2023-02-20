@@ -1,0 +1,2 @@
+ALTER TABLE `queued` ADD `id_user` INT NOT NULL AFTER `id_queue`;
+ALTER TABLE `queued` ADD CONSTRAINT `queued_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user`(`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;

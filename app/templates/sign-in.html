@@ -49,7 +49,7 @@
                                         <p class="opacity-75 text-white">Bienvenue sur le réseau du Hamster</p>
                                         <div class='mb-0 mt-5 mt-md-5 fs--1 fw-semi-bold text-dark opacity-75 d-flex flex-column justify-content-end'>
                                             <a class='text-decoration-underline text-light cursor-pointer' id='to-mentions'>Mentions légales</a><br>
-                                            <a class='text-decoration-underline text-light' id='to-cgu' href='contact'>Nous contacter</a>
+                                            <a class='text-decoration-underline text-light' href='contact'>Nous contacter</a>
                                         </div>
                                     </div>
                                 </div>
@@ -76,7 +76,7 @@
                                         <fieldset class="d-flex flex-column gap-1 w-100 rounded p-2 p-sm-0 p-md-0 p-lg-0">
                                             <div class="d-flex gap-2 mb-2">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="optionsCivilite"
+                                                    <input class="form-check-input" type="radio" name="civilite"
                                                            id="optionsRadios1"
                                                            value="Mr">
                                                     <label class="form-check-label text-dark" for="optionsRadios1">
@@ -84,88 +84,84 @@
                                                     </label>
                                                 </div>
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="optionsCivilite"
+                                                    <input class="form-check-input" type="radio" name="civilite"
                                                            id="optionsRadios2"
                                                            value="Mme">
                                                     <label class="form-check-label text-dark" for="optionsRadios2">
                                                         Mme.
                                                     </label>
                                                 </div>
-                                                <div class="form-check">
-                                                    <input class="form-check-input" type="radio" name="optionsCivilite"
-                                                           id="optionsRadios3"
-                                                           value="Mlle">
-                                                    <label class="form-check-label text-dark" for="optionsRadios3">
-                                                        Mlle.
-                                                    </label>
+                                            </div>
+                                            <div class="form-group position-relative">
+                                                <input
+                                                    id="inputNom"
+                                                    name="nom"
+                                                    type="text"
+                                                    class="field form-control"
+                                                    placeholder=" "
+                                                />
+                                                <label for="inputNom" class="form-label-group m-0">Nom</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group position-relative my-3">
+                                                <input
+                                                id="inputPrenom"
+                                                name="prenom"
+                                                type="text"
+                                                class="field form-control"
+                                                placeholder=" "
+                                                />
+                                                <label for="inputPrenom" class="form-label-group m-0">Prénom</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group position-relative">
+                                                <input
+                                                id="inputEmail"
+                                                name="inputEmail"
+                                                type="email"
+                                                class="field form-control"
+                                                placeholder=" "
+                                                />
+                                                <label for="inputEmail" class="form-label-group m-0">Email</label>
+                                                <div class="invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group position-relative my-3">
+                                                <label for="inputTel" class="sr-only">Téléphone</label>
+                                                <input
+                                                id="inputTel"
+                                                name="inputTel"
+                                                type="number"
+                                                class="field form-control"
+                                                placeholder=""
+                                                />
+                                                <div class="d-block invalid-feedback"></div>
+                                            </div>
+                                            <div class="form-group position-relative">
+                                                <input
+                                                id="inputPassword"
+                                                name="inputPassword"
+                                                type="password"
+                                                class="inputPassword field form-control"
+                                                placeholder=" "/>
+                                                <label for="inputPassword" class="form-label-group m-0">Mot de passe</label>
+                                                <div class="invalid-feedback"></div>
+                                                <div class="showPassword showPassSignIn">
+                                                    <i class="eyeShow fa-regular fa-eye" role="button"></i>
                                                 </div>
                                             </div>
-                                            <div>
-                                                <label for="inputNom" class="sr-only"></label>
-                                                <input
-                                                        id="inputNom"
-                                                        name="nom"
-                                                        type="text"
-                                                        class="appearance-none form-control rounded-top px-3 py-2 border border-gray-300 text-secondary"
-                                                        placeholder="Nom"
-                                                />
-                                                <div class="invalid-feedback mb-2"></div>
+                                            <div class="showPassword showPassSignIn">
+                                                <i class="eyeShow fa-regular fa-eye" role="button"></i>
                                             </div>
-                                            <div>
-                                                <label for="inputPrenom" class="sr-only"></label>
+                                            <div class="form-group position-relative my-3">
                                                 <input
-                                                        id="inputPrenom"
-                                                        name="prenom"
-                                                        type="text"
-                                                        class="field form-control appearance-none rounded-none  px-3 py-2 border border-gray-300 text-secondary"
-                                                        placeholder="Prénom"
+                                                id="inputPassword2"
+                                                name="inputPassword2"
+                                                type="password"
+                                                class="inputPassword field form-control"
+                                                placeholder=" "
                                                 />
-                                                <div class="invalid-feedback mb-2"></div>
-                                            </div>
-                                            <div>
-                                                <label for="inputEmail" class="sr-only"></label>
-                                                <input
-                                                        id="inputEmail"
-                                                        name="inputEmail"
-                                                        type="email"
-                                                        class="field appearance-none form-control rounded-none  px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                        placeholder="Login (Adresse Email)"
-                                                />
-                                                <div class="invalid-feedback mb-2"></div>
-                                            </div>
-                                            <div>
-                                                <label for="inputTel" class="sr-only"></label>
-                                                <input
-                                                        id="inputTel"
-                                                        name="inputTel"
-                                                        type="tel"
-                                                        class="field form-control appearance-none rounded-none relative ps-5 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                        placeholder=""
-                                                />
-                                                <div class="invalid-feedback mb-2"></div>
-                                            </div>
-                                            <div>
-                                                <label for="inputPassword" class="sr-only"></label>
-                                                <input
-                                                        id="inputPassword"
-                                                        name="inputPassword"
-                                                        type="password"
-                                                        class="field form-control appearance-none rounded-none relative  px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                        placeholder="Mot de passe"
-                                                />
-                                                <div class="invalid-feedback mb-2"></div>
-                                            </div>
-
-                                            <div>
-                                                <label for="inputPassword2" class="sr-only"></label>
-                                                <input
-                                                        id="inputPassword2"
-                                                        name="inputPassword2"
-                                                        type="password"
-                                                        class="field form-control appearance-none rounded-bottom relative  px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                        placeholder="Confirmez mot de passe"
-                                                />
-                                                <div class="invalid-feedback mb-2"></div>
+                                                <label for="inputPassword2" class="form-label-group m-0">Confirmation</label>
+                                                <div class="invalid-feedback"></div>
                                             </div>
                                             <div class="rounded-md py-3">
                                                 <div class="px-3 py-2 rounded-top bg-primary text-white">
@@ -173,26 +169,26 @@
                                                     <span id="captcha"></span>
                                                 </div>
                                                 <div>
-                                                    <label for="captcha_verif" class="sr-only"></label>
                                                     <input
-                                                            id="captcha_verif"
-                                                            name="captcha_verif"
-                                                            type="text"
-                                                            class="field form-control appearance-none rounded-bottom relative px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
-                                                            placeholder="Entrez le code captcha."
+                                                        id="inputCaptcha"
+                                                        name="inputCaptcha"
+                                                        type="number"
+                                                        class="field form-control"
+                                                        placeholder="Entrez le code captcha."
                                                     />
+                                                    <label for="inputCaptcha" class="sr-only"></label>
                                                     <div class="invalid-feedback mb-2"></div>
                                                 </div>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" id="card-register-checkbox" />
+                                                <input class="form-check-input" type="checkbox" id="card-register-checkbox" required/>
                                                 <label class="form-label" for="card-register-checkbox">Vous devez accepter nos <a id="to-cgu" class="text-primary" type="button">CGU</a> pour pouvoir créer un compte client.</label>
                                             </div>
                                             <div>
                                                 <button
-                                                        type="submit"
-                                                        id='sign_in'
-                                                        class="group relative w-100 d-flex justify-content-center py-2 px-4 rounded text-white btn btn-primary"
+                                                    type="submit"
+                                                    id='sign-in'
+                                                    class="group relative w-100 d-flex justify-content-center py-2 px-4 rounded text-white btn btn-primary"
                                                 >
                                                     <span class="absolute left-0 inset-y-0 d-flex align-items-center pl-3">
                                                         <svg xmlns="http://www.w3.org/2000/svg"
@@ -202,9 +198,9 @@
                                                              stroke="currentColor"
                                                              stroke-width="2">
                                                             <path
-                                                                    stroke-linecap="round"
-                                                                    stroke-linejoin="round"
-                                                                    d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
+                                                                stroke-linecap="round"
+                                                                stroke-linejoin="round"
+                                                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"
                                                             />
                                                         </svg>
                                                     </span>
@@ -226,16 +222,19 @@
 <!--    End of Main Content-->
 <!-- ===============================================-->
 
+<!-- modals DEBUT -->
 
 <modal-mentions></modal-mentions>
 <modal-cgu></modal-cgu>
 
+<!-- modals FIN -->
+
+
 <script src="../public/js/signIn.js"></script>
-<script src="../public/js/sharedFunctions/fieldControl.js"></script>
+<script src="../public/js/shared/fieldControl.js"></script>
 <script src="../public/js/components/chatButton.js"></script>
-<script src="../public/js/components/footer.js"></script>
-<script src="../public/js/components/modalMentions.js"></script>
-<script src="../public/js/components/modalCGU.js"></script>
+<script src="../public/js/components/modals/modalMentions.js"></script>
+<script src="../public/js/components/modals/modalCGU.js"></script>
 <script src="../vendor/jackocnr/intl-tel-input/build/js/intlTelInput-jquery.min.js"></script>
 <script src="../public/js/theme/sidenav-control.js"></script>
 

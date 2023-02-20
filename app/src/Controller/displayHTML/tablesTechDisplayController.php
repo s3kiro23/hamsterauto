@@ -1,133 +1,122 @@
-<?php 
-session_start();
-$currentTime = time();
-if(!isset($_SESSION['id']) || $currentTime > $_SESSION['expire']) {
-    $status = 2;
-    $msg = 'Nécessite une authentification, retour à la page de connexion';
-    session_unset();
-    session_destroy();
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-}else{
-    
+<?php
 
-require_once '../../Controller/shared.php';
-require_once '../../Controller/authorization.php';
+use HTML\GenerateDateHTML;
+use HTML\LoadTechHTML;
+use HTML\PaginationHTML;
+
+session_start();
+
 spl_autoload_register(function ($classe) {
     require '../../Entity/' . $classe . '.php';
 });
 
+require "../../Entity/HTML/LoadTechHTML.php";
+require "../../Entity/HTML/PaginationHTML.php";
+require "../../Entity/HTML/GenerateDateHTML.php";
+
+
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-$whoIs = false;
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    $whoIs = new User(decrypt($_SESSION['id'], false));
-}
-if (!getAuthorizationUser($whoIs)){
-    $status = 2;
-    session_destroy();
-    $msg = "Vous n'êtes pas autorisé à accéder à cette page ! <br> Redirection vers la page de login...";
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-}else{
-    $_SESSION['expire'] = $_SESSION['expire'] + (4*3600);
+$check = Security::check_security();
+
+if ($check != 'client') {
 
     switch ($_POST['request']) {
 
         /*Tableaux backoffice DEBUT*/
 
-        case 'vehiculeAttente':
+        case 'loadInterventionRecap' :
             setlocale(LC_TIME, "fr_FR", "French");
-            if(empty($_POST['currentDate']) or is_null($_POST['currentDate'])){
-                $currentDate = strtotime(date("d-m-Y"));
-            }else{
-                $currentDate =$_POST['currentDate'];
+            if (empty($_POST['currentDate']) or is_null($_POST['currentDate'])) {
+                $current_date = strtotime(date("d-m-Y"));
+            } else {
+                $current_date = $_POST['currentDate'];
             }
-            $html = '';
-            $htmlVide = HTML::listeVide();
-            $status = 0;
-            $state = 0;
-            $paginationHold = "";
-            $off7 = ($_POST['page'] - 1) * 5;
-            $tab_cars = ControleTech::checkAllRdv($off7, $state, $_POST['immat'],$currentDate);
-            $nbr_of_rdv = ControleTech::countRdv($state, $currentDate);
-            $totalPages = ceil($nbr_of_rdv / 5);
-            $timestamp = strtotime(date('d-m-Y'));
-            $jourRDV = HTML::generateDateBackOffice(date("d-m-Y"), $timestamp);
-            foreach ($tab_cars as $car) {
-                $html .= HTML::loadInterventions($car['id_controle'], $car['time_slot'], $car['nom_marque'], $car['nom_modele'], $car['immat_vehicule'], $currentDate);
-                $status = 1;
-            }
-            for ($i = 1; $i <= $totalPages; $i++) {
-                $paginationHold .= HTML::rdvPages($i, $i, $state);
-            }
-            echo json_encode(array("status" => $status, "msg" => $html, "msg2" => $htmlVide, "paginationHold" => $paginationHold));
-            break;
 
-        case 'interv_en_cours':
-            if(empty($_POST['currentDate']) or is_null($_POST['currentDate'])){
-                $currentDate = strtotime(date("d-m-Y"));
-            }else{
-                $currentDate =$_POST['currentDate'];
-            }
-            $off7 = "";
-            $html = '';
-            $status = 0;
-            $state = 1;
-            $htmlVide = HTML::intervVide();
-            $paginationInProgress = "";
-            if (isset($_POST['page'])) {
-                $off7 = ($_POST['page'] - 1) * 5;
-            }
-            $immat = '';
-            $tab_cars = ControleTech::checkAllRdv($off7, $state, $immat,  $currentDate);
-            $nbr_of_rdv = ControleTech::countRdv($state, $currentDate);
-            $totalPages = ceil($nbr_of_rdv / 5);
-            foreach ($tab_cars as $car) {
-                $tech = new User($car['num_tech']);
-                $html .= HTML::loadInterventionsEnCours($car['id_controle'], $car['time_slot'], $tech->getPrenom_user(), $car['nom_marque'], $car['immat_vehicule']);
-                $status = 1;
-            }
-            for ($i = 1; $i <= $totalPages; $i++) {
-                $paginationInProgress .= HTML::rdvPages($i, $i, $state);
-            }
-            echo json_encode(array("status" => $status, "msg" => $html, "msg2" => $htmlVide, "paginationInProgress" => $paginationInProgress));
-            break;
+            $registration = isset($_POST['registration']) ? $registration = $_POST['registration'] : "";
 
-        case 'load_termines':
-            if(empty($_POST['currentDate']) or is_null($_POST['currentDate'])){
-                $currentDate = strtotime(date("d-m-Y"));
-            }else{
-                $currentDate =$_POST['currentDate'];
-            }
-            $htmlVide = HTML::listeVideHistory();
-            $html = '';
-            $state = 2;
-            $status = 0;
-            $paginationOver = "";
-            $off7 = ($_POST['page'] - 1) * 5;
-            $immat='';
-            $tab_cars = ControleTech::checkAllRdv($off7, $state, $immat,  $currentDate);
-            $nbr_of_rdv = ControleTech::countRDV($state, null);
-            $totalPages = ceil($nbr_of_rdv / 5);
-            foreach ($tab_cars as $car) {
-                $status = 1;
-                $user = new User($car['id_user']);
-                if ($car['state'] == 2) {
-                    $html .= HTML::loadTerminesCTOK($car['id_controle'], $user->getNom_user(), $user->getTelephone_user(), $car['immat_vehicule']);
-                } elseif ($car['state'] == 3) {
-                    $html .= HTML::loadTerminesContreVisite($car['id_controle'], $user->getNom_user(), $user->getTelephone_user(), $car['immat_vehicule']);
-                } elseif ($car['state'] == 4) {
-                    $html .= HTML::loadTerminesAnnule($car['id_controle'], $user->getNom_user(), $user->getTelephone_user(), $car['immat_vehicule']);
+            if ($_POST['type'] == "awaiting") {
+                $timestamp = strtotime(date('d-m-Y'));
+                $tab_awaiting = Intervention::check_all_rdv(PaginationHTML::off7($_POST['page']), 0, $registration, $current_date);
+                $html_awaiting = $tab_awaiting ? "" : "<em style='font-size: x-large;'>Aucun véhicule en attente</em>";
+                $pagination_awaiting = PaginationHTML::dashTechPagination(0, $current_date);
+                foreach ($tab_awaiting as $awaiting) {
+                    $html_awaiting .= LoadTechHTML::pending(
+                        Security::encrypt($awaiting['id_intervention'], false),
+                        $awaiting['time_slot'],
+                        $awaiting['brand_name'],
+                        $awaiting['model_name'],
+                        $awaiting['registration'],
+                        $current_date
+                    );
                 }
+                echo json_encode(array(
+                    'htmlAwaiting' => $html_awaiting,
+                    'paginationAwaiting' => $pagination_awaiting,
+                    'user' => $_SESSION['typeUser']
+                ));
             }
-            for ($i = 1; $i <= $totalPages; $i++) {
-                $paginationOver .= HTML::rdvPages($i, $i, $state);
-            }
-            echo json_encode(array("msg" => $html, "paginationOver" => $paginationOver, "status" => $status, "html_vide" => $htmlVide));
 
+            if ($_POST['type'] == "inprogress") {
+                $pagination_in_progress = PaginationHTML::dashTechPagination(1, $current_date);
+                $tab_in_progress = Intervention::check_all_rdv(PaginationHTML::off7($_POST['page']), 1, null, $current_date);
+                $html_in_progress = $tab_in_progress ? "" : "<em style='font-size: x-large'>Pas d'interventions en cours</em>";
+                foreach ($tab_in_progress as $in_progress) {
+                    $tech = new User($in_progress['num_tech']);
+                    $html_in_progress .= LoadTechHTML::inProgress(
+                        $in_progress['id_intervention'],
+                        $in_progress['time_slot'],
+                        $tech->getFirstname_user(),
+                        $in_progress['brand_name'],
+                        $in_progress['registration']
+                    );
+                }
+                echo json_encode(array(
+                    'htmlInProgress' => $html_in_progress,
+                    'paginationInProgress' => $pagination_in_progress,
+                ));
+            }
+
+            if ($_POST['type'] == "archives") {
+                $pagination_archives = PaginationHTML::dashTechPagination(2, $current_date);
+                $tab_archives = Intervention::check_all_rdv(PaginationHTML::off7($_POST['page']), 2, null, $current_date);
+                $html_archives = $tab_archives ? "" : "<em style='font-size: x-large'>Aucun historique disponible</em>";
+                foreach ($tab_archives as $archive) {
+                    $user = new User($archive['id_user']);
+                    $html_archives .= LoadTechHTML::techHistory(
+                        $archive['id_archive'],
+                        $user->getLastname_user(),
+                        $user->getPhone_user(),
+                        $archive['registration'],
+                        $archive['state']
+                    );
+                }
+                echo json_encode(array(
+                    'htmlTechHistory' => $html_archives,
+                    'paginationTechHistory' => $pagination_archives,
+                    'typeUser' => $_SESSION['typeUser']
+                ));
+            }
+
+            break;
+
+        case 'display_registration':
+            $html = LoadTechHTML::filtre_registration();
+            echo json_encode($html);
+            break;
+
+        case 'autorisation':
+            $msg = "";
+            $status = 1;
+            echo json_encode(array('msg' => $msg, 'status' => $status));
             break;
 
         /*Tableaux backoffice FIN*/
     }
-}
+} else {
+    session_destroy();
+    $msg = "Accès interdit";
+    $status = 0;
+    echo json_encode(array('msg' => $msg, 'status' => $status));
 }

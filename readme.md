@@ -1,12 +1,43 @@
-### Compte MAIL :
+### **Versions minimums**
+<br />
+
+Afin de s'assurer du bon fonctionnement des différents process de l'application, voici les versions minimums des technologies à respecter :
+
+- WampServer 3.3.0
+- MySql 8.0.31
+- PHP 7.4.33
+
+<br />
+Vérifier également que la version de PHP est présente dans les variables d'environnement **système** de la machine:
+
+![Alt text](docs\env_var.PNG?raw=true "Screen var env")
+
+----------------
+
+### **Compte MAIL**
 
 - user = shadow.s3kir0@gmail.com
 - pwd = @flaut0!@20
 - pwd appli (générer compte gmail) = qfujcjiaoxuuhqni
 
-### Config CRON pour l'envoi des mails et SMS :
+----------------
 
-Une tâche cron tourne toutes les minutes et execute un script ("/usr/sbin/cron.10sec") qui va parcourir le dossier "/etc/cron.10sec" toutes les 10sec pendant 50sec et lancer les commandes présentent.
+### **Config CRON pour l'envoi des mails et SMS automatique en Prod**
+<br />
+
+#### Une tâche cron tourne toutes les minutes :
+
+    * *     * * *   root    /usr/sbin/cron.10sec > /dev/null
+
+#### Puis on execute un script ("/usr/sbin/cron.10sec") qui va parcourir le dossier "/etc/cron.10sec" toutes les 10sec pendant 50sec et lancer les commandes présentent :
+
+    #!/bin/bash
+
+    for COUNT in `seq 5` ; do
+        run-parts --report /etc/cron.10sec &
+        disown
+        sleep 10
+    done
 
 ## Procédure d'installation du projet avec docker :
 

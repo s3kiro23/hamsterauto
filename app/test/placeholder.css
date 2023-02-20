@@ -1,0 +1,38 @@
+body {
+	margin: 0;
+	height: 100vh;
+	width: 100vw;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: linear-gradient(135deg, #f83920, #f3930d);
+	font-family: "Poppins", "Helvetica", sans-serif;
+	font-size: 1.5rem;
+}
+
+form {
+	position: relative;
+}
+
+input {
+	border: none;
+	border-bottom: 2px solid #fff;
+	background-color: unset;
+	outline: none;
+	font-family: "Poppins", "Helvetiva", sans-serif;
+	font-size: 1em;
+	color: #fff;
+	min-width: 60vmin;
+}
+
+label {
+	position: absolute;
+	left: 0;
+	color: #fff;
+   transform-origin: 0 0;
+   transition: transform 0.2s ease-in-out;
+}
+
+input:focus + label, input:not(:placeholder-shown) + label {
+   transform: translateY(-1em) scale(0.8);
+}

@@ -1,0 +1,28 @@
+{% for archive in archives %}
+
+    <tr id='{{ archive.getId_archive }}' align='center' class='text-dark'>
+        
+        <td>{{ archive.getRegistration}}</td>
+
+        <td>{{ archive.getLastname_user }}</td>
+        
+        <td>{{ archive.getEmail_user }}</td>
+
+        <td>{{ archive.getPhone_user }}</td>
+        {% if archive.getState == 2 %}
+            <td class='text-center'><span onclick='showContreVisiteAdmin(`{{ archive.getId_archive }}`)' type='button' class='badge rounded-pill bg-success bg-opacity-25 text-success' >Validé</span></td>
+        {% elseif archive.getState == 3 %}
+            <td class='text-center'><div onclick='showContreVisiteAdmin(`{{ archive.getId_archive }}`)' 
+                    type='button'  
+                    class='badge rounded-pill bg-warning bg-opacity-25 text-warning'>Contre-Visite</div>
+            </td>
+        {% else %}
+        <td class='text-center'><div class="badge rounded-pill bg-danger bg-opacity-25 text-danger fw-bold" >Annulé</div></td>
+        {% endif %}
+        
+
+        
+    </tr>
+
+
+{% endfor %}

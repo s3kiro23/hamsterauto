@@ -1,19 +1,9 @@
-<?php 
+<?php
 session_start();
-$currentTime = time();
-if(!isset($_SESSION['id']) || $currentTime > $_SESSION['expire']) {
-    $status = 2;
-    $msg = 'Nécessite une authentification, retour à la page de connexion';
-    session_unset();
-    session_destroy();
-    echo json_encode(array('msg' => $msg, 'status' => $status));
-}else {
-
 
 spl_autoload_register(function ($classe) {
     require '../Entity/' . $classe . '.php';
 });
-require_once 'shared.php';
 
 $db = new Database();
 $GLOBALS['db'] = $db->connexion();
@@ -22,79 +12,58 @@ switch ($_POST['request']) {
 
     case 'showInfo':
         setlocale(LC_TIME, "fr_FR", "French");
+        $rdv_id = Security::decrypt($_POST['rdvID'], false);
         $CG = "";
-        $current_CT = new ControleTech($_POST['rdvID']);
-        $carFile = new Upload($current_CT->getId_vehicule());  //Upload::checkFile($current_CT->getId_vehicule());
-        $car = new Vehicule($current_CT->getId_vehicule());
+        $current_CT = new Intervention($rdv_id);
+        $carFile = new Upload($current_CT->getId_vehicle());  //Upload::checkFile($current_CT->getId_vehicle());
+        $car = new Vehicle($current_CT->getId_vehicle());
         $owner = new User($current_CT->getId_user());
-        if ($carFile->checkFile()) {
-            $CG = $car->getCG($carFile->getFile_name(), $owner->getHash());
+        if ($carFile->check_file()) {
+            $CG = $car->get_CG($carFile->getFile_name(), $owner->getHash());
         }
         $bookedConvert = strtotime($current_CT->getBooked_date());
 
         echo json_encode(array(
-            "rdvID" => $_POST['rdvID'],
-            "timeslotID" => utf8_encode(strftime("%A %d %B %G", $current_CT->getTime_slot())) . " à " . strftime("%H" . "h" . "%M", $current_CT->getTime_slot()),
-            "booked_date" => utf8_encode(strftime("%A %d %B %G", $current_CT->getTime_slot())) . " à " . strftime("%H" . "h" . "%M", $bookedConvert),
-            "nom_user" => $owner->getNom_user(),
-            "prenom_user" => $owner->getPrenom_user(),
-            "tel_user" => $owner->getTelephone_user(),
+            "rdvID" => $rdv_id,
+            "timeslotID" => Convert::date_to_fullFR($current_CT->getTime_slot()) . " à " . date("H", $current_CT->getTime_slot()) . "h" . date("i", $current_CT->getTime_slot()),
+            "booked_date" => Convert::date_to_fullFR($current_CT->getTime_slot()) . " à " . date("H", $bookedConvert) . "h" . date("i", $bookedConvert),
+            "lastname_user" => $owner->getLastname_user(),
+            "firstname_user" => $owner->getFirstname_user(),
+            "phone_user" => $owner->getPhone_user(),
             "mail_user" => $owner->getEmail_user(),
             "CG" => $CG
         ));
 
         break;
 
-//    case 'showInfoCar':
-//
-//        $CG = "";
-//        $msg = "test";
-//        $user = new User(decrypt($_SESSION['id'], false));
-//        $check_currentCar = User::checkCars(decrypt($_SESSION['id'], false), $_POST['carID']);
-//        $carFile = new Upload($_POST['carID']);
-//        $car = new Vehicule($_POST['carID']);
-//        if ($carFile->checkFile()) {
-//            $CG = $car->getCG($carFile->getFile_name(), $user->getHash());
-//        }
-//
-//        echo json_encode(array(
-//            "marque" => $check_currentCar[0]['nom_marque'],
-//            "modele" => $check_currentCar[0]['nom_modele'],
-//            "immat" => $check_currentCar[0]['immat_vehicule'],
-//            "annee" => $check_currentCar[0]['annee_vehicule'],
-//            "carburant" => $check_currentCar[0]['carburant_vehicule'],
-//            "carteGrise" => $CG,
-//            "infos" => $check_currentCar[0]['infos_vehicule'],
-//        ));
-//        break;
-
     case 'addCar':
         $msg = "Véhicule enregistré !";
         $status = 1;
-        $carCheck = Vehicule::checkImmat($_POST['immat']);
-        if (checkField()) {
-            $status = 0;
-            $msg = checkField();
+        $data = json_decode($_POST['data'], true);
+        $car_check = Vehicle::check_registration($data['registration']);
+        $init_control = new Control();
+        $check = $init_control->check_fields($data);
+
+        if ($check['status'] == 0) {
+            $msg = $check['msg'];
+            $status = $check['status'];
         } else {
-            if ($carCheck) {
+            if ($car_check) {
                 $msg = 'Un véhicule existe déjà avec cette immatriculation! Nous contactons la police...';
                 $status = 0;
             } else {
-                Vehicule::newVehicule(
-                    decrypt($_SESSION['id'], false),
-                    $_POST['modele'],
-                    $_POST['immat'],
-                    $_POST['annee'],
-                    $_POST['carburant'],
+                Vehicle::new_vehicle(
+                    Security::decrypt($_SESSION['id'], false),
+                    $data['selectedModel'],
+                    $data['registration'],
+                    $data['inputYear'],
+                    $data['fuel'],
                     true
                 );
 
                 //Add traces in BDD
-                $traces = new Traces(0);
-                $traces->setId_user(decrypt($_SESSION['id'], false));
-                $traces->setType('car');
-                $traces->setAction('new');
-                $traces->create();
+                $traces = new Trace(0);
+                $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'new', 'car');
             }
         }
 
@@ -105,19 +74,17 @@ switch ($_POST['request']) {
     case 'modifyCar':
         $msg = "Véhicule modifié !";
         $status = 1;
-        $car = new Vehicule($_POST['idCar']);
-        $car->setId_modele($_POST['modele']);
-        $car->setImmat_vehicule($_POST['immat']);
-        $car->setAnnee_vehicule($_POST['annee']);
-        $car->setCarburant_vehicule($_POST['carburant']);
+        $data = json_decode($_POST['data'], true);
+        $car = new Vehicle(Security::decrypt($_POST['idCar'], true));
+        $car->setId_model($data['selectedModel']);
+        $car->setRegistration($data['registration']);
+        $car->setFirst_release($data['inputYear']);
+        $car->setFuel($data['fuel']);
         $car->update();
 
         //Add traces in BDD
-        $traces = new Traces(0);
-        $traces->setId_user(decrypt($_SESSION['id'], false));
-        $traces->setType('car');
-        $traces->setAction('modify');
-        $traces->create();
+        $traces = new Trace(0);
+        $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'modify', 'car');
 
         echo json_encode(array("msg" => $msg, 'status' => $status));
 
@@ -125,19 +92,26 @@ switch ($_POST['request']) {
 
     case 'deleteCar':
         $msg = "Suppression du véhicule...";
-        $car = new Vehicule($_POST['carID']);
+        $status = 0;
+        $carID = Security::decrypt($_POST['carID'], true);
+        $car = new Vehicle($carID);
         $car->setOwned(0);
         $car->update();
+        $car_bind_RDV = $car->check_bind_rdv($carID);
+        if (!is_null($car_bind_RDV)) {
+            $bindRDV = new Intervention($car_bind_RDV['id_intervention']);
+            $bindRDV->setState(4);
+            $bindRDV->setNum_tech(0);
+            $bindRDV->update();
+            $status = 1;
+        }
 
         //Add traces in BDD
-        $traces = new Traces(0);
-        $traces->setId_user(decrypt($_SESSION['id'], false));
-        $traces->setType('car');
-        $traces->setAction('delete');
-        $traces->create();
+        $traces = new Trace(0);
+        $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'delete', 'car');
 
-        echo json_encode(array("msg" => $msg));
+        echo json_encode(array("msg" => $msg, "status" => $status));
 
         break;
-    }}
+}
 

@@ -16,16 +16,14 @@ function login() {
     // console.log(1);
     $.ajax({
 
-        url: '../src/Controller/userController.php',
+        url: '../src/Controller/UserController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
             request: 'user_login',
         },
         success: function (response) {
-            // console.log(2);
             $(".user_login").html(response['login']);
-
         },
         error: function () {
 
@@ -35,20 +33,15 @@ function login() {
 
 
 let toProfil = function () {
-
-    console.log('Alpha');
     $.ajax({
-
-        url: '../src/Controller/carController.php',
+        url: '../src/Controller/CarController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
             request: 'to_profil',
         },
         success: function (response) {
-            console.log('successAlpha');
             window.location.replace('profil.html')
-
         },
         error: function () {
             console.log('errorAlpha');
@@ -80,7 +73,7 @@ let modify = function () {
             console.log('query_ajax');
             $.ajax({
 
-                url: '../src/Controller/userController.php',
+                url: '../src/Controller/UserController.php',
                 dataType: 'JSON',
                 type: 'POST',
                 data: {
@@ -115,7 +108,7 @@ let logout = function () {
     console.log(1);
     $.ajax({
 
-        url: '../src/Controller/userController.php',
+        url: '../src/Controller/UserController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
@@ -143,7 +136,7 @@ function modalCard() {
     // console.log(1);
     $.ajax({
 
-        url: '../src/Controller/userController.php',
+        url: '../src/Controller/UserController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
@@ -172,7 +165,7 @@ function modalCard() {
 let toHome = function () {
     console.log("tohome");
     $.ajax({
-        url: '../src/Controller/userController.php',
+        url: '../src/Controller/UserController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {

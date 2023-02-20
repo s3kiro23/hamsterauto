@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Database.php';
-require_once ROOT_DIR() . '/src/Controller/shared.php';
-
+spl_autoload_register(function ($classe) {
+    require $classe . ".php";
+});
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -12,11 +12,11 @@ class User
 
     private $id_user;
     private $civilite_user;
-    private $prenom_user;
-    private $nom_user;
+    private $firstname_user;
+    private $lastname_user;
     private $email_user;
-    private $telephone_user;
-    private $adresse_user;
+    private $phone_user;
+    private $adress_user;
     private $password_user;
     private $type;
     private $pwdExp_user;
@@ -38,16 +38,16 @@ class User
 
     public function checkData($id)
     {
-        $requete = "SELECT * FROM `users` WHERE `id_user` = '" .filter($id) . "'";
+        $requete = "SELECT * FROM `user` WHERE `id_user` = '" . filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
             $this->id_user = $data['id_user'];
             $this->civilite_user = $data['civilite_user'];
-            $this->nom_user = $data['nom_user'];
-            $this->prenom_user = $data['prenom_user'];
-            $this->telephone_user = $data['telephone_user'];
+            $this->lastname_user = $data['lastname_user'];
+            $this->firstname_user = $data['firstname_user'];
+            $this->phone_user = $data['phone_user'];
             $this->email_user = $data['email_user'];
-            $this->adresse_user = $data['adresse_user'];
+            $this->adress_user = $data['adress_user'];
             $this->password_user = $data['password_user'];
             $this->type = $data['type'];
             $this->pwdExp_user = $data['pwdExp_user'];
@@ -59,51 +59,91 @@ class User
         }
     }
 
-    static public function create($civilite_user, $prenom_user, $nom_user, $email_user, $telephone_user, $password_user, $type, $pwdExp_user, $hash)
+    static public function create($civilite_user, $firstname_user, $lastname_user, $email_user, $phone_user, $password_user, $type, $pwdExp_user, $hash)
     {
-        $requete = "INSERT INTO `users` (`civilite_user`, `prenom_user`, `nom_user`, `email_user`, `telephone_user`, 
+        $requete = "INSERT INTO `user` (`civilite_user`, `firstname_user`, `lastname_user`, `email_user`, `phone_user`, 
                      `password_user`, `type`, `pwdExp_user`, `hash`) 
-                    VALUES ('" .filter($civilite_user) . "','" .filter($prenom_user) . "',
-                    '" .filter($nom_user) . "','" .filter($email_user) . "',
-                    '" .filter($telephone_user) . "','" .filter(password_hash($password_user, PASSWORD_BCRYPT)) . "',
-                    '" .filter($type) . "','" .filter($pwdExp_user) . "',
-                    '" .filter($hash) . "')";
-                    error_log($requete);
-        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+                    VALUES ('" . filter($civilite_user) . "','" . filter($firstname_user) . "',
+                    '" . filter($lastname_user) . "','" . filter($email_user) . "',
+                    '" . filter($phone_user) . "','" . filter(password_hash($password_user, PASSWORD_BCRYPT)) . "',
+                    '" . filter($type) . "','" . filter($pwdExp_user) . "',
+                    '" . filter($hash) . "')";
+        mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $GLOBALS['Database']->insert_id;
 
     }
 
+    static public function create_user_admin($civilite_user, $firstname_user, $lastname_user, $email_user, $adress, $phone_user, $password_user, $type, $pwdExp_user, $hash)
+    {
+        $requete = "INSERT INTO user (civilite_user, firstname_user, lastname_user, email_user, adress_user, phone_user, 
+                     password_user, type, pwdExp_user, hash) 
+                    VALUES ('" .filter($civilite_user) . "','" .filter($firstname_user) . "',
+                    '" .filter($lastname_user) . "','" .filter($email_user) . "',
+                    '" .filter($adress) . "',
+                    '" .filter($phone_user) . "','" .filter(password_hash($password_user, PASSWORD_BCRYPT)) . "',
+                    '" .filter($type) . "','" .filter($pwdExp_user) . "',
+                    '" .filter($hash) . "')";
+        mysqli_query($GLOBALS['Database'], $requete) or die;
+
+        return $GLOBALS['Database']->insert_id;
+    }
+
+    static public function count_users(){
+        $requete = "SELECT COUNT(*) as nbUsers FROM user";
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        $data = mysqli_fetch_assoc($result);
+        return (int)$data['nbUsers'];
+    }
+
+    static public function check_all_users($lastname, $firstname, $adress, $phone, $mail, $type, $active)
+    {
+        $users = array();
+        $requete = "SELECT * FROM user WHERE lastname_user LIKE '%" .filter($lastname). "%' 
+                    AND firstname_user LIKE '%" .filter($firstname). "%' 
+                    AND IFNULL(adress_user, '')LIKE '%" .filter($adress). "%'
+                    AND phone_user LIKE '%" .filter($phone). "%' 
+                    AND email_user LIKE '%" .filter($mail). "%' 
+                    AND type LIKE '%" .filter($type). "%' 
+                    AND is_active LIKE '%" .filter($active). "%'
+                    ORDER BY lastname_user ASC";
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        while ($data = mysqli_fetch_assoc($result)) {
+            array_push($users, new User($data['id_user'], $data['lastname_user'],$data['adress_user'],
+            $data['firstname_user'], $data['phone_user'], $data['email_user'], $data['type'], $data['is_active']));
+        }
+        return $users;
+    }
+
     static public function random_hash()
     {
 
-        $longueur = 30;
-        $listeCar = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!%@$#?';
+        $lenght = 30;
+        $list_char = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!%@$#?';
         $chaine = '';
-        $max = mb_strlen($listeCar, '8bit') - 1;
-        for ($i = 0; $i < $longueur; ++$i) {
-            $chaine .= $listeCar[random_int(0, $max)];
+        $max = mb_strlen($list_char, '8bit') - 1;
+        for ($i = 0; $i < $lenght; ++$i) {
+            $chaine .= $list_char[random_int(0, $max)];
         }
         return $chaine;
     }
 
     public function update()
     {
-        $requete = "UPDATE `users` SET `nom_user`='" .filter($this->nom_user) . "', `prenom_user`='" .filter($this->prenom_user) . "',
-        `email_user`='" .filter($this->email_user) . "', `telephone_user`='" .filter($this->telephone_user) . "',
-        `adresse_user`='" .filter($this->adresse_user) . "', `password_user`='" .filter($this->password_user) . "',
-        `pwdExp_user`='" .filter($this->pwdExp_user) . "', `a2f`='" .filter($this->a2f) . "',
-        `img_profile`='" .filter($this->img_profile) . "'
-        WHERE `id_user` ='" .filter($this->id_user) . "'";
+        $requete = "UPDATE `user` SET `lastname_user`='" . filter($this->lastname_user) . "', `firstname_user`='" . filter($this->firstname_user) . "',
+        `email_user`='" . filter($this->email_user) . "', `phone_user`='" . filter($this->phone_user) . "',
+        `adress_user`='" . filter($this->adress_user) . "', `password_user`='" . filter($this->password_user) . "',
+        `pwdExp_user`='" . filter($this->pwdExp_user) . "', `a2f`='" . filter($this->a2f) . "', `is_active`='" . filter($this->is_active) . "',
+        `img_profile`='" . filter($this->img_profile) . "'
+        WHERE `id_user` ='" . filter($this->id_user) . "'";
         mysqli_query($GLOBALS['Database'], $requete) or die;
     }
 
-    public function checkUploadedFiles()
+    public function check_uploaded_files()
     {
         $filesChecked = [];
 
-        $requete = "SELECT * FROM `upload` WHERE `id_user` = '" .filter($this->id_user) . "'";
+        $requete = "SELECT * FROM `upload` WHERE `id_user` = '" . filter($this->id_user) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
             $filesChecked[] = $data;
@@ -111,84 +151,126 @@ class User
         return $filesChecked;
     }
 
-    public function disable($id)
-    {
-        $id_user = $id;
-        $requete = "UPDATE `users` 
-                    INNER JOIN `vehicules` ON `vehicules`.`id_user` = `users`.`id_user`
-                    INNER JOIN `controle_tech` ON `controle_tech`.`id_user` = `users`.`id_user`
-
-                    SET `users`.`is_active`='" .filter(0) . "',
-                        `vehicules`.`owned` ='" .filter(0) . "',
-                        `controle_tech`.`state`='" .filter(4) . "'
-                    WHERE `users`.`id_user` ='" .filter($id_user) . "'";
-            error_log($requete);
-            mysqli_query($GLOBALS['Database'], $requete) or die;
-
-    }
-
-    static public function checkUser($mail)
-    {
-        $userCheck = false;
-
-        $requete = "SELECT * FROM `users` WHERE `email_user` = '" .filter($mail) . "'";
+    public function count_cars($id){
+        $car_check = false;
+        $requete = "SELECT * FROM vehicle
+        WHERE id_user = '" .filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
-            $userCheck[] = $data;
+            $car_check = true;
+        }
+        return $car_check;
+    }
+
+    public function enable($id, $user_cars)
+    {
+        if($user_cars){
+            $requete = "UPDATE user 
+                        INNER JOIN vehicle ON vehicle.id_user = user.id_user
+                        SET user.is_active='" .filter(1) . "',
+                            vehicle.owned ='" .filter(1) . "'
+                        WHERE user.id_user ='" .filter($id) . "' ";
+        }else{
+            $requete = "UPDATE user
+                        SET user.is_active='" .filter(1) . "'
+                        WHERE user.id_user ='" .filter($id) . "' ";
+        }
+        mysqli_query($GLOBALS['Database'], $requete) or die;
+    }
+
+    public function disable($car_check, $rdv_check)
+    {
+        if ($car_check && $rdv_check) {
+            $requete = "UPDATE user 
+                    INNER JOIN vehicle ON vehicle.id_user = user.id_user
+                    INNER JOIN awaiting_intervention ON awaiting_intervention.id_user = user.id_user
+                    SET user.is_active='" .filter(0) . "',
+                        vehicle.owned ='" .filter(0) . "',
+                        awaiting_intervention.state='" .filter(4) . "'
+                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+        } else if (!$car_check && $rdv_check){
+            $requete = "UPDATE user 
+                    INNER JOIN awaiting_intervention ON awaiting_intervention.id_user = user.id_user
+                    SET user.is_active='" .filter(0) . "',
+                        awaiting_intervention.state='" .filter(4) . "'
+                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+        } else if ($car_check && !$rdv_check) {
+            $requete = "UPDATE user 
+                    INNER JOIN vehicle ON vehicle.id_user = user.id_user
+                    SET user.is_active='" .filter(0) . "',
+                        vehicle.owned ='" .filter(0) . "'
+                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+        } else if (!$car_check && !$rdv_check) {
+            $requete = "UPDATE user 
+                    SET user.is_active='" .filter(0) . "'
+                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+        }
+            mysqli_query($GLOBALS['Database'], $requete) or die;
+    }
+
+    static public function check_user($mail)
+    {
+        $user_check = false;
+
+        $requete = "SELECT * FROM `user` WHERE `email_user` = '" . filter($mail) . "'";
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        if ($data = mysqli_fetch_assoc($result)) {
+            $user_check = $data;
         }
 
-        return $userCheck;
+        return $user_check;
 
     }
 
-    static public function checkCars($id_user, $id_vehicule)
+    static public function check_cars($id_user, $id_vehicle)
     {
 
         $tab_cars = [];
 
-        if ($id_vehicule) {
-            $requete = "SELECT * FROM `vehicules`   
-                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
-                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque` 
-                    WHERE `id_user` = '" .filter($id_user) . "'
-                    AND `id_vehicule`= '" .filter($id_vehicule) . "'";
+        if ($id_vehicle) {
+            $requete = "SELECT * FROM `vehicle`   
+                    INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+                    INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand` 
+                    WHERE `id_user` = '" . filter($id_user) . "'
+                    AND `id_vehicle`= '" . filter($id_vehicle) . "'";
         } else {
-
-            $requete = "SELECT * FROM `vehicules` 
-                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
-                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque` 
-                    WHERE `id_user` = '" .filter($id_user) . "'
-                    AND `owned` = '" .filter(true) . "'";
+            $requete = "SELECT * FROM `vehicle` 
+                    INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+                    INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand` 
+                    WHERE `id_user` = '" . filter($id_user) . "'
+                    AND `owned` = '" . filter(true) . "'";
         }
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
+            $data['brand_name'] = strtolower($data['brand_name']);
+            $data['brand_name'] = str_replace(" ","",$data['brand_name']);
             $tab_cars[] = $data;
         }
 
         return $tab_cars;
     }
 
-    static public function checkRdv($id_user, $id_vehicule)
+    static public function check_rdv($id_user, $id_vehicle)
     {
 
         $tab_rdv = [];
 
-        if ($id_vehicule) {
-            $requete = "SELECT * FROM `controle_tech` 
-                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
-                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
-                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`
-                    WHERE `controle_tech`.`id_user` = '" .filter($id_user) . "' 
-                    AND `controle_tech`.`id_vehicule` = '" .filter($id_vehicule) . "'
-                    AND `state` < '" .filter(2) . "'";
+        if ($id_vehicle) {
+            $requete = "SELECT * FROM `awaiting_intervention` 
+                    INNER JOIN `vehicle` ON `awaiting_intervention`.`id_vehicle` = `vehicle`.`id_vehicle`
+                    INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+                    INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand`
+                    WHERE `awaiting_intervention`.`id_user` = '" . filter($id_user) . "' 
+                    AND `awaiting_intervention`.`id_vehicle` = '" . filter($id_vehicle) . "'
+                    AND `state` < '" . filter(2) . "'";
         } else {
-            $requete = "SELECT * FROM `controle_tech` 
-                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
-                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
-                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`
-                    WHERE `controle_tech`.`id_user` = '" .filter($id_user) . "'
-                    AND `state` < '" .filter(2) . "'";
+            $requete = "SELECT * FROM `awaiting_intervention` 
+                    INNER JOIN `vehicle` ON `awaiting_intervention`.`id_vehicle` = `vehicle`.`id_vehicle`
+                    INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+                    INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand`
+                    WHERE `awaiting_intervention`.`id_user` = '" . filter($id_user) . "'
+                    AND `state` < '" . filter(2) . "'";
         }
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
@@ -198,18 +280,18 @@ class User
         return $tab_rdv;
     }
 
-    static public function checkHistory($id_user, $off7)
+    static public function check_history($id_user, $off7)
     {
 
         $tab_history = [];
 
-        $requete = "SELECT * FROM `controle_tech` 
-                    INNER JOIN `vehicules` ON `controle_tech`.`id_vehicule` = `vehicules`.`id_vehicule`
-                    INNER JOIN `modeles` ON `vehicules`.`id_modele` = `modeles`.`id_modele`
-                    INNER JOIN `marques` ON `modeles`.`id_marque` = `marques`.`id_marque`
-                    WHERE `controle_tech`.`id_user` = '" .filter($id_user) . "'
-                    AND `state` >= '" .filter(2) . "'
-                    ORDER BY `id_controle` DESC LIMIT 5 OFFSET $off7 ";
+        $requete = "SELECT * FROM `archive` 
+                    INNER JOIN `vehicle` ON `archive`.`id_vehicle` = `vehicle`.`id_vehicle`
+                    INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+                    INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand`
+                    WHERE `archive`.`id_user` = '" . filter($id_user) . "'
+                    AND `state` >= '" . filter(2) . "'
+                    ORDER BY `time_slot` DESC LIMIT 5 OFFSET $off7 ";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
 
         while ($data = mysqli_fetch_assoc($result)) {
@@ -218,11 +300,11 @@ class User
         return $tab_history;
     }
 
-    static public function countHistory($id_user)
+    static public function count_history($id_user)
     {
-        $requete = "SELECT count(*) AS nbHistory FROM `controle_tech`        
-                    WHERE `id_user` = '" .filter($id_user) . "'
-                    AND `state` >= '" .filter(2) . "'";
+        $requete = "SELECT count(*) AS nbHistory FROM `archive`        
+                    WHERE `id_user` = '" . filter($id_user) . "'
+                    AND `state` >= '" . filter(2) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         $data = mysqli_fetch_assoc($result);
         return (int)$data['nbHistory'];
@@ -235,67 +317,91 @@ class User
         $code = random_int(1000, 10000);
 
         $requete = "INSERT INTO `sms` (`id_user`, `code`) 
-                    VALUES ('" .filter($id_user) . "',
-                    '" .filter($code) . "')";
+                    VALUES ('" . filter($id_user) . "',
+                    '" . filter($code) . "')";
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $code;
 
     }
 
-    static public function checkSmsCode($id_user, $input)
+    static public function check_sms_code($id_user, $input)
     {
-        $smsCheck = false;
+        $sms_check = false;
 
-        $requete = "SELECT * FROM `sms` WHERE `id_user` = '" .filter($id_user) . "' 
-                    AND `code` = '" .filter($input) . "' 
+        $requete = "SELECT * FROM `sms` WHERE `id_user` = '" . filter($id_user) . "' 
+                    AND `code` = '" . filter($input) . "' 
                     AND `state` = 0";
+
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
-            $smsCheck = $data;
+            $sms_check = $data;
         }
-        return $smsCheck;
+        return $sms_check;
     }
 
-    static public function updateSMS($id_user)
+    static public function count_sms($id_user)
+    {
+        $requete = "SELECT count(*) AS nbSMS FROM `sms`        
+                    WHERE `id_user` = '" . filter($id_user) . "'
+                    AND `state` = '" . filter(0) . "'";
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        $data = mysqli_fetch_assoc($result);
+        return (int)$data['nbSMS'];
+    }
+
+    static public function update_sms($id_user)
     {
 
-        $requete = "UPDATE `sms` SET `state`='" .filter(1) . "' WHERE `id_user` ='" .filter($id_user) . "'";
+        $requete = "UPDATE `sms` SET `state`='" . filter(1) . "' WHERE `id_user` ='" . filter($id_user) . "'";
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
     }
 
-    static public function request($id_user)
+    public function request()
     {
 
-        $hash = random_hash();
+        $hash = Security::random_hash();
 
         $requete = "INSERT INTO request (`id_user`, `hash`)
-                VALUES ('" .filter($id_user) . "', '" .filter($hash) . "')";
+                VALUES ('" . filter($this->id_user) . "', '" . filter($hash) . "')";
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $hash;
 
     }
 
-    static public function checkRequest($hash)
+    public function check_request()
     {
-        $requestCheck = false;
-
-        $requete = "SELECT * FROM `request` WHERE hash= '" .filter($hash) . "' AND state= '" .filter(0) . "'";
+        $request_check = [];
+        $requete = "SELECT * FROM `request` WHERE `id_user`= '" . filter($this->id_user) . "' AND state= '" . filter(0) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
-        if ($data = mysqli_fetch_assoc($result)) {
-            $requestCheck = $data;
+        while ($data = mysqli_fetch_assoc($result)) {
+            $request_check[] = $data;
         }
 
-        return $requestCheck;
+        return $request_check;
+    }
+
+    static public function check_token($hash)
+    {
+        $request_check = false;
+
+        $requete = "SELECT * FROM `request` WHERE hash= '" .filter($hash) . "' AND state= '" .filter(0) . "'";
+        error_log('REQUETE TOKEN   '.$requete);
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        if ($data = mysqli_fetch_assoc($result)) {
+            $request_check = $data;
+        }
+
+        return $request_check;
 
     }
 
-    static public function updateRequest($id_user)
+    static public function update_request($id_user)
     {
-        $requete = "UPDATE `request` SET state = '" .filter(1) . "'
-                    WHERE id_user = '" .filter($id_user) . "'";
+        $requete = "UPDATE `request` SET state = '" . filter(1) . "'
+                    WHERE id_user = '" . filter($id_user) . "'";
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
     }
@@ -320,24 +426,24 @@ class User
         $this->civilite_user = $civilite_user;
     }
 
-    public function getPrenom_user()
+    public function getFirstname_user()
     {
-        return $this->prenom_user;
+        return $this->firstname_user;
     }
 
-    public function setPrenom_user($prenom_user)
+    public function setFirstname_user($firstname_user)
     {
-        $this->prenom_user = $prenom_user;
+        $this->firstname_user = $firstname_user;
     }
 
-    public function getNom_user()
+    public function getLastname_user()
     {
-        return $this->nom_user;
+        return $this->lastname_user;
     }
 
-    public function setNom_user($nom_user)
+    public function setLastname_user($lastname_user)
     {
-        $this->nom_user = $nom_user;
+        $this->lastname_user = $lastname_user;
     }
 
     public function getEmail_user()
@@ -350,24 +456,24 @@ class User
         $this->email_user = $email_user;
     }
 
-    public function getTelephone_user()
+    public function getPhone_user()
     {
-        return $this->telephone_user;
+        return $this->phone_user;
     }
 
-    public function setTelephone_user($telephone_user)
+    public function setPhone_user($phone_user)
     {
-        $this->telephone_user = $telephone_user;
+        $this->phone_user = $phone_user;
     }
 
-    public function getAdresse_user()
+    public function getAdress_user()
     {
-        return $this->adresse_user;
+        return $this->adress_user;
     }
 
-    public function setAdresse_user($adresse_user)
+    public function setAdress_user($adress_user)
     {
-        $this->adresse_user = $adresse_user;
+        $this->adress_user = $adress_user;
     }
 
     public function getPassword_user()

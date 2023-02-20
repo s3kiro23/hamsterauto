@@ -29,7 +29,7 @@ services:
     image: mysql
     restart: always
     volumes:
-      - ./app/migrations/dump_hamsterauto.sql:/docker-entrypoint-initdb.d/dump_hamsterauto.sql
+      - ./app/migrations/hamsterauto_dump_SQL.sql:/docker-entrypoint-initdb.d/hamsterauto_dump_SQL.sql
       - ./app/migrations/create-user.sql:/docker-entrypoint-initdb.d/create-user.sql
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD

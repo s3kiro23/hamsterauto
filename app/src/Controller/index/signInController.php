@@ -1,6 +1,5 @@
 <?php
 session_start();
-require_once __DIR__ . '/../shared.php';
 
 spl_autoload_register(function ($classe) {
     require '../../Entity/' . $classe . '.php';
@@ -12,71 +11,71 @@ $GLOBALS['db'] = $db->connexion();
 switch ($_POST['request']) {
 
     case 'captcha' :
-        $get_captcha = captcha();
+        $check = new Control();
+        $get_captcha = $check->captcha();
         echo json_encode(array('get_captcha' => $get_captcha));
         break;
 
-    case 'to_logIn' :
-        $msg = "Redirection vers la page de connexion en cours!";
-        echo json_encode(array("msg" => $msg));
-        break;
-
-
     case 'signIn' :
+        $data = json_decode($_POST['tabInput'], true);
         $status = 1;
         $msg = "Votre compte a été créé avec succès !";
-        $user = User::checkUser($_POST['email']);
+        $user = User::check_user($data['inputEmail']);
+        $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite'];
+        $init_control = new Control();
+        $check = $init_control->check_fields($data);
 
-        if (checkField()) {
-            $status = 0;
-            $msg = checkField();
-        } else if (!checkPassword($_POST['passwd'], $_POST['passwd2'])) {
-            $status = 0;
-            $msg = "Les mots de passe ne correspondent pas !";
-        } else if (!checkCaptcha($_POST['checkCap'], $_POST['captcha'])) {
-            $status = 0;
-            $msg = "Les captcha ne correspondent pas !";
+        if ($check['status'] == 0) {
+            $msg = $check['msg'];
+            $status = $check['status'];
         } else if ($user) {
             $status = 0;
             $msg = "Le login existe déjà!";
         }
-        /*        else if (!checkPasswdLenght($_POST['passwd'])){
-                    $status = 0;
-                    $msg = "Condition de création du mot de passe non remplies!";
-                }*/
 
         if ($status == 1) {
-            $currenPwdExp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
+            $current_pwd_exp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
             $client = User::create(
-                $_POST['civilite'],
-                $_POST['prenom'],
-                $_POST['nom'],
-                $_POST['email'],
-                $_POST['tel'],
-                $_POST['passwd'],
+                $data['civilite'],
+                $data['inputPrenom'],
+                $data['inputNom'],
+                $data['inputEmail'],
+                $data['inputTel'],
+                $data['inputPassword'],
                 "client",
-                $currenPwdExp,
-                User::random_hash(),
+                $current_pwd_exp,
+                User::random_hash()
             );
+            $user = new User($client);
+            $token = $user->request();
 
             //Add Job in queue
             $mail = new Mailing();
-            $mailTemplate = $mail->getSign_Up($_POST['email'], $_POST['civilite'], $_POST['nom']);
-            $queued = new Queued(0);
-            $queued->setType("mail");
-            $queued->setTemplate(json_encode($mailTemplate));
-            $queued->create();
+            $mail->setSignIn_Job($user, $token);
 
             //Add traces in BDD
-            $traces = new Traces(0);
-            $traces->setId_user($client);
-            $traces->setType('account');
-            $traces->setAction('new');
-            $traces->create();
+            $traces = new Trace(0);
+            $traces->setTracesIN($client, 'new', 'account');
         }
-
 
         echo json_encode(array("status" => $status, "msg" => $msg));
 
+        break;
+
+    case 'activateAccount':
+        $msg = '';
+        $token = $_POST['token'];
+        error_log('TOKEN   '.$token);
+        $traces = new Trace(0);
+        $user_token = User::check_token($token);
+        if( $user_token){
+            $user = new User($user_token['id_user']);
+            $user->setIs_active(1);
+            $user->update();
+            User::update_request($user_token['id_user']);
+            $traces->setTracesIN($user_token['id_user'], 'account', 'activate');
+            $msg = 'Votre compte est activé, bienvenue sur Hamster-Auto!';
+        }
+        echo json_encode(array("msg" => $msg));
         break;
 }

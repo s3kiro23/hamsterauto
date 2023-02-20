@@ -3,7 +3,6 @@
 spl_autoload_register(function ($classe) {
     require '../../Entity/' . $classe . '.php';
 });
-require_once '../../Controller/shared.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -11,34 +10,45 @@ $GLOBALS['Database'] = $db->connexion();
 switch ($_POST['request']) {
 
     case 'newRDVHomePage' :
-        $msg = '<div>Vous allez recevoir prochainement un SMS de confirmation au numéro indiqué.</div>';
+        $msg = 'Vous allez recevoir prochainement un SMS de confirmation au numéro indiqué.';
         $status = 1;
-        $carCheck = Vehicule::checkImmat($_POST['immat']);
+        $data = json_decode($_POST['data'], true);
+        $car_check = Vehicle::check_registration($data['registration']);
+        $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite'];
+        $carburant = empty($data['fuel']) ? $data['fuel'] = "" : $data['fuel'];
+        $creneau = empty($data['timeSlot']) ? $data['timeSlot'] = "" : $data['timeSlot'];
+        $init_control = new Control();
+        $check = $init_control->check_fields($data);
 
-        if (checkField()) {
-            $status = 0;
-            $msg = checkField();
-        } else if ($carCheck) {
-            $msg = 'Un véhicule existe déjà avec cette immatriculation! Nous contactons la police...';
+        if ($check['status'] == 0) {
+            $msg = $check['msg'];
+            $status = $check['status'];
+        } else if ($car_check) {
+            $msg = 'Un véhicule existe déjà avec cette registrationriculation! Nous contactons la police...';
             $status = 0;
         } else {
-            $currenPwdExp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
-            $client_tmp = User::create($_POST['civilite'], $_POST['prenom'], $_POST['nom'], $_POST['email'],
-                $_POST['tel'], NULL, 'temp', $currenPwdExp, NULL);
-            $carID = Vehicule::newVehicule($client_tmp, $_POST['modele'], $_POST['immat'], $_POST['annee'], $_POST['carburant'], 0);
-            $ctID = ControleTech::newCT($client_tmp, $_POST['creneau'], $carID, 0);
+            $current_pwd_exp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
+            $time_slot = Security::decrypt($data['timeSlot'],"");
+            $check = Security::check_timeslots($time_slot);
+            if(!$check){
+                $status = 2;
+                $msg = 'Touche pas au code !';
+            }else{
+                $client_tmp = User::create($civilite, $data['inputPrenom'], $data['inputNom'], $data['inputEmail'],
+                $data['inputTel'], NULL, 'temp', $current_pwd_exp, NULL);
+                $car_ID = Vehicle::new_vehicle($client_tmp, $data['selectedModel'], $data['registration'], $data['inputYear'], $carburant, 0);
+                $ct_ID = Intervention::new_CT($client_tmp, $time_slot, $car_ID, 0);
 
-            //Add traces in BDD
-            $traces = new Traces(0);
-            $traces->setId_user($client_tmp);
-            $traces->setType('intervention');
-            $traces->setAction('new');
-            $traces->create();
 
-            //Add Job Sms in Queue table
-            $dataSMS = ["CT" => $ctID, "car" => $carID, "user" => $client_tmp];
-            $sms = new SMS();
-            $sms->setSMSJobRDV($dataSMS);
+                //Add traces in BDD
+                $traces = new Trace(0);
+                $traces->setTracesIN($client_tmp, 'new', 'intervention');
+
+                //Add Job Sms in Queue table
+                $data_SMS = ["CT" => $ct_ID, "car" => $car_ID, "user" => $client_tmp];
+                $sms = new SMS(0);
+                $sms->setSMS_JobRDV($data_SMS);
+            }
         }
 
         echo json_encode(array("status" => $status, "msg" => $msg));

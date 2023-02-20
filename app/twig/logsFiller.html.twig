@@ -1,0 +1,17 @@
+{% for log in logs %}
+    
+    <tr id='{{ log['id_trace'] }}' align='center' class='text-dark'>
+
+        <td>{{ log['email_user'] }}</td>
+
+        <td>{{ log['typeLog'] }} 
+            <i class="fa-solid fa-right-to-bracket text-{% if log['action'] == 'logged' or log['action'] == 'new' 
+            or log['action'] == 'created by admin' %}success{% elseif log['action'] == 'modify' %}warning
+            {% else %}danger{% endif %} fw-bold"></i>&nbsp;{{ log['action'] }}
+        </td>  
+
+        <td>{{ log['triggered_at'] }}</td>
+
+    </tr>
+
+{% endfor %}

@@ -4,12 +4,69 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="../public/assets/css/style.css">
     <link rel="stylesheet" href="https://bootswatch.com/5/lux/bootstrap.min.css"/>
+    <script
+            src="https://code.jquery.com/jquery-3.6.0.min.js"
+            integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8"
             crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/9414e04596.js"
             crossorigin="anonymous"></script>
     <title>Title</title>
+    <style>
+        .flag-ui-container {
+            display: flex;
+            border-radius: 12px;
+            background-color: #cccccc;
+            height: 25px;
+            width: 130px;
+            margin-top: 2px;
+            margin-bottom: 2px;
+        }
+
+        label.flag-ui {
+            display: flex;
+            flex: 1;
+            height: 100%;
+            border-radius: 12px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .flag-ui-inactive {
+            color: white !important;
+            font-size: 12px !important;
+        }
+
+        .flag-ui-green {
+            color: #33cc6b;
+        }
+
+        .flag-ui-red {
+            color: #c60045;
+        }
+
+        input.flag-ui-check {
+            display: none;
+        }
+
+        input[type=radio] {
+            margin: 0 2px;
+        }
+
+        label.flag-ui-active {
+            background-image: radial-gradient(ellipse at center, white 0%, rgba(255, 255, 255, 0.8) 39%, rgba(255, 255, 255, 0) 92%, rgba(255, 255, 255, 0) 100%);
+            animation-name: flag-ui-animation;
+            animation-duration: 0.6s;
+            font-size: 14px !important;
+        }
+
+        .flag-ui-black {
+            color: #555;
+        }
+    </style>
 </head>
 <body>
 
@@ -30,6 +87,45 @@
     </div>
 </div>
 
+<div class="flag-ui-container" style="width:120px !important;float: left;">
+    <label data-toggle="tooltip" data-placement="top" title="" class="flag-ui flag-ui-green flag-ui-inactive"
+           for="C_1731_1" data-original-title="Oui">
+        <i class="fa fa-check"></i>
+    </label>
+    <input type="radio" name="C_1731" value="1" class="flag-ui-check" id="C_1731_1">
+    <label data-toggle="tooltip" data-placement="top" title="" class="flag-ui flag-ui-black flag-ui-active"
+           for="C_1731_2"
+           data-original-title="NC">
+        <i class="fa fa-circle-o"></i>
+    </label>
+    <input type="radio" name="C_1731" value="" checked="" class="flag-ui-check" id="C_1731_2">
+    <label data-toggle="tooltip" data-placement="top" title="" class="flag-ui flag-ui-red flag-ui-inactive"
+           for="C_1731_3" data-original-title="Non">
+        <i class="fa fa-times"></i>
+    </label>
+    <input type="radio" name="C_1731" value="0" class="flag-ui-check" id="C_1731_3">
+</div>
+<script>
+    $(function () {
+        let flag = $(".flag-ui");
+        flag.on("click", function (event) {
+            let container = event.currentTarget.parentNode;
+            let x;
+
+            //pour tous les labels
+            for (x = 0; x < container.children.length; x++) {
+                let lbl = container.children[x];
+
+                if (lbl.nodeName !== "LABEL") continue;
+
+                jQuery(lbl).removeClass("flag-ui-active");
+                jQuery(lbl).addClass("flag-ui-inactive");
+            }
+            jQuery(event.currentTarget).removeClass("flag-ui-inactive");
+            jQuery(event.currentTarget).addClass("flag-ui-active");
+        });
+    });
+</script>
 <script src="../public/js/components/chatButton.js"></script>
 
 </body>

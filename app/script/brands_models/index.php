@@ -3,7 +3,7 @@ class Database{
     private $db;
     public function __construct(){
         try{
-            $this->db = mysqli_connect("localhost", "API_CT", "Db789!@50", "aflauto");
+            $this->db = mysqli_connect("localhost", "API_CT", "Db789!@50", "hamsterauto");
         } catch (RuntimeException $e){
             exit(0);
         }
@@ -20,18 +20,18 @@ function majBdd(){
 	$liste_marques = [];
 	$list_modelesBdd = [];
 
-	$requete = "SELECT `id_marque`,`nom_marque` FROM `marques` ORDER BY `nom_marque`";
+	$requete = "SELECT `id_brand`,`brand_name` FROM `brand` ORDER BY `brand_name`";
 	$result = mysqli_query($GLOBALS['Database'], $requete) or die;
 	while ($data = mysqli_fetch_assoc($result)) {
-		$liste_marques[$data["id_marque"]] = strtoupper($data['nom_marque']);
+		$liste_marques[$data["id_brand"]] = strtoupper($data['brand_name']);
 	}
-	$requeteT = "SELECT * FROM `modeles`
-	 INNER JOIN `marques` ON `marques`.`id_marque` = `modeles`.`id_marque`
+	$requeteT = "SELECT * FROM `model`
+	 INNER JOIN `brand` ON `brand`.`id_brand` = `model`.`id_brand`
 	 WHERE 1";
 	$resultT = mysqli_query($GLOBALS['Database'], $requeteT) or die;
 	while ($dataT = mysqli_fetch_array($resultT)) {	
-		$list_modelesBdd[$dataT['nom_marque']]['id'] = $dataT['id_marque'];
-		$list_modelesBdd[$dataT['nom_marque']]['list'][] = $dataT['nom_modele'];		
+		$list_modelesBdd[$dataT['brand_name']]['id'] = $dataT['id_brand'];
+		$list_modelesBdd[$dataT['brand_name']]['list'][] = $dataT['model_name'];		
 	}
 
 	$apiUrl  = "http://applis.matmut.fr/DevisMRSQInternet/devis.mcp/";
@@ -43,11 +43,11 @@ function majBdd(){
 		foreach($marques as $idMarque => $nomMarque){
 			if(strtoupper($nomMarque['Text']) != 'AUTRES MARQUES'){
 					if(!in_array($nomMarque['Text'], $liste_marques)){
-						$requete2 = "INSERT INTO `marques` (`nom_marque`) VALUES  ('" . mysqli_real_escape_string($GLOBALS['Database'], strtoupper($nomMarque['Text'])) . "')";
+						$requete2 = "INSERT INTO `brand` (`brand_name`) VALUES  ('" . mysqli_real_escape_string($GLOBALS['Database'], strtoupper($nomMarque['Text'])) . "')";
 						mysqli_query($GLOBALS['Database'], $requete2) or die;
-						$new_id_marque = $GLOBALS['Database']->insert_id;
+						$new_id_brand = $GLOBALS['Database']->insert_id;
 						$liste_marques[] = strtoupper($nomMarque['Text']);
-						$list_modelesBdd[strtoupper($nomMarque['Text'])]['id'] = $new_id_marque;
+						$list_modelesBdd[strtoupper($nomMarque['Text'])]['id'] = $new_id_brand;
 						$list_modelesBdd[strtoupper($nomMarque['Text'])]['list'] = array();
 						error_log($nomMarque['Text'].' ajouté en base de données.')	;	
 					}
@@ -58,7 +58,7 @@ function majBdd(){
 						if($nomModele['Text'] != 'AUTRE'){
 							if(!in_array($nomModele['Text'],$list_modelesBdd[strtoupper($nomMarque['Text'])]['list'])){
 								error_log($nomModele['Text']. " a été ajouté");
-								$requete3 = "INSERT INTO `modeles` (`id_marque`,`nom_modele`) VALUES  ('" . mysqli_real_escape_string($GLOBALS['Database'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['id']) . "', '" . mysqli_real_escape_string($GLOBALS['Database'], strtoupper($nomModele['Text'])) . "')";
+								$requete3 = "INSERT INTO `model` (`id_brand`,`model_name`) VALUES  ('" . mysqli_real_escape_string($GLOBALS['Database'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['id']) . "', '" . mysqli_real_escape_string($GLOBALS['Database'], strtoupper($nomModele['Text'])) . "')";
 								mysqli_query($GLOBALS['Database'], $requete3) or die;
 								$list_modelesBdd[strtoupper($nomMarque['Text'])]['list'][] = $nomModele['Text'];
 

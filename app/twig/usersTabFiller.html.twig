@@ -1,0 +1,38 @@
+{% for user in users %}
+
+    <tr id='{{ user.getId_user }}' align='center' class='text-dark'>
+
+        <td id="profile_nom{{ user.getId_user }}" class="data {% if user.is_active == 0 %}text-danger {% endif %}">{{ user.getLastname_user }}</td>
+
+        <td id="profile_prenom{{ user.getId_user }}" class="data">{{ user.getFirstname_user }}</td>
+
+        <td id="profile_addr{{ user.getId_user }}" class="data">{{ user.getAdress_user }}</td>
+
+        <td id="profile_tel{{ user.getId_user }}" class="data">{{ user.getPhone_user }}</td>
+
+        <td id="profile_login{{ user.getId_user }}" class="data">{{ user.getEmail_user }}</td>
+
+        <td>{{ user.getType }}</td>
+
+        <td>
+            <img id={% if user.is_active == 1 %}'LedV' {% else %}'LedR' {% endif %}> 
+        </td>
+
+        <td role='button' onclick='modalProfilAdmin(`{{ user.getId_user }}`)'><i class="fa-solid fa-user-gear"></i></td>
+    {% if user.getType != 'admin' %}
+        <td>{% if user.is_active == 1 %}
+                <span class='offUser' role='button' onclick='inactivateUser(`{{ user.getId_user }}`)'><i class="fa-solid fa-ban"></i></span>
+            {% else %}
+                <span class='onUser' role='button' onclick='activateUser(`{{ user.getId_user }}`)'><i class="fa-solid fa-rotate-right"></i></span>
+            {% endif %}
+        </td>
+    {% else %}
+        <td>
+        </td>
+    {% endif %}
+    </tr>
+
+
+{% endfor %}
+
+
