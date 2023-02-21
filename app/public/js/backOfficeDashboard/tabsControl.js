@@ -88,12 +88,10 @@ let loadAwaiting = function (page) {
         },
         success: function (response) {
             if (!response["paginationAwaiting"]){
-                console.log(1);
                 $('.thead-awaiting').addClass('d-none');
                 $("#vehiculeAttente").html(response["htmlAwaiting"]);
                 $("#pagesHold").html(response["paginationAwaiting"]);
             } else {
-                console.log(2);
                 $('.thead-awaiting').removeClass('d-none');
                 $("#vehiculeAttente").html(response["htmlAwaiting"]);
                 $("#pagesHold").html(response["paginationAwaiting"]);
