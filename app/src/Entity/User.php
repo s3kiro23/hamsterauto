@@ -1,8 +1,6 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require $classe . ".php";
-});
+require_once 'Database.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -388,7 +386,6 @@ class User
         $request_check = false;
 
         $requete = "SELECT * FROM `request` WHERE hash= '" .filter($hash) . "' AND state= '" .filter(0) . "'";
-        error_log('REQUETE TOKEN   '.$requete);
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
             $request_check = $data;

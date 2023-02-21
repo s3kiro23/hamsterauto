@@ -1,4 +1,0 @@
-[21-Feb-2023 11:39:22 Europe/Paris] PHP Warning:  move_uploaded_file(../../upload/profiles/21Feb23_spawn.jpg): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Controller/ProfileUploadController.php on line 38
-[21-Feb-2023 11:39:22 Europe/Paris] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/phpQgOjgY' to '../../upload/profiles/21Feb23_spawn.jpg' in /var/www/hamsterauto/src/Controller/ProfileUploadController.php on line 38
-[21-Feb-2023 11:39:23 Europe/Paris] PHP Warning:  move_uploaded_file(../../upload/profiles/21Feb23_spawn.jpg): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Controller/ProfileUploadController.php on line 38
-[21-Feb-2023 11:39:23 Europe/Paris] PHP Warning:  move_uploaded_file(): Unable to move '/tmp/php9eqLTb' to '../../upload/profiles/21Feb23_spawn.jpg' in /var/www/hamsterauto/src/Controller/ProfileUploadController.php on line 38
