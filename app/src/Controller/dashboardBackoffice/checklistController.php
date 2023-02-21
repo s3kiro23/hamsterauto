@@ -1,16 +1,11 @@
 <?php
 
-use HTML\LoadTechHTML;
-
 session_start();
 
 require_once '../../Controller/authorization.php';
 
-spl_autoload_register(function ($classe) {
-    require '../../Entity/' . $classe . '.php';
-});
-
-require "../../Entity/HTML/LoadTechHTML.php";
+require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+Setting::autoload();
 
 
 $db = new Database();

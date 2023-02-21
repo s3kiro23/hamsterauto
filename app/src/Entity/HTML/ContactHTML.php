@@ -1,7 +1,5 @@
 <?php
 
-namespace HTML;
-
 class ContactHTML
 {
     public static function messageHamster(): string

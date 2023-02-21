@@ -1,12 +1,5 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require $classe . ".php";
-});
-
-$db = new Database();
-$GLOBALS['Database'] = $db->connexion();
-
 class Upload
 {
     private $id_upload;

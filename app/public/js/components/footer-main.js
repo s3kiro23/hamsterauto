@@ -11,7 +11,7 @@ class FooterMain extends HTMLElement {
                         <i class="fa-solid fa-code"></i><span> with lots of ☕ by Team<i class="fw-semibold"> FromScratch</i></span>               
                     </div>
                     <div class="col-12 col-md-6 text-center text-md-end">
-                        <span class="fw-bold">V1.1</span>
+                        <span class="fw-bold">v1.1</span>
                     </div>
                 </nav>
             </footer>

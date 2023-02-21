@@ -1,7 +1,5 @@
 <?php
 
-use HTML\FormHTML;
-
 session_start();
 
 spl_autoload_register(function ($classe) {

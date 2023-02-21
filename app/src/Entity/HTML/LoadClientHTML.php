@@ -1,8 +1,5 @@
 <?php
 
-namespace HTML;
-use Security;
-
 class LoadClientHTML
 {
     public static function carsRecap($brand_name, $model, $registration, $id_vehicle): string

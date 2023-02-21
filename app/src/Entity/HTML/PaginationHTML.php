@@ -1,7 +1,5 @@
 <?php
 
-namespace HTML;
-
 use Intervention;
 use Security;
 use User;

@@ -2,14 +2,14 @@
 session_start();
 
 if(!$_SESSION['auth']) {
-    header('location:index.html');
+    header('location:/');
 }
 else {
     $currentTime = time();
     if($currentTime > $_SESSION['expire']) {
         session_unset();
         session_destroy();
-        header('location:index.html');
+        header('location:/');
     }else {
 
         spl_autoload_register(function ($classe) {
@@ -17,7 +17,7 @@ else {
         });
 
         $db = new Database();
-        $GLOBALS['db'] = $db->connexion();
+        $GLOBALS['Database'] = $db->connexion();
 
         if (isset($_FILES['file']) && !empty($_FILES['file'])) {
 

@@ -4,7 +4,3 @@
 #cd E:/wamp64/www/hamsterauto/script/jobs_in_queue
 
 php -f queue_processing.php
-
-
-
-

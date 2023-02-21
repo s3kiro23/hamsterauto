@@ -1,10 +1,5 @@
 <?php
 
-require_once 'Database.php';
-
-$db = new Database();
-$GLOBALS['Database'] = $db->connexion();
-
 class Queued
 {
     private $id_queue;

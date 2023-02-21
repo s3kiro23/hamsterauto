@@ -1,14 +1,10 @@
 <?php
 
-spl_autoload_register(function ($classe) {
-    require '../../Entity/' . $classe . '.php';
-});
-
-require "../../Entity/HTML/PaginationHTML.php";
-require "../../Entity/HTML/LoadClientHTML.php";
+require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+Setting::autoload();
 
 $db = new Database();
-$GLOBALS['db'] = $db->connexion();
+$GLOBALS['Database'] = $db->connexion();
 
 function getAuthorization_User($whoIs): bool
 {

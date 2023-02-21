@@ -1,9 +1,5 @@
 <?php
 
-use HTML\MenuHTML;
-
-require "../../Entity/HTML/MenuHTML.php";
-
 session_start();
 
 if (!isset($_SESSION['id'])) {
@@ -14,12 +10,11 @@ if (!isset($_SESSION['id'])) {
     echo json_encode(array('msg' => $msg, 'status' => $status));
 } else {
 
-    spl_autoload_register(function ($classe) {
-        require '../../Entity/' . $classe . '.php';
-    });
+    require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+    Setting::autoload();
 
     $db = new Database();
-    $GLOBALS['db'] = $db->connexion();
+    $GLOBALS['Database'] = $db->connexion();
 
     switch ($_POST['request']) {
 

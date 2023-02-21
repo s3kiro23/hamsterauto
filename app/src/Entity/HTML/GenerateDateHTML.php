@@ -1,8 +1,5 @@
 <?php
 
-namespace HTML;
-use Security;
-
 class GenerateDateHTML
 {
     public static function formClient($date, $timeStampDate): string

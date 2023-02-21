@@ -4,9 +4,6 @@ spl_autoload_register(function ($classe) {
     require '../Entity/' . $classe . '.php';
 });
 
-$db = new Database();
-$GLOBALS['Database'] = $db->connexion();
-
 //Load Composer's autoloader
 require ROOT_DIR() . '/vendor/autoload.php';
 

@@ -1,11 +1,8 @@
 <?php
 
 spl_autoload_register(function ($classe) {
-    require '../../src/Entity/' . $classe . '.php';
+    require '../Entity/' . $classe . '.php';
 });
-
-$db = new Database();
-$GLOBALS['Database'] = $db->connexion();
 
 class Notification
 {

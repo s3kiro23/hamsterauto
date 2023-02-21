@@ -1,2 +1,6 @@
-[21-Feb-2023 12:37:07 Europe/Paris] 1
-[21-Feb-2023 12:37:07 Europe/Paris] 1
+[21-Feb-2023 14:21:56 Europe/Paris] PHP Warning:  require(/var/www/hamsterauto/src/Entity/PaginationHTML.php): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Entity/Setting.php on line 51
+[21-Feb-2023 14:21:56 Europe/Paris] PHP Fatal error:  require(): Failed opening required '/var/www/hamsterauto/src/Entity/PaginationHTML.php' (include_path='.:/usr/local/lib/php') in /var/www/hamsterauto/src/Entity/Setting.php on line 51
+[21-Feb-2023 14:21:58 Europe/Paris] PHP Warning:  require(/var/www/hamsterauto/src/Entity/PaginationHTML.php): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Entity/Setting.php on line 51
+[21-Feb-2023 14:21:58 Europe/Paris] PHP Fatal error:  require(): Failed opening required '/var/www/hamsterauto/src/Entity/PaginationHTML.php' (include_path='.:/usr/local/lib/php') in /var/www/hamsterauto/src/Entity/Setting.php on line 51
+[21-Feb-2023 14:22:03 Europe/Paris] PHP Warning:  require(/var/www/hamsterauto/src/Entity/PaginationHTML.php): failed to open stream: No such file or directory in /var/www/hamsterauto/src/Entity/Setting.php on line 51
+[21-Feb-2023 14:22:03 Europe/Paris] PHP Fatal error:  require(): Failed opening required '/var/www/hamsterauto/src/Entity/PaginationHTML.php' (include_path='.:/usr/local/lib/php') in /var/www/hamsterauto/src/Entity/Setting.php on line 51

@@ -1,7 +1,5 @@
 <?php
 
-namespace HTML;
-
 class RequestHTML
 {
     public static function newPwd(): string

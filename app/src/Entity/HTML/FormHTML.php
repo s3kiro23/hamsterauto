@@ -1,7 +1,5 @@
 <?php
 
-namespace HTML;
-
 class FormHTML
 {
     public static function addCar($marque): string

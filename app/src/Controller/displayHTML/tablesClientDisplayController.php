@@ -1,16 +1,9 @@
 <?php 
 
-use HTML\LoadClientHTML;
-use HTML\PaginationHTML;
-
 session_start();
 
-require_once '../../Controller/authorization.php';
-
-
-spl_autoload_register(function ($classe) {
-    require '../../Entity/' . $classe . '.php';
-});
+require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+Setting::autoload();
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();

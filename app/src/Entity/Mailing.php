@@ -1,7 +1,7 @@
 <?php
 
 spl_autoload_register(function ($classe) {
-    require $classe . ".php";
+    require '../Entity/' . $classe . '.php';
 });
 
 use PHPMailer\PHPMailer\PHPMailer;

@@ -1,11 +1,5 @@
 <?php
 
-require_once 'Database.php';
-require_once 'PDF.php';
-
-$db = new Database();
-$GLOBALS['Database'] = $db->connexion();
-
 class Vehicle
 {
     private $id_user;

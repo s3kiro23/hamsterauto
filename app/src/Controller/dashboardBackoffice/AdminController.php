@@ -1,9 +1,8 @@
 <?php
 session_start();
 
-spl_autoload_register(function ($classe) {
-    require '../../Entity/' . $classe . '.php';
-});
+require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+Setting::autoload();
 
 require __DIR__.'/../../../config/Twig.php';
 

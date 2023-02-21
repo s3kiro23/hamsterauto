@@ -1,7 +1,5 @@
 <?php
 
-namespace HTML;
-
 class MenuHTML
 {
     public static function navBarType($user): array

@@ -1,8 +1,5 @@
 <?php
 
-namespace HTML;
-use Security;
-
 class LoadTechHTML
 {
 

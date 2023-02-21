@@ -1,7 +1,5 @@
 <?php
 
-use HTML\GenerateDateHTML;
-
 session_start();
 
 spl_autoload_register(function ($classe) {

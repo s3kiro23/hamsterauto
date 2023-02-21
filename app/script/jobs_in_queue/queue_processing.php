@@ -29,7 +29,7 @@ if (!empty($jobs_in_queued)) {
                 $job_object->delete();
             }
         } catch (Throwable $e) {
-            error_log("Captured Throwable: " . $e->getMessage() . PHP_EOL);
+            echo ("Captured Throwable: " . $e->getMessage() . PHP_EOL);
         }
     }
 }

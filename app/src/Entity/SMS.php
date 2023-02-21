@@ -1,7 +1,8 @@
 <?php
 
-$db = new Database();
-$GLOBALS['Database'] = $db->connexion();
+spl_autoload_register(function ($classe) {
+    require '../Entity/' . $classe . '.php';
+});
 
 require ROOT_DIR() . '/vendor/autoload.php';
 

@@ -6,7 +6,7 @@ spl_autoload_register(function ($classe) {
 });
 
 $db = new Database();
-$GLOBALS['db'] = $db->connexion();
+$GLOBALS['Database'] = $db->connexion();
 
 switch ($_POST['request']) {
 

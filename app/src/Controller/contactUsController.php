@@ -1,15 +1,10 @@
 <?php
 
-use HTML\ContactHTML;
-
-spl_autoload_register(function ($classe) {
-    require '../Entity/' . $classe . '.php';
-});
-
-require "../Entity/HTML/ContactHTML.php";
+require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+Setting::autoload();
 
 $db = new Database();
-$GLOBALS['db'] = $db->connexion();
+$GLOBALS['Database'] = $db->connexion();
 
 switch ($_POST['request']) {
 
@@ -33,7 +28,6 @@ switch ($_POST['request']) {
         break;
 
     case 'getTimes':
-
         $dataBIA = [];
         $dataAJA = [];
         $times = new Setting(1);

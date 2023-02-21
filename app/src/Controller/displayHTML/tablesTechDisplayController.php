@@ -1,18 +1,9 @@
 <?php
 
-use HTML\GenerateDateHTML;
-use HTML\LoadTechHTML;
-use HTML\PaginationHTML;
-
 session_start();
 
-spl_autoload_register(function ($classe) {
-    require '../../Entity/' . $classe . '.php';
-});
-
-require "../../Entity/HTML/LoadTechHTML.php";
-require "../../Entity/HTML/PaginationHTML.php";
-require "../../Entity/HTML/GenerateDateHTML.php";
+require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+Setting::autoload();
 
 
 $db = new Database();

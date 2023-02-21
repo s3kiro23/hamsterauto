@@ -5,6 +5,7 @@ $(function () {
     $("#disable").on("click", disableAccount);
     $("#btnA2f").on("click", activationA2F);
     $("#file").on("change", checkType);
+    $('#check-all-list').on("click", checkThemAll)
 });
 
 /*Vérification du type de fichier upload DEBUT*/

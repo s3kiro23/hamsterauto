@@ -1,11 +1,12 @@
 <?php
 session_start();
+
 spl_autoload_register(function ($classe) {
     require '../Entity/' . $classe . '.php';
 });
 
 $db = new Database();
-$GLOBALS['db'] = $db->connexion();
+$GLOBALS['Database'] = $db->connexion();
 
 switch ($_POST['request']) {
 
