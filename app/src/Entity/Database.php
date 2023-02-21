@@ -1,32 +1,34 @@
 <?php
 
-class Database{
+class Database
+{
 
     private $db;
 
-    public function __construct(){
+    public function __construct()
+    {
 
         $hostname = "localhost";
         if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
             $hostname = "database_mysql";
         }
 
-        try{
+        try {
             $this->db = mysqli_connect($hostname, "db", "Db123!@20", "hamsterauto");
-            error_log(json_encode($this->db));
-        } catch (RuntimeException $e){
+        } catch (RuntimeException $e) {
             exit(0);
         }
     }
 
-    public function connexion(){
+    public function connexion()
+    {
         return $this->db;
     }
-
 }
 
-function filter($value): string{
-	return mysqli_real_escape_string($GLOBALS['Database'], $value);
+function filter($value): string
+{
+    return mysqli_real_escape_string($GLOBALS['Database'], $value);
 }
 
 function ROOT_DIR(): string
