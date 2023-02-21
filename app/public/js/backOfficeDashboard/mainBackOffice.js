@@ -155,12 +155,16 @@ function deleteRdv(rdvId) {
                     idRdv: rdvId,
                 },
                 success: function (response) {
-                        toastMixin.fire({
-                            animation: true,
-                            title: 'Cette intervention a été annulée',
-                        });
+                    let currentPage = $('#vehiculesTermines').find('.active').children().html();
+                    if (currentPage == undefined){
+                        currentPage = 1;
+                    }
+                    toastMixin.fire({
+                        animation: true,
+                        title: 'Cette intervention a été annulée',
+                    });
                     loadAwaiting(1);
-                    loadArchives(1);
+                    loadArchives(currentPage);
                     generateDateBO();
                 },
                 error: function () {

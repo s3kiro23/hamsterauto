@@ -264,6 +264,9 @@ let deleteCar = function () {
                 },
                 success: function (response) {
                     let currentPage = $('#pagesMyArchives').find('.active').children().html();
+                    if (currentPage == undefined){
+                        currentPage = 1;
+                    }
                     toastMixin.fire({
                         animation: true,
                         title: response["msg"]
@@ -382,6 +385,9 @@ function deleteRdvUser(ctId) {
                 },
                 success: function (response) {
                     let currentPage = $('#pagesMyArchives').find('.active').children().html();
+                    if (currentPage == undefined){
+                        currentPage = 1;
+                    }
                     toastMixin.fire({
                         animation: true,
                         title: response["msg"]

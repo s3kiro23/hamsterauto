@@ -65,7 +65,7 @@ switch ($_POST['request']) {
         if (isset($_SESSION['id']) && $_POST['type'] == "archives") {
             $html_archives = "Aucunes données n'est disponible";
             $pagination_my_archives = PaginationHTML::clientHistory($_SESSION['id']);
-            empty($_POST['page']) ? $_POST['page'] = 0 : $_POST['page'];
+            empty($_POST['page']) || !isset($_POST['page']) ? $_POST['page'] = 1 : $_POST['page'];
             $tab_archives = User::check_history(
                 Security::decrypt($_SESSION['id'], false),
                 PaginationHTML::off7($_POST['page'])
