@@ -64,7 +64,7 @@ switch ($_POST['request']) {
                         }
                     } else {
                         $status = 0;
-                        $msg = "Mot de passe incorrect!";
+                        $msg = "La combinaison de cet email et ce mot de passe n'existe pas !";
                         $data = [
                             'id_user' => $user['id_user'],
                             'mail' => $user['email_user'],

@@ -108,6 +108,6 @@ switch ($_POST['request']) {
                 }
             }
         }
-        echo json_encode(array("status" => $status, "msg" => $msg, "type" => $type));
+        echo json_encode(array("status" => $status, "msg" => $msg, "type" => $type, "userType" => $user_type));
         break;
 }
