@@ -8,7 +8,7 @@ $(function () {
 let connect = function () {
     let access = $('.accessPath').prop('id');
     $.ajax({
-        url: "../src/Controller/Index/LoginController.php",
+        url: "/src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -74,7 +74,7 @@ let connect = function () {
 
 let smsVerif = function () {
     $.ajax({
-        url: "../src/Controller/Index/LoginController.php",
+        url: "/src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -103,7 +103,7 @@ let smsVerif = function () {
                 Swal.fire({
                     title: "Erreur",
                     text: response["msg"],
-                    imageUrl: '../public/assets/img/swalicons/warning.png',
+                    imageUrl: '/public/assets/img/swalicons/warning.png',
                     imageWidth: 100,
                     showCancelButton: true,
                     showConfirmButton: false,

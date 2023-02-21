@@ -35,7 +35,7 @@ function clearIntervals(){
 /*Affichage des véhicules/RDV/Historiques par user + pagination DEBUT*/
 let loadUserCars = function () {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesClientDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -56,7 +56,7 @@ let loadUserCars = function () {
 
 let loadUserIntervention = function () {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesClientDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -74,7 +74,7 @@ let loadUserIntervention = function () {
 
 let loadUserArchives = function (page) {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesClientDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -99,7 +99,7 @@ let loadUserArchives = function (page) {
 /*Fonctions de gestion fiche véhicule DEBUT*/
 function formAddCar() {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/FormsDisplayController.php",
+        url: "/src/Controller/DisplayHTML/FormsDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -115,7 +115,7 @@ function formAddCar() {
 
 function selectedCar() {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/BrandsDisplayController.php",
+        url: "/src/Controller/DisplayHTML/BrandsDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -144,7 +144,7 @@ let addCar = function () {
     Swal.fire({
         title: 'Confirmez-vous l\'ajout de ce véhicule?',
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: '#62C462',
@@ -154,7 +154,7 @@ let addCar = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '../src/Controller/CarController.php',
+                url: '/src/Controller/CarController.php',
                 dataType: 'JSON',
                 type: 'POST',
                 data: {
@@ -199,7 +199,7 @@ let modifyCar = function () {
     Swal.fire({
         title: 'Confirmez-vous la modification de ce véhicule?',
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: '#62C462',
@@ -209,7 +209,7 @@ let modifyCar = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '../src/Controller/CarController.php',
+                url: '/src/Controller/CarController.php',
                 dataType: 'JSON',
                 type: 'POST',
                 data: {
@@ -245,7 +245,7 @@ let deleteCar = function () {
     Swal.fire({
         title: "Confirmez-vous la suppression de ce véhicule?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/warning.png',
+        imageUrl: '/public/assets/img/swalicons/warning.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -255,7 +255,7 @@ let deleteCar = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/CarController.php",
+                url: "/src/Controller/CarController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -297,7 +297,7 @@ let deleteCar = function () {
 /*Fonctions de gestion rdv DEBUT*/
 let formAddRDV = function () {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/FormsDisplayController.php",
+        url: "/src/Controller/DisplayHTML/FormsDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -318,7 +318,7 @@ let addRDV = function () {
     Swal.fire({
         title: 'Confirmez-vous la demande de rendez-vous ?',
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: '#62C462',
@@ -328,7 +328,7 @@ let addRDV = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '../src/Controller/RdvController.php',
+                url: '/src/Controller/RdvController.php',
                 dataType: 'JSON',
                 type: 'POST',
                 data: {
@@ -366,7 +366,7 @@ function deleteRdvUser(ctId) {
     Swal.fire({
         title: "Voulez-vous annuler ce rendez-vous?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/warning.png',
+        imageUrl: '/public/assets/img/swalicons/warning.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -376,7 +376,7 @@ function deleteRdvUser(ctId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/RdvController.php",
+                url: "/src/Controller/RdvController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {

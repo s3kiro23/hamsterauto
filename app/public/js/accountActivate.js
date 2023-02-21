@@ -21,7 +21,7 @@ function $_GET(param) {
 function accountActivation(){
     let tokenFromMail = $_GET('token');
        $.ajax({
-           url: "../src/Controller/Index/SignInController.php",
+           url: "/src/Controller/Index/SignInController.php",
            dataType: "JSON",
            type: "POST",
            data: {

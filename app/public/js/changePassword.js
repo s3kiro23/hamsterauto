@@ -53,7 +53,7 @@ let changePassword = function () {
             }
         });
     $.ajax({
-        url: '../src/Controller/Index/RecoveryController.php',
+        url: '/src/Controller/Index/RecoveryController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {

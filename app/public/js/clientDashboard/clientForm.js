@@ -72,7 +72,7 @@ let newRDVFormClient = function () {
     Swal.fire({
         title: 'Confirmez vous la demande de rendez-vous ?',
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: '#62C462',
@@ -82,7 +82,7 @@ let newRDVFormClient = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: '../src/Controller/RdvController.php',
+                url: '/src/Controller/RdvController.php',
                 dataType: 'JSON',
                 type: 'POST',
                 data: {

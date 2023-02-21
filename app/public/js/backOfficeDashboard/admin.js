@@ -4,7 +4,7 @@ $(function () {
     $('.switchLogoAdmin').on("click", switchLogoAdmin);
     $("#inputTel").intlTelInput({
         preferredCountries: ["fr", "gb"],
-        utilsScript: "../vendor/jackocnr/intl-tel-input/build/js/utils.js",
+        utilsScript: "/vendor/jackocnr/intl-tel-input/build/js/utils.js",
         initialCountry: "fr",
         placeholder: '',
         geoIpLookup: function (success, failure) {
@@ -20,10 +20,10 @@ $(function () {
 //
 //
 function switchLogoAdmin(){
-    if ($('.logo').attr('src') === "../public/assets/img/hamsterauto-unscreen.gif"){
-        $('.logo').attr('src',"../public/assets/img/hamsterautoNuit-unscreen.gif")
-    }else if ($('.logo').attr('src') === "../public/assets/img/hamsterautoNuit-unscreen.gif"){
-        $('.logo').attr('src', "../public/assets/img/hamsterauto-unscreen.gif")
+    if ($('.logo').attr('src') === "/public/assets/img/hamsterauto-unscreen.gif"){
+        $('.logo').attr('src',"/public/assets/img/hamsterautoNuit-unscreen.gif")
+    }else if ($('.logo').attr('src') === "/public/assets/img/hamsterautoNuit-unscreen.gif"){
+        $('.logo').attr('src', "/public/assets/img/hamsterauto-unscreen.gif")
     }
 }
 
@@ -117,7 +117,7 @@ function loadAdmin() {
 function adminIndex(){
     clearIntervals();
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -136,7 +136,7 @@ function adminIndex(){
 // 
 function displayFiltreImmatAdmin() {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesTechDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -155,7 +155,7 @@ function displayFiltreImmatAdmin() {
 // 
 function displayRdvTab(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -180,7 +180,7 @@ function displayRdvTab(){
 //
 function adminRdv(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -202,7 +202,7 @@ function adminRdv(){
 // 
 function adminRdvWip(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -224,7 +224,7 @@ function switchDayRdv(switchDate) {
     $('#searchImmat').val("");
     let page = 1;
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -253,7 +253,7 @@ function deleteRdv(rdvId) {
     Swal.fire({
         title: "Confirmez vous la suppression de cette intervention?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/warning.png',
+        imageUrl: '/public/assets/img/swalicons/warning.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -263,7 +263,7 @@ function deleteRdv(rdvId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/RdvController.php",
+                url: "/src/Controller/RdvController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -292,7 +292,7 @@ function deleteRdv(rdvId) {
 function displayUsersTab(){
     clearIntervals();
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -317,7 +317,7 @@ function refreshAdminUsers(){
 // 
 function adminUsers(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -344,7 +344,7 @@ function adminUsers(){
 // 
 function inactivateUser(id){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -368,7 +368,7 @@ function inactivateUser(id){
 function activateUser(id){
    
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -399,7 +399,7 @@ function addUserAdmin() {
         }
     );
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -458,7 +458,7 @@ function modifyUserAdmin() {
         }
     );
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -495,7 +495,7 @@ function modifyUserAdmin() {
 function displayBanTab(){
     clearIntervals();
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -515,7 +515,7 @@ function displayBanTab(){
 // 
 function displayBanUsers(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -535,7 +535,7 @@ function displayBanUsers(){
 // 
 function debanUser(id){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -563,7 +563,7 @@ function debanUser(id){
 function displayAdminArchives(){
     clearIntervals();
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -582,7 +582,7 @@ function displayAdminArchives(){
 // 
 function adminArchives(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -601,7 +601,7 @@ function adminArchives(){
 // 
 function showContreVisiteAdmin(id) {
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -621,7 +621,7 @@ function showContreVisiteAdmin(id) {
 function displayLogs() {
     clearIntervals();
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -645,7 +645,7 @@ function showLogs(){
 // 
 function adminLogs(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -664,7 +664,7 @@ function adminLogs(){
 // 
 function generateDateBO(timestampID = 0) {
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -691,7 +691,7 @@ function generateDateBO(timestampID = 0) {
 function displaySettings(){
     clearIntervals();
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -707,7 +707,7 @@ function displaySettings(){
 }
 function showSettings(){
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/AdminController.php",
+        url: "/src/Controller/DashboardBackoffice/AdminController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -732,7 +732,7 @@ function updateHour(contextHour){
     Swal.fire({
         title: "Voulez-vous changer l'horaire?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -742,7 +742,7 @@ function updateHour(contextHour){
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/DashboardBackoffice/AdminController.php",
+                url: "/src/Controller/DashboardBackoffice/AdminController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -772,7 +772,7 @@ function modifySession(typeUser){
     Swal.fire({
         title: "Voulez-vous changer la durée de session?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -782,7 +782,7 @@ function modifySession(typeUser){
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/DashboardBackoffice/AdminController.php",
+                url: "/src/Controller/DashboardBackoffice/AdminController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -807,7 +807,7 @@ function changeLifts(){
         className: "swalWarning",
         title: "Voulez-vous changer le nombre de ponts disponibles?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -817,7 +817,7 @@ function changeLifts(){
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/DashboardBackoffice/AdminController.php",
+                url: "/src/Controller/DashboardBackoffice/AdminController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -841,7 +841,7 @@ function updateSlot(){
     Swal.fire({
         title: "Voulez-vous changer la durée des créneaux?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -851,7 +851,7 @@ function updateSlot(){
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/DashboardBackoffice/AdminController.php",
+                url: "/src/Controller/DashboardBackoffice/AdminController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {

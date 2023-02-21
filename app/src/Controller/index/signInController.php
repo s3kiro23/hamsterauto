@@ -44,7 +44,8 @@ switch ($_POST['request']) {
                 $data['inputPassword'],
                 "client",
                 $current_pwd_exp,
-                User::random_hash()
+                User::random_hash(),
+                0
             );
             $user = new User($client);
             $token = $user->request();

@@ -57,7 +57,7 @@ function getDaysInYear(year, day) {
 
 let generateDate = function (timestampID = null) {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/DatesDisplayController.php",
+        url: "/src/Controller/DisplayHTML/DatesDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -105,7 +105,7 @@ function changeDate(timestamp) {
 // Affichage des marques et modèles dans les formulaires DEBUT
 let brandsLoad = function () {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/BrandsDisplayController.php",
+        url: "/src/Controller/DisplayHTML/BrandsDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -121,7 +121,7 @@ let brandsLoad = function () {
 
 let modelsLoad = function () {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/BrandsDisplayController.php",
+        url: "/src/Controller/DisplayHTML/BrandsDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -163,7 +163,7 @@ let selectedImmatFormat = function () {
 let IntlTelInput = function () {
     $('#inputTel').intlTelInput({
         preferredCountries: ["fr", "gb"],
-        utilsScript: "../vendor/jackocnr/intl-tel-input/build/js/utils.js",
+        utilsScript: "/vendor/jackocnr/intl-tel-input/build/js/utils.js",
         initialCountry: "fr",
         geoIpLookup: function (success, failure) {
             $.get("https://ipinfo.io", function () {

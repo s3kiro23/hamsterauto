@@ -52,15 +52,17 @@ class User
         }
     }
 
-    static public function create($civilite_user, $firstname_user, $lastname_user, $email_user, $phone_user, $password_user, $type, $pwdExp_user, $hash)
+    static public function create($civilite_user, $firstname_user, $lastname_user, $email_user, $phone_user, $password_user, $type, $pwdExp_user, $hash, $active)
     {
         $requete = "INSERT INTO `user` (`civilite_user`, `firstname_user`, `lastname_user`, `email_user`, `phone_user`, 
-                     `password_user`, `type`, `pwdExp_user`, `hash`) 
+                     `password_user`, `type`, `pwdExp_user`, `hash`, `is_active`) 
                     VALUES ('" . filter($civilite_user) . "','" . filter($firstname_user) . "',
                     '" . filter($lastname_user) . "','" . filter($email_user) . "',
                     '" . filter($phone_user) . "','" . filter(password_hash($password_user, PASSWORD_BCRYPT)) . "',
                     '" . filter($type) . "','" . filter($pwdExp_user) . "',
-                    '" . filter($hash) . "')";
+                    '" . filter($hash) . "',
+                    '" . filter($active) . "')";
+                    error_log($requete);
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $GLOBALS['Database']->insert_id;

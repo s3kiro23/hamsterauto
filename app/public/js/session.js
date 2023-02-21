@@ -18,7 +18,7 @@ function sessionExtending(){
 function sessionEndingSoon() {
     $(window).off("click");
     $.ajax({
-        url: "../src/Controller/Index/LoginController.php",
+        url: "/src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -37,7 +37,7 @@ function sessionEndingSoon() {
 
 function sessionExtend(){
     $.ajax({
-        url: "../src/Controller/Index/LoginController.php",
+        url: "/src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -59,7 +59,7 @@ function sessionExtend(){
 
 function sessionEnding(){
     $.ajax({
-        url: "../src/Controller/Index/LoginController.php",
+        url: "/src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {

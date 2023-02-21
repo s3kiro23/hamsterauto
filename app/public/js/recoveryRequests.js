@@ -8,7 +8,7 @@ let newPwd = function () {
         tabInput[this.id] = $("#" + this.id).val();
     });
     $.ajax({
-        url: "../src/Controller/Index/LoginController.php",
+        url: "/src/Controller/Index/LoginController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -48,7 +48,7 @@ let newPwd = function () {
 
 let toRequestMail = function () {
     $.ajax({
-        url: "../src/Controller/Index/RecoveryController.php",
+        url: "/src/Controller/Index/RecoveryController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -75,7 +75,7 @@ let toRequestMail = function () {
 
 let genToken = function () {
     $.ajax({
-        url: "../src/Controller/Index/RecoveryController.php",
+        url: "/src/Controller/Index/RecoveryController.php",
         dataType: "JSON",
         type: "POST",
         data: {

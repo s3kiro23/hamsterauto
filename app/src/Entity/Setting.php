@@ -44,7 +44,7 @@ class Setting
         return
 
             spl_autoload_register(function ($classe) {
-                $html_file = array("RequestHTML", "ContactHTML", "FormHTML", "GenerateDateHTML", "LoadClientHTML", "LoadTechHTML", "MenuHTML", "PaginatioNHTML");
+                $html_file = array("RequestHTML", "ContactHTML", "FormHTML", "GenerateDateHTML", "LoadClientHTML", "LoadTechHTML", "MenuHTML", "PaginationHTML");
                 if (in_array($classe, $html_file)) {
                     require $_SERVER['DOCUMENT_ROOT'] . "src/Entity/HTML/" . $classe . ".php";
                 } else if ($classe != "Setting") {

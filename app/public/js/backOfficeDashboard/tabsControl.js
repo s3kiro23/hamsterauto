@@ -10,7 +10,7 @@ let loadEvent = function () {
 
 function displayCar() {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesTechDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -38,7 +38,7 @@ function displayCar() {
 
 function displayBackOffice() {
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -59,7 +59,7 @@ function displayBackOffice() {
 
 function displayFiltreImmat() {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesTechDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -76,7 +76,7 @@ function displayFiltreImmat() {
 }
 let loadAwaiting = function (page) {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesTechDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -88,10 +88,12 @@ let loadAwaiting = function (page) {
         },
         success: function (response) {
             if (!response["paginationAwaiting"]){
+                console.log(1);
                 $('.thead-awaiting').addClass('d-none');
                 $("#vehiculeAttente").html(response["htmlAwaiting"]);
                 $("#pagesHold").html(response["paginationAwaiting"]);
             } else {
+                console.log(2);
                 $('.thead-awaiting').removeClass('d-none');
                 $("#vehiculeAttente").html(response["htmlAwaiting"]);
                 $("#pagesHold").html(response["paginationAwaiting"]);
@@ -108,7 +110,7 @@ let loadAwaiting = function (page) {
 
 let loadInProgress = function (page) {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesTechDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -128,7 +130,7 @@ let loadInProgress = function (page) {
 
 let loadArchives = function (page) {
     $.ajax({
-        url: "../src/Controller/DisplayHTML/TablesTechDisplayController.php",
+        url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -157,7 +159,7 @@ function switchDayRdv(switchDate) {
     $('#searchImmat').val("");
     let page = 1;
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -182,7 +184,7 @@ function switchDayRdv(switchDate) {
 // Gestion des dates DEBUT
 function generateDateBO(timestampID = 0) {
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {

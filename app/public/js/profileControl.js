@@ -37,7 +37,7 @@ function checkType() {
 
 function load() {
     $.ajax({
-        url: "../src/Controller/AccountController.php",
+        url: "/src/Controller/AccountController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -85,7 +85,7 @@ let uploadImgProfile = function () {
     let data = new FormData($("form")[1]);
 
     $.ajax({
-        url: "../src/Controller/ProfileUploadController.php",
+        url: "/src/Controller/ProfileUploadController.php",
         type: "POST",
         dataType: "JSON",
         enctype: "multipart/form-data",
@@ -120,7 +120,7 @@ let modify = function () {
         }
     );
     $.ajax({
-        url: "../src/Controller/AccountController.php",
+        url: "/src/Controller/AccountController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -156,7 +156,7 @@ let disableAccount = function () {
     Swal.fire({
         title: "Etes-vous sûr!?",
         text: "La désactivation est permanente!",
-        imageUrl: '../public/assets/img/swalicons/warning.png',
+        imageUrl: '/public/assets/img/swalicons/warning.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: "#4BBF73",
@@ -170,7 +170,7 @@ let disableAccount = function () {
                 "Votre compte à bien été désactivé.",
                 "success",
                 $.ajax({
-                    url: "../src/Controller/AccountController.php",
+                    url: "/src/Controller/AccountController.php",
                     dataType: "JSON",
                     type: "POST",
                     data: {
@@ -209,7 +209,7 @@ let activationA2F = function () {
     Swal.fire({
         title: "Action sur la double authentification par SMS",
         text: "êtes-vous sûr?",
-        imageUrl: '../public/assets/img/swalicons/warning.png',
+        imageUrl: '/public/assets/img/swalicons/warning.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: "#4BBF73",
@@ -219,7 +219,7 @@ let activationA2F = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/AccountController.php",
+                url: "/src/Controller/AccountController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {

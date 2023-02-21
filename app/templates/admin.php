@@ -8,7 +8,7 @@ $user = $_SESSION['typeUser'];
 if ($user === 'admin' && isset($_SESSION['id'])){
     echo $twig-> render('adminOffice.html.twig');
 }else {
-    header("Location: ./403.html");
+    header("Location: error-403");
 }
 
     

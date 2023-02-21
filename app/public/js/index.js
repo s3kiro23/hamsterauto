@@ -85,10 +85,10 @@ $(function () {
 });
 
 function switchLogo() {
-    if ($('#logoIndex').attr('src') === "../public/assets/img/animated-icons/hamsterauto-unscreen.gif") {
-        $('#logoIndex').attr('src', "../public/assets/img/animated-icons/hamsterautoNuit-unscreen.gif")
-    } else if ($('#logoIndex').attr('src') === "../public/assets/img/animated-icons/hamsterautoNuit-unscreen.gif") {
-        $('#logoIndex').attr('src', "../public/assets/img/animated-icons/hamsterauto-unscreen.gif")
+    if ($('#logoIndex').attr('src') === "/public/assets/img/animated-icons/hamsterauto-unscreen.gif") {
+        $('#logoIndex').attr('src', "/public/assets/img/animated-icons/hamsterautoNuit-unscreen.gif")
+    } else if ($('#logoIndex').attr('src') === "/public/assets/img/animated-icons/hamsterautoNuit-unscreen.gif") {
+        $('#logoIndex').attr('src', "/public/assets/img/animated-icons/hamsterauto-unscreen.gif")
     }
 }
 
@@ -96,7 +96,7 @@ let toSignIn = function () {
 
     Swal.fire({
         title: "Redirection vers la page d'inscription",
-        imageUrl: '../public/assets/img/swalicons/spinner.gif',
+        imageUrl: '/public/assets/img/swalicons/spinner.gif',
         imageWidth: 220,
         imageHeight: 220,
         allowEscapeKey: false,
@@ -125,7 +125,7 @@ let newRDVHomePage = function () {
     Swal.fire({
         title: "Confirmez-vous la demande de rendez-vous ?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         confirmButtonColor: "#4BBF73",
@@ -135,7 +135,7 @@ let newRDVHomePage = function () {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/Index/NewRdvHomePage.php",
+                url: "/src/Controller/Index/NewRdvHomePage.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {

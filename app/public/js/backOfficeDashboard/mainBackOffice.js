@@ -7,10 +7,10 @@ $(function () {
 //
 //
 function switchLogo(){
-    if ($('#logo').attr('src') === "../public/assets/img/hamsterauto-unscreen.gif"){
-        $('#logo').attr('src',"../public/assets/img/hamsterautoNuit-unscreen.gif") 
-    }else if ($('#logo').attr('src') === "../public/assets/img/hamsterautoNuit-unscreen.gif"){
-        $('#logo').attr('src', "../public/assets/img/hamsterauto-unscreen.gif")
+    if ($('#logo').attr('src') === "/public/assets/img/hamsterauto-unscreen.gif"){
+        $('#logo').attr('src',"/public/assets/img/hamsterautoNuit-unscreen.gif") 
+    }else if ($('#logo').attr('src') === "/public/assets/img/hamsterautoNuit-unscreen.gif"){
+        $('#logo').attr('src', "/public/assets/img/hamsterauto-unscreen.gif")
     }
 }
 function load() {
@@ -24,7 +24,7 @@ function priseEnCharge(id) {
         className: "swalWarning",
         title: "Voulez-vous prendre en charge cette intervention?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -34,7 +34,7 @@ function priseEnCharge(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+                url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -61,7 +61,7 @@ function priseEnCharge(id) {
 function basculerIntervention(id, id_tech) {
    
     $.ajax({
-        url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -96,7 +96,7 @@ function switchToHold(id) {
         className: "swalWarning",
         title: "Voulez-vous remettre ce véhicule en liste d'attente?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/interro.png',
+        imageUrl: '/public/assets/img/swalicons/interro.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -106,7 +106,7 @@ function switchToHold(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/DashboardBackoffice/BackofficeController.php",
+                url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -137,7 +137,7 @@ function deleteRdv(rdvId) {
     Swal.fire({
         title: "Confirmez vous la suppression de cette intervention?",
         text: "",
-        imageUrl: '../public/assets/img/swalicons/warning.png',
+        imageUrl: '/public/assets/img/swalicons/warning.png',
         imageWidth: 100,
         showCancelButton: true,
         cancelButtonText: "Annuler",
@@ -147,7 +147,7 @@ function deleteRdv(rdvId) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "../src/Controller/RdvController.php",
+                url: "/src/Controller/RdvController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -177,7 +177,7 @@ function deleteRdv(rdvId) {
 
 let showInfo = function (id) {
     $.ajax({
-        url: "../src/Controller/CarController.php",
+        url: "/src/Controller/CarController.php",
         dataType: "JSON",
         type: "POST",
         data: {

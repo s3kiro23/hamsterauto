@@ -94,7 +94,7 @@ let checkField = function () {
 	tabFields[focusedField] = $("#" + focusedField).val();
 
 	$.ajax({
-		url: "../src/Controller/CheckFieldController.php",
+		url: "/src/Controller/CheckFieldController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
