@@ -26,7 +26,6 @@ class PaginationHTML
     {
         $html = "";
         $total_rdv = Intervention::count_rdv($state, $current_date);
-        error_log($total_rdv);
         $total_pages = ceil($total_rdv / 5);
         for ($i = 1; $i <= $total_pages; $i++) {
             if ($state == 0) {
