@@ -94,6 +94,9 @@ switch ($_POST['request']) {
             if (!$user) {
                 $status = 0;
                 $msg = "Cet e-mail n'existe pas!";
+            } else if (password_verify($data['inputPassword'], $user['password_user'])){
+                $status = 0;
+                $msg = "Le nouveau mot de passe ne peut être identique à l'ancien!";
             } else {
                 $current_user = new User($user['id_user']);
                 $current_user->setPassword_user($data['inputPassword']);
