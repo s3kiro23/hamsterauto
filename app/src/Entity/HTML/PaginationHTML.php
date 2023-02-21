@@ -1,13 +1,10 @@
 <?php
 
-use Intervention;
-use Security;
-use User;
-
 class PaginationHTML
 {
     public static function clientHistory($id): array
     {
+        error_log(1);
         $html = "";
         $total_rdv = User::count_history(Security::decrypt($id, false));
         $total_pages = ceil($total_rdv / 5);

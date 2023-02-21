@@ -16,3 +16,5 @@ AH00558: apache2: Could not reliably determine the server's fully qualified doma
 [Tue Feb 21 13:51:37.627972 2023] [access_compat:error] [pid 98] [client 172.20.0.1:52044] AH01797: client denied by server configuration: /var/www/hamsterauto/script/jobs_in_queue/queue_processing.php
 [Tue Feb 21 13:56:30.807289 2023] [mpm_prefork:notice] [pid 1] AH00170: caught SIGWINCH, shutting down gracefully
 AH00558: apache2: Could not reliably determine the server's fully qualified domain name, using 172.20.0.4. Set the 'ServerName' directive globally to suppress this message
+[Tue Feb 21 13:56:39.889014 2023] [mpm_prefork:notice] [pid 1] AH00163: Apache/2.4.54 (Debian) PHP/7.4.33 configured -- resuming normal operations
+[Tue Feb 21 13:56:39.889325 2023] [core:notice] [pid 1] AH00094: Command line: 'apache2 -D FOREGROUND'

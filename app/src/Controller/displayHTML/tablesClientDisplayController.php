@@ -2,8 +2,12 @@
 
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
-Setting::autoload();
+spl_autoload_register(function ($classe) {
+    require '../../Entity/' . $classe . '.php';
+});
+
+require "../../Entity/HTML/PaginationHTML.php";
+require "../../Entity/HTML/LoadClientHTML.php";
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
