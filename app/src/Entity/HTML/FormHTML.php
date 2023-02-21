@@ -285,7 +285,7 @@ class FormHTML
             <div class='rounded p-3'>
                 <div class='form-group'>
                     <label for='selectCars' class='form-label text-dark'>Sélectionner un véhicule :</label>
-                    <select class='field form-select' id='selectCars' name='selectCars' required>
+                    <select class='form-select' id='selectCars' name='selectCars' required>
                             $car_user
                     </select>
                 </div>

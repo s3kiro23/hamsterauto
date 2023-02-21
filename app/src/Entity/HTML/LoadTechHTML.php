@@ -99,7 +99,7 @@ class LoadTechHTML
                     <span class='text-muted fs-2'>" . $registration . "</span>
                 </td>
                 <td>
-                   <a href='checklist?intervention=" . $interv . "'>
+                   <a href='/checklist?intervention=" . $interv . "'>
                         <button type='button' class='checklist border-0 bg-transparent' data-toggle='tooltip' data-placement='bottom' title='Checklist CT'>
                             <i class='fa-solid fa-clipboard-check fa-xl text-info'></i>
                         </button>

@@ -153,7 +153,7 @@ class PDF extends TCPDF
             <table style="text-align: center; font-size: xx-small;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
                     <td>
-                        <img src="' . ROOT_DIR() . '\public\assets\img\logoDark.png" alt="" width="110" height="90" border="0">
+                        <img src="' . ROOT_DIR() . '/public/assets/img/logoDark.png" alt="" width="110" height="90" border="0">
                     </td>
                 </tr>
             </table>
@@ -394,9 +394,8 @@ class PDF extends TCPDF
         }
 
         $bg_thumbnail = '
-                <img src="' . ROOT_DIR() . '\public\assets\img\background_thumbnail_ct.png" alt="" width="130" height="130" border="0">
+                <img src="' . ROOT_DIR() . '/public/assets/img/background_thumbnail_ct.png" alt="" width="130" height="130" border="0">
             ';
-
         $tiny_thumbnail = '
             <table style="font-size: xx-small; background-color: #bdd7ff;" border="0" cellspacing="0" cellpadding="2">';
         if (is_null($report)) {

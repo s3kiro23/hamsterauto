@@ -31,7 +31,6 @@ function displayCar() {
             }
         },
         error: function () {
-            console.log("errorInterEnAttente")
         },
     });
 }
@@ -51,7 +50,6 @@ function displayBackOffice() {
             loadArchives(1);
         },
         error: function () {
-            console.log("errorBO")
         },
     });
 
@@ -70,7 +68,6 @@ function displayFiltreImmat() {
             generateDateBO();
         },
         error: function () {
-            console.log("errorFiltreImmat")
         },
     });
 }
