@@ -26,9 +26,9 @@ if (!$_SESSION['auth']) {
             $car_ID = Security::decrypt($_SESSION['carID'], true);
 
             if ($_FILES['file']['error'] != 4) {
-                
+
                 $user = new User(Security::decrypt($_SESSION['id'], false));
-                $target_dir = "../../upload/";
+                $target_dir = ROOT_DIR() . "upload/";
                 $file_name = basename($_FILES['file']['name']);
                 $target_file = $target_dir . $file_name;
                 $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
@@ -60,7 +60,6 @@ if (!$_SESSION['auth']) {
                     $traces = new Trace(0);
                     $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'upload', 'file');
                 }
-
             }
             echo json_encode(array("status" => $status, "msg" => $msg));
         }
