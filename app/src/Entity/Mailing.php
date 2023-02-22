@@ -230,8 +230,8 @@ class Mailing
                     <br>
                     Bonjour {$user->getFirstname_user()},
                     <br><br>
-                     Vous avez oublié votre mot de passe ?<br>
-                    Nous avons reçu une demande de réinitialisation pour votre compte .
+                    Vous avez oublié votre mot de passe ?<br>
+                    Nous avons reçu une demande de réinitialisation pour votre compte.
                     <br><br>
                     Pour pouvoir récupérer ce dernier, veuillez cliquer sur le lien ci - dessous :
                     <br><br>

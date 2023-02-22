@@ -62,7 +62,6 @@ class User
                     '" . filter($type) . "','" . filter($pwdExp_user) . "',
                     '" . filter($hash) . "',
                     '" . filter($active) . "')";
-                    error_log($requete);
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $GLOBALS['Database']->insert_id;
