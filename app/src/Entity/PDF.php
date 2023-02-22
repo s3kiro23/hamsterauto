@@ -5,7 +5,7 @@ spl_autoload_register(function ($classe) {
 });
 
 //Load Composer's autoloader
-require ROOT_DIR() . '/vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 class PDF extends TCPDF
 {

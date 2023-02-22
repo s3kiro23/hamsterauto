@@ -4,7 +4,7 @@ spl_autoload_register(function ($classe) {
     require '../Entity/' . $classe . '.php';
 });
 
-require ROOT_DIR() . '/vendor/autoload.php';
+require __DIR__.'/../../vendor/autoload.php';
 
 use \Ovh\Api;
 
