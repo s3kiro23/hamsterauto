@@ -70,7 +70,6 @@ class LoadTechHTML
 
     public static function inProgress($interv, $hour, $nomTech, $brand_name, $registration): string
     {
-        $brand_name = strtoupper($brand_name);
         $id_interv = Security::encrypt($interv, false);
         $rdv = date('H:i', $hour);
         return "
@@ -91,7 +90,7 @@ class LoadTechHTML
                     <span class='text-muted fs-2'>" . $nomTech . "</span>
                 </td>
                 <td class='text-center'>
-                    <img src='../public/assets/img/logo/" . strtoupper($brand_name) . ".png' alt='logo_marque'>
+                    <img src='../public/assets/img/logo/" . $brand_name . ".PNG' alt='logo_marque'>
                 </td>                
                 <td>
                     <span class='text-muted font-13'>Immatriculation</span>
