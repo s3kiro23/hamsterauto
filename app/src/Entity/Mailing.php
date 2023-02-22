@@ -18,30 +18,22 @@ class Mailing
         $mail = new PHPMailer(true);
         try {
             //Server settings
-            /*$mail->SMTPDebug = SMTP::DEBUG_SERVER;            //Enable verbose debug output*/
             $mail->isSMTP();                                    //Send using SMTP
-            /*            $mail->Host = 'smtp-mail.outlook.com';                     //Set the SMTP server to send through*/
             $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
             $mail->SMTPAuth = true;                             //Enable SMTP authentication
             $mail->Username = 'shadow.s3kir0@gmail.com';        //SMTP username
             $mail->Password = 'ivjakmgdpgarxgrp';               //SMTP password
-            /*$mail->Username = 'hamsterauto2b@outlook.fr';        //SMTP username
-            $mail->Password = '@flaut0!@20';               //SMTP password*/
             $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
             $mail->Port = 587;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             $mail->CharSet = 'UTF-8';                           //Format d'encodage à utiliser pour les caractères
 
             //Recipients
             $mail->setFrom('contact@outlook.fr', 'HAMSTERAUTO');
-            /*    $mail->addAddress('joe@example.net', 'Joe User');*/     //Add a recipient
-            /*    $mail->addAddress($client->getEmail_user());            //Name is optional*/
             $mail->addAddress($data['mail']);           //Name is optional
             if (isset($data['reply']) && !empty($data['reply'])) {
                 $mail->addReplyTo($data['reply'], 'Information');
             }
             $mail->addReplyTo('no-reply@hamsterauto.com', 'Information');
-            /*    $mail->addCC('cc@example.com');
-                $mail->addBCC('bcc@example.com');*/
             if (isset($data['attachment']) && !empty($data['attachment'])) {
                 $mail->addAttachment("../" . $data['attachment']);
             }

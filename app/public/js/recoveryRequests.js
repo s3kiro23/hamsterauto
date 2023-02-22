@@ -25,9 +25,15 @@ let newPwd = function () {
                     showConfirmButton: false,
                     timer: 1500,
                 });
-                setTimeout(() => {
-                    window.location.replace("/");
-                }, 1500);
+                if (location.pathname == "/"){
+                    setTimeout(() => {
+                        window.location.replace("/");
+                    }, 1500);
+                } else {
+                    setTimeout(() => {
+                        window.location.replace("private-login");
+                    }, 1500);
+                }
             } else {
                 Swal.fire({
                     position: 'top',
