@@ -1,3 +1,4 @@
 /vendor
 /upload/profiles
 /var/generate/minutes
+/var/log
