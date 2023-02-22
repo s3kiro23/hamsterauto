@@ -28,7 +28,7 @@ if (!$_SESSION['auth']) {
             if ($_FILES['file']['error'] != 4) {
 
                 $user = new User(Security::decrypt($_SESSION['id'], false));
-                $target_dir = ROOT_DIR() . "/upload/";
+                $target_dir = "../../upload/";
                 $file_name = basename($_FILES['file']['name']);
                 $target_file = $target_dir . $file_name;
                 $file_type = pathinfo($target_file, PATHINFO_EXTENSION);
