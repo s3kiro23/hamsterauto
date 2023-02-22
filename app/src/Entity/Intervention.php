@@ -100,7 +100,7 @@ class Intervention
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $data['cryptedId'] = Security::encrypt($data['cryptedId'], false);
-            $data['brand_name'] = strtolower($data['brand_name']);
+            $data['brand_name'] = $data['brand_name'];
             $data['brand_name'] = str_replace(" ","",$data['brand_name']);
             $list_Rdv[]=$data;
 
