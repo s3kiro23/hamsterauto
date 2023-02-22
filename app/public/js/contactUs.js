@@ -12,7 +12,7 @@ $(function () {
 
 function configMap(callback) {
     $.ajax({
-        url: "/src/Controller/ContactUsController.php",
+        url: "../src/Controller/ContactUsController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -68,7 +68,7 @@ let contactUS = function () {
         tabInput[$(this).attr('id')] = $(this).val();
     });
     $.ajax({
-        url: '/src/Controller/ContactUsController.php',
+        url: '../src/Controller/ContactUsController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
@@ -99,7 +99,7 @@ let contactUS = function () {
 
 function captcha() {
     $.ajax({
-        url: '/src/Controller/Index/SignInController.php',
+        url: '../src/Controller/Index/SignInController.php',
         dataType: 'JSON',
         type: 'POST',
         data: {
