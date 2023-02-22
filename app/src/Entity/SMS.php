@@ -111,7 +111,7 @@ class SMS
 
     public function getCT_Finish($car_user, $user): array
     {
-        $body_SMS = "Bonjour {$user->getFirstname_user()}, le contrôle technique de votre véhicule immatriculé {$car_user->getRegistration()} est terminé ! Vous pouvez dès à présent venir le récupérer.";
+        $body_SMS = "Bonjour $user->getFirstname_user(), le contrôle technique de votre véhicule immatriculé {$car_user->getRegistration()} est terminé ! Vous pouvez dès à présent venir le récupérer.";
 
         return array("bodySMS" => $body_SMS, "receiver" => $user->getPhone_user());
     }
@@ -126,7 +126,7 @@ class SMS
 
     public function getSupport($user, $car_user): array
     {
-        $body_SMS = "Bonjour {$user->getFirstname_user()}, votre véhicule immatriculé {$car_user->getRegistration()} vient d'être pris en charge par l'un de nos technicien. Merci pour votre confiance. Votre centre HamsterAuto.";
+        $body_SMS = "Bonjour ".$user->getFirstname_user().", votre véhicule immatriculé {$car_user->getRegistration()} vient d'être pris en charge par l'un de nos technicien. Merci pour votre confiance. Votre centre HamsterAuto.";
 
         return array("bodySMS" => $body_SMS, "receiver" => $user->getPhone_user());
     }
@@ -134,7 +134,7 @@ class SMS
     public function getRDV($user, $car_user, $CT): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
-        $body_SMS = "Bonjour {$user->getFirstname_user()}, votre rendez-vous du " . Convert::date_to_fullFR($CT->getTime_slot()) . " pour le véhicule immatriculé {$car_user->getRegistration()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre HamsterAuto.";
+        $body_SMS = "Bonjour ".$user->getFirstname_user().", votre rendez-vous du " . Convert::date_to_fullFR($CT->getTime_slot()) . " pour le véhicule immatriculé {$car_user->getRegistration()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre HamsterAuto.";
 
         return array("bodySMS" => $body_SMS, "receiver" => $user->getPhone_user());
     }
@@ -142,7 +142,7 @@ class SMS
     public function getNextRDV($user, $car_user, $CT): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
-        $body_SMS = "Bonjour {$user->getFirstname_user()}, votre rendez-vous du " . Convert::date_to_fullFR($CT->getTime_slot()) . " pour le véhicule immatriculé {$car_user->getRegistration()} est pour bientôt. Pour préparer au mieux votre visite périodique, faites un tour sur note plateforme ! Merci pour votre confiance. Votre centre HamsterAuto.";
+        $body_SMS = "Bonjour ".$user->getFirstname_user().", votre rendez-vous du " . Convert::date_to_fullFR($CT->getTime_slot()) . " pour le véhicule immatriculé {$car_user->getRegistration()} est pour bientôt. Pour préparer au mieux votre visite périodique, faites un tour sur note plateforme ! Merci pour votre confiance. Votre centre HamsterAuto.";
 
         return array("bodySMS" => $body_SMS, "receiver" => $user->getPhone_user());
     }
