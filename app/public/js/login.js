@@ -20,6 +20,7 @@ let connect = function () {
         success: function (response) {
             if (response["status"] === 0) {
                 toastMixin.fire({
+                    position: 'top',
                     animation: true,
                     title: response["msg"],
                     icon: 'error',
@@ -29,6 +30,7 @@ let connect = function () {
                 }, 1500);
             } else if (response["status"] === 2) {
                 toastMixin.fire({
+                    position: 'top',
                     animation: true,
                     title: response["msg"],
                     icon: 'error',
@@ -37,6 +39,7 @@ let connect = function () {
                 $(".form-control").on("change", checkField);
             } else if (response["status"] === 3) {
                 toastMixin.fire({
+                    position: 'top',
                     animation: true,
                     title: response["msg"],
                     icon: 'warning',

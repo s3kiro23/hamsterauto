@@ -36,7 +36,6 @@ let newPwd = function () {
                 }
             } else {
                 Swal.fire({
-                    position: 'top',
                     title: "Non, non, non...",
                     text: response["msg"],
                     icon: "warning",
