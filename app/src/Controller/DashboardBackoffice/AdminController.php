@@ -23,7 +23,7 @@ if ($check === 'admin'){
             $models_in_bdd = Model::count_models();
             $cars = Vehicle::count_cars();
             $popular_brand = Vehicle::popular_brand();
-            $popular_brand['brand_name'] = strtolower($popular_brand['brand_name']);
+            $popular_brand['brand_name'] = $popular_brand['brand_name'];
             $popular_brand['brand_name'] = str_replace(" ","",$popular_brand['brand_name']);
             if (empty($popular_brand['brand_name'])){
                 $popular_brand['brand_name'] = 'Aucune donnée';
