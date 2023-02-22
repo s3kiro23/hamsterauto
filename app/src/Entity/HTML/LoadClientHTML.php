@@ -4,10 +4,11 @@ class LoadClientHTML
 {
     public static function carsRecap($brand_name, $model, $registration, $id_vehicle): string
     {
+        $brand_name = strtoupper($brand_name);
         return '
             <tr style="cursor: pointer" class="text-center">
                 <td>
-                    <img src="/public/assets/img/logo/' . $brand_name . '.PNG" alt="' . $brand_name . '">
+                    <img src="/public/assets/img/logo/' . $brand_name . '.png" alt="' . $brand_name . '">
                 </td>
                 <td>
                     <span class="text-muted">' . $model . '</span>
