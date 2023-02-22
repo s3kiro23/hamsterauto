@@ -8,7 +8,7 @@ class LoadClientHTML
         return '
             <tr style="cursor: pointer" class="text-center">
                 <td>
-                    <img src="../public/assets/img/logo/' . strtoupper($brand_name) . '.png" alt="' . $brand_name . '">
+                    <img src="/public/assets/img/logo/' . strtoupper($brand_name) . '.png" alt="' . $brand_name . '">
                 </td>
                 <td>
                     <span class="text-muted">' . $model . '</span>
