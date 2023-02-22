@@ -76,21 +76,24 @@ class Mailing
                 <br>
                 <b>Bonjour {$user->getFirstname_user()},</b>
                 <br><br>
-                Votre inscription sur HamsterAuto.com a été validée !
+                Votre inscription sur notre plateforme a été enregistrée !
                 <br><br>
-                Avant de vous connecter vous devez:
-                <a  
-                href='http://localhost/hamsterauto/templates/activate-account.html?token=$token' 
-                target = '_blank'>Activer votre compte
-                </a>
+                Afin de pouvoir accéder à votre espace personnel, vous devez :
+                <br><br>
+                <button>
+                    <a style = 'text-decoration: none;' href='https://hamsterauto.com/activate-account?token=$token' target = '_blank'><b> Activer votre compte </b></a>
+                </button>
+                <br><br><br>
+                Ou copier et coller cette URL dans la barre de recherche de votre navigateur :<br>
+                <a href='https://hamsterauto.com/activate-account?token=$token'> https://hamsterauto.com/activate-account?token=$token</a>
                 <br><br><br>
                 L'équipe d'<a style='text-decoration: none; color: black' 
-                            href='http://localhost/controle_tech/templates/' 
+                            href='https://hamsterauto.com/' 
                             target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
                             </a> vous remercie et espère vous voir lors de vos prochains contrôle technique.
                 <br><br>
                 <p>☎️ 06.00.00.00.01</p>
-                🌐<a href='http://localhost/hamsterauto/templates/' target = '_blank'> HamsterAuto.com</a>
+                🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
             </div>
             ";
         $subject = "Confirmation de votre inscription";
@@ -110,15 +113,15 @@ class Mailing
             <br><br>
             Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> arrive bientôt à échéance !
             <br><br>
-            Vous pouvez dès à présent prendre rendez-vous sur notre plateforme <a href='http://localhost/hamsterauto/templates/' target = '_blank'>hamsterauto.com</a>.
+            Vous pouvez dès à présent prendre rendez-vous sur notre plateforme <a href='https://hamsterauto.com/' target = '_blank'>hamsterauto.com</a>.
             <br><br><br>
             L'équipe d'<a style='text-decoration: none; color: black' 
-                        href='http://localhost/hamsterauto/templates/' 
+                        href='https://hamsterauto.com/' 
                         target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
                         </a> vous remercie et espère vous revoir lors de vos prochains contrôle technique.
                         <br><br>
                         <p>☎️ 06.00.00.00.01</p>
-                        🌐<a href='http://localhost/hamsterauto/templates/' target = '_blank'> HamsterAuto.com</a>
+                        🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
         </div>
         ";
         $subject = "Rappel contrôle technique";
@@ -144,12 +147,12 @@ class Mailing
             Une facture est jointe à ce mail, récapitulant l'ensemble des prestations réalisées sur votre véhicule.
             <br><br><br>
             L'équipe d'<a style='text-decoration: none; color: black' 
-                        href='http://localhost/hamsterauto/templates/' 
+                        href='https://hamsterauto.com/' 
                         target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
                         </a> vous remercie et espère vous revoir lors de vos prochains contrôle technique.
                         <br><br>
                         <p>☎️ 06.00.00.00.01</p>
-                        🌐<a href='http://localhost/hamsterauto/templates/' target = '_blank'> HamsterAuto.com</a>
+                        🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
         </div>
         ";
         $subject = "Compte rendu d'intervention";
@@ -176,12 +179,12 @@ class Mailing
             Un récapitulatif des points à faire contrôler en garage dans un délai de 2 mois dès réception du présent mail, vous est adressé en pièce-jointe.
             <br><br><br>
             L'équipe d'<a style='text - decoration: none; color: black' 
-                        href='http://localhost/hamsterauto/templates/'
+                        href='https://hamsterauto.com/'
                         target = '_blank' ><b>Hamster<span style = 'color: #4bbf73' >A</span>uto</b>
                         </a > reste à votre disposition pour tout complément d'information.
                         <br><br>
                         <p>☎️ 06.00.00.00.01</p>
-                        🌐<a href='http://localhost/hamsterauto/templates/' target = '_blank'> HamsterAuto.com</a>
+                        🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
         </div>
         ";
         $subject = "Compte rendu d'intervention";
@@ -208,10 +211,10 @@ class Mailing
             <br><br>
             Nous espérons vous revoir prochainement pour le suivi de vos véhicules.
             <br><br><br>
-            L'équipe d'<a style='text - decoration: none; color: black' href='http://localhost/hamsterauto/templates/' target='_blank'><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
+            L'équipe d'<a style='text - decoration: none; color: black' href='https://hamsterauto.com/' target='_blank'><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
             <br><br>
             <p>☎️ 06.00.00.00.01</p>
-            🌐 <a href='http://localhost/hamsterauto/templates/' target='_blank'>HamsterAuto.com</a>
+            🌐 <a href='https://hamsterauto.com/' target='_blank'>HamsterAuto.com</a>
         </div>
         ";
         $subject = "Information concernant votre intervention";
@@ -233,19 +236,19 @@ class Mailing
                     Vous avez oublié votre mot de passe ?<br>
                     Nous avons reçu une demande de réinitialisation pour votre compte.
                     <br><br>
-                    Pour pouvoir récupérer ce dernier, veuillez cliquer sur le lien ci - dessous :
+                    Pour pouvoir récupérer ce dernier, veuillez cliquer sur le lien ci-dessous :
                     <br><br>
                     <button>
-                        <a style = 'text-decoration: none;' href = 'http://localhost/hamsterauto/templates/change-password.html?token=$token'><b> Récupération de mon compte </b ></a >
+                        <a style = 'text-decoration: none;' href = 'https://hamsterauto.com/change-password?token=$token'><b> Récupération de mon compte </b ></a >
                     </button>
                     <br><br><br>
                     Ou copier et coller cette URL dans la barre de recherche de votre navigateur :<br>
-                    <a href='http://localhost/hamsterauto/templates/change-password.html?token=$token'> http://localhost/hamsterauto/templates/change-password.html?token=$token</a>
+                    <a href='https://hamsterauto.com/change-password?token=$token'> https://hamsterauto.com/change-password?token=$token</a>
                     <br><br><br>
-                    L'équipe d'<a style='text-decoration: none; color: black' href= 'http://localhost/hamsterauto/templates/' target='_blank' ><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
+                    L'équipe d'<a style='text-decoration: none; color: black' href= 'https://hamsterauto.com/' target='_blank' ><b>Hamster<span style='color: #4bbf73'>A</span>uto</b></a>.
                     <br><br>
                     <p>☎️ 06.00.00.00.01</p>
-                    🌐<a href='http://localhost/hamsterauto/templates/' target = '_blank'> HamsterAuto.com</a>
+                    🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
                 </div>
             ";
         $subject = "Récupération de votre compte utilisateur";

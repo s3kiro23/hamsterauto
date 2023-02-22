@@ -18,6 +18,8 @@ RewriteRule ^dashboards/client?$ /templates/client-dashboard.html [L,NC]
 
 RewriteRule ^administration?$ /templates/admin.php [L,NC]
 
+RewriteRule ^activate-account?$ /templates/activate-account.html? [L,NC]
+
 RewriteRule ^reservation?$ /templates/client-form.html [L,NC]
 
 RewriteRule ^contact?$ /templates/contact-us.html [L,NC]
