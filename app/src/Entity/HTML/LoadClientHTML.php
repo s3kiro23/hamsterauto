@@ -8,7 +8,7 @@ class LoadClientHTML
         return '
             <tr style="cursor: pointer" class="text-center">
                 <td>
-                    <img src="../public/assets/img/logo/' . strtoupper($brand_name) . '.png" alt="' . $brand_name . '">
+                    <img src="' . ROOT_DIR() . '/public/assets/img/logo/' . strtoupper($brand_name) . '.png" alt="' . $brand_name . '">
                 </td>
                 <td>
                     <span class="text-muted">' . $model . '</span>
@@ -58,7 +58,7 @@ class LoadClientHTML
 
     public static function rdvRecap($interv, $state, $registration, $idCT): string
     {
-        
+
         $html = '
             <tr style="cursor: pointer" class="text-center">
                 <td>
@@ -159,5 +159,4 @@ class LoadClientHTML
         }
         return $html;
     }
-
 }
