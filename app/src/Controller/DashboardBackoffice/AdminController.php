@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/src/Entity/Setting.php";
 Setting::autoload();
 
 require __DIR__ . '/../../../config/Twig.php';
-require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
+
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -17,6 +17,7 @@ if ($check === 'admin') {
     switch ($_POST['request']) {
 
         case 'launch_api_sync':
+            require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
             $output = majBdd();
             $msg = 'Mise à jour de la base véhicule terminé !';
             $status = 0;

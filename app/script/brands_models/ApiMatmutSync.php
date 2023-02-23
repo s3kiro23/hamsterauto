@@ -1,28 +1,8 @@
 <?php
-class Database
-{
-	private $db;
-	public function __construct()
-	{
 
-		$hostname = "localhost";
-		if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
-			$hostname = "database_mysql";
-		}
+require_once ROOT_DIR() . 'src/Entity/Database.php';
 
-		try {
-			$this->db = mysqli_connect($hostname, "API_CT", "Db789!@50", "hamsterauto");
-		} catch (RuntimeException $e) {
-			exit(0);
-		}
-	}
-	public function connexion()
-	{
-		return $this->db;
-	}
-}
-
-$db = new Database();
+$db = new Database('API');
 $GLOBALS['Database'] = $db->connexion();
 
 
@@ -96,4 +76,3 @@ function majBdd()
 		'output' => $output
 	);
 }
-majBdd();
