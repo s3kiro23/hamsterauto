@@ -74,6 +74,8 @@ function majBdd()
 
 	error_log('La base données a été mise à jour en ' . round($totalTime, 2) . ' secondes');
 
+	error_log(json_encode($output));
+
 	return array(
 		'totalTime' => round($totalTime, 2),
 		'output' => $output
