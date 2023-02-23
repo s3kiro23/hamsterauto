@@ -21,8 +21,9 @@ if ($check === 'admin') {
             $output = majBdd();
             $msg = 'Mise à jour de la base véhicule terminé !';
             $status = 0;
-            $brands_msg = $output['brands'] . 'a été ajouté';
-            $models_msg = $output['models'] . 'a été ajouté'; 
+            error_log(json_encode($output));
+            $brands_msg = $output['output']['brands'] . 'a été ajouté';
+            $models_msg = $output['output']['models'] . 'a été ajouté'; 
             $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . 'secondes';
 
 
