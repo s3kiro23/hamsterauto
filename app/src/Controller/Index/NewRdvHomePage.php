@@ -35,7 +35,7 @@ switch ($_POST['request']) {
                 $msg = 'Touche pas au code !';
             }else{
                 $client_tmp = User::create($civilite, $data['inputPrenom'], $data['inputNom'], $data['inputEmail'],
-                $data['inputTel'], NULL, 'temp', $current_pwd_exp, NULL);
+                $data['inputTel'], NULL, 'temp', $current_pwd_exp, NULL, 0);
                 $car_ID = Vehicle::new_vehicle($client_tmp, $data['selectedModel'], $data['registration'], $data['inputYear'], $carburant, 0);
                 $ct_ID = Intervention::new_CT($client_tmp, $time_slot, $car_ID, 0);
 
