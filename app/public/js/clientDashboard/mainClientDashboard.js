@@ -2,11 +2,11 @@ $(function () {
     load();
     $("#file").on("change", checkType);
     $('.switchLogo').on("click", switchLogo);
-    setInterval(() => {
-        let currentPage = $('#pagesMyArchives').find('.active').children().html();
-        loadUserIntervention();
-        loadUserArchives(currentPage);
-    }, 5000);
+    // setInterval(() => {
+    //     let currentPage = $('#pagesMyArchives').find('.active').children().html();
+    //     loadUserIntervention();
+    //     loadUserArchives(currentPage);
+    // }, 5000);
 });
 
 function load() {
