@@ -19,17 +19,22 @@ if ($check === 'admin') {
         case 'launch_api_sync':
             require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
             $output = majBdd();
+            $brands_msg = "";
+            $models_msg = "";
             $msg = 'Mise à jour de la base véhicule terminé !';
             $status = 0;
             error_log(json_encode($output));
-            $brands_msg = $output['output']['brands'] . 'a été ajouté';
-            $models_msg = $output['output']['models'] . 'a été ajouté'; 
+            if (!empty($output['output']['brands'] || !empty($output['output']['models']))){
+                $brands_msg = $output['output']['brands'] . 'a été ajouté';
+                $models_msg = $output['output']['models'] . 'a été ajouté'; 
+            }
             $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . 'secondes';
-
 
             echo json_encode(array(
                 'msg' => $msg,
                 'status' => $status,
+                'brands_msg' => $brands_msg,
+                'models_msg' => $models_msg,
                 'totalTime' => $totalTime_msg
             ));
             break;

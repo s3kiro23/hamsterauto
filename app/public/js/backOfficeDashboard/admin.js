@@ -146,12 +146,14 @@ let callApiMatmut = function () {
                     request: "launch_api_sync",
                 },
                 success: function (response) {
-                    toastMixin.fire({
+                    Swal.fire({
                         position: 'center',
-                        animation: true,
                         title: response["msg"],
+                        text: response["brands_msg"],
+                        text: response["models_msg"],
                         text: response["totalTime"],
                         icon: 'success',
+                        confirmButtonColor: "#4BBF73",
                     });
                 },
                 error: function () {
