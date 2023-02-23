@@ -4,7 +4,7 @@
 # shellcheck disable=SC2164
 # cd /var/www/hamsterauto/script/brands_models
 
-php -f call_api_matmut.php
+php -f ApiMatmutSync.php
 
 
 

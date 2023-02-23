@@ -116,7 +116,50 @@ function loadAdmin() {
 // 
 
 let callApiMatmut = function () {
-    
+    Swal.fire({
+        title: "Cette action peut prendre un certains temps, voulez-vous continuer ?",
+        text: "",
+        imageUrl: '/public/assets/img/swalicons/interro.png',
+        imageWidth: 100,
+        showCancelButton: true,
+        confirmButtonColor: "#4BBF73",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Oui",
+        cancelButtonText: "Annuler",
+    }).then((result) => {
+        if (result.isConfirmed) {
+            Swal.fire({
+                title: "Récupération des informations véhicules en cours...",
+                imageUrl: '/public/assets/img/swalicons/spinner.gif',
+                imageWidth: 220,
+                imageHeight: 220,
+                allowEscapeKey: false,
+                allowOutsideClick: false,
+                showCancelButton: false,
+                showConfirmButton: false,
+            })
+            $.ajax({
+                url: "/src/Controller/DashboardBackoffice/AdminController.php",
+                dataType: "JSON",
+                type: "POST",
+                data: {
+                    request: "launch_api_sync",
+                },
+                success: function (response) {
+                    toastMixin.fire({
+                        position: 'center',
+                        animation: true,
+                        title: response["msg"],
+                        text: response["totalTime"],
+                        icon: 'success',
+                    });
+                },
+                error: function () {
+                    console.log("errorAPI")
+                },
+            });
+        }
+    });
 }
 
 function adminIndex(){

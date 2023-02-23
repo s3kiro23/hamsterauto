@@ -1,20 +1,37 @@
 <?php
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/src/Entity/Setting.php";
 Setting::autoload();
 
-require __DIR__.'/../../../config/Twig.php';
+require __DIR__ . '/../../../config/Twig.php';
+require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
 $check = Security::check_security();
 
-if ($check === 'admin'){
+if ($check === 'admin') {
 
     switch ($_POST['request']) {
-       
+
+        case 'launch_api_sync':
+            $output = majBdd();
+            $msg = 'Mise à jour de la base véhicule terminé !';
+            $status = 0;
+            $brands_msg = $output['brands'] . 'a été ajouté';
+            $models_msg = $output['models'] . 'a été ajouté'; 
+            $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . 'secondes';
+
+
+            echo json_encode(array(
+                'msg' => $msg,
+                'status' => $status,
+                'totalTime' => $totalTime_msg
+            ));
+            break;
+
         case 'display_adminOffice':
             $date = Convert::date_to_fullFR();
             $userCount = User::count_users();
@@ -23,24 +40,24 @@ if ($check === 'admin'){
             $models_in_bdd = Model::count_models();
             $cars = Vehicle::count_cars();
             $popular_brand = Vehicle::popular_brand();
-            if (empty($popular_brand['brand_name'])){
+            if (empty($popular_brand['brand_name'])) {
                 $popular_brand['brand_name'] = 'Aucune donnée';
             } else {
                 $popular_brand['brand_name'] = $popular_brand['brand_name'];
-                $popular_brand['brand_name'] = str_replace(" ","",$popular_brand['brand_name']);
+                $popular_brand['brand_name'] = str_replace(" ", "", $popular_brand['brand_name']);
             }
-            $return = $twig-> render('adminIndex.html.twig',array(
+            $return = $twig->render('adminIndex.html.twig', array(
                 'date' => $date, 'nbUsers' => $userCount, 'nbInter' => $interv, 'brands' => $brands_in_bdd,
                 'models' => $models_in_bdd, 'nbCars' => $cars, 'popularBrandName' => $popular_brand['brand_name'],
-                'popularBrandPic' => "../public/assets/img/logo/".$popular_brand['brand_name'].".png"
+                'popularBrandPic' => "../public/assets/img/logo/" . $popular_brand['brand_name'] . ".png"
 
             ));
-            
+
             echo json_encode($return);
             break;
 
         case 'display_RDV_tab':
-            $return = $twig-> render('carsTabStructure.html.twig');
+            $return = $twig->render('carsTabStructure.html.twig');
             echo json_encode($return);
             break;
 
@@ -69,7 +86,7 @@ if ($check === 'admin'){
             break;
 
         case 'display_users':
-            $users = User::check_all_users($_POST['name'], $_POST['firstName'],$_POST['adress'], $_POST['phone'],$_POST['mail'], $_POST['type'], $_POST['active'] );
+            $users = User::check_all_users($_POST['name'], $_POST['firstName'], $_POST['adress'], $_POST['phone'], $_POST['mail'], $_POST['type'], $_POST['active']);
             $return = $twig->render('usersTabFiller.html.twig', array(
                 'users' => $users
             ));
@@ -94,16 +111,16 @@ if ($check === 'admin'){
             echo json_encode(0);
             break;
 
-        case 'add_user' :
+        case 'add_user':
             $data = json_decode($_POST['values'], true);
             $status = 1;
             $msg = "Utilisateur enregistré";
-            if($data['inputPassword'] != $data['inputPassword2']){
+            if ($data['inputPassword'] != $data['inputPassword2']) {
                 $status = 0;
                 $msg = "Vérifiez votre mot de passe";
             }
             $user = User::check_user($data['inputLoginAdd']);
-            $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite']; 
+            $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite'];
             if ($user) {
                 $status = 0;
                 $msg = "Le login existe déjà!";
@@ -130,7 +147,7 @@ if ($check === 'admin'){
             break;
 
 
-        case 'modifyUser' :
+        case 'modifyUser':
             $data = json_decode($_POST['values'], true);
             $init_control = new Control();
             $check = $init_control->check_fields($data);
@@ -147,7 +164,7 @@ if ($check === 'admin'){
                 $user->setPhone_user($data['inputTel']);
                 $user->setAdress_user($data['inputAddr']);
                 $user->update();
-    
+
                 //Add traces in BDD
                 $traces = new Trace(0);
                 $traces->setId_user(Security::decrypt($_SESSION['id'], false));
@@ -157,7 +174,7 @@ if ($check === 'admin'){
             }
             echo json_encode(array("status" => $status, "msg" => $msg));
             break;
-        
+
         case 'display_ban_tab':
             $return = $twig->render('banAccountStructure.html.twig');
             echo json_encode($return);
@@ -200,7 +217,7 @@ if ($check === 'admin'){
                 $path_pv = Security::decrypt($archives['pv'], $client->getHash());
                 $decrypted_file_content = Security::decrypt(file_get_contents("../../../var/generate/minutes/" . $path_pv), $client->getHash());
                 $encoded_content = base64_encode($decrypted_file_content);
-                $rapport_contre_visite = "<iframe src='data:application/pdf;base64, $encoded_content' height='600' class='w-100'></iframe>"; 
+                $rapport_contre_visite = "<iframe src='data:application/pdf;base64, $encoded_content' height='600' class='w-100'></iframe>";
             }
             echo json_encode(array("rdvID" => $id_archive, "rapport" => $rapport_contre_visite));
             break;
@@ -211,28 +228,28 @@ if ($check === 'admin'){
             break;
 
         case 'admin_logs':
-            $logs = Trace::display_traces();         
-            $return = $twig-> render('logsFiller.html.twig', array(
-                'logs' => $logs,             
+            $logs = Trace::display_traces();
+            $return = $twig->render('logsFiller.html.twig', array(
+                'logs' => $logs,
             ));
             echo json_encode($return);
             break;
 
         case 'display_settings':
-            $return = $twig-> render('settingsStructure.html.twig');
+            $return = $twig->render('settingsStructure.html.twig');
             echo json_encode($return);
 
             break;
 
         case 'show_settings':
             $settings = Setting::get_settings();
-            if(date('I') == 0){
+            if (date('I') == 0) {
                 $settings['start_time_am'] = ($settings['start_time_am'] - 3600);
                 $settings['end_time_pm'] = ($settings['end_time_pm'] - 3600);
-                $settings['slot_interval'] = ($settings['slot_interval'] - 3600 );
+                $settings['slot_interval'] = ($settings['slot_interval'] - 3600);
             }
-            $return = $twig-> render('settingsFiller.html.twig', array(
-                'set' => $settings,             
+            $return = $twig->render('settingsFiller.html.twig', array(
+                'set' => $settings,
             ));
             echo json_encode($return);
 
@@ -244,52 +261,47 @@ if ($check === 'admin'){
             $slot = $_POST['slot'];
             $new_TimeH = $_POST['newTimeH'];
             $new_TimeM = $_POST['newTimeM'];
-            $timestamp = ($new_TimeH*3600)+($new_TimeM*60);
-            if($context == 'open' && $timestamp > $settings_database['end_time_pm']){
+            $timestamp = ($new_TimeH * 3600) + ($new_TimeM * 60);
+            if ($context == 'open' && $timestamp > $settings_database['end_time_pm']) {
                 $timestamp = $settings_database['end_time_pm'] - 3600;
             }
-            if($context == 'close' && $timestamp < $settings_database['start_time_am']){
+            if ($context == 'close' && $timestamp < $settings_database['start_time_am']) {
                 $timestamp = $settings_database['start_time_am'] + 3600;
             }
-            $settings = Setting::change_time_settings($slot, $timestamp); 
-            echo json_encode(0);          
+            $settings = Setting::change_time_settings($slot, $timestamp);
+            echo json_encode(0);
             break;
-    
+
         case 'update_slot':
             $new_TimeH = $_POST['newTimeH'];
             $new_TimeM = $_POST['newTimeM'];
-            $timestamp = ($new_TimeH*3600)+($new_TimeM*60);
-            $settings = Setting::change_slot_interval($timestamp); 
-            echo json_encode(0);          
+            $timestamp = ($new_TimeH * 3600) + ($new_TimeM * 60);
+            $settings = Setting::change_slot_interval($timestamp);
+            echo json_encode(0);
             break;
 
         case 'session_update':
             $context = $_POST['context'];
-            if($_POST['context'] == 'user' && $_POST["sessionDuration"] > 10){
+            if ($_POST['context'] == 'user' && $_POST["sessionDuration"] > 10) {
                 $_POST["sessionDuration"] = 10;
             }
-            if($_POST['context'] == 'internal' && $_POST["sessionDuration"] > 30){
+            if ($_POST['context'] == 'internal' && $_POST["sessionDuration"] > 30) {
                 $_POST["sessionDuration"] = 30;
             }
             $settings_database = Setting::get_settings();
-            $timestamp = $_POST["sessionDuration"]*60;
+            $timestamp = $_POST["sessionDuration"] * 60;
             $settings = Setting::change_session_settings($context, $timestamp);
-            echo json_encode(0);             
+            echo json_encode(0);
             break;
 
         case 'change_lifts':
             $lifts = $_POST['lifts'];
-            $settings = Setting::change_lifts($lifts);           
+            $settings = Setting::change_lifts($lifts);
             break;
     }
-
-}else {
+} else {
     session_destroy();
     $msg = "Accès interdit";
     $status = 0;
     echo json_encode(array('msg' => $msg, 'status' => $status));
 }
-
-
-
-
