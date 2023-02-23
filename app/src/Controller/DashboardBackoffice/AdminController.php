@@ -25,8 +25,8 @@ if ($check === 'admin') {
             $status = 0;
             error_log(json_encode($output));
             if (!empty($output['output']['brands'] || !empty($output['output']['models']))){
-                $brands_msg = $output['output']['brands'] . 'a été ajouté';
-                $models_msg = $output['output']['models'] . 'a été ajouté'; 
+                $brands_msg = $output['output']['brands'];
+                $models_msg = $output['output']['models']; 
             }
             $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . 'secondes';
 

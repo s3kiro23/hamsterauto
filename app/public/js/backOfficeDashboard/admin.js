@@ -150,9 +150,9 @@ let callApiMatmut = function () {
                         position: 'center',
                         title: response["msg"],
                         html: 'Les marques suivantes ont été ajoutés : ' + 
-                        response["brands_msg"] + '<br>' +
-                        'Les modèles suivant ont été ajoutés : ' + response["models_msg"],
-                        text: response["totalTime"],
+                        response["brands_msg"] + '<br><br>' +
+                        'Les modèles suivant ont été ajoutés : ' + response["models_msg"] + '<br><br><br>' +
+                        response["totalTime"],
                         icon: 'success',
                         confirmButtonColor: "#4BBF73",
                     });
