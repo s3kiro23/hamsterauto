@@ -115,9 +115,9 @@ function loadAdmin() {
 // 
 // 
 
-let callApiMatmut = function () {
+// let callApiMatmut = function () {
     
-}
+// }
 
 function adminIndex(){
     clearIntervals();

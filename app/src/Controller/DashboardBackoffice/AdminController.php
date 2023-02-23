@@ -23,18 +23,20 @@ if ($check === 'admin'){
             $models_in_bdd = Model::count_models();
             $cars = Vehicle::count_cars();
             $popular_brand = Vehicle::popular_brand();
-            $popular_brand['brand_name'] = $popular_brand['brand_name'];
-            $popular_brand['brand_name'] = str_replace(" ","",$popular_brand['brand_name']);
             if (empty($popular_brand['brand_name'])){
                 $popular_brand['brand_name'] = 'Aucune donnée';
+            } else {
+                $popular_brand['brand_name'] = $popular_brand['brand_name'];
+                $popular_brand['brand_name'] = str_replace(" ","",$popular_brand['brand_name']);
             }
-                $return = $twig-> render('adminIndex.html.twig',array(
-                    'date' => $date, 'nbUsers' => $userCount, 'nbInter' => $interv, 'brands' => $brands_in_bdd,
-                    'models' => $models_in_bdd, 'nbCars' => $cars, 'popularBrandName' => $popular_brand['brand_name'],
-                    'popularBrandPic' => "../public/assets/img/logo/".$popular_brand['brand_name'].".png"
+            $return = $twig-> render('adminIndex.html.twig',array(
+                'date' => $date, 'nbUsers' => $userCount, 'nbInter' => $interv, 'brands' => $brands_in_bdd,
+                'models' => $models_in_bdd, 'nbCars' => $cars, 'popularBrandName' => $popular_brand['brand_name'],
+                'popularBrandPic' => "../public/assets/img/logo/".$popular_brand['brand_name'].".png"
 
-                ));
-                echo json_encode($return);
+            ));
+            
+            echo json_encode($return);
             break;
 
         case 'display_RDV_tab':
