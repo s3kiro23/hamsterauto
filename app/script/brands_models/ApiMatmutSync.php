@@ -45,7 +45,6 @@ function majBdd()
 					$list_modelesBdd[strtoupper($nomMarque['Text'])]['list'] = array();
 					error_log($nomMarque['Text'] . ' ajouté en base de données.');
 					$output['brands'] = $nomMarque['Text'];
-					error_log($output['brands']);
 				}
 				$resultat[$nomMarque['Text']] = array();
 				$urlModel = "GetListeModeles?anneeDebut=&anneeFin=" . date('Y') . "&genreVehicule=$idType&marque=" . urlencode($nomMarque['Text']);
@@ -55,7 +54,6 @@ function majBdd()
 						if (!in_array($nomModele['Text'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['list'])) {
 							error_log($nomModele['Text'] . " a été ajouté");
 							$output['models'] = $nomModele['Text'];
-							error_log($output['models']);
 							$requete3 = "INSERT INTO `model` (`id_brand`,`model_name`) 
 							VALUES  (
 								'" . mysqli_real_escape_string($GLOBALS['Database'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['id']) . "', 
@@ -73,8 +71,6 @@ function majBdd()
 	$totalTime = $endTime - $startTime;
 
 	error_log('La base données a été mise à jour en ' . round($totalTime, 2) . ' secondes');
-
-	error_log(json_encode($output));
 
 	return array(
 		'totalTime' => round($totalTime, 2),

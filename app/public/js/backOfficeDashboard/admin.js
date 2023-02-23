@@ -149,8 +149,9 @@ let callApiMatmut = function () {
                     Swal.fire({
                         position: 'center',
                         title: response["msg"],
-                        text: response["brands_msg"],
-                        text: response["models_msg"],
+                        html: 'Les marques suivantes ont été ajoutés : ' + 
+                        response["brands_msg"] + '<br>' +
+                        'Les modèles suivant ont été ajoutés : ' + response["models_msg"],
                         text: response["totalTime"],
                         icon: 'success',
                         confirmButtonColor: "#4BBF73",
