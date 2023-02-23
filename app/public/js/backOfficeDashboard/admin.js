@@ -147,18 +147,29 @@ let callApiMatmut = function () {
 					request: "launch_api_sync",
 				},
 				success: function (response) {
-					Swal.fire({
-						position: "center",
-						title: response["msg"],
-						html:
-							response["brands_msg"] +
-							"<br><br>" +
-							response["models_msg"] +
-							"<br><br>" +
-							response["totalTime"],
-						icon: "success",
-						confirmButtonColor: "#4BBF73",
-					});
+					if (response["status"] === 1) {
+						Swal.fire({
+							position: "center",
+							title: response["msg"],
+							html:
+								response["brands_msg"] +
+								"<br><br>" +
+								response["models_msg"] +
+								"<br><br>" +
+								response["totalTime"],
+							icon: "success",
+							confirmButtonColor: "#4BBF73",
+						});
+					} else {
+						Swal.fire({
+							position: "center",
+							title: response["msg"],
+							html: response["unfilled"] + "<br><br>" + response["totalTime"],
+							icon: "success",
+							confirmButtonColor: "#4BBF73",
+						});
+					}
+
 					adminIndex();
 				},
 				error: function () {

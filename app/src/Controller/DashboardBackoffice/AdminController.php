@@ -18,11 +18,13 @@ if ($check === 'admin') {
 
         case 'launch_api_sync':
             require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
+            
             $output = majBdd();
             $brands_msg = "";
             $models_msg = "";
             $msg = 'Mise à jour de la base de données véhicules terminé !';
             $status = 0;
+            $unfilled_msg = "Aucune données ajoutées";
             if (!empty($output['output']['brands'] || !empty($output['output']['models']))) {
                 $brands = $output['output']['brands'];
                 $models = $output['output']['models'];
@@ -30,12 +32,14 @@ if ($check === 'admin') {
                 $brands_msg .= implode(', ', $brands) . '.';
                 $models_msg = count($models) > 1 ? 'Les modèles suivants ont été ajoutés : ' : 'Le modèle suivant a été ajouté : ';
                 $models_msg .= implode(', ', $models) . '.';
+                $status = 1;
             }
-            $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . ' secondes';
+            $totalTime_msg = 'La requête a été exécuté en ' . $output['totalTime'] . ' secondes';
 
             echo json_encode(array(
                 'msg' => $msg,
                 'status' => $status,
+                'unfilled' => $unfilled_msg,
                 'brands_msg' => $brands_msg,
                 'models_msg' => $models_msg,
                 'totalTime' => $totalTime_msg
