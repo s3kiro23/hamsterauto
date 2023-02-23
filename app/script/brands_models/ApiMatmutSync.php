@@ -25,6 +25,8 @@ function majBdd()
 		$list_modelesBdd[$dataT['brand_name']]['id'] = $dataT['id_brand'];
 		$list_modelesBdd[$dataT['brand_name']]['list'][] = $dataT['model_name'];
 	}
+	error_log(1);
+
 
 	$apiUrl  = "http://applis.matmut.fr/DevisMRSQInternet/devis.mcp/";
 	$genre   = array('Voiture' => '5');
@@ -32,8 +34,11 @@ function majBdd()
 	$output = array();
 
 	foreach ($genre as $typeVehicule => $idType) {
+		error_log(2);
 		$marques   = JSON_decode(file_get_contents($apiUrl . "GetListeMarques?genreVehicule=$idType"), true);
+		error_log(3);
 		foreach ($marques as $idMarque => $nomMarque) {
+			error_log(4);
 			if (strtoupper($nomMarque['Text']) != 'AUTRES MARQUES') {
 				if (!in_array($nomMarque['Text'], $liste_marques)) {
 					$requete2 = "INSERT INTO `brand` (`brand_name`) VALUES  ('" . mysqli_real_escape_string($GLOBALS['Database'], strtoupper($nomMarque['Text'])) . "')";
@@ -47,8 +52,12 @@ function majBdd()
 				}
 				$resultat[$nomMarque['Text']] = array();
 				$urlModel = "GetListeModeles?anneeDebut=&anneeFin=" . date('Y') . "&genreVehicule=$idType&marque=" . urlencode($nomMarque['Text']);
+				error_log(5);
 				$modeles = JSON_decode(file_get_contents($apiUrl . $urlModel), true);
+				error_log(6);
 				foreach ($modeles as $idModele => $nomModele) {
+					error_log(7);
+
 					if ($nomModele['Text'] != 'AUTRE') {
 						if (!in_array($nomModele['Text'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['list'])) {
 							error_log($nomModele['Text'] . " a été ajouté");
@@ -66,6 +75,7 @@ function majBdd()
 			}
 		}
 	}
+	error_log(8);
 	$endTime = microtime(TRUE);
 	$totalTime = $endTime - $startTime;
 
