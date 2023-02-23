@@ -1,28 +1,8 @@
 <?php
-class Database
-{
-	private $db;
-	public function __construct()
-	{
 
-		$hostname = "localhost";
-		if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
-			$hostname = "database_mysql";
-		}
+require_once ROOT_DIR() . '/src/Entity/Database.php';
 
-		try {
-			$this->db = mysqli_connect($hostname, "API_CT", "Db789!@50", "hamsterauto");
-		} catch (RuntimeException $e) {
-			exit(0);
-		}
-	}
-	public function connexion()
-	{
-		return $this->db;
-	}
-}
-
-$db = new Database();
+$db = new Database('API');
 $GLOBALS['Database'] = $db->connexion();
 
 
@@ -46,10 +26,11 @@ function majBdd()
 		$list_modelesBdd[$dataT['brand_name']]['list'][] = $dataT['model_name'];
 	}
 
+
 	$apiUrl  = "http://applis.matmut.fr/DevisMRSQInternet/devis.mcp/";
 	$genre   = array('Voiture' => '5');
 	$resultat  = array();
-	$output = array();
+	$output = [];
 
 	foreach ($genre as $typeVehicule => $idType) {
 		$marques   = JSON_decode(file_get_contents($apiUrl . "GetListeMarques?genreVehicule=$idType"), true);
@@ -63,7 +44,7 @@ function majBdd()
 					$list_modelesBdd[strtoupper($nomMarque['Text'])]['id'] = $new_id_brand;
 					$list_modelesBdd[strtoupper($nomMarque['Text'])]['list'] = array();
 					error_log($nomMarque['Text'] . ' ajouté en base de données.');
-					$output['brands'] = $nomMarque['Text'];
+					$output['brands'][] = $nomMarque['Text'];
 				}
 				$resultat[$nomMarque['Text']] = array();
 				$urlModel = "GetListeModeles?anneeDebut=&anneeFin=" . date('Y') . "&genreVehicule=$idType&marque=" . urlencode($nomMarque['Text']);
@@ -72,7 +53,7 @@ function majBdd()
 					if ($nomModele['Text'] != 'AUTRE') {
 						if (!in_array($nomModele['Text'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['list'])) {
 							error_log($nomModele['Text'] . " a été ajouté");
-							$output['models'] = $nomModele['Text'];
+							$output['models'][] = $nomModele['Text'];
 							$requete3 = "INSERT INTO `model` (`id_brand`,`model_name`) 
 							VALUES  (
 								'" . mysqli_real_escape_string($GLOBALS['Database'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['id']) . "', 
@@ -96,4 +77,3 @@ function majBdd()
 		'output' => $output
 	);
 }
-majBdd();

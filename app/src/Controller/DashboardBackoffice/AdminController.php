@@ -5,7 +5,7 @@ require $_SERVER['DOCUMENT_ROOT'] . "/src/Entity/Setting.php";
 Setting::autoload();
 
 require __DIR__ . '/../../../config/Twig.php';
-require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
+
 
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
@@ -17,17 +17,27 @@ if ($check === 'admin') {
     switch ($_POST['request']) {
 
         case 'launch_api_sync':
-            $output = majBdd();
-            $msg = 'Mise à jour de la base véhicule terminé !';
-            $status = 0;
-            $brands_msg = $output['brands'] . 'a été ajouté';
-            $models_msg = $output['models'] . 'a été ajouté'; 
-            $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . 'secondes';
+            require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
 
+            $output = majBdd();
+            $status = 0;
+            if (!empty($output['output']['brands'] || !empty($output['output']['models']))) {
+                $brands = $output['output']['brands'];
+                $models = $output['output']['models'];
+                $brands_msg = count($brands) > 1 ? 'Les marques suivantes ont été ajoutées : ' : 'La marque suivante a été ajoutée : ';
+                $brands_msg .= implode(', ', $brands);
+                $models_msg = count($models) > 1 ? 'Les modèles suivants ont été ajoutés : ' : 'Le modèle suivant a été ajouté : ';
+                $models_msg .= implode(', ', $models) . '.';
+                $status = 1;
+            }
+            $totalTime_msg = 'La requête a été exécuté en ' . $output['totalTime'] . ' secondes';
 
             echo json_encode(array(
-                'msg' => $msg,
+                'msg' => 'Mise à jour de la base de données véhicules terminé !',
                 'status' => $status,
+                'unfilled' => "Aucune données ajoutées",
+                'brands_msg' => $brands_msg,
+                'models_msg' => $models_msg,
                 'totalTime' => $totalTime_msg
             ));
             break;
