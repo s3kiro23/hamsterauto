@@ -2,6 +2,12 @@
 class Database{
     private $db;
     public function __construct(){
+
+        $hostname = "localhost";
+        if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
+        $hostname = "database_mysql";
+        }
+
         try{
             $this->db = mysqli_connect("localhost", "script_bans", "Db123!@66", "hamsterauto");
         } catch (RuntimeException $e){

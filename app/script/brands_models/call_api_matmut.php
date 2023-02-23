@@ -1,9 +1,16 @@
 <?php
+error_log(1);
 class Database{
     private $db;
     public function __construct(){
+
+			$hostname = "localhost";
+        	if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
+            $hostname = "database_mysql";
+        	}
+
         try{
-            $this->db = mysqli_connect("localhost", "API_CT", "Db789!@50", "hamsterauto");
+            $this->db = mysqli_connect($hostname, "API_CT", "Db789!@50", "hamsterauto");
         } catch (RuntimeException $e){
             exit(0);
         }
@@ -12,8 +19,12 @@ class Database{
         return $this->db;
     }
 }
+error_log(2);
+
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
+error_log(3);
+
 
 function majBdd(){
 	$startTime = microtime(TRUE);
