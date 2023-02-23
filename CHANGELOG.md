@@ -1,5 +1,9 @@
 # v1.1
 
+### launch_api_dashadmin
+
+- [ADD] nouveau bouton pour lancer la synchro de l'api matmut manuellement
+
 ### placeholder_animation
 
 - [FIX] bug sur la prise de rendez-vous (create User)
