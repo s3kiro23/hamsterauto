@@ -6,6 +6,12 @@
 	padding: 0 !important;
 }
 
+.btn-update-base{
+	left: 19rem;
+	top: 2rem;
+	z-index: 1000;
+}
+
 .row {
 	margin: 0 !important;
 }

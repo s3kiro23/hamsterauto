@@ -8,7 +8,9 @@
 
         <td>{{ ban['lastDate'] }}</td>
 
-        <td> <span role='button' onclick='debanUser(`{{ ban['id_user'] }}`)'><i class="fa-solid fa-rotate-right"></i></span></td>
+        <td> <span role='button' onclick='debanUser(`{{ ban['id_user'] }}`)' data-toggle="tooltip"
+                    data-placement="bottom" 
+                    title="autoriser accès"><i class="fa-solid fa-rotate-right"></i></span></td>
 
     </tr>
 

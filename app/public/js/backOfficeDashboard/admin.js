@@ -114,6 +114,11 @@ function loadAdmin() {
 }
 // 
 // 
+
+let callApiMatmut = function () {
+    
+}
+
 function adminIndex(){
     clearIntervals();
     $.ajax({

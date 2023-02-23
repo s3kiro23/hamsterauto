@@ -18,12 +18,18 @@
             <img id={% if user.is_active == 1 %}'LedV' {% else %}'LedR' {% endif %}> 
         </td>
 
-        <td role='button' onclick='modalProfilAdmin(`{{ user.getId_user }}`)'><i class="fa-solid fa-user-gear"></i></td>
+        <td role='button' onclick='modalProfilAdmin(`{{ user.getId_user }}`)' data-toggle="tooltip"
+                    data-placement="bottom" 
+                    title="modifier utilisateur"><i class="fa-solid fa-user-gear"></i></td>
     {% if user.getType != 'admin' %}
         <td>{% if user.is_active == 1 %}
-                <span class='offUser' role='button' onclick='inactivateUser(`{{ user.getId_user }}`)'><i class="fa-solid fa-ban"></i></span>
+                <span class='offUser' role='button' onclick='inactivateUser(`{{ user.getId_user }}`)' data-toggle="tooltip"
+                    data-placement="bottom" 
+                    title="désactiver le compte"><i class="fa-solid fa-ban"></i></span>
             {% else %}
-                <span class='onUser' role='button' onclick='activateUser(`{{ user.getId_user }}`)'><i class="fa-solid fa-rotate-right"></i></span>
+                <span class='onUser' role='button' onclick='activateUser(`{{ user.getId_user }}`)' data-toggle="tooltip"
+                    data-placement="bottom" 
+                    title="activer le compte"><i class="fa-solid fa-rotate-right"></i></span>
             {% endif %}
         </td>
     {% else %}
