@@ -21,14 +21,17 @@ if ($check === 'admin') {
             $output = majBdd();
             $brands_msg = "";
             $models_msg = "";
-            $msg = 'Mise à jour de la base véhicule terminé !';
+            $msg = 'Mise à jour de la base de données véhicules terminé !';
             $status = 0;
-            error_log(json_encode($output));
-            if (!empty($output['output']['brands'] || !empty($output['output']['models']))){
-                $brands_msg = $output['output']['brands'];
-                $models_msg = $output['output']['models']; 
+            if (!empty($output['output']['brands'] || !empty($output['output']['models']))) {
+                $brands = $output['output']['brands'];
+                $models = $output['output']['models'];
+                $brands_msg = count($brands) > 1 ? 'Les marques suivantes ont été ajoutées : ' : 'La marque suivante a été ajoutée : ';
+                $brands_msg .= implode(', ', $brands) . '.';
+                $models_msg = count($models) > 1 ? 'Les modèles suivants ont été ajoutés : ' : 'Le modèle suivant a été ajouté : ';
+                $models_msg .= implode(', ', $models) . '.';
             }
-            $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . 'secondes';
+            $totalTime_msg = 'La base a été mise à jour en ' . $output['totalTime'] . ' secondes';
 
             echo json_encode(array(
                 'msg' => $msg,
