@@ -44,7 +44,7 @@ function majBdd()
 					$list_modelesBdd[strtoupper($nomMarque['Text'])]['id'] = $new_id_brand;
 					$list_modelesBdd[strtoupper($nomMarque['Text'])]['list'] = array();
 					error_log($nomMarque['Text'] . ' ajouté en base de données.');
-					$output['brands'] = $nomMarque['Text'];
+					$output['brands'][] = $nomMarque['Text'];
 				}
 				$resultat[$nomMarque['Text']] = array();
 				$urlModel = "GetListeModeles?anneeDebut=&anneeFin=" . date('Y') . "&genreVehicule=$idType&marque=" . urlencode($nomMarque['Text']);
@@ -53,7 +53,7 @@ function majBdd()
 					if ($nomModele['Text'] != 'AUTRE') {
 						if (!in_array($nomModele['Text'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['list'])) {
 							error_log($nomModele['Text'] . " a été ajouté");
-							$output['models'] = $nomModele['Text'];
+							$output['models'][] = $nomModele['Text'];
 							$requete3 = "INSERT INTO `model` (`id_brand`,`model_name`) 
 							VALUES  (
 								'" . mysqli_real_escape_string($GLOBALS['Database'], $list_modelesBdd[strtoupper($nomMarque['Text'])]['id']) . "', 

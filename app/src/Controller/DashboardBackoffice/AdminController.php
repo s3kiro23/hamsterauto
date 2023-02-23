@@ -24,10 +24,10 @@ if ($check === 'admin') {
             if (!empty($output['output']['brands'] || !empty($output['output']['models']))) {
                 $brands = $output['output']['brands'];
                 $models = $output['output']['models'];
-                $brands_msg = count($brands) == 1 ? 'La marque suivante a été ajoutée : ' : 'Les marques suivantes ont été ajoutées : ';
+                $brands_msg = count($brands) > 1 ? 'Les marques suivantes ont été ajoutées : ' : 'La marque suivante a été ajoutée : ';
                 $brands_msg .= implode(', ', $brands);
-                $models_msg = count($models) == 1 ? 'Le modèle suivant a été ajouté : ' : 'Les modèles suivants ont été ajoutés : ';
-                $models_msg .= implode(', ', $models);
+                $models_msg = count($models) > 1 ? 'Les modèles suivants ont été ajoutés : ' : 'Le modèle suivant a été ajouté : ';
+                $models_msg .= implode(', ', $models) . '.';
                 $status = 1;
             }
             $totalTime_msg = 'La requête a été exécuté en ' . $output['totalTime'] . ' secondes';
