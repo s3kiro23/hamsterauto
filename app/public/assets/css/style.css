@@ -6,6 +6,10 @@
 	padding: 0 !important;
 }
 
+.button-csv{
+	right: 2rem;
+}
+
 .danger-api{
 	left: 20.25rem;
 	top: 1rem;

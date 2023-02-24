@@ -4,7 +4,7 @@
             <div class="card shadow rounded border border-primary">
                 <div class="card-header bg-primary bg-opacity-75 rounded-top d-flex justify-content-between align-items-center">
                     <h4 class="m-0 py-2 text-dark">UTILISATEURS:</h4> 
-                    <div role='button' onclick='modalAdduser()' data-toggle="tooltip"
+                    <div class="me-3" role='button' onclick='modalAdduser()' data-toggle="tooltip"
                         data-placement="bottom" 
                         title="ajouter nouvel utilisateur">
                         <i class="fa-solid fa-user-plus text-light fs-2"></i>
@@ -12,7 +12,8 @@
                     <div class='btnPrevious position-absolute' style='left: 27%'></div>
                 </div>
                 <div class="card-body">
-                    <table id="tab-admin-users" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0 responsive">
+                    <table id="tab-admin-users" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0 responsive position-relative">
+                        <button class="button-csv btn btn-primary position-absolute" onclick='exportCSV()'>CSV</button>
                         <tfoot>
                             <tr align='center'>
                                 <th><input id='searchName' class='filtreAd rounded' type='search' placeholder='rechercher'></th>

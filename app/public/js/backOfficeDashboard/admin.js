@@ -180,6 +180,47 @@ let callApiMatmut = function () {
 	});
 };
 
+function exportCSV() {
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export",
+			name: $("#searchName").val(),
+			adress: $("#searchAdress").val(),
+			firstName: $("#searchFirstName").val(),
+			phone: $("#searchTel").val(),
+			mail: $("#searchMail").val(),
+			type: $("#searchType").val(),
+			active: $("#searchisActive").val(),
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
+function download(elem) {
+	$.ajax({
+		url: elem.url,
+		method: "GET",
+		xhrFields: {
+			responseType: "blob",
+		},
+		success: function (data) {
+			var a = document.createElement("a");
+			var url = window.URL.createObjectURL(data);
+			a.href = url;
+			a.download = elem.name;
+			document.body.append(a);
+			a.click();
+			a.remove();
+			window.URL.revokeObjectURL(url);
+		},
+	});
+}
+
 function adminIndex() {
 	clearIntervals();
 	$.ajax({
@@ -398,6 +439,7 @@ function adminUsers() {
 			$("#adminUsersTab").html(response);
 			loadAdmin();
 			dataTableAdminUsers();
+			$("#button-csv").on("click", exportCSV);
 		},
 		error: function () {
 			console.log("errorUser");

@@ -16,6 +16,49 @@ if ($check === 'admin') {
 
     switch ($_POST['request']) {
 
+        case 'export':
+
+            $columns = array(
+                'NOM', 
+                'PRENOM', 
+                'ADRESSE',
+                'TELEPHONE',
+                'MAIL',
+                'TYPE',
+                'ETAT',
+            );
+
+            $name_file = date("dmYHis") . ".csv";
+            $csv = fopen("/var/www/hamsterauto/var/generate/doc/" . $name_file, 'w') or die("Can't open php://output");
+            header("Content-Type:application/csv");
+            header("Content-Disposition:attachment;filename=" . $name_file);
+            fputcsv($csv, $columns, ';');
+
+            $data = User::check_all_users($_POST['name'], $_POST['firstName'], $_POST['adress'], $_POST['phone'], $_POST['mail'], $_POST['type'], $_POST['active']);
+
+            foreach ($data as $user) {
+                fputcsv($csv, array(
+                    $user->getLastname_user(), 
+                    $user->getFirstname_user(), 
+                    $user->getAdress_user(), 
+                    $user->getPhone_user(),
+                    $user->getEmail_user(),
+                    $user->getType(),
+                    $user->getIs_active() == 1 ? "Actif" : "Inactif"
+                ), ';');
+            }
+
+            fclose($csv);
+
+            $response = array(
+                'name' => date("dmY") . ".csv",
+                'url' => '/var/generate/doc/' . $name_file
+            );
+
+            echo json_encode($response);
+
+            break;
+
         case 'launch_api_sync':
             require __DIR__ . '/../../../script/brands_models/ApiMatmutSync.php';
 
