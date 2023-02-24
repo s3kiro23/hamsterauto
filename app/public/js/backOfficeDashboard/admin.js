@@ -21,14 +21,15 @@ $(function () {
 //
 //
 function switchLogoAdmin() {
+	console.log($(".logo").attr("src"))
 	if (
-		$(".logo").attr("src") === "/public/assets/img/hamsterauto-unscreen.gif"
+		$(".logo").attr("src") === "../public/assets/img/hamsterauto-unscreen.gif"
 	) {
-		$(".logo").attr("src", "/public/assets/img/hamsterautoNuit-unscreen.gif");
+		$(".logo").attr("src", "../public/assets/img/hamsterautoNuit-unscreen.gif");
 	} else if (
-		$(".logo").attr("src") === "/public/assets/img/hamsterautoNuit-unscreen.gif"
+		$(".logo").attr("src") === "../public/assets/img/hamsterautoNuit-unscreen.gif"
 	) {
-		$(".logo").attr("src", "/public/assets/img/hamsterauto-unscreen.gif");
+		$(".logo").attr("src", "../public/assets/img/hamsterauto-unscreen.gif");
 	}
 }
 
@@ -180,13 +181,13 @@ let callApiMatmut = function () {
 	});
 };
 
-function exportCSV() {
+function exportUserCSV() {
 	$.ajax({
 		url: "/src/Controller/DashboardBackoffice/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
-			request: "export",
+			request: "export_user",
 			name: $("#searchName").val(),
 			adress: $("#searchAdress").val(),
 			firstName: $("#searchFirstName").val(),
@@ -439,7 +440,7 @@ function adminUsers() {
 			$("#adminUsersTab").html(response);
 			loadAdmin();
 			dataTableAdminUsers();
-			$("#button-csv").on("click", exportCSV);
+			$("#button-csv").on("click", exportUserCSV);
 		},
 		error: function () {
 			console.log("errorUser");

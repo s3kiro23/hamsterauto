@@ -16,7 +16,7 @@ if ($check === 'admin') {
 
     switch ($_POST['request']) {
 
-        case 'export':
+        case 'export_user':
 
             $columns = array(
                 'NOM', 
