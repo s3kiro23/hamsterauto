@@ -262,6 +262,7 @@ function adminIndex() {
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
 			loadAdmin();
+			$('.current-breadcrumb').html('');
 		},
 		error: function () {
 			console.log("errorBO");
@@ -299,6 +300,7 @@ function displayRdvTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('interventions');
 			displayFiltreImmatAdmin();
 			setTimeout(() => {
 				loadAdmin();
@@ -435,6 +437,7 @@ function displayUsersTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('utilisateurs');
 			adminUsers();
 		},
 		error: function () {
@@ -633,6 +636,7 @@ function displayBanTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('comptes bannis');
 			displayBanUsers();
 		},
 		error: function () {
@@ -699,6 +703,7 @@ function displayAdminArchives() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('archives');
 			adminArchives();
 		},
 		error: function () {
@@ -758,6 +763,7 @@ function displayLogs() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('surveillance');
 			showLogs();
 		},
 		error: function () {
@@ -828,6 +834,7 @@ function displaySettings() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('paramétrage');
 			showSettings();
 		},
 		error: function () {},
