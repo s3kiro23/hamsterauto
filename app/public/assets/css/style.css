@@ -6,6 +6,11 @@
 	padding: 0 !important;
 }
 
+.danger-api{
+	left: 20.25rem;
+	top: 1rem;
+}
+
 .btn-update-base{
 	left: 19rem;
 	top: 2rem;
