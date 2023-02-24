@@ -202,6 +202,34 @@ function exportUserCSV() {
 	});
 }
 
+function exportArchivesCSV() {
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export_archives",
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
+function exportLogsCSV() {
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export_logs",
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
 function download(elem) {
 	$.ajax({
 		url: elem.url,
@@ -691,6 +719,7 @@ function adminArchives() {
 		success: function (response) {
 			$("#archivesTab").html(response);
 			dataTableAdminArchives();
+			$("#button-csv").on("click", exportArchivesCSV);
 		},
 		error: function () {
 			console.log("errorBO");
@@ -740,6 +769,7 @@ function displayLogs() {
 //
 function showLogs() {
 	adminLogs();
+	$("#button-csv").on("click", exportLogsCSV);
 }
 //
 //
