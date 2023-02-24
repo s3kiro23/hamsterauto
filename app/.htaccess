@@ -4,28 +4,28 @@ RewriteEngine On
 
 RewriteBase /
 
-RewriteRule ^/?$ /templates/index.html [L,NC]
+RewriteRule ^/?$ /views/index.html [L,NC]
 
-RewriteRule ^private-login?$ /templates/private-login.html [L,NC]
+RewriteRule ^private-login?$ /views/private-login.html [L,NC]
 
-RewriteRule ^dashboards/technicien?$ /templates/back-office.html [L,NC]
+RewriteRule ^dashboards/technicien?$ /views/back-office.html [L,NC]
 
-RewriteRule ^change-password?$ /templates/change-password.html [L,NC]
+RewriteRule ^change-password?$ /views/change-password.html [L,NC]
 
-RewriteRule ^checklist?$ /templates/checklist.html [L,NC]
+RewriteRule ^checklist?$ /views/checklist.html [L,NC]
 
-RewriteRule ^dashboards/client?$ /templates/client-dashboard.html [L,NC]
+RewriteRule ^dashboards/client?$ /views/client-dashboard.html [L,NC]
 
-RewriteRule ^administration?$ /templates/admin.php [L,NC]
+RewriteRule ^administration?$ /views/admin.php [L,NC]
 
-RewriteRule ^activate-account?$ /templates/activate-account.html? [L,NC]
+RewriteRule ^activate-account?$ /views/activate-account.html? [L,NC]
 
-RewriteRule ^reservation?$ /templates/client-form.html [L,NC]
+RewriteRule ^reservation?$ /views/client-form.html [L,NC]
 
-RewriteRule ^contact?$ /templates/contact-us.html [L,NC]
+RewriteRule ^contact?$ /views/contact-us.html [L,NC]
 
-RewriteRule ^profil?$ /templates/profil.html [L,NC]
+RewriteRule ^profil?$ /views/profil.html [L,NC]
 
-RewriteRule ^inscription?$ /templates/sign-in.html [L,NC]
+RewriteRule ^inscription?$ /views/sign-in.html [L,NC]
 
-RewriteRule ^erreur-403?$ /templates/403.html [L,NC]
+RewriteRule ^erreur-403?$ /views/403.html [L,NC]

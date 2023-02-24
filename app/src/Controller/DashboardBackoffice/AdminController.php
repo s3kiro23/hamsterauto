@@ -99,7 +99,7 @@ if ($check === 'admin') {
                 $popular_brand['brand_name'] = $popular_brand['brand_name'];
                 $popular_brand['brand_name'] = str_replace(" ", "", $popular_brand['brand_name']);
             }
-            $return = $twig->render('adminIndex.html.twig', array(
+            $return = $twig->render('admin_index.html.twig', array(
                 'date' => $date, 'nbUsers' => $userCount, 'nbInter' => $interv, 'brands' => $brands_in_bdd,
                 'models' => $models_in_bdd, 'nbCars' => $cars, 'popularBrandName' => $popular_brand['brand_name'],
                 'popularBrandPic' => "../public/assets/img/logo/" . $popular_brand['brand_name'] . ".png"
@@ -110,7 +110,7 @@ if ($check === 'admin') {
             break;
 
         case 'display_RDV_tab':
-            $return = $twig->render('carsTabStructure.html.twig');
+            $return = $twig->render('cars_tab_structure.html.twig');
             echo json_encode($return);
             break;
 
@@ -118,7 +118,7 @@ if ($check === 'admin') {
             $registration = $_POST['registration'];
             $current_date = $_POST['currentDate'];
             $Rdv = Intervention::check_rdv_admin(0, $registration, $current_date, "id_user");
-            $return = $twig->render('carTabsFiller.html.twig', array(
+            $return = $twig->render('car_tabs_filler.html.twig', array(
                 'Rdvs' => $Rdv,
             ));
             echo json_encode($return);
@@ -127,20 +127,20 @@ if ($check === 'admin') {
         case 'display_Rdv_wip':
             $current_date = $_POST['currentDate'];
             $Rdv = Intervention::check_rdv_admin(1, "", $current_date, "num_tech");
-            $return = $twig->render('carTabsWipFiller.html.twig', array(
+            $return = $twig->render('car_tabs_wip_filler.html.twig', array(
                 'Rdvs' => $Rdv
             ));
             echo json_encode($return);
             break;
 
         case 'display_users_tab':
-            $return = $twig->render('usersTabStructure.html.twig');
+            $return = $twig->render('users_tab_structure.html.twig');
             echo json_encode($return);
             break;
 
         case 'display_users':
             $users = User::check_all_users($_POST['name'], $_POST['firstName'], $_POST['adress'], $_POST['phone'], $_POST['mail'], $_POST['type'], $_POST['active']);
-            $return = $twig->render('usersTabFiller.html.twig', array(
+            $return = $twig->render('users_tab_filler.html.twig', array(
                 'users' => $users
             ));
             echo json_encode($return);
@@ -229,13 +229,13 @@ if ($check === 'admin') {
             break;
 
         case 'display_ban_tab':
-            $return = $twig->render('banAccountStructure.html.twig');
+            $return = $twig->render('ban_account_structure.html.twig');
             echo json_encode($return);
             break;
 
         case 'display_ban_users';
             $banUsers = LoginAttempt::check_all_attempts();
-            $return = $twig->render('banFiller.html.twig', array(
+            $return = $twig->render('ban_filler.html.twig', array(
                 'banAccounts' => $banUsers
             ));
             echo json_encode($return);
@@ -249,13 +249,13 @@ if ($check === 'admin') {
             break;
 
         case 'display_admin_archives':
-            $return = $twig->render('archivesStructure.html.twig');
+            $return = $twig->render('archives_structure.html.twig');
             echo json_encode($return);
             break;
 
         case 'admin_archives':
             $archives = Archive::admin_archives();
-            $return = $twig->render('archivesFiller.html.twig', array(
+            $return = $twig->render('archives_filler.html.twig', array(
                 'archives' => $archives
             ));
             echo json_encode($return);
@@ -276,20 +276,20 @@ if ($check === 'admin') {
             break;
 
         case 'display_logs_tab':
-            $return = $twig->render('logsStructure.html.twig');
+            $return = $twig->render('logs_structure.html.twig');
             echo json_encode($return);
             break;
 
         case 'admin_logs':
             $logs = Trace::display_traces();
-            $return = $twig->render('logsFiller.html.twig', array(
+            $return = $twig->render('logs_filler.html.twig', array(
                 'logs' => $logs,
             ));
             echo json_encode($return);
             break;
 
         case 'display_settings':
-            $return = $twig->render('settingsStructure.html.twig');
+            $return = $twig->render('settings_structure.html.twig');
             echo json_encode($return);
 
             break;
@@ -301,7 +301,7 @@ if ($check === 'admin') {
                 $settings['end_time_pm'] = ($settings['end_time_pm'] - 3600);
                 $settings['slot_interval'] = ($settings['slot_interval'] - 3600);
             }
-            $return = $twig->render('settingsFiller.html.twig', array(
+            $return = $twig->render('settings_filler.html.twig', array(
                 'set' => $settings,
             ));
             echo json_encode($return);
