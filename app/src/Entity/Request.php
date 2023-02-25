@@ -1,5 +1,10 @@
 <?php
 
+require_once "Database.php";
+
+$db = new Database();
+$GLOBALS['Database'] = $db->connexion();
+
 class Request
 {
     private $id_request;

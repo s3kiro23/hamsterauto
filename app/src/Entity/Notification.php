@@ -4,6 +4,9 @@ spl_autoload_register(function ($classe) {
     require '../Entity/' . $classe . '.php';
 });
 
+$db = new Database();
+$GLOBALS['Database'] = $db->connexion();
+
 class Notification
 {
     private $id_notif;

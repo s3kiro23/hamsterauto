@@ -14,10 +14,10 @@ class Database
         if ($type == null) {
             $user = "db";
             $pwd = "Db123!@20";
-        } else if ($type == 'API') {
+        } else if ($type == 'api') {
             $user = "api";
             $pwd = "Db789!@50";
-        } else if ($type == 'BAN') {
+        } else if ($type == 'ban') {
             $user = "ban";
             $pwd = "Db123!@66";
         }
@@ -25,6 +25,7 @@ class Database
         if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
             $hostname = "database_mysql";
         }
+        error_log($user);
 
         try {
             $this->db = mysqli_connect($hostname, $user, $pwd, "hamsterauto");

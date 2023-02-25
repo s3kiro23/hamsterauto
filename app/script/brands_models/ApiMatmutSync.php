@@ -1,8 +1,8 @@
 <?php
 
-require_once ROOT_DIR() . '/src/Entity/Database.php';
+require_once __DIR__ . '/../../src/Entity/Database.php';
 
-$db = new Database('API');
+$db = new Database('api');
 $GLOBALS['Database'] = $db->connexion();
 
 

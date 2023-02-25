@@ -2,7 +2,7 @@
 
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/src/Entity/Setting.php";
 Setting::autoload();
 
 $db = new Database();
@@ -49,7 +49,7 @@ switch ($_POST['request']) {
         echo json_encode(array("msg" => $msg));
         break;
 
-    case 'modify_password' :
+    case 'modify_password':
         $data = json_decode($_POST['tabInput'], true);
         $status = 1;
         $type = "";
@@ -69,7 +69,7 @@ switch ($_POST['request']) {
             } else if ($check['status'] == 0) {
                 $msg = $check['msg'];
                 $status = $check['status'];
-            } else if ($data['inputPassword'] == $data['old-password']){
+            } else if ($data['inputPassword'] == $data['old-password']) {
                 $status = 0;
                 $msg = "Le nouveau mot de passe ne peut être identique à l'ancien!";
             } else {
@@ -96,15 +96,20 @@ switch ($_POST['request']) {
                 } else if ($get_token == $user_token['hash']) {
                     $user_hash = $user_token['hash'];
                     $user = new User($user_token['id_user']);
-                    $user->setPassword_user($data['inputPassword']);
-                    $user->setPwdExp_user($current_pwd_exp);
-                    $user->update();
-                    User::update_request($user_token['id_user']);
+                    if (password_verify($data['inputPassword'], $user->getPassword_user())) {
+                        $status = 0;
+                        $msg = "Le nouveau mot de passe ne peut être identique à l'ancien!";
+                    } else {
+                        $user->setPassword_user($data['inputPassword']);
+                        $user->setPwdExp_user($current_pwd_exp);
+                        $user->update();
+                        User::update_request($user_token['id_user']);
 
-                    //Add traces in BDD
-                    $traces->setTracesIN($user_token['id_user'], 'recovery', 'password');
+                        //Add traces in BDD
+                        $traces->setTracesIN($user_token['id_user'], 'recovery', 'password');
 
-                    $type = "request";
+                        $type = "request";
+                    }
                 }
             }
         }
