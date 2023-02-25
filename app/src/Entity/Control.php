@@ -144,8 +144,8 @@ class Control
 
     public function check_passwd_strength($passwd): bool
     {
-        // $pattern = '/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{12,18}$/';
-        $pattern = '/^(?=.*[a-z])[0-9A-Za-z@#\-_$%^&+=§!\?]{1,2}$/';
+        $pattern = '/^(?=.*\d)(?=.*[@#\-_$%^&+=§!\?])(?=.*[a-z])(?=.*[A-Z])[0-9A-Za-z@#\-_$%^&+=§!\?]{12,18}$/';
+        // $pattern = '/^(?=.*[a-z])[0-9A-Za-z@#\-_$%^&+=§!\?]{1,2}$/';
         if (preg_match_all($pattern, $passwd)) {
             return true;
         }
