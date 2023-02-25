@@ -21,14 +21,15 @@ $(function () {
 //
 //
 function switchLogoAdmin() {
+	console.log($(".logo").attr("src"))
 	if (
-		$(".logo").attr("src") === "/public/assets/img/hamsterauto-unscreen.gif"
+		$(".logo").attr("src") === "../public/assets/img/hamsterauto-unscreen.gif"
 	) {
-		$(".logo").attr("src", "/public/assets/img/hamsterautoNuit-unscreen.gif");
+		$(".logo").attr("src", "../public/assets/img/hamsterautoNuit-unscreen.gif");
 	} else if (
-		$(".logo").attr("src") === "/public/assets/img/hamsterautoNuit-unscreen.gif"
+		$(".logo").attr("src") === "../public/assets/img/hamsterautoNuit-unscreen.gif"
 	) {
-		$(".logo").attr("src", "/public/assets/img/hamsterauto-unscreen.gif");
+		$(".logo").attr("src", "../public/assets/img/hamsterauto-unscreen.gif");
 	}
 }
 
@@ -180,6 +181,73 @@ let callApiMatmut = function () {
 	});
 };
 
+function exportUserCSV() {
+	let values = {};
+	$('.filtreAd').each(function () {
+		values[$(this).attr('id')] = $(this).val();
+  	});
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export_user",
+			tabValues : JSON.stringify(values)
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
+function exportArchivesCSV() {
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export_archives",
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
+function exportLogsCSV() {
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export_logs",
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
+function download(elem) {
+	$.ajax({
+		url: elem.url,
+		method: "GET",
+		xhrFields: {
+			responseType: "blob",
+		},
+		success: function (data) {
+			var a = document.createElement("a");
+			var url = window.URL.createObjectURL(data);
+			a.href = url;
+			a.download = elem.name;
+			document.body.append(a);
+			a.click();
+			a.remove();
+			window.URL.revokeObjectURL(url);
+		},
+	});
+}
+
 function adminIndex() {
 	clearIntervals();
 	$.ajax({
@@ -192,6 +260,7 @@ function adminIndex() {
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
 			loadAdmin();
+			$('.current-breadcrumb').html('');
 		},
 		error: function () {
 			console.log("errorBO");
@@ -229,6 +298,7 @@ function displayRdvTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('interventions');
 			displayFiltreImmatAdmin();
 			setTimeout(() => {
 				loadAdmin();
@@ -365,6 +435,7 @@ function displayUsersTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('utilisateurs');
 			adminUsers();
 		},
 		error: function () {
@@ -398,6 +469,7 @@ function adminUsers() {
 			$("#adminUsersTab").html(response);
 			loadAdmin();
 			dataTableAdminUsers();
+			$("#button-csv").on("click", exportUserCSV);
 		},
 		error: function () {
 			console.log("errorUser");
@@ -562,6 +634,7 @@ function displayBanTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('comptes bannis');
 			displayBanUsers();
 		},
 		error: function () {
@@ -628,6 +701,7 @@ function displayAdminArchives() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('archives');
 			adminArchives();
 		},
 		error: function () {
@@ -648,6 +722,7 @@ function adminArchives() {
 		success: function (response) {
 			$("#archivesTab").html(response);
 			dataTableAdminArchives();
+			$("#button-csv").on("click", exportArchivesCSV);
 		},
 		error: function () {
 			console.log("errorBO");
@@ -686,6 +761,7 @@ function displayLogs() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('surveillance');
 			showLogs();
 		},
 		error: function () {
@@ -697,6 +773,7 @@ function displayLogs() {
 //
 function showLogs() {
 	adminLogs();
+	$("#button-csv").on("click", exportLogsCSV);
 }
 //
 //
@@ -755,6 +832,7 @@ function displaySettings() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
+			$('.current-breadcrumb').html('paramétrage');
 			showSettings();
 		},
 		error: function () {},

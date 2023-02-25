@@ -6,6 +6,16 @@
 	padding: 0 !important;
 }
 
+
+.button-csv{
+	right: 2rem;
+}
+
+.danger-api{
+	left: 20.25rem;
+	top: 1rem;
+}
+
 .btn-update-base{
 	left: 19rem;
 	top: 2rem;
@@ -376,6 +386,21 @@ tfoot {
 		border-top-right-radius: 5px;
 	}
 
+	.button-csv{
+		top: 8.8rem;
+	}
+	
+	.danger-api{
+		left: 17.3rem;
+		top: 1rem;
+	}
+	
+	.btn-update-base{
+		left: 16rem;
+		top: 2rem;
+		z-index: 1000;
+	}
+
 	.first-name,
 	.last-name {
 		display: none;
@@ -403,6 +428,20 @@ tfoot {
 		margin-bottom: 2rem !important;
 	}
 }
+
+@media (min-width: 992px) {
+	.danger-api{
+		left: 14.3rem;
+		top: 1rem;
+	}
+	
+	.btn-update-base{
+		left: 13rem;
+		top: 2rem;
+		z-index: 1000;
+	}
+}
+
 
 .scrolled-down {
 	transform: translateY(-100%);

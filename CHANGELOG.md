@@ -1,5 +1,11 @@
 # v1.1
 
+### export_csv
+
+- [UPD] style et margins sur certains tableaux du dash admin
+- [ADD] d'un bouton d'export au format CSV pour certains tableaux
+- [UPD] renommage et trie de tous les fichiers twig
+
 ### launch_api_dashadmin
 
 - [ADD] nouveau bouton pour lancer la synchro de l'api matmut manuellement
