@@ -64,7 +64,7 @@ class Export
       foreach ($data as $archive) {
          fputcsv($csv, array(
             $archive->getRegistration(),
-            $archive->getFirstname_user(),
+            $archive->getLastname_user(),
             $archive->getEmail_user(),
             $archive->getPhone_user(),
             $archive->getEmail_user(),
