@@ -1,3 +1,10 @@
+# v1.1.1
+
+### auto_script_vps
+
+- [UPD] mise à jour et test de tous les scripts sur le vps OK
+- [ADD] création des tâches cron associées 
+
 # v1.1
 
 ### export_csv
