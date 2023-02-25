@@ -77,7 +77,7 @@ class Export
             $archive->getLastname_user(),
             $archive->getEmail_user(),
             $archive->getPhone_user(),
-            iconv('ISO-8859-1', 'UTF-8', $state)
+            mb_convert_encoding($state, 'UTF-8')
          ), ';');
       }
 
