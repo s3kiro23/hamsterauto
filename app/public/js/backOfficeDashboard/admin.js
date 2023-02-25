@@ -182,19 +182,17 @@ let callApiMatmut = function () {
 };
 
 function exportUserCSV() {
+	let values = {};
+	$('.filtreAd').each(function () {
+		values[$(this).attr('id')] = $(this).val();
+  	});
 	$.ajax({
 		url: "/src/Controller/DashboardBackoffice/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
 			request: "export_user",
-			name: $("#searchName").val(),
-			adress: $("#searchAdress").val(),
-			firstName: $("#searchFirstName").val(),
-			phone: $("#searchTel").val(),
-			mail: $("#searchMail").val(),
-			type: $("#searchType").val(),
-			active: $("#searchisActive").val(),
+			tabValues : JSON.stringify(values)
 		},
 		success: function (response) {
 			download(response);
