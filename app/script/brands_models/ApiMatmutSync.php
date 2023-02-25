@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../src/Entity/Database.php';
+require_once __DIR__ . '/../../src/Entity/Database.php';
 
 $db = new Database('api');
 $GLOBALS['Database'] = $db->connexion();
