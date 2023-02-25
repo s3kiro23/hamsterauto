@@ -46,28 +46,28 @@ class Control
                 $status = 0;
                 break;
             } else if ($key == "inputEmail" && !$this->check_mail($value) || $key == "inputLogin" && !$this->check_mail($value)) {
-                $msg = "Veuillez renseigner un email valide!";
+                $msg = "Veuillez renseigner un email valide !";
                 $status = 0;
                 break;
             } else if ($key == "inputTel" && !$this->check_phone($value)) {
-                $msg = "Veuillez renseigner un numéro de téléphone valide!";
+                $msg = "Veuillez renseigner un numéro de téléphone valide !";
                 $status = 0;
                 break;
             } else if ($key == "inputYear" && !$this->check_year($value)) {
-                $msg = "Veuillez renseigner une année valide!";
+                $msg = "Veuillez renseigner une année valide !";
                 $status = 0;
                 break;
             } else if ($key == "inputCaptcha" && isset($data['captcha']) && !$this->check_captcha($data['inputCaptcha'], $data['captcha'])) {
                 $status = 0;
-                $msg = "Les captcha ne correspondent pas!";
+                $msg = "Les captcha ne correspondent pas !";
                 break;
             } else if ($key == "inputPassword" && isset($data['inputPassword2']) && !$this->check_password($data['inputPassword'], $data['inputPassword2'])) {
                 $status = 0;
-                $msg = "Les mots de passe ne correspondent pas!";
+                $msg = "Les mots de passe ne correspondent pas !";
                 break;
             } else if ($key == "inputPassword" && !$this->check_passwd_strength($data['inputPassword']) || $key == "inputPassword2" && !$this->check_passwd_strength($data['inputPassword2'])) {
                 $status = 0;
-                $msg = "Veuillez créer un mot de passe plus sécurisé! Minimum 12 caractères, une majuscule, une minuscule et un caractère spécial.";
+                $msg = "Veuillez créer un mot de passe plus sécurisé !";
                 break;
             } else if ($key == 'rgpd' && $value == false) {
                 $status = 0;
