@@ -53,6 +53,12 @@ class Export
          'STATUT'
       );
 
+      $states = array(
+         "2" => "valide",
+         "3" => "contre-visite",
+         "4" => "annulé"
+      );
+
       $name_file = date("dmYHis") . ".csv";
       $csv = fopen(ROOT_DIR() . "/var/generate/doc/" . $name_file, 'w') or die("Can't open php://output");
       header("Content-Type:application/csv");
@@ -62,13 +68,16 @@ class Export
       $data = Archive::admin_archives();
 
       foreach ($data as $archive) {
+         $state = $archive->getState();
+         if (array_key_exists($state, $states)) {
+            $state = $states[$state];
+         }
          fputcsv($csv, array(
             $archive->getRegistration(),
             $archive->getLastname_user(),
             $archive->getEmail_user(),
             $archive->getPhone_user(),
-            $archive->getEmail_user(),
-            $archive->getState(),
+            $state
          ), ';');
       }
 
