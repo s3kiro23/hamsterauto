@@ -24,7 +24,7 @@ class ModalMentions extends HTMLElement {
                                 <div>
                                     <p>
                                         <b>1) Editeur du site :</b><br>
-                                        Dénomination sociale : AFLAUTO SERVICES FRANCE<br>
+                                        Dénomination sociale : HAMSTER AUTO SERVICES FRANCE<br>
                                         Forme juridique : Société par Actions Simplifiée<br>
                                         Capital social : 7 €<br>
                                         Siège social : ?<br>
@@ -36,14 +36,17 @@ class ModalMentions extends HTMLElement {
                                         <b>2) Responsable de la publication :</b><br>
                                         Identité : Team FromScratch<br>
                                         Numéro de téléphone : XX XX XX XX XX <br>
-                                        Adresse de courrier électronique : contact@aflauto.fr<br>
+                                        Adresse de courrier électronique : contact@hamsterauto.com<br>
                                         <br>
                                         <b>3) Hébergeur du site : </b><br>
-                                        Nom/Dénomination sociale : ATE<br>
-                                        Adresse/Siège social : Au fond du maquis.<br>
+                                        Nom/Dénomination sociale : OVH - SAS au capital de 10 174 560 €<br>
+                                        Adresse/Siège social : 2 rue Kellermann - 59100 Roubaix - France<br>
                                         Numéro de téléphone : XX XX XX XX XX<br>
                                         <br>
                                         <b>4) Autres renseignements : </b><br>
+                                            RCS Lille Métropole 424 761 419 00045
+                                            Code APE 2620Z
+                                            N° TVA : FR 22 424 761 419<br>
                                         N° de déclaration simplifiée CNIL : ?<br>
                                     </p>
                                 </div>
