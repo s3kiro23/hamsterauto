@@ -1,5 +1,14 @@
 # v1.1.1
 
+### improve_little_things
+
+- [UPD] margins du bloc de récupération mot de passe
+- [UPD] amélioration du show/hide mot de passe dans un input-group
+- [ADD] backgrounds sur toutes les pages
+- [UPD] logo unscreen sur tous les templates mail
+- [UPD] des mentions légales
+- [UPD] du warning de la modal user 
+
 ### auto_script_vps
 
 - [UPD] mise à jour et test de tous les scripts sur le vps OK
