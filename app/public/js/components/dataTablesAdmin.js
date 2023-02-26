@@ -110,9 +110,9 @@ let dataTableAdminWip = function () {
 
 let dataTableLogs = function () {
     $('#tab-logs').DataTable({
-        
         searching: true,
-        "pageLength": 7,
+        "pageLength": 5,
+        "pagingType": "full",
         "lengthMenu": [[7, 10, 25, 50, 75, 100, -1], [7, 10, 25, 50, 75, 100, "All"]],
         retrieve: true,
         responsive: {
@@ -130,11 +130,6 @@ let dataTableLogs = function () {
             { className: "dt-head-center", targets: [0,1,2] },
             {responsivePriority: 1, targets: 0},
             {responsivePriority: 2, targets: -1},
-            {
-                "targets": [0,1,2],
-                
-                "orderable": false
-            }
         ],
         language: {
             "sEmptyTable": "Aucunes données n'est disponible",
