@@ -16,6 +16,15 @@ $(function () {
 			});
 		},
 	});
+
+	$(document).on("click", function(e) {
+		var navbarToggler = $(".navbar-toggler");
+		if (!navbarToggler.is(e.target) && navbarToggler.has(e.target).length === 0) {
+		  navbarToggler.addClass("collapsed");
+		  navbarToggler.attr("aria-expanded","true");
+		  $('.navbar-collapse').removeClass("show");
+		}
+	 });
 });
 //
 //
