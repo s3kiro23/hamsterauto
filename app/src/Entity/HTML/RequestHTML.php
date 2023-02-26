@@ -151,13 +151,11 @@ class RequestHTML
     public static function mailSending($mail): string
     {
         return "
-            <div class='col-md-7 d-flex flex-center'
-                <div class='p-4 p-md-5 flex-grow-1'>
-                    <div class='text-center'><img class='d-block mx-auto mb-4' src='../public/assets/img/icons/spot-illustrations/16.png' alt='Email' width='100' />
-                        <h3 class='mb-2'>Merci de consulter vos mails!</h3>
-                        <p>Un mail a été envoyé à l'adresse <strong>$mail</strong>. Veuillez cliquer sur le lien <br class='d-none d-sm-block d-md-none' />inclus pour réinitialiser votre mot de passe.</p>
-                        <a class='btn btn-primary btn-sm mt-3' id='reload'><span class='fas fa-chevron-left me-1' data-fa-transform='shrink-4 down-1'></span>Retour au login</a>
-                    </div>
+            <div class='p-4 p-md-5 flex-grow-1'>
+                <div class='text-center'><img class='d-block mx-auto mb-4' src='../public/assets/img/icons/spot-illustrations/16.png' alt='Email' width='100' />
+                    <h3 class='mb-2'>Merci de consulter vos mails !</h3>
+                    <p>Un mail a été envoyé à l'adresse <strong>$mail</strong>. Veuillez cliquer sur le lien <br class='d-none d-sm-block d-md-none' />inclus pour réinitialiser votre mot de passe.</p>
+                    <a class='btn btn-primary btn-sm mt-3' id='reload'><span class='fas fa-chevron-left me-1' data-fa-transform='shrink-4 down-1'></span>Retour au login</a>
                 </div>
             </div>
         ";
@@ -166,7 +164,7 @@ class RequestHTML
     public static function toRequestMail(): string
     {
         return "
-            <div class='row min-vh-100 flex-center gx-6'>
+            <div class='row min-vh-100 flex-center'>
                 <div class='col-lg-9 col-xxl-6 py-2 position-relative'>
                     <img class='bg-auth-circle-shape' src='../public/assets/img/icons/spot-illustrations/bg-shape.png' alt='' width='250'>
                     <img class='bg-auth-circle-shape-2' src='../public/assets/img/icons/spot-illustrations/shape-1.png' alt='' width='150'>
