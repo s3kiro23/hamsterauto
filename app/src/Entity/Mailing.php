@@ -18,17 +18,31 @@ class Mailing
         $mail = new PHPMailer(true);
         try {
             //Server settings
+            // $mail->SMTPDebug = SMTP::DEBUG_SERVER;
+
+            //Config gmail
+            // $mail->isSMTP();                                    //Send using SMTP
+            // $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            // $mail->SMTPAuth = true;                             //Enable SMTP authentication
+            // $mail->Username = 'shadow.s3kir0@gmail.com';        //SMTP username
+            // $mail->Password = 'ivjakmgdpgarxgrp';               //SMTP password
+            // $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
+            // $mail->Port = 587;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            // $mail->CharSet = 'UTF-8';                           //Format d'encodage à utiliser pour les caractères
+
+            //Config OVH mail
             $mail->isSMTP();                                    //Send using SMTP
-            $mail->Host = 'smtp.gmail.com';                     //Set the SMTP server to send through
+            $mail->Host = 'ssl0.ovh.net';                     //Set the SMTP server to send through
             $mail->SMTPAuth = true;                             //Enable SMTP authentication
-            $mail->Username = 'shadow.s3kir0@gmail.com';        //SMTP username
-            $mail->Password = 'ivjakmgdpgarxgrp';               //SMTP password
-            $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; //Enable implicit TLS encryption
-            $mail->Port = 587;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
+            $mail->Username = 'contact@hamsterauto.com';        //SMTP username
+            $mail->Password = 'pMEKZjEq3pnZMY@t';               //SMTP password
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; //Enable implicit TLS encryption
+            $mail->Port = 465;                                  //TCP port to connect to; use 587 if you have set `SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS`
             $mail->CharSet = 'UTF-8';                           //Format d'encodage à utiliser pour les caractères
+            $mail->Encoding = 'base64';
 
             //Recipients
-            $mail->setFrom('contact@outlook.fr', 'HAMSTERAUTO');
+            $mail->setFrom('contact@hamsterauto.com', 'HamsterAuto Services');
             $mail->addAddress($data['mail']);           //Name is optional
             if (isset($data['reply']) && !empty($data['reply'])) {
                 $mail->addReplyTo($data['reply'], 'Information');

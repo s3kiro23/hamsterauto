@@ -25,7 +25,6 @@ class Database
         if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
             $hostname = "database_mysql";
         }
-        error_log($user);
 
         try {
             $this->db = mysqli_connect($hostname, $user, $pwd, "hamsterauto");
