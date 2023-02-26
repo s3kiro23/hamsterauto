@@ -47,7 +47,9 @@ class Mailing
             if (isset($data['reply']) && !empty($data['reply'])) {
                 $mail->addReplyTo($data['reply'], 'Information');
             }
-            $mail->addReplyTo('no-reply@hamsterauto.com', 'Information');
+            if ($data['mail'] != 'contact@hamsterauto.com'){
+                $mail->addReplyTo('no-reply@hamsterauto.com', 'Information');
+            }
             if (isset($data['attachment']) && !empty($data['attachment'])) {
                 $mail->addAttachment("../" . $data['attachment']);
             }
@@ -66,7 +68,7 @@ class Mailing
     {
         $body = $user_info['inputTexte'];
         $subject = "Demande d'information formulaire de contact - " . $user_info['inputPrenom'] . " " . $user_info['inputNom'];
-        $mail = 'shadow.s3kir0@gmail.com';
+        $mail = 'contact@hamsterauto.com';
         $reply = $user_info['inputEmail'];
 
         return array("subject" => $subject, "body" => $body, "mail" => $mail, "reply" => $reply);
