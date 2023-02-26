@@ -51,7 +51,7 @@ class RequestHTML
                                                             type='email'
                                                             autocomplete='current-email'
                                                             required
-                                                            class='field form-control'
+                                                            class='field form-control rounded-end'
                                                             placeholder=' '
                                                         />
                                                         <label for='inputEmail' class='email-label input-password-field form-label-group m-0'>Email</label>
@@ -211,7 +211,7 @@ class RequestHTML
                                                             name='inputEmail'
                                                             type='email'
                                                             required
-                                                            class='field form-control'
+                                                            class='field form-control rounded-end'
                                                             placeholder=' '/>
                                                         <label for='inputEmail' class='email-label form-label-group m-0'>Email</label>
                                                         <div class='invalid-feedback'></div>
