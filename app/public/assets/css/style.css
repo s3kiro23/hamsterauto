@@ -306,6 +306,10 @@ tfoot {
 	transition: all 0.2s;
 }
 
+.input-password-field, .email-label{
+	z-index: 1000;
+}
+
 /*FIN Afficher/Cacher mot de passe*/
 
 #back:hover {
@@ -384,6 +388,10 @@ tfoot {
 	#card-login {
 		border-top-left-radius: 5px;
 		border-top-right-radius: 5px;
+	}
+
+	.logo-change-pwd{
+		width: 12rem !important;
 	}
 
 	.button-csv{
@@ -798,12 +806,16 @@ tfoot {
 .form-label-group {
 	position: absolute;
 	left: 0.7rem;
-	bottom: 0.4rem;
+	bottom: 0.36rem;
 	font-size: 1em !important;
 	color: #b6c1d2;
 	transform-origin: 0 0;
 	transition: transform 0.2s ease-in-out;
 	padding: 0 6px;
+}
+
+.email-label {
+	left: 3.7rem !important;
 }
 
 .contact-text.form-label-group {

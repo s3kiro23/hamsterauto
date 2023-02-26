@@ -36,12 +36,15 @@ class RequestHTML
                                 <div id='mail-sending' class='col-md-7 d-flex flex-center'>
                                     <div class='p-4 p-md-5 flex-grow-1'>
                                         <div class='text-center text-md-start'>
-                                            <h4 class='mb-3'>Mise à jour <br> mot de passe</h4>
+                                            <h4 class='mb-4'>Mise à jour <br> mot de passe</h4>
                                         </div>
                                         <div class='row justify-content-center'>
                                             <div class='col-sm-8 col-md p-0'>
                                                 <form class='b-3 d-flex flex-column gap-3' action='javascript:newPwd();' method='POST'>
-                                                    <div>
+                                                    <div class='input-group'>
+                                                        <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
+                                                            <i class='fa-solid fa-at'></i>
+                                                        </span>
                                                         <input
                                                             id='inputEmail'
                                                             name='inputEmail'
@@ -49,11 +52,12 @@ class RequestHTML
                                                             autocomplete='current-email'
                                                             required
                                                             class='field form-control'
-                                                            placeholder='Login utilisateur(email)'
+                                                            placeholder=' '
                                                         />
+                                                        <label for='inputEmail' class='email-label input-password-field form-label-group m-0'>Email</label>
                                                         <div class='invalid-feedback'></div>          
                                                     </div>      
-                                                    <div>
+                                                    <div class='input-group position-relative'>
                                                         <input
                                                             id='inputPassword'
                                                             name='inputPassword'
@@ -63,8 +67,12 @@ class RequestHTML
                                                             title='Minumun 12 caractères, une majuscule, des chiffres et un caractère spécial'
                                                             autocomplete='current-password'
                                                             class='field form-control'
-                                                            placeholder='Nouveau mot de passe'
+                                                            placeholder=' '
                                                         />
+                                                        <label for='inputPassword' class='input-password-field form-label-group m-0'>Nouveau</label>
+                                                        <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
+                                                            <i class='fa-regular fa-eye eyeShow'></i>
+                                                        </span>
                                                         <div class='invalid-feedback'></div>
                                                     </div>
                                                     <button class='btn btn-primary d-block w-100 mt-3' id='newPwd' type='submit' name='submit'>Modifier</button>
@@ -195,14 +203,17 @@ class RequestHTML
                                         <div class='row justify-content-center'>
                                             <div class='col-sm-8 col-md p-0'>
                                                 <form action='javascript:genToken();' method='POST'>
-                                                    <div class='form-group position-relative'>   
+                                                    <div class='input-group position-relative'>
+                                                        <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
+                                                            <i class='fa-solid fa-at'></i>
+                                                        </span>   
                                                         <input id='inputEmail'
                                                             name='inputEmail'
                                                             type='email'
                                                             required
                                                             class='field form-control'
                                                             placeholder=' '/>
-                                                        <label for='inputEmail' class='form-label-group m-0'>Login utilisateur</label>
+                                                        <label for='inputEmail' class='email-label form-label-group m-0'>Email</label>
                                                         <div class='invalid-feedback'></div>
                                                     </div> 
                                                     <button class='btn btn-primary d-block w-100 mt-3' id='sendToken' type='submit' name='submit'>Envoyer le lien</button>

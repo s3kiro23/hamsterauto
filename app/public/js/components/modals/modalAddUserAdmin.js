@@ -69,16 +69,19 @@ class ModalUserAdmin extends HTMLElement {
                                                 <div class="invalid-feedback"></div>
                                             </div>
                                             <div class='mt-3'>
-                                                <div id='passwordContainer' class='position-relative'>
+                                                <div id='passwordContainer' class='input-group'>
                                                     <label for="inputPassword" class="sr-only"></label>
                                                     <input  id="inputPassword"
                                                             name="inputPassword"
                                                             type="password"
                                                             class="inputPassword modal-add field form-control appearance-none rounded-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
                                                             placeholder="Mot de passe"/>
+                                                            <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
+                                                            <i class='fa-regular fa-eye eyeShow'></i>
+                                                        </span>
                                                             <div class="invalid-feedback mb-2"></div>
                                                             <div class="strengthMeter mt-1"></div>
-                                                    <div class='showPassword'><i class="eyeShow fa-solid fa-eye"></i> </div>
+                                                    
                                                 </div>
                                                 <div class='mt-4'>
                                                     <label for="inputPassword2" class="sr-only"></label>

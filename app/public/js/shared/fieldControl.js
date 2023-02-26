@@ -104,6 +104,7 @@ let checkField = function () {
 		success: function (response) {
 			let inputField = $("#" + focusedField);
 			let labelField = $("label[for='" + focusedField + "']");
+			console.log(labelField);
 			if (response["status"] === 1) {
 				if (inputField.hasClass("is-invalid")) {
 					inputField.removeClass("is-invalid");
@@ -136,6 +137,10 @@ let checkField = function () {
 					}
 					inputField.addClass("is-invalid");
 					labelField.next(".invalid-feedback").html(response["msg"]);
+					if (labelField.next().is('span')){
+						console.log('ya un span !');
+						labelField.next().next(".invalid-feedback").html(response["msg"]);
+					}
 				} else {
 					inputField.removeClass("is-valid");
 					inputField.addClass("is-invalid");
