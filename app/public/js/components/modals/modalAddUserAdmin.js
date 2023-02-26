@@ -74,21 +74,20 @@ class ModalUserAdmin extends HTMLElement {
                                                     <input  id="inputPassword"
                                                             name="inputPassword"
                                                             type="password"
-                                                            class="inputPassword modal-add field form-control appearance-none rounded-none px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
+                                                            class="inputPassword modal-add field form-control rounded-start"
                                                             placeholder="Mot de passe"/>
-                                                            <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
-                                                            <i class='fa-regular fa-eye eyeShow'></i>
-                                                        </span>
-                                                            <div class="invalid-feedback mb-2"></div>
-                                                            <div class="strengthMeter mt-1"></div>
-                                                    
+                                                    <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
+                                                        <i class='fa-regular fa-eye eyeShow'></i>
+                                                    </span>
+                                                    <div class="invalid-feedback mb-2"></div>
+                                                    <div class="strengthMeter mt-1"></div>
                                                 </div>
                                                 <div class='mt-4'>
                                                     <label for="inputPassword2" class="sr-only"></label>
                                                     <input  id="inputPassword2"
                                                             name="inputPassword2"
                                                             type="password"
-                                                            class="inputPassword modal-add field form-control appearance-none rounded-bottom px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900"
+                                                            class="inputPassword modal-add field form-control"
                                                             placeholder="Confirmez mot de passe"/>
                                                             
                                                     <div class="invalid-feedback mb-2"></div>
@@ -119,8 +118,9 @@ class ModalUserAdmin extends HTMLElement {
                                                 </label>
                                             </div>
                                             <div class='d-flex'>
-                                            <i class="fa-solid fa-triangle-exclamation text-danger"></i>
-                                            <p style='font-size: 0.7em'>Un compte administrateur n'est pas <br>désactivable depuis l'application !</p>
+                                            <i class="fa-solid fa-triangle-exclamation text-danger ms-3">
+                                                <p class="mt-2 text-black fs--1 font-sans-serif" style='font-size: 0.7em;'>Un compte administrateur n'est pas désactivable depuis l'application !</p>
+                                            </i>
                                         </div>
                                         </div>
                                     </div>
