@@ -40,7 +40,7 @@ class Mailing
 
             $mail->isHTML(true);     //Set email format to HTML
             $mail->Subject = $data['subject'];
-            $mail->AddEmbeddedImage("../../public/assets/img/logoDark.png", "logo", "logoDark.png");
+            $mail->AddEmbeddedImage("../../public/assets/img/logoDark_unscreen", "logo", "logoDark_unscreen");
             $mail->Body = $data['body'];
             $mail->send();
         } catch (Exception $e) {
@@ -63,7 +63,7 @@ class Mailing
         $body = "
             <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
                 <div style='display: flex; justify-content: center'>
-                    <img src='cid:logoDark.png' alt='logo_hamsterauto' style='width: 160px'/>
+                    <img src='cid:logoDark_unscreen' alt='logo_hamsterauto' style='width: 160px'/>
                 </div>
                 <br>
                 <b>Bonjour {$user->getFirstname_user()},</b>
@@ -98,7 +98,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoDark.png' alt='logo_hamsterauto' style='width: 160px'/>
+                <img src='cid:logoDark_unscreen' alt='logo_hamsterauto' style='width: 160px'/>
             </div>
             <br>
                 Bonjour {$user->getFirstname_user()},
@@ -127,7 +127,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoDark.png' alt='logo_hamsterauto' style='width: 160px'/>
+                <img src='cid:logoDark_unscreen' alt='logo_hamsterauto' style='width: 160px'/>
             </div>
             <br>
                 Bonjour {$user->getFirstname_user()},
@@ -159,7 +159,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoDark.png' alt='logo_hamsterauto' style='width: 160px'/>
+                <img src='cid:logoDark_unscreen' alt='logo_hamsterauto' style='width: 160px'/>
             </div>
             <br>
             Bonjour {$user->getFirstname_user()}, 
@@ -194,7 +194,7 @@ class Mailing
         $body = "
         <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
             <div style='display: flex; justify-content: center'>
-                <img src='cid:logoDark.png' alt='logo_hamsterauto' style='width: 160px'/>
+                <img src='cid:logoDark_unscreen' alt='logo_hamsterauto' style='width: 160px'/>
             </div>
             <br>
             Bonjour {$user->getFirstname_user()},
@@ -220,7 +220,7 @@ class Mailing
         $body = "
                 <div style='background-color: #EFEFF3; border-radius: 5px; box-shadow: 2px 2px 10px black; padding: 10px'>
                     <div style='display: flex; justify-content: center'>
-                        <img src='cid:logoDark.png' alt='logo_hamsterauto' style='width: 160px'/>
+                        <img src='cid:logoDark_unscreen' alt='logo_hamsterauto' style='width: 160px'/>
                     </div>
                     <br>
                     Bonjour {$user->getFirstname_user()},
