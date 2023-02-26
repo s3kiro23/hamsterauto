@@ -40,7 +40,7 @@ class Mailing
 
             $mail->isHTML(true);     //Set email format to HTML
             $mail->Subject = $data['subject'];
-            $mail->AddEmbeddedImage("../../public/assets/img/logoDark_unscreen", "logo", "logoDark_unscreen");
+            $mail->AddEmbeddedImage("../../public/assets/img/logoDark_unscreen.png", "logo", "logoDark_unscreen");
             $mail->Body = $data['body'];
             $mail->send();
         } catch (Exception $e) {
