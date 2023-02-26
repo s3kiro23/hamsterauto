@@ -1,4 +1,4 @@
-### **Versions minimums**
+## **Versions minimums**
 <br />
 
 Afin de s'assurer du bon fonctionnement des différents process de l'application, voici les versions minimums des technologies à respecter :
@@ -14,11 +14,18 @@ Vérifier également que la version de PHP est présente dans les variables d'en
 
 ----------------
 
-### **Compte MAIL**
+## **MAILING**
+
+#### GMAIL (backup)
 
 - user = shadow.s3kir0@gmail.com
 - pwd = @flaut0!@20
 - pwd appli (générer compte gmail) = qfujcjiaoxuuhqni
+
+#### OVH (prod)
+
+- user = contact@hamsterauto.com
+- pwd = pMEKZjEq3pnZMY@t
 
 ----------------
 
