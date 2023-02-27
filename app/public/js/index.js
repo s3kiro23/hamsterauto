@@ -11,6 +11,8 @@ $(function () {
     $("#reload").on("click", reload);
     $('[data-toggle="tooltip"]').tooltip();
     $('input[name=radioImmat]').on("click", selectedImmatFormat);
+    $('#selectMarque').select2();
+    $('#selectedModel').select2();
 
     // Gestion du wizard sur l'index
     $('.changeStep').on('click', function (event) {

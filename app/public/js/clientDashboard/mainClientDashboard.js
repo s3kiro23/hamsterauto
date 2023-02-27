@@ -124,6 +124,7 @@ function selectedCar() {
         },
         success: function (response) {
             $("#selectedModel").html(response['html_model'])
+            $('#selectedModel').select2();
         },
         error: function () {
         },

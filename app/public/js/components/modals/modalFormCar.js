@@ -51,6 +51,7 @@ let modalModifyCar = function () {
             $("#inputImmatNew").val(response['data']['registration'])
             $("#bodyFormCar").attr('action', "javascript:modifyCar();")
             $('#selectMarque').on("change", selectedCar)
+            $('#selectMarque').select2();
             $("#inputImmatNew").on("keyup", checkNewValueRegEx)
             $("#inputImmatOld").on("keyup", checkOldValueRegEx)
             $("#inputYear").on("keyup", checkOldValueYear)

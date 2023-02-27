@@ -3,6 +3,8 @@ $(function () {
     generateDate();
     brandsLoad();
     $("#selectMarque").on('change', modelsLoad)
+    $('#selectMarque').select2();
+    $('#selectedModel').select2();
     $(".form-control").on('change', checkField)
     $('input[name=radioImmat]').on("click", selectedImmatFormat);
     $('.changeStep').on('click', function (event) {
