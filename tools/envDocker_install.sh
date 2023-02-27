@@ -1,19 +1,21 @@
-# Use Windows as base image
-FROM mcr.microsoft.com/windows:20H2
+# Activer les fonctionnalités nécessaires pour WSL2
+Enable-WindowsOptionalFeature -Online -FeatureName VirtualMachinePlatform,Microsoft-Windows-Subsystem-Linux -NoRestart
 
-# Install WSL 2
-RUN dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
-RUN dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
-COPY wsl_update_x64.msi C:\\wsl_update_x64.msi
-RUN powershell.exe Start-Process msiexec.exe -ArgumentList '/i', 'C:\wsl_update_x64.msi', '/quiet', '/norestart' -NoNewWindow -Wait
-RUN wsl --set-default-version 2
+# Définir WSL2 comme version par défaut pour les nouvelles distributions Linux installées.
+wsl --set-default-version 2
 
-# DL Docker Desktop
-ADD https://desktop.docker.com/win/stable/amd64/Docker%20Desktop%20Installer.exe C:\\Temp\\DockerDesktopInstaller.exe
+# Télécharger et installer Docker Desktop
+Invoke-WebRequest -Uri https://desktop.docker.com/win/stable/Docker%20Desktop%20Installer.exe -OutFile "$env:USERPROFILE\Downloads\Docker Desktop Installer.exe"
+Start-Process -FilePath "$env:USERPROFILE\Downloads\Docker Desktop Installer.exe" -ArgumentList "/S"
 
-# Install Docker Desktop
-RUN powershell.exe Start-Process C:\\Temp\\DockerDesktopInstaller.exe -ArgumentList '--quiet' -NoNewWindow -Wait
-RUN del C:\\Temp\\DockerDesktopInstaller.exe
+# Ajouter l'utilisateur courant au groupe "docker"
+$computerName = $env:COMPUTERNAME
+$userName = $env:USERNAME
+Add-LocalGroupMember -Group "docker" -Member "$computerName\$userName"
 
-# Ajouter Docker à la variable PATH
-RUN setx /M PATH "%PATH%;C:\Program Files\Docker"
+# Ajouter le chemin d'accès à Docker à la variable d'environnement PATH
+$dockerPath = "C:\Program Files\Docker\Docker\resources\bin"
+if (-not (Test-Path -Path $dockerPath)) {
+    $dockerPath = "C:\Program Files (x86)\Docker\Docker\resources\bin"
+}
+$env:Path += ";$dockerPath"
