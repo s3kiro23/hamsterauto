@@ -1,5 +1,9 @@
 # v1.1.1
 
+### implemente_select2
+
+- [ADD] ajout de la librairie select2 pour mise en forme des sélections de marques/ modèles et ajout d'un champ de recherche
+
 ### dev
 
 - [FIX] bug aléatoire d'auto remplissage du champs année et immat
