@@ -109,6 +109,11 @@ function formAddCar() {
             modalAddCar(response);
             $('#selectMarque').select2();
             $('#selectedModel').select2();
+            $('select:not(.normal)').each(function () {
+                $(this).select2({
+                    dropdownParent: $(this).parent()
+                });
+            });
         },
         error: function () {
         },

@@ -10,10 +10,6 @@
 	height: 30px !important;
 }
 
-.select2-container--open .select2-dropdown--below {
-	z-index: 10000 !important;
-}
-
 .button-csv{
 	right: 2rem;
 }
