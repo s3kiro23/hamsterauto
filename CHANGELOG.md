@@ -1,5 +1,9 @@
 # v1.1.1
 
+### dev
+
+- [FIX] bug aléatoire d'auto remplissage du champs année et immat
+
 ### improve_little_things
 
 - [UPD] margins du bloc de récupération mot de passe

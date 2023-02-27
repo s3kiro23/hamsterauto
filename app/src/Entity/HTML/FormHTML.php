@@ -33,6 +33,7 @@ class FormHTML
                                id='inputImmatNew'
                                aria-describedby='textHelp'
                                placeholder='AA-1234-AA'
+                               autocomplete='off'
                                pattern='^[A-Z]{2} ?- ?\d{3} ?- ?[A-Z]{2}$'>
                     </div>
                     <div class='invalid-feedback'></div>
@@ -44,6 +45,7 @@ class FormHTML
                                id='inputImmatOld'
                                aria-describedby='textHelp'
                                placeholder='1234-AA-0A'
+                               autocomplete='off'
                                pattern='^[0-9]{1,4} ?- ?[A-Z]{1,4} ?- ?[0-9]{1,2}$'>
                     </div>
                     <div class='invalid-feedback'></div>
@@ -118,6 +120,7 @@ class FormHTML
                         type='text'
                         class='field form-control'
                         id='inputYear'
+                        autocomplete='off'
                         placeholder=' '/>        
                     <label for='inputYear' class='form-label-group m-0'>Année</label>
                     <div class='invalid-feedback'></div>          
