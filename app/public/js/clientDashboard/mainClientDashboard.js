@@ -107,6 +107,8 @@ function formAddCar() {
         },
         success: function (response) {
             modalAddCar(response);
+            $('#selectMarque').select2();
+            $('#selectedModel').select2();
         },
         error: function () {
         },
@@ -124,7 +126,6 @@ function selectedCar() {
         },
         success: function (response) {
             $("#selectedModel").html(response['html_model'])
-            $('#selectedModel').select2();
         },
         error: function () {
         },
