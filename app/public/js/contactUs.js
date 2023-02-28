@@ -6,7 +6,6 @@ $(function () {
     $(".form-control").on("focusin", placeholderAnimation);
     $(".form-control").on("focusout", placeholderAnimation);
     $('#to_logIn').on('click', to_logIn);
-    
 });
 
 

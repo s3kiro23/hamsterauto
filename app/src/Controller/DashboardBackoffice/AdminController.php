@@ -270,32 +270,32 @@ if ($check === 'admin') {
             break;
 
         case 'show_settings':
-            $settings = Setting::get_settings();
-            if (date('I') == 0) {
-                $settings['start_time_am'] = ($settings['start_time_am'] - 3600);
-                $settings['end_time_pm'] = ($settings['end_time_pm'] - 3600);
-                $settings['slot_interval'] = ($settings['slot_interval'] - 3600);
-            }
+            $settings = new Setting(1);
+
+            $hours_convert = array(
+                "slot_interval_h" => gmdate("H", $settings->getSlot_interval()),
+                "slot_interval_i" => gmdate("i", $settings->getSlot_interval()),
+                "start_time_am_h" => gmdate("H", $settings->getStart_time_am()),
+                "start_time_am_i" => gmdate("i", $settings->getStart_time_am()),
+                "end_time_pm_h" => gmdate("H", $settings->getEnd_time_pm()),
+                "end_time_pm_i" => gmdate("i", $settings->getEnd_time_pm()),
+            );
             $return = $twig->render('setting/settings_filler.html.twig', array(
                 'set' => $settings,
+                'hours' => $hours_convert,
             ));
             echo json_encode($return);
 
             break;
 
         case 'update_hour':
-            $context = $_POST['context'];
             $settings_database = Setting::get_settings();
+            $context = $_POST['context'];
             $slot = $_POST['slot'];
             $new_TimeH = $_POST['newTimeH'];
             $new_TimeM = $_POST['newTimeM'];
+            error_log("Context : " . $slot . " | Nouvelle heure : " . $new_TimeH . " | Nouvelle minute : " . $new_TimeM);
             $timestamp = ($new_TimeH * 3600) + ($new_TimeM * 60);
-            if ($context == 'open' && $timestamp > $settings_database['end_time_pm']) {
-                $timestamp = $settings_database['end_time_pm'] - 3600;
-            }
-            if ($context == 'close' && $timestamp < $settings_database['start_time_am']) {
-                $timestamp = $settings_database['start_time_am'] + 3600;
-            }
             $settings = Setting::change_time_settings($slot, $timestamp);
             echo json_encode(0);
             break;

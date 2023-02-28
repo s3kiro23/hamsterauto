@@ -31,8 +31,8 @@ switch ($_POST['request']) {
         $dataBIA = [];
         $dataAJA = [];
         $times = new Setting(1);
-        $opening = date("H:i", $times->getStart_time_am());
-        $close = date("H:i", $times->getEnd_time_pm());
+        $opening = gmdate("H:i", $times->getStart_time_am());
+        $close = gmdate("H:i", $times->getEnd_time_pm());
         $days = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"];
         $coordinates = json_decode($times->getCoordinates(), true);
         $html_content = "";

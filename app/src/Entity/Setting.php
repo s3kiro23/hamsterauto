@@ -57,6 +57,7 @@ class Setting
     {
         $requete = "SELECT * FROM `setting`";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+
         return mysqli_fetch_assoc($result);
     }
 
