@@ -1,4 +1,4 @@
 <?php
 
-header("Location: ./templates/index.html");
+header("Location: ./");
 die();
