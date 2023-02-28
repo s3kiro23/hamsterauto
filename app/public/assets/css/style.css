@@ -10,12 +10,12 @@
 	height: 30px !important;
 }
 
-.danger-api{
+.danger-api {
 	left: 20.25rem;
 	top: 1rem;
 }
 
-.btn-update-base{
+.btn-update-base {
 	left: 19rem;
 	top: 2rem;
 	z-index: 1000;
@@ -305,7 +305,8 @@ tfoot {
 	transition: all 0.2s;
 }
 
-.input-password-field, .email-label{
+.input-password-field,
+.email-label {
 	z-index: 1000;
 }
 
@@ -393,20 +394,20 @@ tfoot {
 		display: none;
 	}
 
-	.logo-change-pwd{
+	.logo-change-pwd {
 		width: 12rem !important;
 	}
 
-	.button-csv{
+	.button-csv {
 		top: 8.8rem;
 	}
-	
-	.danger-api{
+
+	.danger-api {
 		left: 17.3rem;
 		top: 1rem;
 	}
-	
-	.btn-update-base{
+
+	.btn-update-base {
 		left: 16rem;
 		top: 2rem;
 		z-index: 1000;
@@ -430,10 +431,6 @@ tfoot {
 		left: 0px !important;
 	}
 
-	#logo {
-		height: 3rem !important;
-	}
-
 	#tab-car,
 	#tab-rdv {
 		margin-bottom: 2rem !important;
@@ -441,18 +438,17 @@ tfoot {
 }
 
 @media (min-width: 992px) {
-	.danger-api{
+	.danger-api {
 		left: 14.3rem;
 		top: 1rem;
 	}
-	
-	.btn-update-base{
+
+	.btn-update-base {
 		left: 13rem;
 		top: 2rem;
 		z-index: 1000;
 	}
 }
-
 
 .scrolled-down {
 	transform: translateY(-100%);
