@@ -3,6 +3,43 @@
 class Export
 {
 
+   static public function interventionToCSV($filter) {
+      $columns = array(
+         'N° INTER',
+         'DATE',
+         'MARQUE',
+         'MODELE',
+         'IMMATRICULATION',
+         'STATUT',
+      );
+
+      $name_file = date("dmYHis") . ".csv";
+      $csv = fopen(ROOT_DIR() . "/var/generate/doc/" . $name_file, 'w') or die("Can't open php://output");
+      header("Content-Type:application/csv");
+      header("Content-Disposition:attachment;filename=" . $name_file);
+      fputcsv($csv, $columns, ';');
+
+      $data = Intervention::check_rdv_admin($filter);
+
+      foreach ($data as $inter) {
+         fputcsv($csv, array(
+            $inter['id_intervention'],
+            Convert::date_to_fullFR($inter['time_slot']),
+            (new Brand($inter['id_brand']))->getBrand_name(),
+            (new Model($inter['id_model']))->getModel_name(),
+            $inter['registration'],
+            $inter['state']  == 0 ? "En attente" : "Pris en charge",
+         ), ';');
+      }
+
+      fclose($csv);
+
+      return $response = array(
+         'name' => date("dmY") . ".csv",
+         'url' => '/var/generate/doc/' . $name_file
+      );
+   }
+
    static public function userToCSV($values)
    {
       $columns = array(

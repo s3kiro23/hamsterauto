@@ -16,6 +16,12 @@ if ($check === 'admin') {
 
     switch ($_POST['request']) {
 
+        case 'export_intervention':
+
+            echo json_encode(Export::interventionToCSV($_POST['filter']));
+
+            break;
+
         case 'export_user':
 
             echo json_encode(Export::userToCSV(json_decode($_POST['tabValues'], true)));

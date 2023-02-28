@@ -188,6 +188,21 @@ let callApiMatmut = function () {
 	});
 };
 
+function exportInterCSV() {
+	$.ajax({
+		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		dataType: "json",
+		type: "POST",
+		data: {
+			request: "export_intervention",
+			filter : $("#searchImmat").val(),
+		},
+		success: function (response) {
+			download(response);
+		},
+	});
+}
+
 function exportUserCSV() {
 	let values = {};
 	$('.filtreAd').each(function () {
