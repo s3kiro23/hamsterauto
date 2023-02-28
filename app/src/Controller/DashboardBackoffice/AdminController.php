@@ -89,21 +89,11 @@ if ($check === 'admin') {
             echo json_encode($return);
             break;
 
-        case 'display_Rdv_wait':
+        case 'display_Rdv':
             $registration = $_POST['registration'];
-            $current_date = $_POST['currentDate'];
-            $Rdv = Intervention::check_rdv_admin(0, $registration, $current_date, "id_user");
+            $Rdv = Intervention::check_rdv_admin($registration);
             $return = $twig->render('intervention/car_tabs_filler.html.twig', array(
                 'Rdvs' => $Rdv,
-            ));
-            echo json_encode($return);
-            break;
-
-        case 'display_Rdv_wip':
-            $current_date = $_POST['currentDate'];
-            $Rdv = Intervention::check_rdv_admin(1, "", $current_date, "num_tech");
-            $return = $twig->render('intervention/car_tabs_wip_filler.html.twig', array(
-                'Rdvs' => $Rdv
             ));
             echo json_encode($return);
             break;

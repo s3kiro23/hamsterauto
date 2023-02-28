@@ -1,31 +1,26 @@
 <div id='dashAdmin'>
     <div class='row mt-5'>
-    {# 1er TABLEAU ADMIN #}
+    {# TABLEAU Inter #}
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 mb-5 px-0 px-md-3">
             <div class="card shadow rounded border border-primary">
                 <div class="card-header bg-primary bg-opacity-75 rounded-top d-flex justify-content-between align-items-center">
-                    <h4 class="m-0 py-2 text-white d-none d-md-inline">RENDEZ-VOUS DU:</h4>
-                    <div class='btnPrevious position-absolute' style='left: 27%'></div>
-                    <div id='dateDuJour' class='position-absolute' style='left: 36%'> 
-                        <!-- génération des switch dates-->
-                    </div>
-                    <div class='btnNext position-absolute' style='left: 72%'></div>
-                    <div class='btnBack'></div>
+                    <h4 class="m-0 py-2 text-white d-none d-md-inline">INTERVENTIONS</h4>
                 </div>
                 <div class="card-body">
-                
                     <table id="tab-rdv-admin" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0">
                         <thead>
                             <tr align='center'>
                                 <th></th>
                                 <th>N° INTER</th>
-                                <th>HEURE DU RDV</th>
+                                <th>DATE</th>
                                 <th>MARQUE</th>
                                 <th>MODELE</th>
                                 <th>  
-                <div id='filtreImmat' class='d-flex justify-content-center mt-1'>
-                    <!-- génération du filtre immat -->
-                    </div> </th>
+                                    <div id='filtreImmat' class='d-flex justify-content-center mt-1'>
+                                        <!-- génération du filtre immat -->
+                                    </div> 
+                                </th>
+                                <th>STATUT</th>
                                 <th>SUPPRIMER</th>
                             </tr>
                         </thead>
@@ -37,35 +32,6 @@
                 </div>
             </div>
         </div>
-        {# FIN 1ER TABLEAU ADMIN #}
-
-        {# 2EME TABLEAU ADMIN #}
-        <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12 px-0 px-md-3">
-            <div class="card shadow rounded border border-primary">
-                <div class="card-header bg-primary bg-opacity-75 rounded-top d-flex justify-content-between align-items-center">
-                    <h4 class="m-0 py-2 text-white">INTERVENTION EN COURS:</h4>
-                </div>
-                <div class="card-body">
-                
-                    <table id="tab-admin-wip" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0">
-                        <thead>
-                            <tr>
-                                <th></th>
-                                <th>N° INTER</th>
-                                <th>HEURE DU RDV</th>
-                                <th>TECHNICIEN</th>
-                                <th>MARQUE</th>
-                                <th>IMMATRICULATION</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody id="wipCarsAdmin">
-                        <!-- génération des rdv user ici-->
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-        {# FIN 2EME TABLEAU ADMIN #}
+        {# FIN TABLEAU Inter #}
     </div>
 </div>

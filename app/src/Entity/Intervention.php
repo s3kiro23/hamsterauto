@@ -84,26 +84,23 @@ class Intervention
         }
     }
 
-    static public function check_rdv_admin($state,$registration,$date,$searchId) {
+    static public function check_rdv_admin($registration) {
         $list_Rdv = [];
             $requete = "SELECT *, awaiting_intervention.id_intervention AS cryptedId, 
             user.lastname_user AS nomTech FROM awaiting_intervention 
             INNER JOIN vehicle ON awaiting_intervention.id_vehicle = vehicle.id_vehicle 
             INNER JOIN model ON vehicle.id_model = model.id_model
             INNER JOIN brand ON model.id_brand = brand.id_brand
-            INNER JOIN user ON awaiting_intervention.$searchId =   user.id_user
-            WHERE time_slot BETWEEN '" .filter($date) . "' + 28800 
-            AND '" .filter($date) . "' + 64800
+            INNER JOIN user ON awaiting_intervention.id_user = user.id_user
+            WHERE awaiting_intervention.state BETWEEN 0 AND 1
             AND vehicle.registration LIKE '%" .filter($registration) . "%'
-            AND awaiting_intervention.state = '" .filter($state) . "'
             ORDER BY awaiting_intervention.time_slot ASC "; 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $data['cryptedId'] = Security::encrypt($data['cryptedId'], false);
             $data['brand_name'] = $data['brand_name'];
             $data['brand_name'] = str_replace(" ","",$data['brand_name']);
-            $list_Rdv[]=$data;
-
+            $list_Rdv[]= $data;
         }
         return $list_Rdv;
     }

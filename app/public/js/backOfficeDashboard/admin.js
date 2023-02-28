@@ -17,6 +17,7 @@ $(function () {
 		},
 	});
 
+	// Permet de fermer le menu en mobile au clickOut
 	$(document).on("click", function(e) {
 		var navbarToggler = $(".navbar-toggler");
 		if (!navbarToggler.is(e.target) && navbarToggler.has(e.target).length === 0) {
@@ -85,15 +86,12 @@ function checkStrength() {
 //----------------------------------------------------------//
 
 let intervalRdv = null;
-let intervalWip = null;
 
 function reloadRdv() {
 	intervalRdv = setInterval(adminRdv, 10000);
-	intervalWip = setInterval(adminRdvWip, 10000);
 }
 function clearIntervals() {
 	clearInterval(intervalRdv);
-	clearInterval(intervalWip);
 }
 
 function loadAdmin() {
@@ -328,13 +326,11 @@ function adminRdv() {
 		dataType: "JSON",
 		type: "POST",
 		data: {
-			request: "display_Rdv_wait",
+			request: "display_Rdv",
 			registration: $("#searchImmat").val(),
-			currentDate: $(".currentDate").prop("id"),
 		},
 		success: function (response) {
 			$("#awaitingCarsAdmin").html(response);
-			adminRdvWip();
 			dataTableAdminRdv();
 		},
 		error: function () {
@@ -343,54 +339,6 @@ function adminRdv() {
 	});
 }
 //
-//
-function adminRdvWip() {
-	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "display_Rdv_wip",
-			currentDate: $(".currentDate ").prop("id"),
-		},
-		success: function (response) {
-			$("#wipCarsAdmin").html(response);
-			dataTableAdminWip();
-		},
-		error: function () {
-			console.log("errorAdminRDV3");
-		},
-	});
-}
-//
-//
-function switchDayRdv(switchDate) {
-	$("#searchImmat").val("");
-	let page = 1;
-	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "switch_day_rdv",
-			page: page,
-			timestamp: switchDate,
-			registration: "",
-		},
-		success: function (response) {
-			if (response["html"]) {
-				$("#vehiculeAttente").html(response["html"]);
-				$("#pagesHold").html(response["paginationHoldNext"]);
-				$("#pageH" + page).addClass("active");
-				generateDateBO(response["time"]);
-				setTimeout(() => {
-					dataTableAdminWip();
-					dataTableAdminRdv();
-				}, 100);
-			}
-		},
-	});
-}
 //
 //
 function deleteRdv(rdvId) {
