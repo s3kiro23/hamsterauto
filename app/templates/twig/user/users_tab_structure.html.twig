@@ -1,20 +1,21 @@
 <div class='row justify-content-center mt-5'>
-	<div class="col-12 mb-5 px-0 px-md-3">
+	<div class="col-12 mb-5 px-0">
 		<div class="card shadow rounded border border-primary">
 			<div class="card-header bg-primary bg-opacity-75 rounded-top d-flex justify-content-between align-items-center">
 				<h4 class="m-0 py-2 text-white">UTILISATEURS:</h4>
-				<div class="me-3" role='button' onclick='modalAdduser()' data-toggle="tooltip" data-placement="bottom" title="ajouter nouvel utilisateur">
-					<i class="fa-solid fa-user-plus text-light fs-2"></i>
-				</div>
-				<div class='btnPrevious position-absolute' style='left: 27%'></div>
-			</div>
-			<div class="card-body">
-				<table id="tab-admin-users" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0 responsive position-relative">
-					<button class="button-csv btn btn-primary position-absolute" onclick='exportUserCSV()' data-toggle="tooltip" data-placement="bottom" title="exporter au format CSV">
+				<div class="d-flex flex-row gap-4 justify-content-center align-items-center">
+					<button class="button-csv btn btn-outline-light" onclick='exportUserCSV()' data-toggle="tooltip" data-placement="bottom" title="exporter au format CSV">
 						<i class="fa-solid fa-file-export">
 							<span class="ms-2">CSV</span>
 						</i>
 					</button>
+					<button class="button-csv btn btn-outline-light" onclick='modalAdduser()' data-toggle="tooltip" data-placement="bottom" title="ajouter nouvel utilisateur">
+							<i class="fa-solid fa-user-plus"></i>
+					</button>
+				</div>
+			</div>
+			<div class="card-body">
+				<table id="tab-admin-users" class="table table-centered table-striped align-middle table-nowrap table-hover mb-0 responsive">
 					<tfoot>
 						<tr align='center'>
 							<th><input id='searchName' class='filtreAd rounded' type='search' placeholder='rechercher'></th>
