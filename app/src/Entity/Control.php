@@ -67,7 +67,7 @@ class Control
                 break;
             } else if ($key == "inputPassword" && !$this->check_passwd_strength($data['inputPassword']) || $key == "inputPassword2" && !$this->check_passwd_strength($data['inputPassword2'])) {
                 $status = 0;
-                $msg = "Créez un mot de passe plus sécurisé ! <a class='text-decoration cursor-pointer' onclick=modalRecoPwd();><i class='fa-solid fa-circle-info'></i></a>";
+                $msg = "Créez un mot de passe plus sécurisé ! <a class='cursor-pointer' onclick=modalRecoPwd();><i class='ms-2 fa-solid fa-circle-info fs-0'></i></a>";
                 break;
             } else if ($key == 'rgpd' && $value == false) {
                 $status = 0;

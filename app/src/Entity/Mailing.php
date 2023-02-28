@@ -84,7 +84,7 @@ class Mailing
                 <br>
                 <b>Bonjour {$user->getFirstname_user()},</b>
                 <br><br>
-                Votre inscription sur notre plateforme a été enregistrée !
+                Votre inscription sur notre plateforme a été enregistrée!
                 <br><br>
                 Afin de pouvoir accéder à votre espace personnel, vous devez :
                 <br><br>
@@ -119,7 +119,7 @@ class Mailing
             <br>
                 Bonjour {$user->getFirstname_user()},
             <br><br>
-            Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> arrive bientôt à échéance !
+            Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> arrive bientôt à échéance!
             <br><br>
             Vous pouvez dès à présent prendre rendez-vous sur notre plateforme <a href='https://hamsterauto.com/' target = '_blank'>hamsterauto.com</a>.
             <br><br><br>
@@ -148,7 +148,7 @@ class Mailing
             <br>
                 Bonjour {$user->getFirstname_user()},
             <br><br>
-            Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> est terminé !
+            Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> est terminé!
             <br><br>
             Vous pouvez dès à présent venir le récupérer.
             <br><br>
@@ -180,7 +180,7 @@ class Mailing
             <br>
             Bonjour {$user->getFirstname_user()}, 
             <br><br>
-            Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> est terminé ! 
+            Le contrôle technique de votre véhicule immatriculé <b>{$car_user->getRegistration()}</b> est terminé! 
             <br><br>
             Vous pouvez dès à présent venir le récupérer. Ce dernier fait l'objet d'une <b style='text - decoration: underline'>contre visite</b>.
             <br><br>
