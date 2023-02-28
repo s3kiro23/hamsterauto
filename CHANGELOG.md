@@ -1,5 +1,13 @@
 # v1.1.1
 
+### review_interventionTab_admin
+
+- [UPD] révision des tableaux d'interventions côté admin pour n'afficher que les rdv du jours
+- [ADD] export CSV sur les interventions
+- [UPD] design des boutons d'actions côté client et admin
+- [UPD] du regex de contrôle des années pour n'autoriser que les dates ne dépassant pas l'année en cours
+- [FIX] des bugs sur la gestion des heures côté admin
+
 ### implemente_select2
 
 - [ADD] ajout de la librairie select2 pour mise en forme des sélections de marques/ modèles et ajout d'un champ de recherche
