@@ -389,6 +389,10 @@ tfoot {
 		border-top-right-radius: 5px;
 	}
 
+	.csv-user {
+		display: none;
+	}
+
 	.logo-change-pwd{
 		width: 12rem !important;
 	}
