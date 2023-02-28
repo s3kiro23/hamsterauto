@@ -100,6 +100,7 @@ class Intervention
             $data['cryptedId'] = Security::encrypt($data['cryptedId'], false);
             $data['brand_name'] = $data['brand_name'];
             $data['brand_name'] = str_replace(" ","",$data['brand_name']);
+            $data['time_slot_fr'] = Convert::date_to_fullFR($data['time_slot']);
             $list_Rdv[]= $data;
         }
         return $list_Rdv;

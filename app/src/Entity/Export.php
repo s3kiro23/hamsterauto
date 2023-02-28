@@ -98,7 +98,9 @@ class Export
 
       $name_file = date("dmYHis") . ".csv";
       $csv = fopen(ROOT_DIR() . "/var/generate/doc/" . $name_file, 'w') or die("Can't open php://output");
-      header("Content-Type:application/csv");
+      header('Content-Encoding: UTF-8');
+      header('Content-Type: text/csv; charset=UTF-8');
+      // header("Content-Type:application/csv");
       header("Content-Disposition:attachment;filename=" . $name_file);
       fputcsv($csv, $columns, ';');
 
@@ -114,7 +116,7 @@ class Export
             $archive->getLastname_user(),
             $archive->getEmail_user(),
             $archive->getPhone_user(),
-            mb_convert_encoding($state, 'UTF-8')
+            $state,
          ), ';');
       }
 
