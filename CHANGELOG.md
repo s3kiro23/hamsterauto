@@ -7,6 +7,8 @@
 - [UPD] design des boutons d'actions côté client et admin
 - [UPD] du regex de contrôle des années pour n'autoriser que les dates ne dépassant pas l'année en cours
 - [FIX] des bugs sur la gestion des heures côté admin
+- [UPD] changement du retour de comptage sur l'index admin pour prendre en compte les states 0 et 1
+- [ADD] conversion des dates en francais côté admin intervention
 
 ### implemente_select2
 
