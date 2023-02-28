@@ -322,11 +322,7 @@ function displayRdvTab() {
 			$("#adminOfficeBody").html(response);
 			$('.current-breadcrumb').html('interventions');
 			displayFiltreImmatAdmin();
-			setTimeout(() => {
-				loadAdmin();
-				adminRdv();
-				reloadRdv();
-			}, 140);
+			// reloadRdv();
 		},
 		error: function () {
 			console.log("errorAdminRDV1");

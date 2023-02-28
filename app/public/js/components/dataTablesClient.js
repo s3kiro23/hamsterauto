@@ -7,7 +7,8 @@ let dataTableClient = function (type) {
         retrieve: true,
         responsive: {
             details: {
-                type: 'none'
+                type: 'colomn',
+                target: 'tr'
             }
         },
         columnDefs: [
