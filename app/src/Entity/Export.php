@@ -143,9 +143,8 @@ class Export
       $data = Trace::display_traces();
 
       foreach ($data as $archive) {
-         $user = new User($archive['id_user']);
          fputcsv($csv, array(
-            $user->getEmail_user(),
+            (new User($archive['id_user']))->getEmail_user(),
             $archive['type'] . "=>" . $archive['action'],
             $archive['triggered_at']
          ), ';');
