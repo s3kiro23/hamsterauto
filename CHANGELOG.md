@@ -1,5 +1,13 @@
 # v1.1.1
 
+### fix_bug_tabs_admin
+
+- [UPD] taille du logo sur la page private
+- [FIX] bug de responsive sur la modal rdvInfos
+- [UPD] style de la police tab rdv admin
+- [FIX] du chemin d'accès logo admin
+- [FIX] bug responsive sur le tableau des rdv admin + changement des prio
+
 ### review_interventionTab_admin
 
 - [UPD] révision des tableaux d'interventions côté admin pour n'afficher que les rdv du jours
