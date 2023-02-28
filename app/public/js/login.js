@@ -25,9 +25,6 @@ let connect = function () {
                     title: response["msg"],
                     icon: 'error',
                 });
-                setTimeout(() => {
-                    window.location.replace(response['url']);
-                }, 1500);
             } else if (response["status"] === 2) {
                 toastMixin.fire({
                     position: 'top',

@@ -112,9 +112,9 @@ class Control
     public function check_year($year): bool
     {
         $pattern = '/^(?:19|20)\d{2}$/';
-        if (preg_match_all($pattern, $year)) {
+        if (preg_match_all($pattern, $year) && $year <= date("Y")) {
             return true;
-        }
+        } 
         return false;
     }
 
