@@ -9,7 +9,7 @@ class ModalCar extends HTMLElement {
                 <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary bg-opacity-10">
-                            <h5 class="modal-title">Infos du véhicule</h5>
+                            <h5 class="modal-title">Informations du véhicule</h5>
                             <button
                                     type="button"
                                     class="btn-close"

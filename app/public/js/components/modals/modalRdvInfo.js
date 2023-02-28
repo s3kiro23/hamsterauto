@@ -6,11 +6,11 @@ class ModalRdvInfo extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
             <div id='modalRdvInfo' class='modal fade'>
-                <div class='modal-dialog modal-lg' role='document'>
+                <div class='modalRdvInfo modal-dialog modal-lg' role='document'>
                     <div class='modal-content'>
                         <div class='modal-header'>
-                            <h5 class='modal-title'>Infos client liées à l'inter n°</h5>
-                            <span id='modal-rdvID'></span>
+                            <h5 class='modal-title'>Informations client liées à l'intervention n° <span id='modal-rdvID'></span></h5>
+                            
                             <button
                                     type='button'
                                     class='btn-close'
@@ -19,34 +19,18 @@ class ModalRdvInfo extends HTMLElement {
                                 <span aria-hidden='true'></span>
                             </button>
                         </div>
-                        <div class='modal-body d-flex flex-row'>
-                            <div class='col-4 d-flex flex-column gap-3' id='modal-body'>
-                                <div>
-                                    <span class='fw-bold font-italic text-gray-700 white:text-dark'>Nom :</span>
-                                    <span id='modal-nom_user' class='pl-4 fst-italic'>Nom client</span>
+                        <div class='modal-body'>
+                            <div class="row">
+                                <div class='col-12 col-md-6 d-flex flex-column gap-3' id='modal-body'>
+                                    <span class='fw-bold font-italic text-gray-700 white:text-dark'>Nom : <span id='modal-nom_user' class='pl-4 fst-italic fw-normal'>Nom client</span></span>
+                                    <span class='fw-bold text-gray-700 white:text-dark'>Prénom : <span id='modal-prenom_user' class='pl-4 fst-italic fw-normal'>User ID</span></span>
+                                    <span class='fw-bold text-gray-700 white:text-dark'>Créneau réservé : <span id='modal-timeslotID' class='pl-4 fst-italic fw-normal'>Créneau</span></span>
+                                    <span class='fw-bold text-gray-700 white:text-dark'>Téléphone : <span id='modal-tel_user' class='pl-4 fst-italic fw-normal'>Tél</span></span>
+                                    <span class='fw-bold text-gray-700 white:text-dark'>Email : <span id='modal-mail_user' class='pl-4 fst-italic fw-normal'>Email</span></span>
+                                    <span class='fw-bold text-gray-700 white:text-dark'>RDV confirmé le : <span id='modal-booked_date' class='pl-4 fst-italic fw-normal'>Créneau</span></span>
                                 </div>
-                                <div>
-                                    <span class='fw-bold text-gray-700 white:text-dark'>Prénom :</span>
-                                    <span id='modal-prenom_user' class='pl-4 fst-italic'>User ID</span>
-                                </div>
-                                <div>
-                                    <span class='fw-bold text-gray-700 white:text-dark'>Créneau réservé :</span>
-                                    <span id='modal-timeslotID' class='pl-4 fst-italic'>Créneau</span>
-                                </div>
-                                <div>
-                                    <span class='fw-bold text-gray-700 white:text-dark'>Téléphone :</span>
-                                    <span id='modal-tel_user' class='pl-4 fst-italic'>Tél</span>
-                                </div>
-                                <div>
-                                    <span class='fw-bold text-gray-700 white:text-dark'>Email :</span>
-                                    <span id='modal-mail_user' class='pl-4 fst-italic'>Email</span>
-                                </div>
-                                <div>
-                                    <span class='fw-bold text-gray-700 white:text-dark'>RDV confirmé le :</span>
-                                    <span id='modal-booked_date' class='pl-4 fst-italic'>Créneau</span>
-                                </div>
+                                <div class='col-12 col-md-6 d-flex justify-content-center align-items-center mt-3 mt-md-0' id='modal-CG'></div>
                             </div>
-                            <div class='col d-flex justify-content-center align-items-center' id='modal-CG'></div>
                         </div>
                         <div class='modal-footer'>
                             <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>
@@ -62,8 +46,16 @@ class ModalRdvInfo extends HTMLElement {
 
 customElements.define("modal-rdv-info", ModalRdvInfo);
 
-let modalRdvInfo = function (id) {
+let resizeModalInfo = function () {
+	// Permet d'adapter la modal info des rdv au mobile
+	if ($(window).width() < 768) {
+		$(".modalRdvInfo").removeClass("modal-lg")
+	} else {
+		$(".modalRdvInfo").addClass("modal-lg");
+	}
+}
 
+let modalRdvInfo = function (id) {
     $.ajax({
         url: "../src/Controller/CarController.php",
         dataType: "JSON",
@@ -74,6 +66,7 @@ let modalRdvInfo = function (id) {
         },
         success: function (response) {
             $("#modalRdvInfo").modal("show");
+            resizeModalInfo();
             $("#modal-rdvID").html(response["rdvID"]);
             $("#modal-timeslotID").html(response["timeslotID"]);
             $("#modal-booked_date").html(response["booked_date"]);

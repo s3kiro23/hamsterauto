@@ -18,26 +18,30 @@ $(function () {
 	});
 
 	// Permet de fermer le menu en mobile au clickOut
-	$(document).on("click", function(e) {
+	$(document).on("click", function (e) {
 		var navbarToggler = $(".navbar-toggler");
-		if (!navbarToggler.is(e.target) && navbarToggler.has(e.target).length === 0) {
-		  navbarToggler.addClass("collapsed");
-		  navbarToggler.attr("aria-expanded","true");
-		  $('.navbar-collapse').removeClass("show");
+		if (
+			!navbarToggler.is(e.target) &&
+			navbarToggler.has(e.target).length === 0
+		) {
+			navbarToggler.addClass("collapsed");
+			navbarToggler.attr("aria-expanded", "true");
+			$(".navbar-collapse").removeClass("show");
 		}
-	 });
+	});
 });
 //
 //
 //
 function switchLogoAdmin() {
-	console.log($(".logo").attr("src"))
+	console.log($(".logo").attr("src"));
 	if (
 		$(".logo").attr("src") === "../public/assets/img/hamsterauto-unscreen.gif"
 	) {
 		$(".logo").attr("src", "../public/assets/img/hamsterautoNuit-unscreen.gif");
 	} else if (
-		$(".logo").attr("src") === "../public/assets/img/hamsterautoNuit-unscreen.gif"
+		$(".logo").attr("src") ===
+		"../public/assets/img/hamsterautoNuit-unscreen.gif"
 	) {
 		$(".logo").attr("src", "../public/assets/img/hamsterauto-unscreen.gif");
 	}
@@ -195,7 +199,7 @@ function exportInterCSV() {
 		type: "POST",
 		data: {
 			request: "export_intervention",
-			filter : $("#searchImmat").val(),
+			filter: $("#searchImmat").val(),
 		},
 		success: function (response) {
 			download(response);
@@ -205,16 +209,16 @@ function exportInterCSV() {
 
 function exportUserCSV() {
 	let values = {};
-	$('.filtreAd').each(function () {
-		values[$(this).attr('id')] = $(this).val();
-  	});
+	$(".filtreAd").each(function () {
+		values[$(this).attr("id")] = $(this).val();
+	});
 	$.ajax({
 		url: "/src/Controller/DashboardBackoffice/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
 			request: "export_user",
-			tabValues : JSON.stringify(values)
+			tabValues: JSON.stringify(values),
 		},
 		success: function (response) {
 			download(response);
@@ -282,7 +286,7 @@ function adminIndex() {
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
 			loadAdmin();
-			$('.current-breadcrumb').html('');
+			$(".current-breadcrumb").html("");
 		},
 		error: function () {
 			console.log("errorBO");
@@ -320,7 +324,7 @@ function displayRdvTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
-			$('.current-breadcrumb').html('interventions');
+			$(".current-breadcrumb").html("interventions");
 			displayFiltreImmatAdmin();
 			// reloadRdv();
 		},
@@ -403,7 +407,7 @@ function displayUsersTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
-			$('.current-breadcrumb').html('utilisateurs');
+			$(".current-breadcrumb").html("utilisateurs");
 			adminUsers();
 		},
 		error: function () {
@@ -602,7 +606,7 @@ function displayBanTab() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
-			$('.current-breadcrumb').html('comptes bannis');
+			$(".current-breadcrumb").html("comptes bannis");
 			displayBanUsers();
 		},
 		error: function () {
@@ -669,7 +673,7 @@ function displayAdminArchives() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
-			$('.current-breadcrumb').html('archives');
+			$(".current-breadcrumb").html("archives");
 			adminArchives();
 		},
 		error: function () {
@@ -729,7 +733,7 @@ function displayLogs() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
-			$('.current-breadcrumb').html('surveillance');
+			$(".current-breadcrumb").html("surveillance");
 			showLogs();
 		},
 		error: function () {
@@ -800,7 +804,7 @@ function displaySettings() {
 		},
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
-			$('.current-breadcrumb').html('paramétrage');
+			$(".current-breadcrumb").html("paramétrage");
 			showSettings();
 		},
 		error: function () {},
