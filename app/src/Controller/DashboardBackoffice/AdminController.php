@@ -69,7 +69,7 @@ if ($check === 'admin') {
         case 'display_adminOffice':
             $date = Convert::date_to_fullFR();
             $userCount = User::count_users();
-            $interv = Intervention::count_rdv(0, strtotime(date('d-m-Y')));
+            $interv = Intervention::count_rdv(null, strtotime(date('d-m-Y')));
             $brands_in_bdd = Brand::count_brands();
             $models_in_bdd = Model::count_models();
             $cars = Vehicle::count_cars();

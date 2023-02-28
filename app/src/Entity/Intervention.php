@@ -84,31 +84,33 @@ class Intervention
         }
     }
 
-    static public function check_rdv_admin($registration) {
+    static public function check_rdv_admin($registration)
+    {
         $list_Rdv = [];
-            $requete = "SELECT *, awaiting_intervention.id_intervention AS cryptedId, 
+        $requete = "SELECT *, awaiting_intervention.id_intervention AS cryptedId, 
             user.lastname_user AS nomTech FROM awaiting_intervention 
             INNER JOIN vehicle ON awaiting_intervention.id_vehicle = vehicle.id_vehicle 
             INNER JOIN model ON vehicle.id_model = model.id_model
             INNER JOIN brand ON model.id_brand = brand.id_brand
             INNER JOIN user ON awaiting_intervention.id_user = user.id_user
             WHERE awaiting_intervention.state BETWEEN 0 AND 1
-            AND vehicle.registration LIKE '%" .filter($registration) . "%'
-            ORDER BY awaiting_intervention.time_slot ASC "; 
+            AND vehicle.registration LIKE '%" . filter($registration) . "%'
+            ORDER BY awaiting_intervention.time_slot ASC ";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $data['cryptedId'] = Security::encrypt($data['cryptedId'], false);
             $data['brand_name'] = $data['brand_name'];
-            $data['brand_name'] = str_replace(" ","",$data['brand_name']);
+            $data['brand_name'] = str_replace(" ", "", $data['brand_name']);
             $data['time_slot_fr'] = Convert::date_to_fullFR($data['time_slot']);
-            $list_Rdv[]= $data;
+            $list_Rdv[] = $data;
         }
         return $list_Rdv;
     }
 
-    static public function check_rdv_archives($id) {
+    static public function check_rdv_archives($id)
+    {
         $requete = "SELECT * FROM archive
-                    WHERE id_archive = '" .filter($id) . "'";
+                    WHERE id_archive = '" . filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return mysqli_fetch_assoc($result);
@@ -200,11 +202,10 @@ class Intervention
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $data['brand_name'] = strtolower($data['brand_name']);
-            $data['brand_name'] = str_replace(" ","",$data['brand_name']);
+            $data['brand_name'] = str_replace(" ", "", $data['brand_name']);
             $list_vehicle[] = $data;
         }
         return $list_vehicle;
-
     }
 
     static public function check_archive($id)
@@ -237,11 +238,15 @@ class Intervention
         return $list_vehicle;
     }
 
-    static public function count_rdv($state, $Date)
+    static public function count_rdv($state = null, $Date)
     {
         if ($state == 2) {
             $requete = " SELECT count(*) AS nbRdv FROM `archive` 
                         WHERE `state` >= 2 ";
+        } elseif ($state == null) {
+            $requete = "SELECT count(*) AS nbRdv FROM `awaiting_intervention`
+            WHERE `time_slot` BETWEEN '" . filter($Date) . "' + 28800 
+            AND '" . filter($Date) . "' + 64800";
         } else {
             $requete = " SELECT count(*) AS nbRdv FROM `awaiting_intervention` 
                         WHERE `time_slot` BETWEEN '" . filter($Date) . "' + 28800 
@@ -352,6 +357,4 @@ class Intervention
     {
         $this->notified = $notified;
     }
-
 }
-
