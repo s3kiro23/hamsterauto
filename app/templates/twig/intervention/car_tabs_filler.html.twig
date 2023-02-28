@@ -15,19 +15,19 @@
                 </button >
             </td>
             <td>
-                <span class='fs-2'>{{ data['id_intervention'] }}</span>
+                <span class='text-muted'>{{ data['id_intervention'] }}</span>
             </td>
             <td>
-                <span class='fs-2'>{{ data['time_slot_fr']}} à {{ data['time_slot']|date("G:i")}}</span>
+                <span class='text-muted'>{{ data['time_slot_fr']}} à {{ data['time_slot']|date("G:i")}}</span>
             </td>
             <td>
-            <span class='fs-2'><img src='../public/assets/img/logo/{{ data['brand_name'] }}.png'></span>
+            <span class='text-muted'><img src='../public/assets/img/logo/{{ data['brand_name'] }}.png'></span>
             </td>                
             <td>
-                <span class='fs-2'>{{ data['model_name'] }}</span>
+                <span class='text-muted'>{{ data['model_name'] }}</span>
             </td>
             <td>
-                <span class='fs-2'>{{ data['registration'] }}</span>
+                <span class='text-muted'>{{ data['registration'] }}</span>
             </td>  
             <td>
                 {% if data['state'] == 0 %}
