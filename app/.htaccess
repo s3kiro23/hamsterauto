@@ -6,7 +6,7 @@ RewriteBase /
 
 RewriteRule ^/?$ /templates/index.html [L,NC]
 
-RewriteRule ^private-login?$ /templates/private-login.html [L,NC]
+RewriteRule ^acces-prive?$ /templates/private-login.html [L,NC]
 
 RewriteRule ^dashboards/technicien?$ /templates/back-office.html [L,NC]
 
@@ -18,7 +18,7 @@ RewriteRule ^dashboards/client?$ /templates/client-dashboard.html [L,NC]
 
 RewriteRule ^administration?$ /templates/admin.php [L,NC]
 
-RewriteRule ^activate-account?$ /templates/activate-account.html? [L,NC]
+RewriteRule ^activation-compte?$ /templates/activate-account.html? [L,NC]
 
 RewriteRule ^reservation?$ /templates/client-form.html [L,NC]
 
@@ -28,4 +28,4 @@ RewriteRule ^profil?$ /templates/profil.html [L,NC]
 
 RewriteRule ^inscription?$ /templates/sign-in.html [L,NC]
 
-RewriteRule ^erreur-403?$ /templates/403.html [L,NC]
+RewriteRule ^acces-interdit?$ /templates/403.html [L,NC]

@@ -8,5 +8,5 @@ $user = $_SESSION['typeUser'];
 if ($user === 'admin' && isset($_SESSION['id'])) {
     echo $twig->render('admin/admin_office.html.twig');
 } else {
-    header("Location: error-403");
+    header("Location: acces-interdit");
 }
