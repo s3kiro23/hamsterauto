@@ -36,7 +36,6 @@ let connect = function () {
                 $(".form-control").on("change", checkField);
                 $(".form-control").on("focusin", placeholderAnimation);
                 $(".form-control").on("focusout", placeholderAnimation);
-                $('.showPassord').on("click", showPassword);
             } else if (response["status"] === 3) {
                 toastMixin.fire({
                     position: 'top',

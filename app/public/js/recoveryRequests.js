@@ -69,7 +69,7 @@ let toRequestMail = function () {
             $("#content-request").html(response["contentForgot"]);
             $('#to-mentions').on("click", modalMentions);
             $(".form-control").on("change", checkField);
-            $(".form-control").on("click", placeholderAnimation);
+            $(".form-control").on("focusin", placeholderAnimation);
             $(".form-control").on("focusout", placeholderAnimation);
         },
 
