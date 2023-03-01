@@ -140,7 +140,10 @@ let checkField = function () {
 						labelField.next().next(".invalid-feedback").html(response["msg"]);
 					}
 				} else {
-					if (inputField.attr("id") !== "inputLogin") {
+					if (
+						inputField.attr("id") !== "inputLogin" &&
+						inputField.attr("id") !== "inputPasswdLogin"
+					) {
 						inputField.removeClass("is-valid");
 						inputField.addClass("is-invalid");
 						inputField.parent().next().html(response["msg"]);
