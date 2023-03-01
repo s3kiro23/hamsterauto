@@ -102,6 +102,7 @@ let checkField = function () {
 		success: function (response) {
 			let inputField = $("#" + focusedField);
 			let labelField = $("label[for='" + focusedField + "']");
+			console.log(inputField);
 			if (response["status"] === 1) {
 				if (inputField.hasClass("is-invalid")) {
 					inputField.removeClass("is-invalid");
@@ -125,7 +126,8 @@ let checkField = function () {
 					inputField.attr("id") !== "inputImmatNew" &&
 					inputField.attr("id") !== "inputImmatOld" &&
 					inputField.attr("id") !== "inputTel" &&
-					inputField.attr("id") !== "inputLogin"
+					inputField.attr("id") !== "inputLogin" &&
+					inputField.attr("id") !== "inputPasswdLogin"
 				) {
 					inputField.removeClass("is-valid");
 					labelField.removeClass("form-label-valid");
@@ -141,8 +143,7 @@ let checkField = function () {
 					}
 				} else {
 					if (
-						inputField.attr("id") !== "inputLogin" &&
-						inputField.attr("id") !== "inputPasswdLogin"
+						inputField.attr("id") !== "inputLogin"
 					) {
 						inputField.removeClass("is-valid");
 						inputField.addClass("is-invalid");
