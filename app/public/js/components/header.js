@@ -157,13 +157,15 @@ let generateNavbar = function () {
                     $("#settings").on("click", notificationManager);
                     $("#client").on("click", toHomeClient);
                     $(".linkToClient").on("click", toHomeClient);
-                    $('#formClient').on("click", toFormClient)
+                    $('#formClient').on("click", toFormClient);
                     $("#sessionEnding").on("click", sessionEnding);
-                    $('#check-all-list').on("click", checkThemAll)
+                    $('#check-all-list').on("click", checkThemAll);
+                    $('.path-to-home').attr("href", "/dashboards/client");
                 } else {
                     $("#technicien").on("click", toHomeTech);
                     $("#linkToTech").on("click", toHomeTech);
                     $("#sessionEnding").on("click", sessionEnding);
+                    $('.path-to-home').attr("href", "/dashboards/technicien");
                 }
             }
         },

@@ -79,7 +79,7 @@ class Vehicle
         $encoded_content = base64_encode($decrypted_file_content);
 
         if ($extension == "png" || $extension == "jpeg" || $extension == "jpg") {
-            $CG = "<img src='data:image/png;base64, $encoded_content' alt='CG'/>";
+            $CG = "<img src='data:image/png;base64, $encoded_content' alt='CG' height='600' class='w-100 w-md-75'/>";
         } else if ($extension == "pdf") {
             $CG = "<iframe src='data:application/pdf;base64, $encoded_content' height='600' class='w-100'></iframe>";
         }
