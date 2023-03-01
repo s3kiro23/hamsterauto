@@ -72,7 +72,7 @@ function sessionEnding(){
                 title: response['msg']
               });
                 if (response['status'] === 'technicien'){
-                    setTimeout(() => {location.assign("/private-login")}, 2000);
+                    setTimeout(() => {location.assign("/acces-prive")}, 2000);
                 }else{
                     setTimeout(() => {location.assign("/")}, 2000);
                 } 

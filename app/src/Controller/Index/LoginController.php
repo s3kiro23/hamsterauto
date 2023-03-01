@@ -54,7 +54,7 @@ switch ($_POST['request']) {
                                 $msg = "Accès interdit";
                                 $url = "/";
                                 if ($user['type'] === 'technicien') {
-                                    $url = "private-login";
+                                    $url = "acces-prive";
                                 }
                             }
                         } else {

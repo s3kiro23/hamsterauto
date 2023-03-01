@@ -1,5 +1,5 @@
 $(function () {
-    accountActivation();
+    // accountActivation();
     sweetToast();
 });
 
@@ -29,18 +29,10 @@ function accountActivation(){
                token: tokenFromMail,
            },
            success: function (response) {
-               toastMixin.fire({
-                   animation: true,
-                   timer: 1500,
-                   position: 'center',
-                   title: response["msg"]
-               });
-               setTimeout(() => {
-                window.location.replace('/')
-               }, 1550);
-              
+            //    setTimeout(() => {
+            //     window.location.replace('/')
+            //    }, 1550);      
            },
-   
            error: function () {
            },
        });

@@ -31,7 +31,7 @@ let newPwd = function () {
                     }, 1500);
                 } else {
                     setTimeout(() => {
-                        window.location.replace("private-login");
+                        window.location.replace("acces-prive");
                     }, 1500);
                 }
             } else {

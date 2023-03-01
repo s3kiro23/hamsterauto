@@ -13,7 +13,6 @@
     <meta name="theme-color" content="#ffffff">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="../public/assets/css/style.css">
-    <link rel="stylesheet" href="../vendor/jackocnr/intl-tel-input/build/css/intlTelInput.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700%7cPoppins:300,400,500,600,700,800,900&amp;display=swap"
           rel="stylesheet">
@@ -25,7 +24,6 @@
             crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <!-- datedropper -->
-    <script src="../public/js/components/datedropper-jquery.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://kit.fontawesome.com/9414e04596.js" crossorigin="anonymous"></script>
     <title>Hamster Auto | Activation</title>
@@ -33,23 +31,47 @@
 
 <body>
 <main class="main" id="activate-account">
+    <div class="container d-flex justify-content-center align-items-center h-auto">
+        <div class='row min-vh-100 flex-center'>
+            <div class='col-lg-9 col-xxl-8 py-2 position-relative'>
+                <img class='bg-auth-circle-shape' src='../public/assets/img/icons/spot-illustrations/bg-shape.png' alt='' width='250'>
+                <img class='bg-auth-circle-shape-2' src='../public/assets/img/icons/spot-illustrations/shape-1.png' alt='' width='150'>
+                <div class='card overflow-hidden z-index-1'>
+                    <div class='card-body p-0'>
+                        <div class='row g-0 h-100'>
+                            <div class='col-md-5 text-center bg-card-gradient'>
+                                <div class='position-relative p-4 pt-md-5 pb-md-7 light'>
+                                    <div class='bg-holder bg-auth-card-shape' style='background-image:url(../public/assets/img/icons/spot-illustrations/half-circle.png);'>
+                                      </div>
+                                      <!--/.bg-holder-->
 
-    <div class="content container d-flex justify-content-center align-items-center h-auto">
-
-        <div class="row text-center pt-4 pt-lg-2 fixed-top z-index--1">
-            <div class="col">
-                <img id="logoActivateAccount" src="../public/assets/img/animated-icons/hamsterauto-unscreen.gif"
-                     class="img-fluid"
-                     style="width:12rem" alt="logo_agence">
+                                      <div class='z-index-1 position-relative d-flex justify-content-center align-items-center flex-column gap-4'>
+                                        <img src='../public/assets/img/hamsterautoNuit-unscreen.gif'
+                                            class='logo_agence img-fluid'
+                                            style='width:60%'
+                                            alt='logo_agence'>
+                                        <p class='text-white'>Ne pensez plus à votre contrôle technique, nous le faisons pour vous!</p>
+                                      </div>
+                                </div>
+                            </div>
+                            <div class='col-md-7 d-flex flex-center'>
+                                <div class='p-4 px-md-3 py-md-5 flex-grow-1'>
+                                    <div class="wizard-lottie-wrapper">
+                                        <div class="lottie wizard-lottie mx-auto my-3" data-options='{"path":"../public/assets/img/animated-icons/celebration.json"}'></div>
+                                      </div>
+                                    <div class='d-flex flex-column text-center gap-4'><img class='d-block mx-auto mb-4' src='../public/assets/img/icons/spot-illustrations/16.png' alt='Email' width='100' />
+                                        <h3 class='mb-2'>Bienvenue sur Hamster Auto</h3>
+                                        <h5>Votre compte a bien été activé !</h5>
+                                        <p>Vous allez être redirigé vers la page d'accueil dans quelques instants...</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-
-        <div class="row text-center pt-4 pt-lg-2 fixed-top z-index--1" style="background-image:url(../public/assets/img/icons/spot-illustrations/shape-1.png);background-repeat: no-repeat;">
-
-        </div>
-
     </div>
-   
 </main>
 
 <!-- modals DEBUT -->
@@ -61,10 +83,8 @@
 
 
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-<script src="../public/js/accountActivate.js"></script>
+<!-- <script src="../public/js/accountActivate.js"></script> -->
 <script src="../public/js/components/sweetAlertToast.js"></script>
-
-
 
 </body>
 </html>

@@ -103,11 +103,11 @@ class Mailing
                 Afin de pouvoir accéder à votre espace personnel, vous devez :
                 <br><br>
                 <button>
-                    <a style = 'text-decoration: none;' href='https://hamsterauto.com/activate-account?token=$token' target = '_blank'><b> Activer votre compte </b></a>
+                    <a style = 'text-decoration: none;' href='https://hamsterauto.com/activation-compte?token=$token' target = '_blank'><b> Activer votre compte </b></a>
                 </button>
                 <br><br><br>
                 Ou copier et coller cette URL dans la barre de recherche de votre navigateur :<br>
-                <a href='https://hamsterauto.com/activate-account?token=$token'> https://hamsterauto.com/activate-account?token=$token</a>
+                <a href='https://hamsterauto.com/activation-compte?token=$token'> https://hamsterauto.com/activation-compte?token=$token</a>
                 <br><br><br>
                 L'équipe d'<a style='text-decoration: none; color: black' 
                             href='https://hamsterauto.com/' 
