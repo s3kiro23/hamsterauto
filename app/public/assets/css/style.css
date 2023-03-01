@@ -87,16 +87,6 @@ tfoot {
 
 /*DEBUT Afficher/Cacher mot de passe*/
 
-.showPassword {
-	position: absolute !important;
-	top: 16%;
-	right: 10px;
-	height: 50%;
-	cursor: pointer;
-	color: #adb1b6;
-	transition: all 0.2s;
-}
-
 .showPassword:hover {
 	color: #748194;
 }
@@ -109,10 +99,6 @@ tfoot {
 	height: 50%;
 	cursor: pointer;
 	z-index: 1500;
-}
-
-.showPassword:hover {
-	color: #748194;
 }
 
 /*FIN Afficher/Cacher mot de passe*/

@@ -2,8 +2,6 @@ $(function () {
 	$("#inputImmatNew").on("keyup", checkNewValueRegEx);
 	$("#inputImmatOld").on("keyup", checkOldValueRegEx);
 	$("#inputYear").on("keyup", checkOldValueYear);
-	// showHidePassword();
-	$(".showPassword").on("click", showPassword);
 });
 
 let oldvalue = "";
@@ -114,7 +112,8 @@ let checkField = function () {
 				if (
 					inputField.attr("id") !== "inputImmatNew" &&
 					inputField.attr("id") !== "inputImmatOld" &&
-					inputField.attr("id") !== "inputPasswdLogin"
+					inputField.attr("id") !== "inputPasswdLogin" &&
+					inputField.attr("id") !== "inputLogin"
 				) {
 					inputField.addClass("is-valid");
 					labelField.addClass("form-label-valid");
@@ -125,7 +124,8 @@ let checkField = function () {
 				if (
 					inputField.attr("id") !== "inputImmatNew" &&
 					inputField.attr("id") !== "inputImmatOld" &&
-					inputField.attr("id") !== "inputTel"
+					inputField.attr("id") !== "inputTel" &&
+					inputField.attr("id") !== "inputLogin"
 				) {
 					inputField.removeClass("is-valid");
 					labelField.removeClass("form-label-valid");
@@ -136,13 +136,15 @@ let checkField = function () {
 					}
 					inputField.addClass("is-invalid");
 					labelField.next(".invalid-feedback").html(response["msg"]);
-					if (labelField.next().is('span')){
+					if (labelField.next().is("span")) {
 						labelField.next().next(".invalid-feedback").html(response["msg"]);
 					}
 				} else {
-					inputField.removeClass("is-valid");
-					inputField.addClass("is-invalid");
-					inputField.parent().next().html(response["msg"]);
+					if (inputField.attr("id") !== "inputLogin") {
+						inputField.removeClass("is-valid");
+						inputField.addClass("is-invalid");
+						inputField.parent().next().html(response["msg"]);
+					}
 				}
 			}
 		},
@@ -155,7 +157,10 @@ let placeholderAnimation = function () {
 	let inputField = $("#" + focusedField);
 	let formattedString = formatString(focusedField);
 	let labelField = $("label[for='" + focusedField + "']");
-	if (inputField.attr("placeholder") == " " || inputField.attr("placeholder") == null) {
+	if (
+		inputField.attr("placeholder") == " " ||
+		inputField.attr("placeholder") == null
+	) {
 		inputField.attr("placeholder", "Entrez votre " + formattedString + " ici");
 	} else if (
 		inputField.attr("placeholder") ==
@@ -186,6 +191,10 @@ function formatString(str) {
 			nextWord = "nouveau mot de passe";
 		} else if (nextWord == "password2") {
 			nextWord = "confirmation";
+		} else if (nextWord == "passwdlogin") {
+			nextWord = "mot de passe";
+		} else if (nextWord == "login") {
+			nextWord = "email";
 		}
 		// Concaténer les parties de la chaîne avec le mot suivant en minuscule
 		str = str.substring(0, inputIndex) + nextWord + str.substring(endIndex);

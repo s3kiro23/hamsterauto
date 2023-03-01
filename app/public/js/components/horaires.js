@@ -29,6 +29,7 @@ function horaires(){
     // var heureHtml = h+":"+m;
     var texteHtml2= " ";
 
+
 if (heureActuelle >= jourSemaine[1] && heureActuelle < jourSemaine[2]){
     texteHtml2 = " Ouvre bientôt... <i class='fa-regular fa-clock'></i>";
     document.querySelector("#statutOuverture").setAttribute("style", "color:green");	
