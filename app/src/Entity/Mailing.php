@@ -50,7 +50,13 @@ class Mailing
             if ($data['mail'] != 'contact@hamsterauto.com'){
                 $mail->addReplyTo('no-reply@hamsterauto.com', 'Information');
             }
+
             if (isset($data['attachment']) && !empty($data['attachment'])) {
+                //Decryption file
+                $pdf_content = file_get_contents("../" . $data['attachment']);
+                $decrypted_content = Security::decrypt($pdf_content, $data['hash']);
+                file_put_contents("../" . $data['attachment'], $decrypted_content);
+
                 $mail->addAttachment("../" . $data['attachment']);
             }
 
@@ -59,6 +65,14 @@ class Mailing
             $mail->AddEmbeddedImage("../../public/assets/img/logoDark_unscreen.png", "logo", "logoDark_unscreen");
             $mail->Body = $data['body'];
             $mail->send();
+
+            if (isset($data['attachment']) && !empty($data['attachment'])) {
+                //Encryption file
+                $pdf_content = file_get_contents("../" . $data['attachment']);
+                $decrypted_content = Security::encrypt($pdf_content, $data['hash']);
+                file_put_contents("../" . $data['attachment'], $decrypted_content);
+            }
+
         } catch (Exception $e) {
             error_log("Erreur lors de l'envoi du mail. Logs:" . $mail->ErrorInfo);
         }
@@ -155,19 +169,20 @@ class Mailing
             Une facture est jointe à ce mail, récapitulant l'ensemble des prestations réalisées sur votre véhicule.
             <br><br><br>
             L'équipe d'<a style='text-decoration: none; color: black' 
-                        href='https://hamsterauto.com/' 
-                        target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
-                        </a> vous remercie et espère vous revoir lors de vos prochains contrôle technique.
-                        <br><br>
-                        <p>☎️ 06.00.00.00.01</p>
-                        🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
+                href='https://hamsterauto.com/' 
+                target = '_blank'><b>Hamster<span style = 'color: #4bbf73'>A</span>uto</b>
+                </a> vous remercie et espère vous revoir lors de vos prochains contrôle technique.
+                <br><br>
+                <p>☎️ 06.00.00.00.01</p>
+                🌐<a href='https://hamsterauto.com/' target = '_blank'> HamsterAuto.com</a>
         </div>
         ";
         $subject = "Compte rendu d'intervention";
         $mail = $user->getEmail_user();
         $attachment = '../var/generate/minutes/' . Security::decrypt($CT->getPv(), $user->getHash());
+        error_log($attachment);
 
-        return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment);
+        return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment, "hash" => $user->getHash());
     }
 
     public function getCT_KO($user, $CT, $car_user): array
