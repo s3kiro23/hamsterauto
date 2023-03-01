@@ -106,6 +106,8 @@ function formAddCar() {
             request: "formAddCar",
         },
         success: function (response) {
+            $("#formAddCar").removeAttr("aria-describedby");
+            $(".tooltip").remove();
             modalAddCar(response);
             $('#selectMarque').select2();
             $('#selectedModel').select2();
@@ -311,6 +313,8 @@ let formAddRDV = function () {
             request: "formAddRDV",
         },
         success: function (response) {
+            $("#formAddRdv").removeAttr("aria-describedby");
+            $(".tooltip").remove();
             modalFormAddRDV(response);
         },
         error: function () {
