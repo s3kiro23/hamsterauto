@@ -1,5 +1,11 @@
 # v1.1.1
 
+### dev
+
+- [FIX] bug sur la sélection des modèles/marques dans la modal de modif véhicules
+- [FIX] bug avec les tooltips sur les boutons d'actions du dash client
+
+
 ### add_placeholder_anim_login
 
 - [FIX] bug sur le show/hide password page expiration mdp
