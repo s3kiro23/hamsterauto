@@ -34,6 +34,9 @@ let connect = function () {
                 });
                 $("#content-request").html(response["contentPwdLogin"]);
                 $(".form-control").on("change", checkField);
+                $(".form-control").on("focusin", placeholderAnimation);
+                $(".form-control").on("focusout", placeholderAnimation);
+                $('.showPassord').on("click", showPassword);
             } else if (response["status"] === 3) {
                 toastMixin.fire({
                     position: 'top',

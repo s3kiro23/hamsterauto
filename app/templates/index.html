@@ -83,29 +83,29 @@
                                         </div>
                                     </div>
                                     <form class="accessPath" id="index" action="javascript:connect();" method="POST">
-                                        <div class="fw-bold my-2">Identifiants</div>
-                                        <div class="mb-3">
+                                        <div class="fw-bold my-3">Identifiants</div>
+                                        <div class="mb-3 position-relative">
                                             <input
                                                 id="inputLogin"
                                                 name="inputLogin"
                                                 type="email"
                                                 class="field form-control"
-                                                placeholder="Email"/>
-                                            <label class="sr-only" for="inputLogin">Identifiants</label>
+                                                placeholder=" "/>
+                                            <label class="form-label-group m-0" for="inputLogin">Email</label>
                                             <div class="invalid-feedback mb-2"></div>
                                         </div>
-                                        <div class="mb-3 position-relative">
-                                            <label for="inputPasswdLogin" class="sr-only">Mot de passe</label>
+                                        <div class="input-group mb-3">
                                             <input
                                                 id="inputPasswdLogin"
                                                 name="inputPasswdLogin"
                                                 type="password"
                                                 class="inputPassword field form-control"
-                                                placeholder="******"/>
+                                                placeholder=" "/>
+                                            <label for="inputPasswdLogin" class="input-password-field form-label-group m-0">Mot de passe</label>
                                             <div class="invalid-feedback mb-2"></div>
-                                            <div class="showPassword">
-                                                <i class="eyeShow fa-regular fa-eye" role="button"></i>
-                                            </div>
+                                            <span class="input-group-text rounded-end showPassword" role="button" onclick="showPassword();">
+                                                <i class="fa-regular fa-eye eyeShow"></i>
+                                            </span>
                                         </div>
                                         <div class="row justify-content-between align-items-center w-100">
                                             <div id="toRequestMail" class="col-auto fs--1 p-0">
@@ -466,6 +466,7 @@
 
 <modal-mentions></modal-mentions>
 <modal-cgu></modal-cgu>
+<modal-reco-pwd></modal-reco-pwd>
 
 <!-- modals FIN -->
 

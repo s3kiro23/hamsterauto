@@ -80,26 +80,28 @@
                                         <h3>Accédez à votre espace de travail</h3>
                                     </div>
                                     <form class='accessPath' id="private" action="javascript:connect();" method="POST">
-                                        <div class="mb-3">
-                                            <label class="form-label" for="inputLogin">Identifiants</label>
+                                        <div class="fw-bold my-3 text-center">Identifiants</div>
+                                        <div class="mb-3 position-relative">
                                             <input
-                                                    id="inputLogin"
-                                                    name="inputLogin"
-                                                    type="email"
-                                                    class="field form-control"
-                                                    placeholder="Email"/>
+                                                id="inputLogin"
+                                                name="inputLogin"
+                                                type="email"
+                                                class="field form-control"
+                                                placeholder=" "/>
+                                            <label class="form-label-group m-0" for="inputLogin">Email</label>
                                             <div class="invalid-feedback mb-2"></div>
                                         </div>
-                                        <div class="mb-3 position-relative">
-                                            <label for="inputPasswdLogin" class="sr-only">Mot de passe</label>
-                                            <input  id="inputPasswdLogin"
-                                                    name="inputPasswdLogin"
-                                                    type="password"
-                                                    class="inputPassword field form-control"
-                                                    placeholder="******"/>
+                                        <div class="input-group mb-3">
+                                            <input  
+                                                id="inputPasswdLogin"
+                                                name="inputPasswdLogin"
+                                                type="password"
+                                                class="inputPassword field form-control"
+                                                placeholder=" "/>
+                                            <label for="inputPasswdLogin" class="input-password-field form-label-group m-0">Mot de passe</label>
                                             <div class="invalid-feedback mb-2"></div>
-                                            <div class="showPassword">
-                                                <i class="eyeShow fa-regular fa-eye" role="button"></i>
+                                            <div class="input-group-text rounded-end" role="button" onclick="showPassword();">
+                                                <i class="fa-regular fa-eye eyeShow"></i>
                                             </div>
                                         </div>
                                         <div id="toRequestMail" class="col-auto m-0">
@@ -124,6 +126,9 @@
 <!-- ===============================================-->
 <!--    End of Main Content-->
 <!-- ===============================================-->
+
+<modal-reco-pwd></modal-reco-pwd>
+
 
 <!-- ===============================================-->
 <!--    JavaScripts-->
