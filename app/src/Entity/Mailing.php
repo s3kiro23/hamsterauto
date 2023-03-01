@@ -180,7 +180,6 @@ class Mailing
         $subject = "Compte rendu d'intervention";
         $mail = $user->getEmail_user();
         $attachment = '../var/generate/minutes/' . Security::decrypt($CT->getPv(), $user->getHash());
-        error_log($attachment);
 
         return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment, "hash" => $user->getHash());
     }

@@ -1,5 +1,9 @@
 # v1.1.1
 
+### fix_bug_mailing_pv
+
+- [ADD] Decrypt fonctions avant l'envoi du mail sur le fichier pdf et Encrypt après l'envoi
+
 ### fix_bug_tabs_admin
 
 - [UPD] taille du logo sur la page private

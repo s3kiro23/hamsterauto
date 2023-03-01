@@ -290,7 +290,6 @@ if ($check === 'admin') {
             $slot = $_POST['slot'];
             $new_TimeH = $_POST['newTimeH'];
             $new_TimeM = $_POST['newTimeM'];
-            error_log("Context : " . $slot . " | Nouvelle heure : " . $new_TimeH . " | Nouvelle minute : " . $new_TimeM);
             $timestamp = ($new_TimeH * 3600) + ($new_TimeM * 60);
             $settings = Setting::change_time_settings($slot, $timestamp);
             echo json_encode(0);

@@ -66,7 +66,6 @@ switch ($_POST['request']) {
     case 'activateAccount':
         $msg = '';
         $token = $_POST['token'];
-        error_log('TOKEN   '.$token);
         $traces = new Trace(0);
         $user_token = User::check_token($token);
         if( $user_token){

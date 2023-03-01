@@ -31,7 +31,6 @@ if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
                 break;
 
             case 'validationCT' :
-                error_log(1);
                 $id_intervention = $_POST['id_intervention'];
                 $msg = 'Intervention en cours de validation...';
                 $report = json_decode($_POST['tab_checkbox'], true);
