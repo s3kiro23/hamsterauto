@@ -19,7 +19,10 @@ switch ($_POST['request']) {
     case 'signIn' :
         $data = json_decode($_POST['tabInput'], true);
         $status = 1;
-        $msg = "Votre compte a été créé avec succès !";
+        $msg = array(
+            "title" => "Demande de création de compte transmise !",
+            "text" => "Vous allez recevoir sous peu un mail d'activation à l'adresse indiquée."
+        );
         $user = User::check_user($data['inputEmail']);
         $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite'];
         $init_control = new Control();

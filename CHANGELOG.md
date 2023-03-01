@@ -1,5 +1,9 @@
 # v1.1.1
 
+### dev
+
+- [UPD] du message de validation lors de la création d'un nouveau compte pour prévenir de l'envoi d'un mail
+
 ### redesign_activate_page
 
 - [UPD] du design de la page d'activation des comptes
