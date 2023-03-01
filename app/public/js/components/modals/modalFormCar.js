@@ -52,6 +52,12 @@ let modalModifyCar = function () {
             $("#bodyFormCar").attr('action', "javascript:modifyCar();")
             $('#selectMarque').on("change", selectedCar)
             $('#selectMarque').select2();
+            $('#selectedModel').select2();
+            $('select:not(.normal)').each(function () {
+                $(this).select2({
+                    dropdownParent: $(this).parent()
+                });
+            });
             $("#inputImmatNew").on("keyup", checkNewValueRegEx)
             $("#inputImmatOld").on("keyup", checkOldValueRegEx)
             $("#inputYear").on("keyup", checkOldValueYear)
