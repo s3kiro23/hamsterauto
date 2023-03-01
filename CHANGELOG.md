@@ -1,5 +1,9 @@
 # v1.1.1
 
+### redesign_activate_page
+
+- [UPD] du design de la page d'activation des comptes
+
 ### dev
 
 - [FIX] bug sur la sélection des modèles/marques dans la modal de modif véhicules
