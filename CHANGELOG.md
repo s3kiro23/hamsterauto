@@ -1,5 +1,10 @@
 # v1.1.1
 
+### add_placeholder_anim_login
+
+- [FIX] bug sur le show/hide password page expiration mdp
+- [ADD] placeholder animé sur les champs de login
+
 ### fix_bug_mailing_pv
 
 - [ADD] Decrypt fonctions avant l'envoi du mail sur le fichier pdf et Encrypt après l'envoi
