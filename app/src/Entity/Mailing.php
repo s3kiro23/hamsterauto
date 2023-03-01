@@ -213,7 +213,7 @@ class Mailing
         $mail = $user->getEmail_user();
         $attachment = '../var/generate/minutes/' . Security::decrypt($CT->getPv(), $user->getHash());
 
-        return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment);
+        return array("subject" => $subject, "body" => $body, "mail" => $mail, "attachment" => $attachment, "hash" => $user->getHash());
     }
 
     public function getCT_Canceled($user, $CT, $car_user): array
