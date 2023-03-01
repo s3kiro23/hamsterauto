@@ -74,7 +74,6 @@ switch ($_POST['request']) {
             $user->update();
             User::update_request($user_token['id_user']);
             $traces->setTracesIN($user_token['id_user'], 'account', 'activate');
-            $msg = 'Votre compte est activé, bienvenue sur Hamster-Auto!';
         }
         echo json_encode(array("msg" => $msg));
         break;
