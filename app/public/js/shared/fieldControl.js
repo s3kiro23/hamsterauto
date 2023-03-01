@@ -102,7 +102,7 @@ let checkField = function () {
 		success: function (response) {
 			let inputField = $("#" + focusedField);
 			let labelField = $("label[for='" + focusedField + "']");
-			console.log(inputField);
+			console.log(inputField.attr("id"));
 			if (response["status"] === 1) {
 				if (inputField.hasClass("is-invalid")) {
 					inputField.removeClass("is-invalid");
@@ -143,7 +143,8 @@ let checkField = function () {
 					}
 				} else {
 					if (
-						inputField.attr("id") !== "inputLogin"
+						inputField.attr("id") !== "inputLogin" &&
+						inputField.attr("id") !== "inputPasswdLogin"
 					) {
 						inputField.removeClass("is-valid");
 						inputField.addClass("is-invalid");
