@@ -6,6 +6,7 @@ function activateButtons() {
 
 let dataTableCars = $("#tab-car").DataTable({
 	pageLength: 3,
+    paging: true,
 	lengthMenu: [
 		[3, 5, 10, 25, 50, 75, 100, -1],
 		[3, 5, 10, 25, 50, 75, 100, "All"],
@@ -42,6 +43,9 @@ let dataTableCars = $("#tab-car").DataTable({
 		data: function (d) {
 			d.sSearch = $('input[type="search"]').val();
 		},
+        // success: function (data){
+        //     console.log(data)
+        // }
 	},
 	drawCallback: function () {
 		activateButtons();

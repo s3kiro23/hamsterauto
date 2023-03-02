@@ -264,6 +264,7 @@ class User
                 AND (`vehicle`.`registration` LIKE '%" . filter($search) . "%')
                 LIMIT $length
                 OFFSET $start";
+                error_log($requete);
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
@@ -279,10 +280,12 @@ class User
         WHERE `id_user` = '" . filter($user_id) . "'
         AND `owned` = '" . filter(1) . "'";
 
-        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
-        $data2 = mysqli_fetch_assoc($result);
+        error_log($requete);
 
-        return (int)$data2['nbCars'];
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        $data = mysqli_fetch_assoc($result);
+
+        return (int)$data['nbCars'];
     }
 
     static public function check_rdv($id_user, $id_vehicle)
