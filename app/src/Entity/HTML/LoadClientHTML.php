@@ -124,7 +124,7 @@ class LoadClientHTML
                     <span class="text-muted fs-1">' . $tech . '</span>
                 </td>
                 <td>
-                    <span class="text-muted font-13">registrationriculation</span>
+                    <span class="text-muted font-13">Immatriculation</span>
                     <br>
                     <span class="text-muted fs-1">' . $registration . '</span>
                 </td>

@@ -6,7 +6,7 @@ function activateButtons() {
 
 let dataTableCars = $("#tab-car").DataTable({
 	pageLength: 3,
-    paging: true,
+	paging: true,
 	lengthMenu: [
 		[3, 5, 10, 25, 50, 75, 100, -1],
 		[3, 5, 10, 25, 50, 75, 100, "All"],
@@ -43,47 +43,89 @@ let dataTableCars = $("#tab-car").DataTable({
 		data: function (d) {
 			d.sSearch = $('input[type="search"]').val();
 		},
-        // success: function (data){
-        //     console.log(data)
-        // }
+		// success: function (data){
+		//     console.log(data)
+		// }
 	},
 	drawCallback: function (settings) {
 		activateButtons();
-        // var pageInfo = settings.json;
-        // var startIndex = pageInfo.start;
-        // var endIndex = startIndex + pageInfo.length - 1;
-        // var totalRecords = pageInfo.recordsTotal;
-        // var filteredRecords = pageInfo.recordsFiltered;
 
-        // // console.log(startIndex);
-        // // console.log(endIndex);
-        // // console.log(totalRecords);
-        // // console.log(filteredRecords);
-        // // console.log(pageInfo.length);
+		//Pagination buttons
+		var pageInfo = settings.json;
+		var startIndex = pageInfo.start;
+		var totalRecords = pageInfo.recordsTotal;
+		var filteredRecords = pageInfo.recordsFiltered;
 
-        // var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
-        // var totalPages = Math.ceil(totalRecords / pageInfo.length);
-        // // console.log(totalPages);
+		// Handle case when only one result is returned by the search
+		if (settings.oPreviousSearch.sSearch !== '') {
+			if (filteredRecords == 1) {
+				totalRecords = 1;
+			} else {
+				totalRecords = filteredRecords;
+			}
+		}
 
-        // var pagingControls = '<ul class="pagination"><li id="tab-car_previous" class="paginate_button page-item previous ' + (currentPage == 1 ? "disabled" : "") + '"><a href="#" aria-controls="tab-car" class="page-link" data-dt-idx="previous" tabindex="0">Previous</a></li>';
+		//Calculate number of total pages
+		var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+		var totalPages = Math.ceil(totalRecords / pageInfo.length);
 
-        // for (var i = 1; i <= totalPages; i++) {
-        //     pagingControls += '<li class="paginate_button page-item ' + (i == currentPage ? "active" : "") + '"><a href="#" aria-controls="tab-car" data-dt-idx='+ i +' tabindex="0" class="page-link">' + i + '</a></li>';
-        // }
+		//Calculate indices start/end of display elements
+		var endIndex = Math.min(startIndex + filteredRecords - 1, totalRecords - 1);
+		var displayStart = startIndex + 1;
+		var displayEnd = endIndex + 1;
 
-        // pagingControls += '<li id="tab-car_next" class="paginate_button page-item next ' + (currentPage == totalPages ? "disabled" : "") + '"><a href="#" class="page-link" data-dt-idx="next" tabindex="0">Next</a></li></ul>';
-        
-        // $('.dataTables_paginate').html(pagingControls);
+		//Display output
+		var displayText =
+			"Affichage de l'élément " +
+			displayStart +
+			" à " +
+			displayEnd +
+			" sur " +
+			filteredRecords +
+			" éléments (filtré à partir de " +
+			pageInfo.recordsTotal +
+			" éléments au total)";
 
-        // $('.pagination li a').on('click', function () {
-        //     var page = $(this).data('dt-idx');
-        //     console.log(page);
-        //     // Traitez la valeur de la page ici...
-        //     // Effectuez l'appel AJAX avec la nouvelle valeur de la page
-        //     $("#tab-car").DataTable().ajax.url('../src/Controller/DashboardClient/ClientCarController.php?start=' + page).load();
-        // });
+		//Btn previous
+		var pagingControls =
+			'<ul class="pagination"><li id="tab-car_previous" class="paginate_button page-item previous ' +
+			(currentPage == 1 ? "disabled" : "") +
+			'"><a aria-controls="tab-car" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Previous</a></li>';
 
-        
+		//Generate buttons page
+		for (var i = 1; i <= totalPages; i++) {
+			pagingControls +=
+				'<li class="paginate_button page-item ' +
+				(i == currentPage ? "active" : "") +
+				'"><a aria-controls="tab-car" data-dt-idx=' +
+				i +
+				' tabindex="0" class="cursor-pointer page-link">' +
+				i +
+				"</a></li>";
+		}
+
+		//Btn next
+		pagingControls +=
+			'<li id="tab-car_next" class="paginate_button page-item next ' +
+			(currentPage == totalPages ? "disabled" : "") +
+			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Next</a></li></ul>';
+
+		//Write html pagination
+		$("#tab-car_wrapper .dataTables_paginate").html(pagingControls);
+		$("#tab-car_wrapper .dataTables_info").html(displayText);
+
+		//Callback for pagination
+		$("#tab-car_wrapper .pagination li a").on("click", function () {
+			var page = $(this).data("dt-idx");
+			// Call Ajax with new value
+			$("#tab-car")
+				.DataTable()
+				.ajax.url(
+					"../src/Controller/DashboardClient/ClientCarController.php?start=" +
+						page
+				)
+				.load();
+		});
 	},
 	language: {
 		sEmptyTable: "Aucunes données n'est disponible",
@@ -155,6 +197,86 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		data: function (d) {
 			d.sSearch = $('input[type="search"]').val();
 		},
+	},
+	drawCallback: function (settings) {
+		activateButtons();
+
+		//Pagination buttons
+		var pageInfo = settings.json;
+		var startIndex = pageInfo.start;
+		var totalRecords = pageInfo.recordsTotal;
+		var filteredRecords = pageInfo.recordsFiltered;
+
+		// Handle case when only one result is returned by the search
+		if (settings.oPreviousSearch.sSearch !== '') {
+			if (filteredRecords == 1) {
+				totalRecords = 1;
+			} else {
+				totalRecords = filteredRecords;
+			}
+		}
+
+		//Calcul nb total page
+		var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+		var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+		//Calcul indices start/end of display elements
+		var endIndex = Math.min(startIndex + pageInfo.length - 1, totalRecords - 1);
+		var displayStart = startIndex + 1;
+		var displayEnd = endIndex + 1;
+
+		//Display output
+		var displayText =
+			"Affichage de l'élément " +
+			displayStart +
+			" à " +
+			displayEnd +
+			" sur " +
+			filteredRecords +
+			" éléments (filtré à partir de " +
+			pageInfo.recordsTotal +
+			" éléments au total)";
+
+		//Btn previous
+		var pagingControls =
+			'<ul class="pagination"><li id="tab-rdv_previous" class="paginate_button page-item previous ' +
+			(currentPage == 1 ? "disabled" : "") +
+			'"><a aria-controls="tab-rdv" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Previous</a></li>';
+
+		//Generate buttons page
+		for (var i = 1; i <= totalPages; i++) {
+			pagingControls +=
+				'<li class="paginate_button page-item ' +
+				(i == currentPage ? "active" : "") +
+				'"><a aria-controls="tab-rdv" data-dt-idx=' +
+				i +
+				' tabindex="0" class="cursor-pointer page-link">' +
+				i +
+				"</a></li>";
+		}
+
+		//Btn next
+		pagingControls +=
+			'<li id="tab-rdv_next" class="paginate_button page-item next ' +
+			(currentPage == totalPages ? "disabled" : "") +
+			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Next</a></li></ul>';
+
+		//Write html pagination
+		$("#tab-rdv_wrapper .dataTables_paginate").html(pagingControls);
+		$("#tab-rdv_wrapper .dataTables_info").html(displayText);
+
+		//Callback for pagination
+		$("#tab-rdv_wrapper .pagination li a").on("click", function () {
+			var page = $(this).data("dt-idx");
+			// Call Ajax with new value
+			$("#tab-rdv")
+				.DataTable()
+				.ajax.url(
+					"../src/Controller/DashboardClient/ClientRdvController.php?start=" +
+						page
+				)
+				.load();
+		});
 	},
 	language: {
 		sEmptyTable: "Aucunes données n'est disponible",

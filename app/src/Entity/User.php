@@ -282,7 +282,6 @@ class User
                     }
                 }
                 if ($orderColumn !== null) {
-                    // $query->orderBy($orderColumn, $order['dir']);
                     $asc = $order['dir'];
                     $requete .= " ORDER BY `$orderColumn` $asc";
                 }
@@ -290,9 +289,7 @@ class User
         }
 
         $requete .= " LIMIT $length OFFSET $start";
-        error_log($requete);
-
-
+        
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $tab_cars[] = new Vehicle($data['id_vehicle']);
@@ -306,8 +303,6 @@ class User
         $requete = "SELECT count(*) AS nbCars FROM `vehicle`        
         WHERE `id_user` = '" . filter($user_id) . "'
         AND `owned` = '" . filter(1) . "'";
-
-        // error_log($requete);
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         $data = mysqli_fetch_assoc($result);
@@ -359,7 +354,6 @@ class User
 
         // Order
         foreach ($orders as $key => $order) {
-            error_log($order['name']);
             // $order['name'] is the name of the order column as sent by the JS
             if ($order['name'] != '') {
                 $orderColumn = null;
@@ -388,7 +382,6 @@ class User
         }
 
         $requete .= " LIMIT $length OFFSET $start";
-        error_log($requete);
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {

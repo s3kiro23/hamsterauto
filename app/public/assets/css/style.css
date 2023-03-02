@@ -6,6 +6,10 @@
 	padding: 0 !important;
 }
 
+#tab-admin-users input {
+	padding: 2px !important;
+}
+
 /* Fade in/up animation */
 
 @keyframes fadeInUp {

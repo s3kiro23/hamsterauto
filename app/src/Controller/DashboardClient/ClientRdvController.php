@@ -14,8 +14,9 @@ if ($_POST) {
 
    // Get the parameters from DataTable Ajax Call
    $draw = intval($_POST['draw']);
-   $start = $_POST['start'];
    $length = $_POST['length'];
+   $start = isset($_GET['start']) ? $start = ($_GET['start'] - 1) * $length : $start = 0;
+   
    $orders = $_POST['order'];
    $search = $_POST['search'];
    $columns = $_POST['columns'];
@@ -32,6 +33,8 @@ if ($_POST) {
 
    // Returned objects
    $output = array(
+      "start" => $start,
+      "length" => $length,
       "draw" => $draw,
       'recordsTotal' => $count_rdv,
       'recordsFiltered' => count($rdv_user),
@@ -40,7 +43,7 @@ if ($_POST) {
    // Construct response
    foreach ($rdv_user as $rdv) {
       $output['data'][] = [
-         '0' => gmdate("d M Y", $rdv->getTime_slot()) . " à " . gmdate("G", $rdv->getTime_slot()) . "h" . gmdate("i", $rdv->getTime_slot()),
+         '0' => gmdate("d M Y", $rdv->getTime_slot()) . " à " . gmdate("G\hi", $rdv->getTime_slot()),
          '1' => (new Vehicle($rdv->getId_vehicle()))->getRegistration(),
          '2' => $rdv->getState() == 1 ? '<div class="badge rounded-pill bg-soft-info text-info">
          Pris en charge
