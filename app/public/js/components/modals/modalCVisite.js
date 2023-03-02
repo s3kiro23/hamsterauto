@@ -9,8 +9,8 @@ class ModalCVisite extends HTMLElement {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary bg-opacity-10">
-                            <h5 class="modal-title">Procès-verbal du CT n°</h5>
-                            <span id="modal-contreID"></span>
+                            <h5 class="modal-title-cvisite">Procès-verbal du CT n° <span id="modal-contreID"></span></h5>
+                            
                             <button
                                     type="button"
                                     class="btn-close"

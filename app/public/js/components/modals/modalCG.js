@@ -9,7 +9,7 @@ class ModalCG extends HTMLElement {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary bg-opacity-10">
-                            <h5 class="modal-title">Import d'une carte grise</h5>
+                            <h5 class="modal-title-cg">Import d'une carte grise</h5>
                             <button type="button"
                                     class="btn-close"
                                     data-bs-dismiss="modal"

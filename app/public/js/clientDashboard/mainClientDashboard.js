@@ -7,11 +7,6 @@ $(function () {
         dataTableRdv.ajax.reload();
         loadUserArchives(currentPage);
     }, 3000);
-    setTimeout(() => {
-        $('.addCG').on("click", modalCG);
-        $('.modifyCar').on("click", modalModifyCar);
-        $('.deleteCar').on("click", deleteCar);
-    }, 150)
 });
 
 function load() {
@@ -270,14 +265,10 @@ let deleteCar = function () {
                     if (response['status'] === 1){
                         dataTableCars.ajax.reload();
                         dataTableRdv.ajax.reload();
-                        setTimeout(() => {
-                            $('.addCG').on("click", modalCG);
-                            $('.modifyCar').on("click", modalModifyCar);
-                            $('.deleteCar').on("click", deleteCar);
-                        }, 150)
                         loadUserArchives(currentPage);
                     } else {
                         dataTableCars.ajax.reload();
+                        
                         loadUserArchives(currentPage);
                     }
                 },

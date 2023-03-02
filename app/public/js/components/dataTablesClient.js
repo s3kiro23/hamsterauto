@@ -1,5 +1,11 @@
+function activateButtons() {
+	$(".addCG").on("click", modalCG);
+	$(".modifyCar").on("click", modalModifyCar);
+	$(".deleteCar").on("click", deleteCar);
+}
+
 let dataTableCars = $("#tab-car").DataTable({
-	pageLength: 5,
+	pageLength: 3,
 	lengthMenu: [
 		[3, 5, 10, 25, 50, 75, 100, -1],
 		[3, 5, 10, 25, 50, 75, 100, "All"],
@@ -36,6 +42,9 @@ let dataTableCars = $("#tab-car").DataTable({
 		data: function (d) {
 			d.sSearch = $('input[type="search"]').val();
 		},
+	},
+	drawCallback: function () {
+		activateButtons();
 	},
 	language: {
 		sEmptyTable: "Aucunes données n'est disponible",

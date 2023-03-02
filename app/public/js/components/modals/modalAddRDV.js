@@ -9,7 +9,7 @@ class ModalAddRDV extends HTMLElement {
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header bg-primary bg-opacity-10">
-                            <h5 class="modal-title">Nouveau rendez-vous</h5>
+                            <h5 class="modal-title-rdv">Nouveau rendez-vous</h5>
                             <span id="modal-addRdvId"></span>
                             <button
                                     type="button"

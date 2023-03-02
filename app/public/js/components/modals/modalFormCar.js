@@ -45,7 +45,7 @@ let modalModifyCar = function () {
         success: function (response) {
             $("#modalFormCar").modal("show");
             $("#bodyFormCar").html(response['html'])
-            $(".modal-title").html('Modification de votre véhicule :')
+            $(".modal-title").html('Modification de votre véhicule')
             $("#modal-addID").attr('data-id', response['data']['idCar'])
             $("#inputYear").val(response['data']['year'])
             $("#inputImmatNew").val(response['data']['registration'])
@@ -70,7 +70,7 @@ let modalModifyCar = function () {
 
 let modalAddCar = function (response) {
     $("#modalFormCar").modal("show");
-    $(".modal-title").html("Ajout d'un nouveau véhicule :");
+    $(".modal-title").html("Ajout d'un nouveau véhicule");
     $("#modal-addID").attr('data-id', "")
     $("#bodyFormCar").attr('action', "javascript:addCar();")
     $("#bodyFormCar").html(response['html'])
