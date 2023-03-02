@@ -20,8 +20,6 @@ if ($_POST) {
    $search = $_POST['search'];
    $columns = $_POST['columns'];
 
-   error_log(json_encode($start));
-
    // Orders
    foreach ($orders as $key => $order) {
       // Orders does not contain the name of the column, but its number,
@@ -32,7 +30,6 @@ if ($_POST) {
    $cars_user = User::fetchCars($start, $length, $orders, $search['value'], $user_id);
 
    $count_all_cars = User::countAllCar($user_id);
-   error_log("Filtré = " . count($cars_user) . " | " . "Total = ". $count_all_cars);
 
    // Returned objects
    $output = array(

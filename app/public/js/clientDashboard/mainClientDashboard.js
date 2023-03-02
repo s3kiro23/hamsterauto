@@ -17,46 +17,6 @@ function load() {
     $("#formAddRDV").on("click", formAddRDV);
 }
 
-/*Affichage des véhicules/RDV/Historiques par user + pagination DEBUT*/
-// let loadUserCars = function () {
-//     $.ajax({
-//         url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
-//         dataType: "JSON",
-//         type: "POST",
-//         data: {
-//             request: "loadCarsRecap",
-//             type : "cars",
-//         },
-//         success: function (response) {
-//             $("#mycars").html(response["htmlCar"]);
-//             $('.addCG').on("click", modalCG);
-//             $('.modifyCar').on("click", modalModifyCar);
-//             $('.deleteCar').on("click", deleteCar);
-//             // dataTableCars();
-//         },
-//         error: function () {
-//         },
-//     });
-// }
-
-// let loadUserIntervention = function () {
-//     $.ajax({
-//         url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
-//         dataType: "JSON",
-//         type: "POST",
-//         data: {
-//             request: "loadCarsRecap",
-//             type : "rdv",
-//         },
-//         success: function (response) {
-//             $("#myrdv").html(response["htmlRDV"]);
-//             dataTableRdv();
-//         },
-//         error: function () {
-//         },
-//     });
-// }
-
 let loadUserArchives = function (page) {
     $.ajax({
         url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",

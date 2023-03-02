@@ -1,6 +1,14 @@
 $(function () {
     generateNavbar();
     displayCar();
+    setInterval(() => {
+        let currentPageH = $('#pagesHold').find('.active').children().html() == undefined ? 1 : $('#pagesHold').find('.active').children().html();
+        let currentPageP = $('#pagesInProgress').find('.active').children().html() == undefined ? 1 : $('#pagesInProgress').find('.active').children().html();
+        let currentPageO = $('#pagesOver').find('.active').children().html() == undefined ? 1 : $('#pagesOver').find('.active').children().html();
+        loadAwaiting(currentPageH);
+        loadInProgress(currentPageP);
+        loadArchives(currentPageO);
+    }, 3000);
 });
 
 let loadEvent = function () {
