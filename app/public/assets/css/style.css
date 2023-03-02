@@ -6,6 +6,50 @@
 	padding: 0 !important;
 }
 
+/* Fade in/up animation */
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0;
+		margin-top: 0.75rem;
+	}
+
+	100% {
+		opacity: 1;
+		margin-top: 0;
+	}
+}
+
+.animated--fade-in-up {
+	animation-name: fadeInUp !important;
+	animation-duration: 300ms !important;
+	animation-timing-function: margin cubic-bezier(0.18, 1.25, 0.4, 1),
+		opacity cubic-bezier(0, 1, 0.4, 1) !important;
+}
+
+.animated--fade-in-up.dropdown-menu {
+	margin-top: 0;
+	top: 5rem !important;
+}
+
+/* Fade in animation */
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.animated--fade-in {
+	animation-name: fadeIn;
+	animation-duration: 300ms;
+	animation-timing-function: opacity cubic-bezier(0, 1, 0.4, 1);
+}
+
 .select2-container .select2-selection--single {
 	height: 30px !important;
 }

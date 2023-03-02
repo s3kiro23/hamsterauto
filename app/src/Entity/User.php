@@ -252,7 +252,7 @@ class User
         return $tab_cars;
     }
 
-    static public function fetchCars($start, $length, $search, $user_id)
+    static public function fetchCars($start, $length, $orders, $search, $user_id)
     {
         $tab_cars = [];
 
@@ -262,9 +262,36 @@ class User
                 WHERE `id_user` = '" . filter($user_id) . "'
                 AND `owned` = '" . filter(true) . "'
                 AND (`vehicle`.`registration` LIKE '%" . filter($search) . "%')
-                LIMIT $length
-                OFFSET $start";
-                error_log($requete);
+            ";
+
+        // Order
+        foreach ($orders as $key => $order) {
+            // $order['name'] is the name of the order column as sent by the JS
+            if ($order['name'] != '') {
+                $orderColumn = null;
+                switch ($order['name']) {
+                    case 'registration':
+                    {
+                        $orderColumn = 'registration';
+                        break;
+                    }
+                    case 'model':
+                    {
+                        $orderColumn = 'model_name';
+                        break;
+                    }
+                }
+                if ($orderColumn !== null) {
+                    // $query->orderBy($orderColumn, $order['dir']);
+                    $asc = $order['dir'];
+                    $requete .= " ORDER BY `$orderColumn` $asc";
+                }
+            }
+        }
+
+        $requete .= " LIMIT $length OFFSET $start";
+        error_log($requete);
+
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
@@ -280,7 +307,7 @@ class User
         WHERE `id_user` = '" . filter($user_id) . "'
         AND `owned` = '" . filter(1) . "'";
 
-        error_log($requete);
+        // error_log($requete);
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         $data = mysqli_fetch_assoc($result);
@@ -317,20 +344,51 @@ class User
         return $tab_rdv;
     }
 
-    static public function fetchAllRdv($start, $length, $search, $user_id)
+    static public function fetchAllRdv($start, $length, $orders, $search, $user_id)
     {
         $tab_rdv = [];
 
         $requete = "SELECT * FROM `awaiting_intervention` 
-        INNER JOIN `vehicle` ON `awaiting_intervention`.`id_vehicle` = `vehicle`.`id_vehicle`
-        INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
-        INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand`
-        WHERE `awaiting_intervention`.`id_user` = $user_id
-        AND `state` < 2
-        AND (`vehicle`.`registration` LIKE '%" . filter($search) . "%')
-        ORDER BY `time_slot` ASC
-        LIMIT $length
-        OFFSET $start";
+            INNER JOIN `vehicle` ON `awaiting_intervention`.`id_vehicle` = `vehicle`.`id_vehicle`
+            INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+            INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand`
+            WHERE `awaiting_intervention`.`id_user` = $user_id
+            AND `state` < 2
+            AND (`vehicle`.`registration` LIKE '%" . filter($search) . "%')
+        ";
+
+        // Order
+        foreach ($orders as $key => $order) {
+            error_log($order['name']);
+            // $order['name'] is the name of the order column as sent by the JS
+            if ($order['name'] != '') {
+                $orderColumn = null;
+                switch ($order['name']) {
+                    case 'date':
+                    {
+                        $orderColumn = 'time_slot';
+                        break;
+                    }
+                    case 'registration':
+                    {
+                        $orderColumn = 'model_name';
+                        break;
+                    }
+                    case 'statut':
+                        {
+                            $orderColumn = 'state';
+                            break;
+                        }
+                }
+                if ($orderColumn !== null) {
+                    $asc = $order['dir'];
+                    $requete .= " ORDER BY `$orderColumn` $asc";
+                }
+            }
+        }
+
+        $requete .= " LIMIT $length OFFSET $start";
+        error_log($requete);
 
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {

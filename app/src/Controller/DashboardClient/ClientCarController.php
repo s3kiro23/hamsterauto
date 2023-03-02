@@ -12,17 +12,19 @@ $GLOBALS['Database'] = $db->connexion();
 if ($_POST) {
    $user_id = Security::decrypt($_SESSION['id'], false);
 
-   error_log(json_encode($_POST));
+   // error_log(isset($_GET));
 
    // Get the parameters from DataTable Ajax Call
    $draw = intval($_POST['draw']);
-   $start = $_POST['start'];
    $length = $_POST['length'];
+   // error_log($length);
+   // $start = isset($_GET['start']) ? $start = $_GET['start'] * $length : $start = $_POST['start'];
+   $start = $_POST['start'];
    $orders = $_POST['order'];
    $search = $_POST['search'];
    $columns = $_POST['columns'];
 
-   error_log(json_encode($search));
+   // error_log(json_encode($start));
 
    // Orders
    foreach ($orders as $key => $order) {
@@ -31,10 +33,11 @@ if ($_POST) {
       $orders[$key]['name'] = $columns[$order['column']]['name'];
    }
 
-   $cars_user = User::fetchCars($start, $length, $search['value'], $user_id);
+
+   $cars_user = User::fetchCars($start, $length, $orders, $search['value'], $user_id);
 
    $count_all_cars = User::countAllCar($user_id);
-   error_log("Filtré = " . count($cars_user) . " | " . "Total = ". $count_all_cars);
+   // error_log("Filtré = " . count($cars_user) . " | " . "Total = ". $count_all_cars);
 
    // Returned objects
    $output = array(

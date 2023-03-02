@@ -47,8 +47,43 @@ let dataTableCars = $("#tab-car").DataTable({
         //     console.log(data)
         // }
 	},
-	drawCallback: function () {
+	drawCallback: function (settings) {
 		activateButtons();
+        // var pageInfo = settings.json;
+        // var startIndex = pageInfo.start;
+        // var endIndex = startIndex + pageInfo.length - 1;
+        // var totalRecords = pageInfo.recordsTotal;
+        // var filteredRecords = pageInfo.recordsFiltered;
+
+        // // console.log(startIndex);
+        // // console.log(endIndex);
+        // // console.log(totalRecords);
+        // // console.log(filteredRecords);
+        // // console.log(pageInfo.length);
+
+        // var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+        // var totalPages = Math.ceil(totalRecords / pageInfo.length);
+        // // console.log(totalPages);
+
+        // var pagingControls = '<ul class="pagination"><li id="tab-car_previous" class="paginate_button page-item previous ' + (currentPage == 1 ? "disabled" : "") + '"><a href="#" aria-controls="tab-car" class="page-link" data-dt-idx="previous" tabindex="0">Previous</a></li>';
+
+        // for (var i = 1; i <= totalPages; i++) {
+        //     pagingControls += '<li class="paginate_button page-item ' + (i == currentPage ? "active" : "") + '"><a href="#" aria-controls="tab-car" data-dt-idx='+ i +' tabindex="0" class="page-link">' + i + '</a></li>';
+        // }
+
+        // pagingControls += '<li id="tab-car_next" class="paginate_button page-item next ' + (currentPage == totalPages ? "disabled" : "") + '"><a href="#" class="page-link" data-dt-idx="next" tabindex="0">Next</a></li></ul>';
+        
+        // $('.dataTables_paginate').html(pagingControls);
+
+        // $('.pagination li a').on('click', function () {
+        //     var page = $(this).data('dt-idx');
+        //     console.log(page);
+        //     // Traitez la valeur de la page ici...
+        //     // Effectuez l'appel AJAX avec la nouvelle valeur de la page
+        //     $("#tab-car").DataTable().ajax.url('../src/Controller/DashboardClient/ClientCarController.php?start=' + page).load();
+        // });
+
+        
 	},
 	language: {
 		sEmptyTable: "Aucunes données n'est disponible",

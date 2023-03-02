@@ -26,7 +26,7 @@ if ($_POST) {
       // so add the name so we can handle it just like the $columns array
       $orders[$key]['name'] = $columns[$order['column']]['name'];
    }
-   $rdv_user = User::fetchAllRdv($start, $length, $search['value'], $user_id);
+   $rdv_user = User::fetchAllRdv($start, $length, $orders, $search['value'], $user_id);
 
    $count_rdv = User::countAllRdv($user_id);
 
@@ -40,7 +40,7 @@ if ($_POST) {
    // Construct response
    foreach ($rdv_user as $rdv) {
       $output['data'][] = [
-         '0' => Convert::date_to_fullFR($rdv->getTime_slot()),
+         '0' => gmdate("d M Y", $rdv->getTime_slot()) . " à " . gmdate("G", $rdv->getTime_slot()) . "h" . gmdate("i", $rdv->getTime_slot()),
          '1' => (new Vehicle($rdv->getId_vehicle()))->getRegistration(),
          '2' => $rdv->getState() == 1 ? '<div class="badge rounded-pill bg-soft-info text-info">
          Pris en charge

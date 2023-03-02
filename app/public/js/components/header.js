@@ -90,7 +90,7 @@ class Header extends HTMLElement {
                             <img class="img-profile rounded-circle" width="55" height="55"
                                  src="" alt="70x70">
                         </a>
-                        <ul class='dropdown-menu dropdown-menu-end' id="profil_dropdown">
+                        <ul class='dropdown-menu dropdown-menu-end animated--fade-in-up' id="profil_dropdown">
                             <li>
                                 <button class='dropdown-item' id='profil' type='button'>Mon profil</button>
                             </li>
