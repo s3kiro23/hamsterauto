@@ -26,7 +26,6 @@ class User
         if ($this->id_user != 0) {
             $this->checkData($id);
         }
-
     }
 
     public function checkData($id)
@@ -65,25 +64,25 @@ class User
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $GLOBALS['Database']->insert_id;
-
     }
 
     static public function create_user_admin($civilite_user, $firstname_user, $lastname_user, $email_user, $adress, $phone_user, $password_user, $type, $pwdExp_user, $hash)
     {
         $requete = "INSERT INTO user (civilite_user, firstname_user, lastname_user, email_user, adress_user, phone_user, 
                      password_user, type, pwdExp_user, hash) 
-                    VALUES ('" .filter($civilite_user) . "','" .filter($firstname_user) . "',
-                    '" .filter($lastname_user) . "','" .filter($email_user) . "',
-                    '" .filter($adress) . "',
-                    '" .filter($phone_user) . "','" .filter(password_hash($password_user, PASSWORD_BCRYPT)) . "',
-                    '" .filter($type) . "','" .filter($pwdExp_user) . "',
-                    '" .filter($hash) . "')";
+                    VALUES ('" . filter($civilite_user) . "','" . filter($firstname_user) . "',
+                    '" . filter($lastname_user) . "','" . filter($email_user) . "',
+                    '" . filter($adress) . "',
+                    '" . filter($phone_user) . "','" . filter(password_hash($password_user, PASSWORD_BCRYPT)) . "',
+                    '" . filter($type) . "','" . filter($pwdExp_user) . "',
+                    '" . filter($hash) . "')";
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $GLOBALS['Database']->insert_id;
     }
 
-    static public function count_users(){
+    static public function count_users()
+    {
         $requete = "SELECT COUNT(*) as nbUsers FROM user";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         $data = mysqli_fetch_assoc($result);
@@ -93,18 +92,26 @@ class User
     static public function check_all_users($lastname, $firstname, $adress, $phone, $mail, $type, $active)
     {
         $users = array();
-        $requete = "SELECT * FROM user WHERE lastname_user LIKE '%" .filter($lastname). "%' 
-                    AND firstname_user LIKE '%" .filter($firstname). "%' 
-                    AND IFNULL(adress_user, '')LIKE '%" .filter($adress). "%'
-                    AND phone_user LIKE '%" .filter($phone). "%' 
-                    AND email_user LIKE '%" .filter($mail). "%' 
-                    AND type LIKE '%" .filter($type). "%' 
-                    AND is_active LIKE '%" .filter($active). "%'
+        $requete = "SELECT * FROM user WHERE lastname_user LIKE '%" . filter($lastname) . "%' 
+                    AND firstname_user LIKE '%" . filter($firstname) . "%' 
+                    AND IFNULL(adress_user, '')LIKE '%" . filter($adress) . "%'
+                    AND phone_user LIKE '%" . filter($phone) . "%' 
+                    AND email_user LIKE '%" . filter($mail) . "%' 
+                    AND type LIKE '%" . filter($type) . "%' 
+                    AND is_active LIKE '%" . filter($active) . "%'
                     ORDER BY lastname_user ASC";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
-            array_push($users, new User($data['id_user'], $data['lastname_user'],$data['adress_user'],
-            $data['firstname_user'], $data['phone_user'], $data['email_user'], $data['type'], $data['is_active']));
+            array_push($users, new User(
+                $data['id_user'],
+                $data['lastname_user'],
+                $data['adress_user'],
+                $data['firstname_user'],
+                $data['phone_user'],
+                $data['email_user'],
+                $data['type'],
+                $data['is_active']
+            ));
         }
         return $users;
     }
@@ -145,10 +152,11 @@ class User
         return $filesChecked;
     }
 
-    public function count_cars($id){
+    public function count_cars($id)
+    {
         $car_check = false;
         $requete = "SELECT * FROM vehicle
-        WHERE id_user = '" .filter($id) . "'";
+        WHERE id_user = '" . filter($id) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
             $car_check = true;
@@ -158,16 +166,16 @@ class User
 
     public function enable($id, $user_cars)
     {
-        if($user_cars){
+        if ($user_cars) {
             $requete = "UPDATE user 
                         INNER JOIN vehicle ON vehicle.id_user = user.id_user
-                        SET user.is_active='" .filter(1) . "',
-                            vehicle.owned ='" .filter(1) . "'
-                        WHERE user.id_user ='" .filter($id) . "' ";
-        }else{
+                        SET user.is_active='" . filter(1) . "',
+                            vehicle.owned ='" . filter(1) . "'
+                        WHERE user.id_user ='" . filter($id) . "' ";
+        } else {
             $requete = "UPDATE user
-                        SET user.is_active='" .filter(1) . "'
-                        WHERE user.id_user ='" .filter($id) . "' ";
+                        SET user.is_active='" . filter(1) . "'
+                        WHERE user.id_user ='" . filter($id) . "' ";
         }
         mysqli_query($GLOBALS['Database'], $requete) or die;
     }
@@ -178,28 +186,28 @@ class User
             $requete = "UPDATE user 
                     INNER JOIN vehicle ON vehicle.id_user = user.id_user
                     INNER JOIN awaiting_intervention ON awaiting_intervention.id_user = user.id_user
-                    SET user.is_active='" .filter(0) . "',
-                        vehicle.owned ='" .filter(0) . "',
-                        awaiting_intervention.state='" .filter(4) . "'
-                    WHERE user.id_user ='" .filter($this->id_user) . "'";
-        } else if (!$car_check && $rdv_check){
+                    SET user.is_active='" . filter(0) . "',
+                        vehicle.owned ='" . filter(0) . "',
+                        awaiting_intervention.state='" . filter(4) . "'
+                    WHERE user.id_user ='" . filter($this->id_user) . "'";
+        } else if (!$car_check && $rdv_check) {
             $requete = "UPDATE user 
                     INNER JOIN awaiting_intervention ON awaiting_intervention.id_user = user.id_user
-                    SET user.is_active='" .filter(0) . "',
-                        awaiting_intervention.state='" .filter(4) . "'
-                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+                    SET user.is_active='" . filter(0) . "',
+                        awaiting_intervention.state='" . filter(4) . "'
+                    WHERE user.id_user ='" . filter($this->id_user) . "'";
         } else if ($car_check && !$rdv_check) {
             $requete = "UPDATE user 
                     INNER JOIN vehicle ON vehicle.id_user = user.id_user
-                    SET user.is_active='" .filter(0) . "',
-                        vehicle.owned ='" .filter(0) . "'
-                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+                    SET user.is_active='" . filter(0) . "',
+                        vehicle.owned ='" . filter(0) . "'
+                    WHERE user.id_user ='" . filter($this->id_user) . "'";
         } else if (!$car_check && !$rdv_check) {
             $requete = "UPDATE user 
-                    SET user.is_active='" .filter(0) . "'
-                    WHERE user.id_user ='" .filter($this->id_user) . "'";
+                    SET user.is_active='" . filter(0) . "'
+                    WHERE user.id_user ='" . filter($this->id_user) . "'";
         }
-            mysqli_query($GLOBALS['Database'], $requete) or die;
+        mysqli_query($GLOBALS['Database'], $requete) or die;
     }
 
     static public function check_user($mail)
@@ -213,7 +221,6 @@ class User
         }
 
         return $user_check;
-
     }
 
     static public function check_cars($id_user, $id_vehicle)
@@ -238,11 +245,44 @@ class User
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $data['brand_name'] = strtolower($data['brand_name']);
-            $data['brand_name'] = str_replace(" ","",$data['brand_name']);
+            $data['brand_name'] = str_replace(" ", "", $data['brand_name']);
             $tab_cars[] = $data;
         }
 
         return $tab_cars;
+    }
+
+    static public function fetchCars($start, $length, $search, $user_id)
+    {
+        $tab_cars = [];
+
+        $requete = "SELECT * FROM `vehicle` 
+                INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+                INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand` 
+                WHERE `id_user` = '" . filter($user_id) . "'
+                AND `owned` = '" . filter(true) . "'
+                AND (`vehicle`.`registration` LIKE '%" . filter($search) . "%')
+                LIMIT $length
+                OFFSET $start";
+
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        while ($data = mysqli_fetch_assoc($result)) {
+            $tab_cars[] = new Vehicle($data['id_vehicle']);
+        }
+
+        return $tab_cars;
+    }
+
+    static public function countAllCar($user_id)
+    {
+        $requete = "SELECT count(*) AS nbCars FROM `vehicle`        
+        WHERE `id_user` = '" . filter($user_id) . "'
+        AND `owned` = '" . filter(1) . "'";
+
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        $data2 = mysqli_fetch_assoc($result);
+
+        return (int)$data2['nbCars'];
     }
 
     static public function check_rdv($id_user, $id_vehicle)
@@ -272,6 +312,39 @@ class User
         }
 
         return $tab_rdv;
+    }
+
+    static public function fetchAllRdv($start, $length, $search, $user_id)
+    {
+        $tab_rdv = [];
+
+        $requete = "SELECT * FROM `awaiting_intervention` 
+        INNER JOIN `vehicle` ON `awaiting_intervention`.`id_vehicle` = `vehicle`.`id_vehicle`
+        INNER JOIN `model` ON `vehicle`.`id_model` = `model`.`id_model`
+        INNER JOIN `brand` ON `model`.`id_brand` = `brand`.`id_brand`
+        WHERE `awaiting_intervention`.`id_user` = $user_id
+        AND `state` < 2
+        AND (`vehicle`.`registration` LIKE '%" . filter($search) . "%')
+        ORDER BY `time_slot` ASC
+        LIMIT $length
+        OFFSET $start";
+
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        while ($data = mysqli_fetch_assoc($result)) {
+            $tab_rdv[] = new Intervention($data['id_intervention']);
+        }
+
+        return $tab_rdv;
+    }
+
+    static public function countAllRdv($id_user)
+    {
+        $requete = "SELECT count(*) AS nbRdv FROM `awaiting_intervention`        
+                    WHERE `id_user` = '" . filter($id_user) . "'
+                    AND `state` <= '" . filter(1) . "'";
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        $data = mysqli_fetch_assoc($result);
+        return (int)$data['nbRdv'];
     }
 
     static public function check_history($id_user, $off7)
@@ -316,7 +389,6 @@ class User
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $code;
-
     }
 
     static public function check_sms_code($id_user, $input)
@@ -349,7 +421,6 @@ class User
 
         $requete = "UPDATE `sms` SET `state`='" . filter(1) . "' WHERE `id_user` ='" . filter($id_user) . "'";
         mysqli_query($GLOBALS['Database'], $requete) or die;
-
     }
 
     public function request()
@@ -362,7 +433,6 @@ class User
         mysqli_query($GLOBALS['Database'], $requete) or die;
 
         return $hash;
-
     }
 
     public function check_request()
@@ -381,14 +451,13 @@ class User
     {
         $request_check = false;
 
-        $requete = "SELECT * FROM `request` WHERE hash= '" .filter($hash) . "' AND state= '" .filter(0) . "'";
+        $requete = "SELECT * FROM `request` WHERE hash= '" . filter($hash) . "' AND state= '" . filter(0) . "'";
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         if ($data = mysqli_fetch_assoc($result)) {
             $request_check = $data;
         }
 
         return $request_check;
-
     }
 
     static public function update_request($id_user)
@@ -396,7 +465,6 @@ class User
         $requete = "UPDATE `request` SET state = '" . filter(1) . "'
                     WHERE id_user = '" . filter($id_user) . "'";
         mysqli_query($GLOBALS['Database'], $requete) or die;
-
     }
 
     public function getId_user()
@@ -477,7 +545,6 @@ class User
     public function setPassword_user($password_user)
     {
         $this->password_user = password_hash($password_user, PASSWORD_BCRYPT);
-
     }
 
     public function getType()
@@ -557,6 +624,4 @@ class User
     {
         $this->is_active = $is_active;
     }
-
-
 }

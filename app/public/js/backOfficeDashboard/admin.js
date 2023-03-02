@@ -34,7 +34,6 @@ $(function () {
 //
 //
 function switchLogoAdmin() {
-	console.log($(".logo").attr("src"));
 	if (
 		$(".logo").attr("src") === "../public/assets/img/hamsterauto-unscreen.gif"
 	) {

@@ -102,7 +102,6 @@ let checkField = function () {
 		success: function (response) {
 			let inputField = $("#" + focusedField);
 			let labelField = $("label[for='" + focusedField + "']");
-			console.log(inputField.attr("id"));
 			if (response["status"] === 1) {
 				if (inputField.hasClass("is-invalid")) {
 					inputField.removeClass("is-invalid");

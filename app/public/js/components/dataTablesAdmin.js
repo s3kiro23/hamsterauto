@@ -1,7 +1,6 @@
 
 let dataTableAdminRdv = function () {
     $('#tab-rdv-admin').DataTable({
-        
         searching: false,
         "pageLength": 5,
         "lengthMenu": [[5, 10, 25, 50, 75, 100, -1], [5, 10, 25, 50, 75, 100, "All"]],

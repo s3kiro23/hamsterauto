@@ -51,9 +51,8 @@ let modalModifyCar = function () {
             $("#inputImmatNew").val(response['data']['registration'])
             $("#bodyFormCar").attr('action', "javascript:modifyCar();")
             $('#selectMarque').on("change", selectedCar)
-            $('#selectMarque').select2();
-            $('#selectedModel').select2();
-            $('select:not(.normal)').each(function () {
+            $('#selectMarque, #selectedModel').select2();
+            $('select:not(.normal)').filter('#selectMarque, #selectedModel').each(function () {
                 $(this).select2({
                     dropdownParent: $(this).parent()
                 });
@@ -71,6 +70,9 @@ let modalModifyCar = function () {
 
 let modalAddCar = function (response) {
     $("#modalFormCar").modal("show");
+    $(".modal-title").html("Ajout d'un nouveau véhicule :");
+    $("#modal-addID").attr('data-id', "")
+    $("#bodyFormCar").attr('action', "javascript:addCar();")
     $("#bodyFormCar").html(response['html'])
     $('#selectMarque').on("change", selectedCar)
     $("#inputImmatNew").on("keyup", checkNewValueRegEx)

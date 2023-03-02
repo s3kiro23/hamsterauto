@@ -71,7 +71,6 @@ let changePassword = function () {
                     timer: 1500
                 });
                 if (response['type'] == "profile") {
-                    console.log(response['userType']);
                     if (response['userType'] == "client") {
                         setTimeout(() => {
                             toClientDash();

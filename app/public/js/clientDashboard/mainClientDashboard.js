@@ -2,75 +2,65 @@ $(function () {
     load();
     $("#file").on("change", checkType);
     $('.switchLogo').on("click", switchLogo);
-    // setInterval(() => {
-    //     let currentPage = $('#pagesMyArchives').find('.active').children().html();
-    //     loadUserIntervention();
-    //     loadUserArchives(currentPage);
-    // }, 5000);
+    setInterval(() => {
+        let currentPage = $('#pagesMyArchives').find('.active').children().html();
+        dataTableRdv.ajax.reload();
+        loadUserArchives(currentPage);
+    }, 3000);
+    setTimeout(() => {
+        $('.addCG').on("click", modalCG);
+        $('.modifyCar').on("click", modalModifyCar);
+        $('.deleteCar').on("click", deleteCar);
+    }, 150)
 });
 
 function load() {
     sweetToast();
     generateNavbar();
-    loadUserCars();
-    loadUserIntervention();
     loadUserArchives(1);
     $("#formAddCar").on("click", formAddCar);
     $("#formAddRDV").on("click", formAddRDV);
-    $('[data-toggle="tooltip"]').tooltip();
-}
-
-let intervalRdv = null;
-let intervalHist = null;
-
-function reloadRdv(){
-    intervalRdv = setInterval(loadUserIntervention, 10000);
-    intervalHist = setInterval(loadUserArchives, 10000);
-}
-function clearIntervals(){
-    clearInterval(intervalRdv);
-    clearInterval(intervalHist);
 }
 
 /*Affichage des véhicules/RDV/Historiques par user + pagination DEBUT*/
-let loadUserCars = function () {
-    $.ajax({
-        url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
-        dataType: "JSON",
-        type: "POST",
-        data: {
-            request: "loadCarsRecap",
-            type : "cars",
-        },
-        success: function (response) {
-            $("#mycars").html(response["htmlCar"]);
-            $('.addCG').on("click", modalCG);
-            $('.modifyCar').on("click", modalModifyCar);
-            $('.deleteCar').on("click", deleteCar);
-            dataTableClient('car');
-        },
-        error: function () {
-        },
-    });
-}
+// let loadUserCars = function () {
+//     $.ajax({
+//         url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
+//         dataType: "JSON",
+//         type: "POST",
+//         data: {
+//             request: "loadCarsRecap",
+//             type : "cars",
+//         },
+//         success: function (response) {
+//             $("#mycars").html(response["htmlCar"]);
+//             $('.addCG').on("click", modalCG);
+//             $('.modifyCar').on("click", modalModifyCar);
+//             $('.deleteCar').on("click", deleteCar);
+//             // dataTableCars();
+//         },
+//         error: function () {
+//         },
+//     });
+// }
 
-let loadUserIntervention = function () {
-    $.ajax({
-        url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
-        dataType: "JSON",
-        type: "POST",
-        data: {
-            request: "loadCarsRecap",
-            type : "rdv",
-        },
-        success: function (response) {
-            $("#myrdv").html(response["htmlRDV"]);
-            dataTableClient('rdv');
-        },
-        error: function () {
-        },
-    });
-}
+// let loadUserIntervention = function () {
+//     $.ajax({
+//         url: "/src/Controller/DisplayHTML/TablesClientDisplayController.php",
+//         dataType: "JSON",
+//         type: "POST",
+//         data: {
+//             request: "loadCarsRecap",
+//             type : "rdv",
+//         },
+//         success: function (response) {
+//             $("#myrdv").html(response["htmlRDV"]);
+//             dataTableRdv();
+//         },
+//         error: function () {
+//         },
+//     });
+// }
 
 let loadUserArchives = function (page) {
     $.ajax({
@@ -109,9 +99,8 @@ function formAddCar() {
             $("#formAddCar").removeAttr("aria-describedby");
             $(".tooltip").remove();
             modalAddCar(response);
-            $('#selectMarque').select2();
-            $('#selectedModel').select2();
-            $('select:not(.normal)').each(function () {
+            $('#selectMarque, #selectedModel').select2();
+            $('select:not(.normal)').filter('#selectMarque, #selectedModel').each(function () {
                 $(this).select2({
                     dropdownParent: $(this).parent()
                 });
@@ -177,8 +166,7 @@ let addCar = function () {
                             title: response["msg"]
                         });
                         $("#modalFormCar").modal("hide");
-                        $('#tab-car').DataTable().clear().destroy();
-                        loadUserCars();
+                        dataTableCars.ajax.reload();
                     } else {
                         toastMixin.fire({
                             animation: true,
@@ -233,8 +221,7 @@ let modifyCar = function () {
                             title: response["msg"]
                         });
                         $("#modalFormCar").modal("hide");
-                        $('#tab-car').DataTable().clear().destroy();
-                        loadUserCars();
+                        dataTableCars.ajax.reload();
                     } else {
                         toastMixin.fire({
                             animation: true,
@@ -281,14 +268,16 @@ let deleteCar = function () {
                         title: response["msg"]
                     });
                     if (response['status'] === 1){
-                        $('#tab-car').DataTable().clear().destroy();
-                        $('#tab-rdv').DataTable().clear().destroy();
-                        loadUserCars();
-                        loadUserIntervention();
+                        dataTableCars.ajax.reload();
+                        dataTableRdv.ajax.reload();
+                        setTimeout(() => {
+                            $('.addCG').on("click", modalCG);
+                            $('.modifyCar').on("click", modalModifyCar);
+                            $('.deleteCar').on("click", deleteCar);
+                        }, 150)
                         loadUserArchives(currentPage);
                     } else {
-                        $('#tab-car').DataTable().clear().destroy();
-                        loadUserCars();
+                        dataTableCars.ajax.reload();
                         loadUserArchives(currentPage);
                     }
                 },
@@ -352,9 +341,8 @@ let addRDV = function () {
                             animation: true,
                             title: response["msg"]
                         });
-                        $('#tab-rdv').DataTable().clear().destroy();
                         $("#modalAddRDV").modal("hide");
-                        loadUserIntervention();
+                        dataTableRdv.ajax.reload();
                     } else {
                         toastMixin.fire({
                             animation: true,
@@ -403,8 +391,7 @@ function deleteRdvUser(ctId) {
                         animation: true,
                         title: response["msg"]
                     });
-                    $('#tab-rdv').DataTable().clear().destroy();
-                    loadUserIntervention();
+                    dataTableRdv.ajax.reload();
                     loadUserArchives(currentPage);
                 },
                 error: function () {
