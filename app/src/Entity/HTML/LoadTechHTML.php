@@ -218,7 +218,7 @@ class LoadTechHTML
                                             </tr>
                                         </thead>
                                         <tbody id='vehiculeAttente' class='text-center'>
-                                            <!-- génération des interventions en attente ici-->
+                                        <!-- génération des interventions en attente ici-->
                                         </tbody>
                                     </table>
                                 </div>

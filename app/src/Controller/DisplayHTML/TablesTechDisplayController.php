@@ -30,7 +30,7 @@ if ($check != 'client') {
             if ($_POST['type'] == "awaiting") {
                 $timestamp = strtotime(date('d-m-Y'));
                 $tab_awaiting = Intervention::check_all_rdv(PaginationHTML::off7($_POST['page']), 0, $registration, $current_date);
-                $html_awaiting = $tab_awaiting ? "" : "<em style='font-size: x-large;'>Aucun véhicule en attente</em>";
+                $html_awaiting = $tab_awaiting ? "" : "<tr><td colspan='8'><em style='font-size: x-large;'>Aucun véhicule en attente</em></td></tr>";
                 $pagination_awaiting = PaginationHTML::dashTechPagination(0, $current_date);
                 foreach ($tab_awaiting as $awaiting) {
                     $html_awaiting .= LoadTechHTML::pending(
@@ -45,7 +45,8 @@ if ($check != 'client') {
                 echo json_encode(array(
                     'htmlAwaiting' => $html_awaiting,
                     'paginationAwaiting' => $pagination_awaiting,
-                    'user' => $_SESSION['typeUser']
+                    'user' => $_SESSION['typeUser'],
+                    'count' => count($tab_awaiting),
                 ));
             }
 

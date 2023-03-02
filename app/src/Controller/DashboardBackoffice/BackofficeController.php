@@ -25,7 +25,7 @@ switch ($_POST['request']) {
         $timestamp = Security::decrypt($_POST['timestamp'], false);
         $state = 0;
         $off7 = ($_POST['page'] - 1) * 5;
-        $html = "<em style='font-size: x-large'>Aucun véhicule en attente</em>";
+        $html = "<tr><td colspan='8'><em style='font-size: x-large;'>Aucun véhicule en attente</em></td></tr>";
         $paginationHoldNext = PaginationHTML::dashTechPagination(0, $timestamp);
         $tab_cars = Intervention::check_rdv_switch_days($off7, $state, $timestamp);
         if (!empty($tab_cars)) {
