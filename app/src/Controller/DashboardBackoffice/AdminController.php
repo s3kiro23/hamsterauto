@@ -95,25 +95,8 @@ if ($check === 'admin') {
             echo json_encode($return);
             break;
 
-        case 'display_Rdv':
-            $registration = $_POST['registration'];
-            $Rdv = Intervention::check_rdv_admin($registration);
-            $return = $twig->render('intervention/car_tabs_filler.html.twig', array(
-                'Rdvs' => $Rdv,
-            ));
-            echo json_encode($return);
-            break;
-
         case 'display_users_tab':
             $return = $twig->render('user/users_tab_structure.html.twig');
-            echo json_encode($return);
-            break;
-
-        case 'display_users':
-            $users = User::check_all_users($_POST['name'], $_POST['firstName'], $_POST['adress'], $_POST['phone'], $_POST['mail'], $_POST['type'], $_POST['active']);
-            $return = $twig->render('user/users_tab_filler.html.twig', array(
-                'users' => $users
-            ));
             echo json_encode($return);
             break;
 
@@ -201,14 +184,6 @@ if ($check === 'admin') {
 
         case 'display_ban_tab':
             $return = $twig->render('ban/ban_account_structure.html.twig');
-            echo json_encode($return);
-            break;
-
-        case 'display_ban_users';
-            $banUsers = LoginAttempt::check_all_attempts();
-            $return = $twig->render('ban/ban_filler.html.twig', array(
-                'banAccounts' => $banUsers
-            ));
             echo json_encode($return);
             break;
 

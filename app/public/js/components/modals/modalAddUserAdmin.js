@@ -23,8 +23,8 @@ class ModalUserAdmin extends HTMLElement {
                                 <div id="modal-body">
                                     <div class="row gap-3">
                                         <div class="col-12 d-flex flex-column">
-                                            <label class="fw-bold">Email / login</label>
-                                            <input id="inputLoginAdd" type="text" class="modal-add form-control text-muted ps-2">
+                                            <label class="fw-bold">Email / login *</label>
+                                            <input id="inputLoginAdd" type="text" class="modal-add form-control text-muted ps-2" required>
                                             <div class="invalid-feedback mb-2"></div>
                                         </div>
                                         <div class="col-6">
@@ -32,7 +32,7 @@ class ModalUserAdmin extends HTMLElement {
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="civilite"
                                                     id="optionsRadios1"
-                                                    value="Mr">
+                                                    value="Mr" required>
                                                 <label class="form-check-label text-dark" for="optionsRadios1">
                                                     Mr.
                                                 </label>
@@ -40,7 +40,7 @@ class ModalUserAdmin extends HTMLElement {
                                             <div class="form-check">
                                                 <input class="form-check-input" type="radio" name="civilite"
                                                     id="optionsRadios2"
-                                                    value="Mme">
+                                                    value="Mme" required>
                                                 <label class="form-check-label text-dark" for="optionsRadios2">
                                                     Mme.
                                                 </label>
@@ -48,12 +48,12 @@ class ModalUserAdmin extends HTMLElement {
                                         </div>
                                             <div class="d-flex flex-column">
                                                 <label class="fw-bold">Nom</label>
-                                                <input id="inputNomAdd" type="text" class="modal-add form-control text-muted ps-2">
+                                                <input id="inputNomAdd" type="text" class="modal-add form-control text-muted ps-2" required>
                                                 <div class="invalid-feedback mb-2"></div>
                                             </div>
                                             <div class="d-flex flex-column my-2">
                                                 <label class="fw-bold">Prénom</label>
-                                                <input id="inputPrenomAdd" type="text" class="modal-add form-control text-muted ps-2">
+                                                <input id="inputPrenomAdd" type="text" class="modal-add form-control text-muted ps-2" required>
                                                 <div class="invalid-feedback mb-2"></div>
                                             </div>
                                             <div class="d-flex flex-column">
@@ -75,7 +75,7 @@ class ModalUserAdmin extends HTMLElement {
                                                             name="inputPassword"
                                                             type="password"
                                                             class="inputPassword modal-add field form-control rounded-start"
-                                                            placeholder="Mot de passe"/>
+                                                            placeholder="Mot de passe" required/>
                                                     <span class='input-group-text rounded-end' role='button' onclick='showPassword();'>
                                                         <i class='fa-regular fa-eye eyeShow'></i>
                                                     </span>
@@ -88,7 +88,7 @@ class ModalUserAdmin extends HTMLElement {
                                                             name="inputPassword2"
                                                             type="password"
                                                             class="inputPassword modal-add field form-control"
-                                                            placeholder="Confirmez mot de passe"/>
+                                                            placeholder="Confirmez mot de passe" required/>
                                                             
                                                     <div class="invalid-feedback mb-2"></div>
                                                     

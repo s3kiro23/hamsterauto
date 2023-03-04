@@ -116,6 +116,97 @@ class User
         return $users;
     }
 
+
+    static public function fetchAllUsers($start, $length, $orders, $columns)
+    {
+        $users = array();
+        $requete = "SELECT * FROM user";
+
+        // //Fields search
+        $whereClause = "";
+        foreach ($columns as $key => $column) {
+            if ($column['search']['value'] != '') {
+                // $searchItem is what we are looking for
+                $searchItem = $column['search']['value'];
+                $searchQuery = null;
+
+                // $column['name'] is the name of the column as sent by the JS
+                switch ($column['name']) {
+                    case 'lastname': {
+                            $searchQuery = 'lastname_user LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                    case 'firstname': {
+                            $searchQuery = 'firstname_user LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                    case 'adress': {
+                            $searchQuery = 'adress_user LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                    case 'phone': {
+                            $searchQuery = 'phone_user LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                    case 'email': {
+                            $searchQuery = 'email_user LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                    case 'type': {
+                            $searchQuery = 'type LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                    case 'active': {
+                            $searchQuery = 'is_active LIKE \'%' . filter($searchItem) . '%\'';
+                            break;
+                        }
+                }
+                if ($searchQuery !== null) {
+                    $whereClause .= ($whereClause == "") ? " WHERE " : " AND ";
+                    $whereClause .= $searchQuery;
+                }
+            }
+        }
+
+        //Concat query with right clause
+        $requete .= $whereClause;
+
+        // Order
+        foreach ($orders as $key => $order) {
+            // $order['name'] is the name of the order column as sent by the JS
+            if ($order['name'] != '') {
+                $orderColumn = null;
+                switch ($order['name']) {
+                    case 'lastname': {
+                            $orderColumn = 'lastname_user';
+                            break;
+                        }
+                    case 'firstname': {
+                            $orderColumn = 'firstname_user';
+                            break;
+                        }
+                    case 'type': {
+                            $orderColumn = 'type';
+                            break;
+                        }
+                }
+                if ($orderColumn !== null) {
+                    $asc = $order['dir'];
+                    $requete .= " ORDER BY `$orderColumn` $asc";
+                }
+            }
+        }
+
+        $requete .= " LIMIT $length OFFSET $start";
+
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        while ($data = mysqli_fetch_assoc($result)) {
+            array_push($users, new User($data['id_user']));
+        }
+        return $users;
+    }
+
+
     static public function random_hash()
     {
 
@@ -270,16 +361,14 @@ class User
             if ($order['name'] != '') {
                 $orderColumn = null;
                 switch ($order['name']) {
-                    case 'registration':
-                    {
-                        $orderColumn = 'registration';
-                        break;
-                    }
-                    case 'model':
-                    {
-                        $orderColumn = 'model_name';
-                        break;
-                    }
+                    case 'registration': {
+                            $orderColumn = 'registration';
+                            break;
+                        }
+                    case 'model': {
+                            $orderColumn = 'model_name';
+                            break;
+                        }
                 }
                 if ($orderColumn !== null) {
                     $asc = $order['dir'];
@@ -289,7 +378,7 @@ class User
         }
 
         $requete .= " LIMIT $length OFFSET $start";
-        
+
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $tab_cars[] = new Vehicle($data['id_vehicle']);
@@ -358,18 +447,15 @@ class User
             if ($order['name'] != '') {
                 $orderColumn = null;
                 switch ($order['name']) {
-                    case 'date':
-                    {
-                        $orderColumn = 'time_slot';
-                        break;
-                    }
-                    case 'registration':
-                    {
-                        $orderColumn = 'model_name';
-                        break;
-                    }
-                    case 'statut':
-                        {
+                    case 'date': {
+                            $orderColumn = 'time_slot';
+                            break;
+                        }
+                    case 'registration': {
+                            $orderColumn = 'model_name';
+                            break;
+                        }
+                    case 'statut': {
                             $orderColumn = 'state';
                             break;
                         }

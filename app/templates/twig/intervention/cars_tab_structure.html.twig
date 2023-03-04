@@ -5,7 +5,7 @@
             <div class="card shadow rounded border border-primary">
                 <div class="card-header bg-primary bg-opacity-75 rounded-top d-flex justify-content-between align-items-center">
                     <h4 class="m-0 py-2 text-white d-md-inline">INTERVENTIONS</h4>
-                    <button class="button-csv btn btn-outline-light" onclick='exportInterCSV()' data-toggle="tooltip" data-placement="bottom" title="exporter au format CSV">
+                    <button class="button-csv btn btn-outline-light" data-toggle="tooltip" data-placement="bottom" title="exporter au format CSV">
                         <i class="fa-solid fa-file-export">
                             <span class="ms-2">CSV</span>
                         </i>
@@ -20,13 +20,9 @@
                                 <th data-priority="1">DATE</th>
                                 <th>MARQUE</th>
                                 <th>MODELE</th>
-                                <th data-priority="2">  
-                                    <div id='filtreImmat' class='d-flex justify-content-center mt-1'>
-                                        <!-- génération du filtre immat -->
-                                    </div> 
-                                </th>
+                                <th data-priority="2">IMMATRICULATION</th>
                                 <th data-priority="3">STATUT</th>
-                                <th>SUPPRIMER</th>
+                                <th>ACTION</th>
                             </tr>
                         </thead>
                         <tbody id="awaitingCarsAdmin">

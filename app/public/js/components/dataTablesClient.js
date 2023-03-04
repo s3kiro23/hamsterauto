@@ -57,7 +57,7 @@ let dataTableCars = $("#tab-car").DataTable({
 		var filteredRecords = pageInfo.recordsFiltered;
 
 		// Handle case when only one result is returned by the search
-		if (settings.oPreviousSearch.sSearch !== '') {
+		if (settings.oPreviousSearch.sSearch !== "") {
 			if (filteredRecords == 1) {
 				totalRecords = 1;
 			} else {
@@ -90,7 +90,7 @@ let dataTableCars = $("#tab-car").DataTable({
 		var pagingControls =
 			'<ul class="pagination"><li id="tab-car_previous" class="paginate_button page-item previous ' +
 			(currentPage == 1 ? "disabled" : "") +
-			'"><a aria-controls="tab-car" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Previous</a></li>';
+			'"><a aria-controls="tab-car" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
 
 		//Generate buttons page
 		for (var i = 1; i <= totalPages; i++) {
@@ -108,7 +108,7 @@ let dataTableCars = $("#tab-car").DataTable({
 		pagingControls +=
 			'<li id="tab-car_next" class="paginate_button page-item next ' +
 			(currentPage == totalPages ? "disabled" : "") +
-			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Next</a></li></ul>';
+			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 		//Write html pagination
 		$("#tab-car_wrapper .dataTables_paginate").html(pagingControls);
@@ -117,12 +117,18 @@ let dataTableCars = $("#tab-car").DataTable({
 		//Callback for pagination
 		$("#tab-car_wrapper .pagination li a").on("click", function () {
 			var page = $(this).data("dt-idx");
+			var previousPage = currentPage - 1;
+			var nextPage = currentPage + 1;
 			// Call Ajax with new value
 			$("#tab-car")
 				.DataTable()
 				.ajax.url(
 					"../src/Controller/DashboardClient/ClientCarController.php?start=" +
-						page
+						(page == "next"
+							? nextPage
+							: page == "previous"
+							? previousPage
+							: page)
 				)
 				.load();
 		});
@@ -208,7 +214,7 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		var filteredRecords = pageInfo.recordsFiltered;
 
 		// Handle case when only one result is returned by the search
-		if (settings.oPreviousSearch.sSearch !== '') {
+		if (settings.oPreviousSearch.sSearch !== "") {
 			if (filteredRecords == 1) {
 				totalRecords = 1;
 			} else {
@@ -241,7 +247,7 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		var pagingControls =
 			'<ul class="pagination"><li id="tab-rdv_previous" class="paginate_button page-item previous ' +
 			(currentPage == 1 ? "disabled" : "") +
-			'"><a aria-controls="tab-rdv" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Previous</a></li>';
+			'"><a aria-controls="tab-rdv" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
 
 		//Generate buttons page
 		for (var i = 1; i <= totalPages; i++) {
@@ -259,7 +265,7 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		pagingControls +=
 			'<li id="tab-rdv_next" class="paginate_button page-item next ' +
 			(currentPage == totalPages ? "disabled" : "") +
-			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Next</a></li></ul>';
+			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 		//Write html pagination
 		$("#tab-rdv_wrapper .dataTables_paginate").html(pagingControls);
@@ -268,12 +274,18 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		//Callback for pagination
 		$("#tab-rdv_wrapper .pagination li a").on("click", function () {
 			var page = $(this).data("dt-idx");
+			var previousPage = currentPage - 1;
+			var nextPage = currentPage + 1;
 			// Call Ajax with new value
 			$("#tab-rdv")
 				.DataTable()
 				.ajax.url(
 					"../src/Controller/DashboardClient/ClientRdvController.php?start=" +
-						page
+					(page == "next"
+					? nextPage
+					: page == "previous"
+					? previousPage
+					: page)
 				)
 				.load();
 		});

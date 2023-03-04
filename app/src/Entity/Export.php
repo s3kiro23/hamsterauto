@@ -19,7 +19,7 @@ class Export
       header("Content-Disposition:attachment;filename=" . $name_file);
       fputcsv($csv, $columns, ';');
 
-      $data = Intervention::check_rdv_admin($filter);
+      $data = Intervention::fetchRdvAdmin($filter);
 
       foreach ($data as $inter) {
          fputcsv($csv, array(

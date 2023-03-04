@@ -100,28 +100,6 @@ function clearIntervals() {
 function loadAdmin() {
 	sweetToast();
 	btnToTop();
-	// -----------------OFF--------------------------------
-	$("#searchType").off("change");
-	$("#searchisActive").off("change");
-	$("#searchName").off("keyup");
-	$("#searchFirstName").off("keyup");
-	$("#searchTel").off("keyup");
-	$("#searchMail").off("keyup");
-	$("#searchImmat").off("keyup");
-	$("#searchAdress").off("keyup");
-	$(".showPassword").off("click");
-	// -----------------ON----------------------------------
-	$("#sessionEnding").on("click", sessionEnding);
-	$("#searchName").on("keyup", adminUsers);
-	$("#searchFirstName").on("keyup", adminUsers);
-	$("#searchTel").on("keyup", adminUsers);
-	$("#searchMail").on("keyup", adminUsers);
-	$("#searchAdress").on("keyup", adminUsers);
-	$("#searchType").on("change", adminUsers);
-	$("#searchisActive").on("change", adminUsers);
-	$("#searchImmat").on("keyup", adminRdv);
-	$(".showPassword").on("click", showPassword);
-	$("#inputPassword").on("keyup", checkStrength);
 }
 //
 //
@@ -198,7 +176,7 @@ function exportInterCSV() {
 		type: "POST",
 		data: {
 			request: "export_intervention",
-			filter: $("#searchImmat").val(),
+			filter: $("#tab-rdv-admin_filter input[type='search']").val(),
 		},
 		success: function (response) {
 			download(response);
@@ -294,23 +272,6 @@ function adminIndex() {
 }
 //
 //
-function displayFiltreImmatAdmin() {
-	$.ajax({
-		url: "/src/Controller/DisplayHTML/TablesTechDisplayController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "display_registration",
-		},
-		success: function (response) {
-			$("#filtreImmat").html(response);
-			generateDateBO();
-		},
-		error: function () {
-			console.log("errorFiltreImmat");
-		},
-	});
-}
 //
 //
 function displayRdvTab() {
@@ -324,8 +285,173 @@ function displayRdvTab() {
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
 			$(".current-breadcrumb").html("interventions");
-			displayFiltreImmatAdmin();
-			// reloadRdv();
+			$(".button-csv").on("click", exportInterCSV);
+			let dataTableAdminRdv = $("#tab-rdv-admin").DataTable({
+				searching: true,
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 25, 50, 75, 100, -1],
+					[5, 10, 25, 50, 75, 100, "All"],
+				],
+				retrieve: true,
+				responsive: {
+					details: {
+						type: "colomn",
+						target: "tr",
+					},
+				},
+				order: [[2, "asc"]],
+				columnDefs: [
+					{ name: "info", targets: 0 },
+					{ name: "inter", targets: 1 },
+					{ name: "date", targets: 2 },
+					{ name: "brand", targets: 3 },
+					{ name: "model", targets: 4 },
+					{ name: "registration", targets: 5 },
+					{ name: "state", targets: 6 },
+					{ name: "delete", targets: 7 },
+					{ className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] },
+					{ responsivePriority: 1, targets: 2 },
+					{ responsivePriority: 2, targets: 6 },
+					{ responsivePriority: 3, targets: 7 },
+					{
+						targets: [0, 3, 4, 7],
+						orderable: false,
+					},
+				],
+				processing: false,
+				serverSide: true,
+				// Ajax call
+				ajax: {
+					url: "../src/Controller/DashboardBackoffice/InterventionController.php",
+					type: "POST",
+					// success: function (data){
+					//     console.log(data)
+					// }
+				},
+				drawCallback: function (settings) {
+					$(".deleteRdvTech").on("click", deleteRdv);
+
+					//Pagination buttons
+					var pageInfo = settings.json;
+					var startIndex = pageInfo.start;
+					var totalRecords = pageInfo.recordsTotal;
+					var filteredRecords = pageInfo.recordsFiltered;
+
+					// Handle case when only one result is returned by the search
+					if (settings.oPreviousSearch.sSearch !== "") {
+						if (filteredRecords == 1) {
+							totalRecords = 1;
+						} else {
+							totalRecords = filteredRecords;
+						}
+					}
+
+					//Calculate number of total pages
+					var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+					var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+					//Calculate indices start/end of display elements
+					var endIndex = Math.min(
+						startIndex + filteredRecords - 1,
+						totalRecords - 1
+					);
+					var displayStart = startIndex + 1;
+					var displayEnd = endIndex + 1;
+
+					//Display output
+					var displayText =
+						"Affichage de l'élément " +
+						displayStart +
+						" à " +
+						displayEnd +
+						" sur " +
+						filteredRecords +
+						" éléments (filtré à partir de " +
+						pageInfo.recordsTotal +
+						" éléments au total)";
+
+					//Btn previous
+					var pagingControls =
+						'<ul class="pagination"><li id="tab-rdv-admin_previous" class="paginate_button page-item previous' +
+						(currentPage == 1 ? " disabled" : "") +
+						'"><a aria-controls="tab-rdv-admin" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
+
+					//Generate buttons page
+					for (var i = 1; i <= totalPages; i++) {
+						pagingControls +=
+							'<li class="paginate_button page-item ' +
+							(i == currentPage ? "active" : "") +
+							'"><a aria-controls="tab-rdv-admin" data-dt-idx=' +
+							i +
+							' tabindex="0" class="cursor-pointer page-link">' +
+							i +
+							"</a></li>";
+					}
+
+					//Btn next
+					pagingControls +=
+						'<li id="tab-rdv-admin_next" class="paginate_button page-item next ' +
+						(currentPage == totalPages ? "disabled" : "") +
+						'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
+
+					//Write html pagination
+					$("#tab-rdv-admin_wrapper .dataTables_paginate").html(pagingControls);
+					$("#tab-rdv-admin_wrapper .dataTables_info").html(displayText);
+
+					//Callback for pagination
+					$("#tab-rdv-admin_wrapper .pagination li a").on("click", function () {
+						var page = $(this).data("dt-idx");
+						var previousPage = currentPage - 1;
+						var nextPage = currentPage + 1;
+						// Call Ajax with new value
+						$("#tab-rdv-admin")
+							.DataTable()
+							.ajax.url(
+								"../src/Controller/DashboardBackoffice/InterventionController.php?start=" +
+									(page == "next"
+										? nextPage
+										: page == "previous"
+										? previousPage
+										: page)
+							)
+							.load();
+					});
+				},
+				language: {
+					sEmptyTable: "Aucunes données n'est disponible",
+					sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+					sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+					sInfoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+					sInfoPostFix: "",
+					sInfoThousands: ",",
+					sLengthMenu: "Afficher _MENU_ éléments",
+					sLoadingRecords: "Chargement...",
+					sProcessing: "Traitement...",
+					sSearch: "Rechercher :",
+					searchPlaceholder: "immatriculation",
+					sZeroRecords: "Aucun élément correspondant trouvé",
+					oPaginate: {
+						sFirst: "Premier",
+						sLast: "Dernier",
+						sNext: "Suivant",
+						sPrevious: "Précédent",
+					},
+					oAria: {
+						sSortAscending:
+							": activer pour trier la colonne par ordre croissant",
+						sSortDescending:
+							": activer pour trier la colonne par ordre décroissant",
+					},
+					select: {
+						rows: {
+							_: "%d lignes sélectionnées",
+							0: "Aucune ligne sélectionnée",
+							1: "1 ligne sélectionnée",
+						},
+					},
+				},
+			});
 		},
 		error: function () {
 			console.log("errorAdminRDV1");
@@ -334,28 +460,178 @@ function displayRdvTab() {
 }
 //
 //
-function adminRdv() {
-	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "display_Rdv",
-			registration: $("#searchImmat").val(),
+
+function refreshAdminRdv() {
+	let dataTableAdminRdv = $("#tab-rdv-admin").DataTable({
+		searching: true,
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 25, 50, 75, 100, -1],
+			[5, 10, 25, 50, 75, 100, "All"],
+		],
+		retrieve: true,
+		responsive: {
+			details: {
+				type: "colomn",
+				target: "tr",
+			},
 		},
-		success: function (response) {
-			$("#awaitingCarsAdmin").html(response);
-			dataTableAdminRdv();
+		columnDefs: [
+			{ name: "lastname", targets: 0 },
+			{ name: "firstname", targets: 1 },
+			{ name: "adress", targets: 2 },
+			{ name: "phone", targets: 3 },
+			{ name: "email", targets: 4 },
+			{ name: "type", targets: 5 },
+			{ name: "active", targets: 6 },
+			{ className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] },
+			{ responsivePriority: 1, targets: 0 },
+			{ responsivePriority: 2, targets: 8 },
+			{ responsivePriority: 3, targets: 7 },
+			{
+				targets: [2, 3, 4, 6, 7, 8],
+				orderable: false,
+			},
+		],
+		processing: false,
+		serverSide: true,
+		// Ajax call
+		ajax: {
+			url: "../src/Controller/DashboardBackoffice/InterventionController.php",
+			type: "POST",
+			// success: function (data){
+			//     console.log(data)
+			// }
 		},
-		error: function () {
-			console.log("errorAdminRDV2");
+		drawCallback: function (settings) {
+			$(".showPassword").off("click").on("click", showPassword);
+			$("#inputPassword").on("keyup", checkStrength);
+			$("#button-csv").on("click", exportUserCSV);
+
+			//Pagination buttons
+			var pageInfo = settings.json;
+			var startIndex = pageInfo.start;
+			var totalRecords = pageInfo.recordsTotal;
+			var filteredRecords = pageInfo.recordsFiltered;
+
+			// Handle case when only one result is returned by the search
+			if (settings.oPreviousSearch.sSearch !== "") {
+				if (filteredRecords == 1) {
+					totalRecords = 1;
+				} else {
+					totalRecords = filteredRecords;
+				}
+			}
+
+			//Calculate number of total pages
+			var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+			var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+			//Calculate indices start/end of display elements
+			var endIndex = Math.min(
+				startIndex + filteredRecords - 1,
+				totalRecords - 1
+			);
+			var displayStart = startIndex + 1;
+			var displayEnd = endIndex + 1;
+
+			//Display output
+			var displayText =
+				"Affichage de l'élément " +
+				displayStart +
+				" à " +
+				displayEnd +
+				" sur " +
+				filteredRecords +
+				" éléments (filtré à partir de " +
+				pageInfo.recordsTotal +
+				" éléments au total)";
+
+			//Btn previous
+			var pagingControls =
+				'<ul class="pagination"><li id="tab-rdv-admin_previous" class="paginate_button page-item previous' +
+				(currentPage == 1 ? " disabled" : "") +
+				'"><a aria-controls="tab-rdv-admin" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
+
+			//Generate buttons page
+			for (var i = 1; i <= totalPages; i++) {
+				pagingControls +=
+					'<li class="paginate_button page-item ' +
+					(i == currentPage ? "active" : "") +
+					'"><a aria-controls="tab-rdv-admin" data-dt-idx=' +
+					i +
+					' tabindex="0" class="cursor-pointer page-link">' +
+					i +
+					"</a></li>";
+			}
+
+			//Btn next
+			pagingControls +=
+				'<li id="tab-rdv-admin_next" class="paginate_button page-item next ' +
+				(currentPage == totalPages ? "disabled" : "") +
+				'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
+
+			//Write html pagination
+			$("#tab-rdv-admin_wrapper .dataTables_paginate").html(pagingControls);
+			$("#tab-rdv-admin_wrapper .dataTables_info").html(displayText);
+
+			//Callback for pagination
+			$("#tab-rdv-admin_wrapper .pagination li a").on("click", function () {
+				var page = $(this).data("dt-idx");
+				var previousPage = currentPage - 1;
+				var nextPage = currentPage + 1;
+				// Call Ajax with new value
+				$("#tab-rdv-admin")
+					.DataTable()
+					.ajax.url(
+						"../src/Controller/DashboardBackoffice/InterventionController.php?start=" +
+							(page == "next"
+								? nextPage
+								: page == "previous"
+								? previousPage
+								: page)
+					)
+					.load();
+			});
+		},
+		language: {
+			sEmptyTable: "Aucunes données n'est disponible",
+			sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+			sInfoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+			sInfoPostFix: "",
+			sInfoThousands: ",",
+			sLengthMenu: "Afficher _MENU_ éléments",
+			sLoadingRecords: "Chargement...",
+			sProcessing: "Traitement...",
+			sSearch: "Rechercher :",
+			sZeroRecords: "Aucun élément correspondant trouvé",
+			oPaginate: {
+				sFirst: "Premier",
+				sLast: "Dernier",
+				sNext: "Suivant",
+				sPrevious: "Précédent",
+			},
+			oAria: {
+				sSortAscending: ": activer pour trier la colonne par ordre croissant",
+				sSortDescending:
+					": activer pour trier la colonne par ordre décroissant",
+			},
+			select: {
+				rows: {
+					_: "%d lignes sélectionnées",
+					0: "Aucune ligne sélectionnée",
+					1: "1 ligne sélectionnée",
+				},
+			},
 		},
 	});
+
+	dataTableAdminRdv.ajax.reload();
 }
 //
 //
-//
-function deleteRdv(rdvId) {
+function deleteRdv() {
 	Swal.fire({
 		title: "Confirmez vous la suppression de cette intervention?",
 		text: "",
@@ -374,14 +650,14 @@ function deleteRdv(rdvId) {
 				type: "POST",
 				data: {
 					request: "deleteRdv",
-					idRdv: rdvId,
+					idRdv: $(this).data("id"),
 				},
 				success: function (response) {
 					toastMixin.fire({
 						animation: true,
 						title: "Cette intervention a été annulée",
 					});
-					displayRdvTab();
+					refreshAdminRdv();
 				},
 				error: function () {
 					console.log("PHP");
@@ -392,11 +668,9 @@ function deleteRdv(rdvId) {
 }
 //
 //
-
 //
 //
 function displayUsersTab() {
-	clearIntervals();
 	$.ajax({
 		url: "/src/Controller/DashboardBackoffice/AdminController.php",
 		dataType: "JSON",
@@ -407,7 +681,195 @@ function displayUsersTab() {
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
 			$(".current-breadcrumb").html("utilisateurs");
-			adminUsers();
+			let dataTableAdminUsers = $("#tab-admin-users").DataTable({
+				searching: true,
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 25, 50, 75, 100, -1],
+					[5, 10, 25, 50, 75, 100, "All"],
+				],
+				// 		dom: "<'f'>" +
+				//  "<'row'<'col-sm-12'tr>>" +
+				//  "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
+				retrieve: true,
+				responsive: {
+					details: {
+						type: "colomn",
+						target: "tr",
+					},
+				},
+				columnDefs: [
+					{ name: "lastname", targets: 0 },
+					{ name: "firstname", targets: 1 },
+					{ name: "adress", targets: 2 },
+					{ name: "phone", targets: 3 },
+					{ name: "email", targets: 4 },
+					{ name: "type", targets: 5 },
+					{ name: "active", targets: 6 },
+					{ className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] },
+					{ responsivePriority: 1, targets: 0 },
+					{ responsivePriority: 2, targets: 8 },
+					{ responsivePriority: 3, targets: 7 },
+					{
+						targets: [2, 3, 4, 6, 7, 8],
+						orderable: false,
+					},
+				],
+				processing: false,
+				serverSide: true,
+				// Ajax call
+				ajax: {
+					url: "../src/Controller/DashboardBackoffice/UserController.php",
+					type: "POST",
+					// success: function (data){
+					//     console.log(data)
+					// }
+				},
+				drawCallback: function (settings) {
+					$(".showPassword").off("click").on("click", showPassword);
+					$("#inputPassword").on("keyup", checkStrength);
+					$("#button-csv").on("click", exportUserCSV);
+
+					//Pagination buttons
+					var pageInfo = settings.json;
+					var startIndex = pageInfo.start;
+					var totalRecords = pageInfo.recordsTotal;
+					var filteredRecords = pageInfo.recordsFiltered;
+
+					// Handle case when only one result is returned by the search
+					if (settings.oPreviousSearch.sSearch !== "") {
+						if (filteredRecords == 1) {
+							totalRecords = 1;
+						} else {
+							totalRecords = filteredRecords;
+						}
+					}
+
+					//Calculate number of total pages
+					var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+					var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+					//Calculate indices start/end of display elements
+					var endIndex = Math.min(
+						startIndex + filteredRecords - 1,
+						totalRecords - 1
+					);
+					var displayStart = startIndex + 1;
+					var displayEnd = endIndex + 1;
+
+					//Display output
+					var displayText =
+						"Affichage de l'élément " +
+						displayStart +
+						" à " +
+						displayEnd +
+						" sur " +
+						filteredRecords +
+						" éléments (filtré à partir de " +
+						pageInfo.recordsTotal +
+						" éléments au total)";
+
+					//Btn previous
+					var pagingControls =
+						'<ul class="pagination"><li id="tab-admin-users_previous" class="paginate_button page-item previous' +
+						(currentPage == 1 ? " disabled" : "") +
+						'"><a aria-controls="tab-admin-users" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
+
+					//Generate buttons page
+					for (var i = 1; i <= totalPages; i++) {
+						pagingControls +=
+							'<li class="paginate_button page-item ' +
+							(i == currentPage ? "active" : "") +
+							'"><a aria-controls="tab-admin-users" data-dt-idx=' +
+							i +
+							' tabindex="0" class="cursor-pointer page-link">' +
+							i +
+							"</a></li>";
+					}
+
+					//Btn next
+					pagingControls +=
+						'<li id="tab-admin-users_next" class="paginate_button page-item next ' +
+						(currentPage == totalPages ? "disabled" : "") +
+						'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
+
+					//Write html pagination
+					$("#tab-admin-users_wrapper .dataTables_paginate").html(
+						pagingControls
+					);
+					$("#tab-admin-users_wrapper .dataTables_info").html(displayText);
+
+					//Callback for pagination
+					$("#tab-admin-users_wrapper .pagination li a").on(
+						"click",
+						function () {
+							var page = $(this).data("dt-idx");
+							var previousPage = currentPage - 1;
+							var nextPage = currentPage + 1;
+							// Call Ajax with new value
+							$("#tab-admin-users")
+								.DataTable()
+								.ajax.url(
+									"../src/Controller/DashboardBackoffice/UserController.php?start=" +
+										(page == "next"
+											? nextPage
+											: page == "previous"
+											? previousPage
+											: page)
+								)
+								.load();
+						}
+					);
+				},
+				language: {
+					sEmptyTable: "Aucunes données n'est disponible",
+					sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+					sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+					sInfoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+					sInfoPostFix: "",
+					sInfoThousands: ",",
+					sLengthMenu: "Afficher _MENU_ éléments",
+					sLoadingRecords: "Chargement...",
+					sProcessing: "Traitement...",
+					sSearch: "Rechercher :",
+					sZeroRecords: "Aucun élément correspondant trouvé",
+					oPaginate: {
+						sFirst: "Premier",
+						sLast: "Dernier",
+						sNext: "Suivant",
+						sPrevious: "Précédent",
+					},
+					oAria: {
+						sSortAscending:
+							": activer pour trier la colonne par ordre croissant",
+						sSortDescending:
+							": activer pour trier la colonne par ordre décroissant",
+					},
+					select: {
+						rows: {
+							_: "%d lignes sélectionnées",
+							0: "Aucune ligne sélectionnée",
+							1: "1 ligne sélectionnée",
+						},
+					},
+				},
+			});
+			// Apply the search
+			let pos = 1;
+			dataTableAdminUsers.columns().every(function () {
+				const that = this;
+
+				$(".filtreAd" + pos).on("change", function () {
+					if (that.search() !== this.value) {
+						that.search(this.value).draw();
+					}
+				});
+				pos++;
+			});
+
+			var searchField = $("div.dataTables_filter");
+			// Cacher le champ de recherche
+			searchField.hide();
 		},
 		error: function () {
 			console.log("errorBO");
@@ -417,36 +879,168 @@ function displayUsersTab() {
 //
 //
 function refreshAdminUsers() {
-	displayUsersTab();
-}
-//
-//
-function adminUsers() {
-	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "display_users",
-			name: $("#searchName").val(),
-			adress: $("#searchAdress").val(),
-			firstName: $("#searchFirstName").val(),
-			phone: $("#searchTel").val(),
-			mail: $("#searchMail").val(),
-			type: $("#searchType").val(),
-			active: $("#searchisActive").val(),
+	let dataTableAdminUsers = $("#tab-admin-users").DataTable({
+		searching: false,
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 25, 50, 75, 100, -1],
+			[5, 10, 25, 50, 75, 100, "All"],
+		],
+		retrieve: true,
+		responsive: {
+			details: {
+				type: "colomn",
+				target: "tr",
+			},
 		},
-		success: function (response) {
-			$("#adminUsersTab").html(response);
-			loadAdmin();
-			dataTableAdminUsers();
+		columnDefs: [
+			{ name: "lastname", targets: 0 },
+			{ name: "firstname", targets: 1 },
+			{ name: "type", targets: 5 },
+			{ className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7, 8] },
+			{ responsivePriority: 1, targets: 0 },
+			{ responsivePriority: 2, targets: 8 },
+			{ responsivePriority: 3, targets: 7 },
+			{
+				targets: [2, 3, 4, 6, 7, 8],
+				orderable: false,
+			},
+		],
+		processing: false,
+		serverSide: true,
+		// Ajax call
+		ajax: {
+			url: "../src/Controller/DashboardBackoffice/UserController.php",
+			type: "POST",
+			// data: function (d) {
+			// 	d.sSearch = $('input[type="search"]').val();
+			// },
+			// success: function (data){
+			//     console.log(data)
+			// }
+		},
+		drawCallback: function (settings) {
+			$(".showPassword").off("click").on("click", showPassword);
+			$("#inputPassword").on("keyup", checkStrength);
 			$("#button-csv").on("click", exportUserCSV);
+
+			//Pagination buttons
+			var pageInfo = settings.json;
+			var startIndex = pageInfo.start;
+			var totalRecords = pageInfo.recordsTotal;
+			var filteredRecords = pageInfo.recordsFiltered;
+
+			// Handle case when only one result is returned by the search
+			if (settings.oPreviousSearch.sSearch !== "") {
+				if (filteredRecords == 1) {
+					totalRecords = 1;
+				} else {
+					totalRecords = filteredRecords;
+				}
+			}
+
+			//Calculate number of total pages
+			var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+			var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+			//Calculate indices start/end of display elements
+			var endIndex = Math.min(
+				startIndex + filteredRecords - 1,
+				totalRecords - 1
+			);
+			var displayStart = startIndex + 1;
+			var displayEnd = endIndex + 1;
+
+			//Display output
+			var displayText =
+				"Affichage de l'élément " +
+				displayStart +
+				" à " +
+				displayEnd +
+				" sur " +
+				filteredRecords +
+				" éléments (filtré à partir de " +
+				pageInfo.recordsTotal +
+				" éléments au total)";
+
+			//Btn previous
+			var pagingControls =
+				'<ul class="pagination"><li id="tab-admin-users_previous" class="paginate_button page-item previous ' +
+				(currentPage == 1 ? "disabled" : "") +
+				'"><a aria-controls="tab-admin-users" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
+
+			//Generate buttons page
+			for (var i = 1; i <= totalPages; i++) {
+				pagingControls +=
+					'<li class="paginate_button page-item ' +
+					(i == currentPage ? "active" : "") +
+					'"><a aria-controls="tab-admin-users" data-dt-idx=' +
+					i +
+					' tabindex="0" class="cursor-pointer page-link">' +
+					i +
+					"</a></li>";
+			}
+
+			//Btn next
+			pagingControls +=
+				'<li id="tab-admin-users_next" class="paginate_button page-item next ' +
+				(currentPage == totalPages ? "disabled" : "") +
+				'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
+
+			//Write html pagination
+			$("#tab-admin-users_wrapper .dataTables_paginate").html(pagingControls);
+			$("#tab-admin-users_wrapper .dataTables_info").html(displayText);
+
+			//Callback for pagination
+			$("#tab-admin-users_wrapper .pagination li a").on("click", function () {
+				var page = $(this).data("dt-idx");
+				// Call Ajax with new value
+				$("#tab-admin-users")
+					.DataTable()
+					.ajax.url(
+						"../src/Controller/DashboardBackoffice/UserController.php?start=" +
+							page
+					)
+					.load();
+			});
 		},
-		error: function () {
-			console.log("errorUser");
+		language: {
+			sEmptyTable: "Aucunes données n'est disponible",
+			sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+			sInfoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+			sInfoPostFix: "",
+			sInfoThousands: ",",
+			sLengthMenu: "Afficher _MENU_ éléments",
+			sLoadingRecords: "Chargement...",
+			sProcessing: "Traitement...",
+			sSearch: "Rechercher :",
+			sZeroRecords: "Aucun élément correspondant trouvé",
+			oPaginate: {
+				sFirst: "Premier",
+				sLast: "Dernier",
+				sNext: "Suivant",
+				sPrevious: "Précédent",
+			},
+			oAria: {
+				sSortAscending: ": activer pour trier la colonne par ordre croissant",
+				sSortDescending:
+					": activer pour trier la colonne par ordre décroissant",
+			},
+			select: {
+				rows: {
+					_: "%d lignes sélectionnées",
+					0: "Aucune ligne sélectionnée",
+					1: "1 ligne sélectionnée",
+				},
+			},
 		},
 	});
+
+	dataTableAdminUsers.ajax.reload();
 }
+//
+//
 //
 //
 function inactivateUser(id) {
@@ -459,7 +1053,6 @@ function inactivateUser(id) {
 			id: id,
 		},
 		success: function () {
-			// adminUsers();
 			swal.fire({
 				title: "Compte désactivé",
 			});
@@ -482,7 +1075,6 @@ function activateUser(id) {
 			id: id,
 		},
 		success: function () {
-			// adminUsers();
 			swal.fire({
 				title: "Compte activé",
 			});
@@ -523,7 +1115,7 @@ function addUserAdmin() {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				adminUsers();
+				refreshAdminUsers();
 			} else {
 				Swal.fire({
 					position: "center",
@@ -539,18 +1131,22 @@ function addUserAdmin() {
 }
 //
 //
-function modalProfilAdmin(id) {
-	let tab_fields = {};
-	$(".data").each(function () {
-		tab_fields[$(this).attr("id")] = $(this).html();
-	});
+function modalProfilAdmin(id, event) {
+	let tr = $(event).closest("tr");
+	let tab_fields = {
+		profile_login: tr.find("td:nth-child(5)").text(),
+		profile_nom: tr.find("td:nth-child(1)").text(),
+		profile_prenom: tr.find("td:nth-child(2)").text(),
+		profile_tel: tr.find("td:nth-child(4)").text(),
+		profile_addr: tr.find("td:nth-child(3)").text(),
+	};
 	$("#modal-profil").modal("show");
 	$("#userId").val(id);
-	$("#inputLogin").val(tab_fields["profile_login" + id]);
-	$("#inputNom").val(tab_fields["profile_nom" + id]);
-	$("#inputPrenom").val(tab_fields["profile_prenom" + id]);
-	$("#inputAddr").html(tab_fields["profile_addr" + id]);
-	$("#inputTel").val(tab_fields["profile_tel" + id]);
+	$("#inputLogin").val(tab_fields["profile_login"]);
+	$("#inputNom").val(tab_fields["profile_nom"]);
+	$("#inputPrenom").val(tab_fields["profile_prenom"]);
+	$("#inputTel").val(tab_fields["profile_tel"]);
+	$("#inputAddr").html(tab_fields["profile_addr"]);
 }
 //
 //
@@ -578,7 +1174,7 @@ function modifyUserAdmin() {
 					showConfirmButton: false,
 					timer: 1500,
 				});
-				adminUsers();
+				refreshAdminUsers();
 			} else {
 				Swal.fire({
 					position: "center",
@@ -606,32 +1202,343 @@ function displayBanTab() {
 		success: function (response) {
 			$("#adminOfficeBody").html(response);
 			$(".current-breadcrumb").html("comptes bannis");
-			displayBanUsers();
+			let dataTableAdminBan = $("#tab-bans").DataTable({
+				searching: true,
+				pageLength: 5,
+				lengthMenu: [
+					[5, 10, 25, 50, 75, 100, -1],
+					[5, 10, 25, 50, 75, 100, "All"],
+				],
+				retrieve: true,
+				responsive: {
+					details: {
+						type: "colomn",
+						target: "tr",
+					},
+				},
+				order: [[2, "desc"]],
+				columnDefs: [
+					{ name: "login", targets: 0 },
+					{ name: "ip", targets: 1 },
+					{ name: "date", targets: 2 },
+					{ name: "action", targets: 3 },
+					{ className: "dt-center", targets: [0, 1, 2, 3] },
+					{ responsivePriority: 1, targets: 0 },
+					{ responsivePriority: 2, targets: 3 },
+					{
+						targets: [3],
+						orderable: false,
+					},
+				],
+				processing: false,
+				serverSide: true,
+				// Ajax call
+				ajax: {
+					url: "../src/Controller/DashboardBackoffice/BanController.php",
+					type: "POST",
+					// success: function (data){
+					//     console.log(data)
+					// }
+				},
+				drawCallback: function (settings) {
+					//Pagination buttons
+					var pageInfo = settings.json;
+					var startIndex = pageInfo.start;
+					var totalRecords = pageInfo.recordsTotal;
+					var filteredRecords = pageInfo.recordsFiltered;
+
+					// Handle case when only one result is returned by the search
+					if (settings.oPreviousSearch.sSearch !== "") {
+						if (filteredRecords == 1) {
+							totalRecords = 1;
+						} else {
+							totalRecords = filteredRecords;
+						}
+					}
+
+					//Calculate number of total pages
+					var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+					var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+					//Calculate indices start/end of display elements
+					var endIndex = Math.min(
+						startIndex + filteredRecords - 1,
+						totalRecords - 1
+					);
+					var displayStart = startIndex + 1;
+					var displayEnd = endIndex + 1;
+
+					//Display output
+					var displayText =
+						"Affichage de l'élément " +
+						displayStart +
+						" à " +
+						displayEnd +
+						" sur " +
+						filteredRecords +
+						" éléments (filtré à partir de " +
+						pageInfo.recordsTotal +
+						" éléments au total)";
+
+					//Btn previous
+					var pagingControls =
+						'<ul class="pagination"><li id="tab-bans_previous" class="paginate_button page-item previous' +
+						(currentPage == 1 ? " disabled" : "") +
+						'"><a aria-controls="tab-bans" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
+
+					//Generate buttons page
+					for (var i = 1; i <= totalPages; i++) {
+						pagingControls +=
+							'<li class="paginate_button page-item ' +
+							(i == currentPage ? "active" : "") +
+							'"><a aria-controls="tab-bans" data-dt-idx=' +
+							i +
+							' tabindex="0" class="cursor-pointer page-link">' +
+							i +
+							"</a></li>";
+					}
+
+					//Btn next
+					pagingControls +=
+						'<li id="tab-bans_next" class="paginate_button page-item next ' +
+						(currentPage == totalPages ? "disabled" : "") +
+						'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
+
+					//Write html pagination
+					$("#tab-bans_wrapper .dataTables_paginate").html(pagingControls);
+					$("#tab-bans_wrapper .dataTables_info").html(displayText);
+
+					//Callback for pagination
+					$("#tab-bans_wrapper .pagination li a").on("click", function () {
+						var page = $(this).data("dt-idx");
+						var previousPage = currentPage - 1;
+						var nextPage = currentPage + 1;
+						// Call Ajax with new value
+						$("#tab-bans")
+							.DataTable()
+							.ajax.url(
+								"../src/Controller/DashboardBackoffice/BanController.php?start=" +
+									(page == "next"
+										? nextPage
+										: page == "previous"
+										? previousPage
+										: page)
+							)
+							.load();
+					});
+				},
+				language: {
+					sEmptyTable: "Aucunes données n'est disponible",
+					sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+					sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+					sInfoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+					sInfoPostFix: "",
+					sInfoThousands: ",",
+					sLengthMenu: "Afficher _MENU_ éléments",
+					sLoadingRecords: "Chargement...",
+					sProcessing: "Traitement...",
+					sSearch: "Rechercher :",
+					searchPlaceholder: "immatriculation",
+					sZeroRecords: "Aucun élément correspondant trouvé",
+					oPaginate: {
+						sFirst: "Premier",
+						sLast: "Dernier",
+						sNext: "Suivant",
+						sPrevious: "Précédent",
+					},
+					oAria: {
+						sSortAscending:
+							": activer pour trier la colonne par ordre croissant",
+						sSortDescending:
+							": activer pour trier la colonne par ordre décroissant",
+					},
+					select: {
+						rows: {
+							_: "%d lignes sélectionnées",
+							0: "Aucune ligne sélectionnée",
+							1: "1 ligne sélectionnée",
+						},
+					},
+				},
+			});
 		},
 		error: function () {
 			console.log("errorBO");
 		},
 	});
 }
-//
-//
-function displayBanUsers() {
-	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "display_ban_users",
+
+function refreshAdminBans() {
+	let dataTableAdminBan = $("#tab-bans").DataTable({
+		searching: true,
+		pageLength: 5,
+		lengthMenu: [
+			[5, 10, 25, 50, 75, 100, -1],
+			[5, 10, 25, 50, 75, 100, "All"],
+		],
+		retrieve: true,
+		responsive: {
+			details: {
+				type: "colomn",
+				target: "tr",
+			},
 		},
-		success: function (response) {
-			$("#userBans").html(response);
-			dataTableBans();
+		order: [[2, "asc"]],
+		columnDefs: [
+			{ name: "info", targets: 0 },
+			{ name: "inter", targets: 1 },
+			{ name: "date", targets: 2 },
+			{ name: "brand", targets: 3 },
+			{ name: "model", targets: 4 },
+			{ name: "registration", targets: 5 },
+			{ name: "state", targets: 6 },
+			{ name: "delete", targets: 7 },
+			{ className: "dt-center", targets: [0, 1, 2, 3, 4, 5, 6, 7] },
+			{ responsivePriority: 1, targets: 2 },
+			{ responsivePriority: 2, targets: 6 },
+			{ responsivePriority: 3, targets: 7 },
+			{
+				targets: [0, 3, 4, 7],
+				orderable: false,
+			},
+		],
+		processing: false,
+		serverSide: true,
+		// Ajax call
+		ajax: {
+			url: "../src/Controller/DashboardBackoffice/BanController.php",
+			type: "POST",
+			// success: function (data){
+			//     console.log(data)
+			// }
 		},
-		error: function () {
-			console.log("errorUser");
+		drawCallback: function (settings) {
+			$(".deleteRdvTech").on("click", deleteRdv);
+
+			//Pagination buttons
+			var pageInfo = settings.json;
+			var startIndex = pageInfo.start;
+			var totalRecords = pageInfo.recordsTotal;
+			var filteredRecords = pageInfo.recordsFiltered;
+
+			// Handle case when only one result is returned by the search
+			if (settings.oPreviousSearch.sSearch !== "") {
+				if (filteredRecords == 1) {
+					totalRecords = 1;
+				} else {
+					totalRecords = filteredRecords;
+				}
+			}
+
+			//Calculate number of total pages
+			var currentPage = Math.ceil((startIndex + 1) / pageInfo.length);
+			var totalPages = Math.ceil(totalRecords / pageInfo.length);
+
+			//Calculate indices start/end of display elements
+			var endIndex = Math.min(
+				startIndex + filteredRecords - 1,
+				totalRecords - 1
+			);
+			var displayStart = startIndex + 1;
+			var displayEnd = endIndex + 1;
+
+			//Display output
+			var displayText =
+				"Affichage de l'élément " +
+				displayStart +
+				" à " +
+				displayEnd +
+				" sur " +
+				filteredRecords +
+				" éléments (filtré à partir de " +
+				pageInfo.recordsTotal +
+				" éléments au total)";
+
+			//Btn previous
+			var pagingControls =
+				'<ul class="pagination"><li id="tab-bans_previous" class="paginate_button page-item previous' +
+				(currentPage == 1 ? " disabled" : "") +
+				'"><a aria-controls="tab-bans" class="cursor-pointer page-link" data-dt-idx="previous" tabindex="0">Précédent</a></li>';
+
+			//Generate buttons page
+			for (var i = 1; i <= totalPages; i++) {
+				pagingControls +=
+					'<li class="paginate_button page-item ' +
+					(i == currentPage ? "active" : "") +
+					'"><a aria-controls="tab-bans" data-dt-idx=' +
+					i +
+					' tabindex="0" class="cursor-pointer page-link">' +
+					i +
+					"</a></li>";
+			}
+
+			//Btn next
+			pagingControls +=
+				'<li id="tab-bans_next" class="paginate_button page-item next ' +
+				(currentPage == totalPages ? "disabled" : "") +
+				'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
+
+			//Write html pagination
+			$("#tab-bans_wrapper .dataTables_paginate").html(pagingControls);
+			$("#tab-bans_wrapper .dataTables_info").html(displayText);
+
+			//Callback for pagination
+			$("#tab-bans_wrapper .pagination li a").on("click", function () {
+				var page = $(this).data("dt-idx");
+				var previousPage = currentPage - 1;
+				var nextPage = currentPage + 1;
+				// Call Ajax with new value
+				$("#tab-bans")
+					.DataTable()
+					.ajax.url(
+						"../src/Controller/DashboardBackoffice/BanController.php?start=" +
+							(page == "next"
+								? nextPage
+								: page == "previous"
+								? previousPage
+								: page)
+					)
+					.load();
+			});
+		},
+		language: {
+			sEmptyTable: "Aucunes données n'est disponible",
+			sInfo: "Affichage de l'élément _START_ à _END_ sur _TOTAL_ éléments",
+			sInfoEmpty: "Affichage de l'élément 0 à 0 sur 0 élément",
+			sInfoFiltered: "(filtré à partir de _MAX_ éléments au total)",
+			sInfoPostFix: "",
+			sInfoThousands: ",",
+			sLengthMenu: "Afficher _MENU_ éléments",
+			sLoadingRecords: "Chargement...",
+			sProcessing: "Traitement...",
+			sSearch: "Rechercher :",
+			searchPlaceholder: "immatriculation",
+			sZeroRecords: "Aucun élément correspondant trouvé",
+			oPaginate: {
+				sFirst: "Premier",
+				sLast: "Dernier",
+				sNext: "Suivant",
+				sPrevious: "Précédent",
+			},
+			oAria: {
+				sSortAscending: ": activer pour trier la colonne par ordre croissant",
+				sSortDescending:
+					": activer pour trier la colonne par ordre décroissant",
+			},
+			select: {
+				rows: {
+					_: "%d lignes sélectionnées",
+					0: "Aucune ligne sélectionnée",
+					1: "1 ligne sélectionnée",
+				},
+			},
 		},
 	});
+
+	dataTableAdminBan.ajax.reload();
 }
+//
+//
 //
 //
 function debanUser(id) {
@@ -644,15 +1551,13 @@ function debanUser(id) {
 			userId: id,
 		},
 		success: function (response) {
-			$("#userBans").html(response);
-			Swal.fire({
-				position: "center",
-				icon: "success",
+			toastMixin.fire({
+				position: 'center',
+				animation: true,
 				title: response,
-				showConfirmButton: false,
-				timer: 1500,
-			});
-			displayBanTab();
+				icon: 'success',
+		  });
+			refreshAdminBans();
 		},
 		error: function () {
 			console.log("errorUser");
@@ -767,28 +1672,6 @@ function adminLogs() {
 }
 //
 //
-function generateDateBO(timestampID = 0) {
-	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
-		dataType: "JSON",
-		type: "POST",
-		data: {
-			request: "generate_date_BO",
-			currentDate: timestampID,
-		},
-		success: function (response) {
-			$("#dateDuJour").html(response["html_day"]["currentDay"]);
-			$(".btnBack").html(response["html_day"]["btnBack"]);
-			$(".btnNext").html(response["html_day"]["btnNext"]);
-			$(".btnPrevious").html(response["html_day"]["btnPrevious"]);
-			adminRdv();
-			loadAdmin();
-		},
-		error: function () {
-			console.log("errordayCases");
-		},
-	});
-}
 //
 //
 

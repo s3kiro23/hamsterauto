@@ -84,7 +84,7 @@ class Intervention
         }
     }
 
-    static public function check_rdv_admin($registration)
+    static public function fetchRdvAdmin($registration)
     {
         $list_Rdv = [];
         $requete = "SELECT *, awaiting_intervention.id_intervention AS cryptedId, 
@@ -95,7 +95,8 @@ class Intervention
             INNER JOIN user ON awaiting_intervention.id_user = user.id_user
             WHERE awaiting_intervention.state BETWEEN 0 AND 1
             AND vehicle.registration LIKE '%" . filter($registration) . "%'
-            ORDER BY awaiting_intervention.time_slot ASC ";
+            ORDER BY `id_intervention` ASC";
+
         $result = mysqli_query($GLOBALS['Database'], $requete) or die;
         while ($data = mysqli_fetch_assoc($result)) {
             $data['cryptedId'] = Security::encrypt($data['cryptedId'], false);
@@ -105,6 +106,71 @@ class Intervention
             $list_Rdv[] = $data;
         }
         return $list_Rdv;
+    }
+
+
+    static public function check_rdv_admin($start, $length, $orders, $search)
+    {
+        $list_Rdv = [];
+        $requete = "SELECT *, awaiting_intervention.id_intervention AS cryptedId, 
+            user.lastname_user AS nomTech FROM awaiting_intervention 
+            INNER JOIN vehicle ON awaiting_intervention.id_vehicle = vehicle.id_vehicle 
+            INNER JOIN model ON vehicle.id_model = model.id_model
+            INNER JOIN brand ON model.id_brand = brand.id_brand
+            INNER JOIN user ON awaiting_intervention.id_user = user.id_user
+            WHERE awaiting_intervention.state BETWEEN 0 AND 1
+            AND vehicle.registration LIKE '%" . filter($search['value']) . "%'";
+
+        // Order
+        foreach ($orders as $key => $order) {
+            // $order['name'] is the name of the order column as sent by the JS
+            if ($order['name'] != '') {
+                $orderColumn = null;
+                switch ($order['name']) {
+                    case 'inter': {
+                            $orderColumn = 'id_intervention';
+                            break;
+                        }
+                    case 'date': {
+                            $orderColumn = 'time_slot';
+                            break;
+                        }
+                    case 'registration': {
+                            $orderColumn = 'registration';
+                            break;
+                        }
+                    case 'state': {
+                            $orderColumn = 'state';
+                            break;
+                        }
+                }
+                if ($orderColumn !== null) {
+                    $asc = $order['dir'];
+                    $requete .= " ORDER BY `$orderColumn` $asc";
+                }
+            }
+        }
+
+        $requete .= " LIMIT $length OFFSET $start";
+
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        while ($data = mysqli_fetch_assoc($result)) {
+            $data['cryptedId'] = Security::encrypt($data['cryptedId'], false);
+            $data['brand_name'] = $data['brand_name'];
+            $data['brand_name'] = str_replace(" ", "", $data['brand_name']);
+            $data['time_slot_fr'] = Convert::date_to_fullFR($data['time_slot']);
+            $list_Rdv[] = $data;
+        }
+        return $list_Rdv;
+    }
+
+    static public function countRdvAdmin()
+    {
+        $requete = "SELECT count(*) AS nbRdv FROM `awaiting_intervention`";
+
+        $result = mysqli_query($GLOBALS['Database'], $requete) or die;
+        $data = mysqli_fetch_assoc($result);
+        return (int)$data['nbRdv'];
     }
 
     static public function check_rdv_archives($id)
