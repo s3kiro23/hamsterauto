@@ -60,7 +60,7 @@ function $_GET(param) {
 
 function allowCheckList() {
     $.ajax({
-        url: "/src/Controller/DashboardBackoffice/ChecklistController.php ",
+        url: "/src/Controller/DashboardTechnician/ChecklistController.php ",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -88,7 +88,7 @@ function allowCheckList() {
 
 function displayCheckList(){
     $.ajax({
-        url: "/src/Controller/DashboardBackoffice/ChecklistController.php ",
+        url: "/src/Controller/DashboardTechnician/ChecklistController.php ",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -110,7 +110,7 @@ function checkListLoader() {
     let intervention = $_GET("intervention");
     let interID = $(".inter-id");
     $.ajax({
-        url: "/src/Controller/DashboardBackoffice/ChecklistController.php ",
+        url: "/src/Controller/DashboardTechnician/ChecklistController.php ",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -167,7 +167,7 @@ function validationCT() {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "/src/Controller/DashboardBackoffice/ChecklistController.php ",
+                url: "/src/Controller/DashboardTechnician/ChecklistController.php ",
                 dataType: "JSON",
                 type: "POST",
                 data: {

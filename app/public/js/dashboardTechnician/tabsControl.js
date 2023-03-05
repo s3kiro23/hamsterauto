@@ -53,7 +53,7 @@ function displayCar() {
 
 function displayBackOffice() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
+		url: "/src/Controller/DashboardTechnician/BackofficeController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -162,7 +162,7 @@ function switchDayRdv(switchDate) {
 	$("#searchImmat").val("");
 	let page = 1;
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
+		url: "/src/Controller/DashboardTechnician/BackofficeController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -187,7 +187,7 @@ function switchDayRdv(switchDate) {
 // Gestion des dates DEBUT
 function generateDateBO(timestampID = 0) {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
+		url: "/src/Controller/DashboardTechnician/BackofficeController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {

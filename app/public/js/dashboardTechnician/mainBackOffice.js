@@ -34,7 +34,7 @@ function priseEnCharge(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
+                url: "/src/Controller/DashboardTechnician/BackofficeController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {
@@ -61,7 +61,7 @@ function priseEnCharge(id) {
 function basculerIntervention(id, id_tech) {
    
     $.ajax({
-        url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
+        url: "/src/Controller/DashboardTechnician/BackofficeController.php",
         dataType: "JSON",
         type: "POST",
         data: {
@@ -106,7 +106,7 @@ function switchToHold(id) {
     }).then((result) => {
         if (result.isConfirmed) {
             $.ajax({
-                url: "/src/Controller/DashboardBackoffice/BackofficeController.php",
+                url: "/src/Controller/DashboardTechnician/BackofficeController.php",
                 dataType: "JSON",
                 type: "POST",
                 data: {

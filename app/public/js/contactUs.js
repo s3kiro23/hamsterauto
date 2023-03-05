@@ -5,7 +5,7 @@ $(function () {
     $(".form-control").on("change", checkField);
     $(".form-control").on("focusin", placeholderAnimation);
     $(".form-control").on("focusout", placeholderAnimation);
-    $('#to_logIn').on('click', to_logIn);
+    $('#back-to').on('click', historyBack);
 });
 
 
@@ -77,7 +77,7 @@ let contactUS = function () {
         success: function (response) {
             if (response['status'] === 1) {
                 $('.sending').html(response['msg'])
-                $('#to_logIn').on('click', to_logIn);
+                $('#to-login').on('click', backLogin);
             } else {
                 Swal.fire({
                     title: "Erreur",
@@ -112,9 +112,12 @@ function captcha() {
     });
 }
 
-let to_logIn = function () {
-    // window.location.replace('index.html')
+let historyBack = function () {
     history.back()
+};
+
+let backLogin = function () {
+    window.location.replace('/')
 };
 
 

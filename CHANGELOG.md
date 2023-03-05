@@ -1,5 +1,10 @@
 # v1.1.1
 
+### improve_datatables_refresh
+
+- [ADD] de appel Ajax à tous les Datatables pour éviter le clignotement des tableaux au refresh
+- [UPD] amélioration visuel sur les tableaux
+
 ### dev
 
 - [UPD] du message de validation lors de la création d'un nouveau compte pour prévenir de l'envoi d'un mail

@@ -1,3 +1,5 @@
+// START DataTables Admin Intervention //
+
 let dataTableAdminRdv = function () {
 	$("#tab-rdv-admin").DataTable({
 		searching: false,
@@ -152,7 +154,9 @@ let dataTableAdminRdv = function () {
 		},
 	});
 };
+// END DataTables Admin Intervention //
 
+// START DataTables Admin Logs //
 let dataTableLogs = function () {
 	$("#tab-logs").DataTable({
 		searching: true,
@@ -241,11 +245,8 @@ let dataTableAdminUsers = $("#tab-admin-users").DataTable({
 	serverSide: true,
 	// Ajax call
 	ajax: {
-		url: "../src/Controller/DashboardBackoffice/UserController.php",
+		url: "../src/Controller/DashboardAdmin/UserController.php",
 		type: "POST",
-		// data: function (d) {
-		// 	d.sSearch = $('input[type="search"]').val();
-		// },
 		// success: function (data){
 		//     console.log(data)
 		// }
@@ -326,7 +327,7 @@ let dataTableAdminUsers = $("#tab-admin-users").DataTable({
 			$("#tab-admin-users")
 				.DataTable()
 				.ajax.url(
-					"../src/Controller/DashboardBackoffice/UserController.php?start=" +
+					"../src/Controller/DashboardAdmin/UserController.php?start=" +
 						page
 				)
 				.load();
@@ -363,23 +364,9 @@ let dataTableAdminUsers = $("#tab-admin-users").DataTable({
 		},
 	},
 });
+// END DataTables Admin Logs //
 
-// Apply the search
-// let pos = 1;
-// dataTableAdminUsers.columns().every(function () {
-// 	const that = this;
-
-// 	$(".filtreAd" + pos).on("change", function () {
-// 		console.log(that);
-
-// 		if (that.search() !== this.value) {
-// 			searchValues[that.header()] = this.value;
-// 			that.draw();
-// 		}
-// 	});
-// 	pos++;
-// });
-
+// START DataTables Admin Bans //
 let dataTableBans = function () {
 	$("#tab-bans").DataTable({
 		searching: true,
@@ -498,3 +485,4 @@ let dataTableAdminArchives = function () {
 		},
 	});
 };
+// END DataTables Admin Bans //

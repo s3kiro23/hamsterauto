@@ -4,6 +4,9 @@ function activateButtons() {
 	$(".deleteCar").on("click", deleteCar);
 }
 
+
+// START DataTables Cars //
+
 let dataTableCars = $("#tab-car").DataTable({
 	pageLength: 3,
 	paging: true,
@@ -165,7 +168,9 @@ let dataTableCars = $("#tab-car").DataTable({
 		},
 	},
 });
+// END DataTables Cars //
 
+// START DataTables RDV //
 let dataTableRdv = $("#tab-rdv").DataTable({
 	pageLength: 3,
 	lengthMenu: [
@@ -322,3 +327,4 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		},
 	},
 });
+// END DataTables RDV //

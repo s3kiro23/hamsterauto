@@ -17,7 +17,7 @@ $(function () {
 		},
 	});
 
-	// Permet de fermer le menu en mobile au clickOut
+	// Close menu monile on clickOut
 	$(document).on("click", function (e) {
 		var navbarToggler = $(".navbar-toggler");
 		if (
@@ -103,6 +103,7 @@ function loadAdmin() {
 }
 //
 //
+//----------------- START Admin API functions -----------------//
 
 let callApiMatmut = function () {
 	Swal.fire({
@@ -129,7 +130,7 @@ let callApiMatmut = function () {
 				showConfirmButton: false,
 			});
 			$.ajax({
-				url: "/src/Controller/DashboardBackoffice/AdminController.php",
+				url: "/src/Controller/DashboardAdmin/AdminController.php",
 				dataType: "JSON",
 				type: "POST",
 				data: {
@@ -168,10 +169,16 @@ let callApiMatmut = function () {
 		}
 	});
 };
+//
+//
+//----------------- END Admin API functions -----------------//
+//
+//
+//----------------- Start Export CSV functions -----------------//
 
 function exportInterCSV() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
@@ -190,7 +197,7 @@ function exportUserCSV() {
 		values[$(this).attr("id")] = $(this).val();
 	});
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
@@ -205,7 +212,7 @@ function exportUserCSV() {
 
 function exportArchivesCSV() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
@@ -219,7 +226,7 @@ function exportArchivesCSV() {
 
 function exportLogsCSV() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "json",
 		type: "POST",
 		data: {
@@ -250,11 +257,17 @@ function download(elem) {
 		},
 	});
 }
+//
+//
+//----------------- END Export CSV functions -----------------//
+//
+//
+//----------------- Start Admin Rdv functions -----------------//
 
 function adminIndex() {
 	clearIntervals();
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -276,7 +289,7 @@ function adminIndex() {
 //
 function displayRdvTab() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -323,7 +336,7 @@ function displayRdvTab() {
 				serverSide: true,
 				// Ajax call
 				ajax: {
-					url: "../src/Controller/DashboardBackoffice/InterventionController.php",
+					url: "../src/Controller/DashboardAdmin/InterventionController.php",
 					type: "POST",
 					// success: function (data){
 					//     console.log(data)
@@ -408,7 +421,7 @@ function displayRdvTab() {
 						$("#tab-rdv-admin")
 							.DataTable()
 							.ajax.url(
-								"../src/Controller/DashboardBackoffice/InterventionController.php?start=" +
+								"../src/Controller/DashboardAdmin/InterventionController.php?start=" +
 									(page == "next"
 										? nextPage
 										: page == "previous"
@@ -497,7 +510,7 @@ function refreshAdminRdv() {
 		serverSide: true,
 		// Ajax call
 		ajax: {
-			url: "../src/Controller/DashboardBackoffice/InterventionController.php",
+			url: "../src/Controller/DashboardAdmin/InterventionController.php",
 			type: "POST",
 			// success: function (data){
 			//     console.log(data)
@@ -584,7 +597,7 @@ function refreshAdminRdv() {
 				$("#tab-rdv-admin")
 					.DataTable()
 					.ajax.url(
-						"../src/Controller/DashboardBackoffice/InterventionController.php?start=" +
+						"../src/Controller/DashboardAdmin/InterventionController.php?start=" +
 							(page == "next"
 								? nextPage
 								: page == "previous"
@@ -668,11 +681,14 @@ function deleteRdv() {
 }
 //
 //
+//----------------- END Admin Rdv functions -----------------//
 //
 //
+//----------------- Start Admin Users functions -----------------//
+
 function displayUsersTab() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -688,9 +704,6 @@ function displayUsersTab() {
 					[5, 10, 25, 50, 75, 100, -1],
 					[5, 10, 25, 50, 75, 100, "All"],
 				],
-				// 		dom: "<'f'>" +
-				//  "<'row'<'col-sm-12'tr>>" +
-				//  "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
 				retrieve: true,
 				responsive: {
 					details: {
@@ -719,7 +732,7 @@ function displayUsersTab() {
 				serverSide: true,
 				// Ajax call
 				ajax: {
-					url: "../src/Controller/DashboardBackoffice/UserController.php",
+					url: "../src/Controller/DashboardAdmin/UserController.php",
 					type: "POST",
 					// success: function (data){
 					//     console.log(data)
@@ -810,7 +823,7 @@ function displayUsersTab() {
 							$("#tab-admin-users")
 								.DataTable()
 								.ajax.url(
-									"../src/Controller/DashboardBackoffice/UserController.php?start=" +
+									"../src/Controller/DashboardAdmin/UserController.php?start=" +
 										(page == "next"
 											? nextPage
 											: page == "previous"
@@ -910,11 +923,8 @@ function refreshAdminUsers() {
 		serverSide: true,
 		// Ajax call
 		ajax: {
-			url: "../src/Controller/DashboardBackoffice/UserController.php",
+			url: "../src/Controller/DashboardAdmin/UserController.php",
 			type: "POST",
-			// data: function (d) {
-			// 	d.sSearch = $('input[type="search"]').val();
-			// },
 			// success: function (data){
 			//     console.log(data)
 			// }
@@ -998,7 +1008,7 @@ function refreshAdminUsers() {
 				$("#tab-admin-users")
 					.DataTable()
 					.ajax.url(
-						"../src/Controller/DashboardBackoffice/UserController.php?start=" +
+						"../src/Controller/DashboardAdmin/UserController.php?start=" +
 							page
 					)
 					.load();
@@ -1045,7 +1055,7 @@ function refreshAdminUsers() {
 //
 function inactivateUser(id) {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1067,7 +1077,7 @@ function inactivateUser(id) {
 //
 function activateUser(id) {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1099,7 +1109,7 @@ function addUserAdmin() {
 		tab_fields_modal[$(this).attr("id")] = $(this).val();
 	});
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1157,7 +1167,7 @@ function modifyUserAdmin() {
 		tab_fields_modal[$(this).attr("id")] = $(this).val();
 	});
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1190,10 +1200,15 @@ function modifyUserAdmin() {
 }
 //
 //
+//----------------- END Admin Rdv functions -----------------//
+//
+//
+//----------------- Start Admin Ban functions -----------------//
+
 function displayBanTab() {
 	clearIntervals();
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1234,7 +1249,7 @@ function displayBanTab() {
 				serverSide: true,
 				// Ajax call
 				ajax: {
-					url: "../src/Controller/DashboardBackoffice/BanController.php",
+					url: "../src/Controller/DashboardAdmin/BanController.php",
 					type: "POST",
 					// success: function (data){
 					//     console.log(data)
@@ -1317,7 +1332,7 @@ function displayBanTab() {
 						$("#tab-bans")
 							.DataTable()
 							.ajax.url(
-								"../src/Controller/DashboardBackoffice/BanController.php?start=" +
+								"../src/Controller/DashboardAdmin/BanController.php?start=" +
 									(page == "next"
 										? nextPage
 										: page == "previous"
@@ -1406,7 +1421,7 @@ function refreshAdminBans() {
 		serverSide: true,
 		// Ajax call
 		ajax: {
-			url: "../src/Controller/DashboardBackoffice/BanController.php",
+			url: "../src/Controller/DashboardAdmin/BanController.php",
 			type: "POST",
 			// success: function (data){
 			//     console.log(data)
@@ -1491,7 +1506,7 @@ function refreshAdminBans() {
 				$("#tab-bans")
 					.DataTable()
 					.ajax.url(
-						"../src/Controller/DashboardBackoffice/BanController.php?start=" +
+						"../src/Controller/DashboardAdmin/BanController.php?start=" +
 							(page == "next"
 								? nextPage
 								: page == "previous"
@@ -1543,7 +1558,7 @@ function refreshAdminBans() {
 //
 function debanUser(id) {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1566,10 +1581,15 @@ function debanUser(id) {
 }
 //
 //
+//----------------- END Admin Ban functions -----------------//
+//
+//
+//----------------- Start Admin Archives functions -----------------//
+
 function displayAdminArchives() {
 	clearIntervals();
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1589,7 +1609,7 @@ function displayAdminArchives() {
 //
 function adminArchives() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1609,7 +1629,7 @@ function adminArchives() {
 //
 function showContreVisiteAdmin(id) {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1626,10 +1646,15 @@ function showContreVisiteAdmin(id) {
 }
 //
 //
+//----------------- Start Admin Archives functions -----------------//
+//
+//
+//----------------- Start Admin Logs functions -----------------//
+
 function displayLogs() {
 	clearIntervals();
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1655,7 +1680,7 @@ function showLogs() {
 //
 function adminLogs() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1672,13 +1697,15 @@ function adminLogs() {
 }
 //
 //
+//----------------- END Admin Logs functions -----------------//
 //
 //
+//----------------- Start Admin Settings functions -----------------//
 
 function displaySettings() {
 	clearIntervals();
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1694,7 +1721,7 @@ function displaySettings() {
 }
 function showSettings() {
 	$.ajax({
-		url: "/src/Controller/DashboardBackoffice/AdminController.php",
+		url: "/src/Controller/DashboardAdmin/AdminController.php",
 		dataType: "JSON",
 		type: "POST",
 		data: {
@@ -1728,7 +1755,7 @@ function updateHour(contextHour) {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/src/Controller/DashboardBackoffice/AdminController.php",
+				url: "/src/Controller/DashboardAdmin/AdminController.php",
 				dataType: "JSON",
 				type: "POST",
 				data: {
@@ -1767,7 +1794,7 @@ function modifySession(typeUser) {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/src/Controller/DashboardBackoffice/AdminController.php",
+				url: "/src/Controller/DashboardAdmin/AdminController.php",
 				dataType: "JSON",
 				type: "POST",
 				data: {
@@ -1802,7 +1829,7 @@ function changeLifts() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/src/Controller/DashboardBackoffice/AdminController.php",
+				url: "/src/Controller/DashboardAdmin/AdminController.php",
 				dataType: "JSON",
 				type: "POST",
 				data: {
@@ -1834,7 +1861,7 @@ function updateSlot() {
 	}).then((result) => {
 		if (result.isConfirmed) {
 			$.ajax({
-				url: "/src/Controller/DashboardBackoffice/AdminController.php",
+				url: "/src/Controller/DashboardAdmin/AdminController.php",
 				dataType: "JSON",
 				type: "POST",
 				data: {
@@ -1852,3 +1879,6 @@ function updateSlot() {
 		}
 	});
 }
+//
+//
+//----------------- Start Admin Settings functions -----------------//

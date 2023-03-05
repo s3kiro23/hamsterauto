@@ -9,7 +9,7 @@ class ContactHTML
             <div class='bg-success bg-opacity-10 text-center text-success border border-1 border-success p-2'>
                 Notre hamster se charge de nous transmettre votre message ! Nous reviendrons vers vous très rapidement.
             </div>
-           <a class='btn btn-primary btn-sm mt-3' id='to_logIn'><span class='fas fa-chevron-left me-1' data-fa-transform='shrink-4 down-1'></span>Retour au login</a>
+           <a class='btn btn-primary btn-sm mt-3' id='to-login'><span class='fas fa-chevron-left me-1' data-fa-transform='shrink-4 down-1'></span>Retour au login</a>
         </div>
         ";
     }
