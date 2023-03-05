@@ -40,9 +40,9 @@ class SMS
     public function send($data)
     {
         $endpoint = 'ovh-eu';
-        $application_key = "5523737948b90bd7";
-        $application_secret = "92ceecd5eb1a15ddd979f97601576e0a";
-        $consumer_key = "5c60c7c5934bc8edc5fcef9e277806a7";
+        $application_key = "56533cf0f5ff7344";
+        $application_secret = "0aeb493a9696e888bc0a68896e696f5e";
+        $consumer_key = "08dcfd7977c8f162b417aab800c0a351";
 
         $conn = new Api($application_key,
             $application_secret,

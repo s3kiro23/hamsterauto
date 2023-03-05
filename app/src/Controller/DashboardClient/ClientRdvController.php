@@ -43,7 +43,7 @@ if ($_POST) {
    // Construct response
    foreach ($rdv_user as $rdv) {
       $output['data'][] = [
-         '0' => gmdate("d M Y", $rdv->getTime_slot()) . " à " . gmdate("G\hi", $rdv->getTime_slot()),
+         '0' => gmdate("d M Y", $rdv->getTime_slot()) . " à " . date("G\hi", $rdv->getTime_slot()),
          '1' => (new Vehicle($rdv->getId_vehicle()))->getRegistration(),
          '2' => $rdv->getState() == 1 ? '<div class="badge rounded-pill bg-soft-info text-info">
          Pris en charge
