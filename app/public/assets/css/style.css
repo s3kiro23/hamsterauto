@@ -6,6 +6,23 @@
 	padding: 0 !important;
 }
 
+
+
+@media (min-width: 1400px) {
+	#bootstrap-wizard-tab0{
+		padding-top: 1.12em !important;
+	}
+	#bootstrap-wizard-tab1{
+		padding-top: 1.32em !important;
+	}
+	#bootstrap-wizard-tab2{
+		padding-top: 2.1em !important;
+	}
+	#bootstrap-wizard-tab4{
+		padding-top: 2.1em !important;
+	}
+ }
+
 #tab-admin-users input {
 	padding: 2px !important;
 }
