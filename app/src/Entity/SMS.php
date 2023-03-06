@@ -134,7 +134,7 @@ class SMS
     public function getRDV($user, $car_user, $CT): array
     {
         setlocale(LC_TIME, "fr_FR", "French");
-        $body_SMS = "Bonjour ".$user->getFirstname_user().", votre rendez-vous du " . Convert::date_to_fullFR($CT->getTime_slot()) . " pour le véhicule immatriculé {$car_user->getRegistration()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre HamsterAuto.";
+        $body_SMS = "Bonjour ".$user->getFirstname_user().", votre rendez-vous du " . Convert::date_to_fullFR($CT->getTime_slot()) . " à ".date("G\hi", $CT->getTime_slot()) ." pour le véhicule immatriculé {$car_user->getRegistration()} vient d'être confirmé sur notre plateforme. Merci pour votre confiance. Votre centre HamsterAuto.";
 
         return array("bodySMS" => $body_SMS, "receiver" => $user->getPhone_user());
     }
