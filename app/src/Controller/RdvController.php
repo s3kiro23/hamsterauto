@@ -12,7 +12,7 @@ $GLOBALS['Database'] = $db->connexion();
 
 switch ($_POST['request']) {
 
-    case 'newRDVDashboardClient' :
+    case 'newRDVDashboardClient':
         $msg = 'Votre rendez-vous est validé';
         $status = 1;
         $user_ID = Security::decrypt($_SESSION['id'], false);
@@ -47,6 +47,16 @@ switch ($_POST['request']) {
                     } else {
                         $car_ID = Vehicle::new_vehicle($user_ID, $data['selectedModel'], $data['registration'], $data['inputYear'], $data['fuel'], 1);
                         $ct_ID = Intervention::new_CT($user_ID, Security::decrypt($data['timeSlot'], ""), $car_ID, 0);
+                        //set job SMS
+                        if ($notify['confirmed']) {
+                            $sms = new SMS(0);
+                            $data_SMS = [
+                                "CT" => $ct_ID,
+                                "user" => $user_ID,
+                                "car" => $car_ID,
+                            ];
+                            $sms->setSMS_JobRDV($data_SMS);
+                        }
                     }
                 }
             } else {
@@ -65,19 +75,20 @@ switch ($_POST['request']) {
                         $msg = 'Touche pas au code !';
                     } else {
                         $ctID = Intervention::new_CT($user_ID, Security::decrypt($data['timeSlot'], ""), $car_ID, 0);
+                        //set job SMS
+                        if ($notify['confirmed']) {
+                            $sms = new SMS(0);
+                            $data_SMS = [
+                                "CT" => $ct_ID,
+                                "user" => $user_ID,
+                                "car" => $car_ID,
+                            ];
+                            $sms->setSMS_JobRDV($data_SMS);
+                        }
                     }
                 }
             }
-            //set job SMS
-            if ($notify['confirmed']) {
-                $sms = new SMS(0);
-                $data_SMS = [
-                    "CT" => $ct_ID,
-                    "user" => $user_ID,
-                    "car" => $car_ID,
-                ];
-                $sms->setSMS_JobRDV($data_SMS);
-            }
+
             //Add traces in BDD
             $traces = new Trace(0);
             $traces->setTracesIN($user_ID, 'new', 'intervention');
@@ -127,8 +138,7 @@ switch ($_POST['request']) {
         echo json_encode(array("rdvID" => $id_intervention, "rapport" => $rapport_contre_visite));
         break;
 
-    default :
+    default:
         echo json_encode(1);
         break;
 }
-
