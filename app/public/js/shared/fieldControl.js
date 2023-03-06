@@ -46,9 +46,9 @@ function checkOld(s) {
 
 let checkOldValueRegEx = function () {
 	if (!checkOld(this.value)) {
-		this.value = oldvalue;
+		this.value = oldRegValue;
 	} else {
-		oldvalue = this.value = this.value.toUpperCase();
+		oldRegValue = this.value = this.value.toUpperCase();
 	}
 };
 
@@ -80,9 +80,9 @@ function checkYear(s) {
 
 let checkOldValueYear = function () {
 	if (!checkYear(this.value)) {
-		this.value = oldvalue;
+		this.value = oldYearValue;
 	} else {
-		oldvalue = this.value;
+		oldYearValue = this.value;
 	}
 };
 
