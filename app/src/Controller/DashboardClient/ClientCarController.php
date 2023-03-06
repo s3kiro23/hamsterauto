@@ -9,7 +9,7 @@ spl_autoload_register(function ($classe) {
 $db = new Database();
 $GLOBALS['Database'] = $db->connexion();
 
-if ($_POST) {
+if ($_POST && isset($_SESSION["id"])) {
    $user_id = Security::decrypt($_SESSION['id'], false);
 
    // Get the parameters from DataTable Ajax Call
