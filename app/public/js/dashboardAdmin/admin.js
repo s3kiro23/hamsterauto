@@ -1366,7 +1366,6 @@ function displayBanTab() {
 					sLoadingRecords: "Chargement...",
 					sProcessing: "Traitement...",
 					sSearch: "Rechercher :",
-					searchPlaceholder: "immatriculation",
 					sZeroRecords: "Aucun élément correspondant trouvé",
 					oPaginate: {
 						sFirst: "Premier",

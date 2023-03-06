@@ -163,8 +163,8 @@ let dataTableLogs = function () {
 		pageLength: 5,
 		pagingType: "full",
 		lengthMenu: [
-			[7, 10, 25, 50, 75, 100, -1],
-			[7, 10, 25, 50, 75, 100, "All"],
+			[5, 10, 25, 50, 75, 100, -1],
+			[5, 10, 25, 50, 75, 100, "All"],
 		],
 		retrieve: true,
 		responsive: {
@@ -447,10 +447,6 @@ let dataTableAdminArchives = function () {
 			{ className: "dt-center", targets: [0, 1, 2, 3, 4] },
 			{ responsivePriority: 1, targets: 0 },
 			{ responsivePriority: 2, targets: -1 },
-			{
-				targets: [0, 1, 2, 3, 4],
-				orderable: false,
-			},
 		],
 		language: {
 			sEmptyTable: "Aucunes données n'est disponible",
