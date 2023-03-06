@@ -465,6 +465,9 @@ function displayRdvTab() {
 					},
 				},
 			});
+			setInterval(() => {
+				dataTableAdminRdv.ajax.reload();
+			}, 3000);
 		},
 		error: function () {
 			console.log("errorAdminRDV1");
@@ -879,10 +882,13 @@ function displayUsersTab() {
 				});
 				pos++;
 			});
-
 			var searchField = $("div.dataTables_filter");
 			// Cacher le champ de recherche
 			searchField.hide();
+
+			setInterval(() => {
+				dataTableAdminUsers.ajax.reload();
+		  }, 3000);
 		},
 		error: function () {
 			console.log("errorBO");
@@ -1008,8 +1014,7 @@ function refreshAdminUsers() {
 				$("#tab-admin-users")
 					.DataTable()
 					.ajax.url(
-						"../src/Controller/DashboardAdmin/UserController.php?start=" +
-							page
+						"../src/Controller/DashboardAdmin/UserController.php?start=" + page
 					)
 					.load();
 			});
@@ -1063,8 +1068,12 @@ function inactivateUser(id) {
 			id: id,
 		},
 		success: function () {
-			swal.fire({
+			Swal.fire({
+				position: "center",
+				icon: "info",
 				title: "Compte désactivé",
+				showConfirmButton: false,
+				timer: 1500,
 			});
 			refreshAdminUsers();
 		},
@@ -1085,8 +1094,12 @@ function activateUser(id) {
 			id: id,
 		},
 		success: function () {
-			swal.fire({
+			Swal.fire({
+				position: "center",
+				icon: "success",
 				title: "Compte activé",
+				showConfirmButton: false,
+				timer: 1500,
 			});
 			refreshAdminUsers();
 		},
@@ -1567,11 +1580,11 @@ function debanUser(id) {
 		},
 		success: function (response) {
 			toastMixin.fire({
-				position: 'center',
+				position: "center",
 				animation: true,
 				title: response,
-				icon: 'success',
-		  });
+				icon: "success",
+			});
 			refreshAdminBans();
 		},
 		error: function () {

@@ -122,16 +122,16 @@ if ($check === 'admin') {
             $data = json_decode($_POST['values'], true);
             $status = 1;
             $msg = "Utilisateur enregistré";
-            if ($data['inputPassword'] != $data['inputPassword2']) {
-                $status = 0;
-                $msg = "Vérifiez votre mot de passe";
-            }
             $user = User::check_user($data['inputLoginAdd']);
-            $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite'];
             if ($user) {
                 $status = 0;
                 $msg = "Le login existe déjà!";
             }
+            if ($data['inputPassword'] != $data['inputPassword2']) {
+                $status = 0;
+                $msg = "Vérifiez votre mot de passe";
+            }
+            $civilite = empty($data['civilite']) ? $data['civilite'] = "" : $data['civilite'];
             if ($status == 1) {
                 $currenPwdExp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 30, date("Y")));
                 $client = User::create_user_admin(

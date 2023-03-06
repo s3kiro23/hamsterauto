@@ -55,7 +55,7 @@ if ($_POST) {
                   </svg >
                </button >",
          '1' => "<span class='text-muted'>" . $intervention['id_intervention'] . "</span>",
-         '2' => "<span class='text-muted'>" . $intervention['time_slot_fr'] . " à " . gmdate("G\hi", $intervention['time_slot']) . "</span>",
+         '2' => "<span class='text-muted'>" . $intervention['time_slot_fr'] . " à " . date("G\hi", $intervention['time_slot']) . "</span>",
          '3' => "<span class='text-muted'><img src='../public/assets/img/logo/" . $intervention['brand_name'] . ".png'></span>",
          '4' => "<span class='text-muted'>" . $intervention['model_name'] . "</span>",
          '5' => "<span class='text-muted'>" . $intervention['registration'] . "</span>",
