@@ -40,14 +40,21 @@ if ($_POST) {
       'recordsFiltered' => count($cars_user),
       'data' => array()
    );
+
+
+
    // Construct response
    foreach ($cars_user as $car) {
+      //Check diff between control and today
+      $one_month = 2505600;
+      $check_diff = $car->getNext_control() - time();
       $id_vehicle = Security::encrypt($car->getId_vehicle(), true);
       $output['data'][] = [
-         '0' => '<img src="/public/assets/img/logo/' . str_replace(" ", "", $car->getBrand_name()) . '.png" alt="' . $car->getBrand_name() . '">',
-         '1' => (new Model($car->getId_model()))->getModel_name(),
-         '2' => $car->getRegistration(),
-         '3' => '<a class="text-decoration-none" 
+         '0' => ($car->getNext_control() == null || $car->getNext_control() < time()) ? "<img id='LedR'>" : (($check_diff > 0 && $check_diff <= $one_month) ? "<img id='LedO'>" : "<img id='LedV'>"),
+         '1' => '<img src="/public/assets/img/logo/' . str_replace(" ", "", $car->getBrand_name()) . '.png" alt="' . $car->getBrand_name() . '">',
+         '2' => (new Model($car->getId_model()))->getModel_name(),
+         '3' => $car->getRegistration(),
+         '4' => '<a class="text-decoration-none" 
                      role="button" 
                      data-bs-toggle="dropdown">
                      <i class="fa-solid fa-ellipsis fa-xl"></i>

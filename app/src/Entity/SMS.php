@@ -111,7 +111,7 @@ class SMS
 
     public function getCT_Finish($car_user, $user): array
     {
-        $body_SMS = "Bonjour $user->getFirstname_user(), le contrôle technique de votre véhicule immatriculé {$car_user->getRegistration()} est terminé ! Vous pouvez dès à présent venir le récupérer.";
+        $body_SMS = "Bonjour {$user->getFirstname_user()}, le contrôle technique de votre véhicule immatriculé {$car_user->getRegistration()} est terminé ! Vous pouvez dès à présent venir le récupérer.";
 
         return array("bodySMS" => $body_SMS, "receiver" => $user->getPhone_user());
     }
