@@ -405,7 +405,7 @@ function displayRdvTab() {
 					//Btn next
 					pagingControls +=
 						'<li id="tab-rdv-admin_next" class="paginate_button page-item next ' +
-						(currentPage == totalPages ? "disabled" : "") +
+						(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 						'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 					//Write html pagination
@@ -584,7 +584,7 @@ function refreshAdminRdv() {
 			//Btn next
 			pagingControls +=
 				'<li id="tab-rdv-admin_next" class="paginate_button page-item next ' +
-				(currentPage == totalPages ? "disabled" : "") +
+				(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 				'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 			//Write html pagination
@@ -806,7 +806,7 @@ function displayUsersTab() {
 					//Btn next
 					pagingControls +=
 						'<li id="tab-admin-users_next" class="paginate_button page-item next ' +
-						(currentPage == totalPages ? "disabled" : "") +
+						(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 						'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 					//Write html pagination
@@ -888,7 +888,7 @@ function displayUsersTab() {
 
 			setInterval(() => {
 				dataTableAdminUsers.ajax.reload();
-		  }, 3000);
+			}, 3000);
 		},
 		error: function () {
 			console.log("errorBO");
@@ -1000,7 +1000,7 @@ function refreshAdminUsers() {
 			//Btn next
 			pagingControls +=
 				'<li id="tab-admin-users_next" class="paginate_button page-item next ' +
-				(currentPage == totalPages ? "disabled" : "") +
+				(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 				'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 			//Write html pagination
@@ -1329,7 +1329,7 @@ function displayBanTab() {
 					//Btn next
 					pagingControls +=
 						'<li id="tab-bans_next" class="paginate_button page-item next ' +
-						(currentPage == totalPages ? "disabled" : "") +
+						(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 						'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 					//Write html pagination

@@ -110,7 +110,7 @@ let dataTableCars = $("#tab-car").DataTable({
 		//Btn next
 		pagingControls +=
 			'<li id="tab-car_next" class="paginate_button page-item next ' +
-			(currentPage == totalPages ? "disabled" : "") +
+			(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 		//Write html pagination
@@ -269,7 +269,7 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 		//Btn next
 		pagingControls +=
 			'<li id="tab-rdv_next" class="paginate_button page-item next ' +
-			(currentPage == totalPages ? "disabled" : "") +
+			(currentPage == totalPages || totalPages == 0 ? "disabled" : "") +
 			'"><a class="cursor-pointer page-link" data-dt-idx="next" tabindex="0">Suivant</a></li></ul>';
 
 		//Write html pagination
