@@ -4,6 +4,7 @@
 
 - [ADD] de appel Ajax à tous les Datatables pour éviter le clignotement des tableaux au refresh
 - [UPD] amélioration visuel sur les tableaux
+- [FIX] de certains bug sur les affichages admin et tech
 
 ### dev
 
