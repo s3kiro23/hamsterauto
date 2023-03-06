@@ -102,7 +102,7 @@ class Header extends HTMLElement {
                             </li>
                             <div class='dropdown-divider'></div>
                             <li class="d-flex flex-row">
-                                <button class='dropdown-item' id='sessionEnding' type='button'>Se déconnecter</button>
+                                <button class='dropdown-item' id='log-out' type='button'>Se déconnecter</button>
                             </li>
                         </ul>
                     </div>
@@ -158,13 +158,13 @@ let generateNavbar = function () {
                     $("#client").on("click", toHomeClient);
                     $(".linkToClient").on("click", toHomeClient);
                     $('#formClient').on("click", toFormClient);
-                    $("#sessionEnding").on("click", sessionEnding);
+                    $("#log-out").on("click", logOut);
                     $('#check-all-list').on("click", checkThemAll);
                     $('.path-to-home').attr("href", "/dashboards/client");
                 } else {
                     $("#technicien").on("click", toHomeTech);
                     $("#linkToTech").on("click", toHomeTech);
-                    $("#sessionEnding").on("click", sessionEnding);
+                    $("#log-out").on("click", logOut);
                     $('.path-to-home').attr("href", "/dashboards/technicien");
                 }
             }

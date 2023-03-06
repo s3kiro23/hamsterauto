@@ -2,7 +2,7 @@
 
 session_start();
 
-require $_SERVER['DOCUMENT_ROOT']."/src/Entity/Setting.php";
+require $_SERVER['DOCUMENT_ROOT'] . "/src/Entity/Setting.php";
 Setting::autoload();
 
 $db = new Database();
@@ -47,7 +47,8 @@ switch ($_POST['request']) {
                                 }
                             }
                             if (($user['type'] === 'technicien' && $_POST['accessPath'] == 'private') or
-                                ($user['type'] === 'client' && $_POST['accessPath'] === 'index') or ($user['type'] === 'admin')) {
+                                ($user['type'] === 'client' && $_POST['accessPath'] === 'index') or ($user['type'] === 'admin')
+                            ) {
                                 $type_user = Security::create_session($user);
                             } else {
                                 $status = 0;
@@ -78,7 +79,7 @@ switch ($_POST['request']) {
         echo json_encode(array("status" => $status, "msg" => $msg, "contentPwdLogin" => $content_pwd_login, "typeUser" => $type_user, "url" => $url));
         break;
 
-    case 'newPwd' :
+    case 'newPwd':
         $status = 1;
         $msg = "Mise à jour réussie!";
         $current_pwd_exp = date("Y-m-d H:i:s", mktime(0, 0, 0, date("m"), date("d") + 1, date("Y")));
@@ -94,7 +95,7 @@ switch ($_POST['request']) {
             if (!$user) {
                 $status = 0;
                 $msg = "Cet e-mail n'existe pas!";
-            } else if (password_verify($data['inputPassword'], $user['password_user'])){
+            } else if (password_verify($data['inputPassword'], $user['password_user'])) {
                 $status = 0;
                 $msg = "Le nouveau mot de passe ne peut être identique à l'ancien!";
             } else {
@@ -137,13 +138,13 @@ switch ($_POST['request']) {
         echo json_encode(array("status" => $status, "msg" => $msg, "type" => $user->getType()));
         break;
 
-    case 'to_clientForm' :
+    case 'to_clientForm':
         $msg = "Redirection vers la page du formulaire...";
         echo json_encode(array("msg" => $msg));
         break;
 
 
-    case 'captcha' :
+    case 'captcha':
         $check = new Control();
         $get_captcha = $check->captcha();
         echo json_encode(array('get_captcha' => $get_captcha));
@@ -159,13 +160,23 @@ switch ($_POST['request']) {
         echo json_encode(array("msg" => $data['msg'], "status" => $data['status']));
         break;
 
+    case 'logout':
+        $status = $_SESSION['typeUser'];
+        $traces = new Trace(0);
+        $traces->setTracesIN(Security::decrypt($_SESSION['id'], false), 'logout', 'session');
+        $_SESSION = array();
+        session_destroy();
+        unset($_SESSION);
+        echo json_encode(array('status' => $status));
+        break;
+
     case 'session_ending_soon':
         $data = Session::session_ending_soon();
         echo json_encode(array("msg" => $data['msg'], "status" => $data['status']));
         break;
 
 
-    default :
+    default:
         echo json_encode(1);
         break;
 }

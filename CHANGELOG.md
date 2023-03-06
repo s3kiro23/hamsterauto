@@ -1,3 +1,6 @@
+# v1.2
+
+
 # v1.1.1
 
 ### improve_datatables_refresh
