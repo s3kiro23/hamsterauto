@@ -2,11 +2,6 @@ $(function () {
     load();
     $("#file").on("change", checkType);
     $('.switchLogo').on("click", switchLogo);
-    setInterval(() => {
-        let currentPage = $('#pagesMyArchives').find('.active').children().html();
-        dataTableRdv.ajax.reload();
-        loadUserArchives(currentPage);
-    }, 3000);
 });
 
 function load() {

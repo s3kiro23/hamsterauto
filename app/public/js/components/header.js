@@ -134,6 +134,7 @@ let generateNavbar = function () {
                     window.location.href = "/";
                 }, 2000);
             } else if (response['status'] === 2) {
+                elAutoHide();
                 toastMixin.fire({
                     animation: true,
                     icon: "error",
@@ -161,6 +162,11 @@ let generateNavbar = function () {
                     $("#log-out").on("click", logOut);
                     $('#check-all-list').on("click", checkThemAll);
                     $('.path-to-home').attr("href", "/dashboards/client");
+                    setInterval(() => {
+                        let currentPage = $('#pagesMyArchives').find('.active').children().html();
+                        dataTableRdv.ajax.reload();
+                        loadUserArchives(currentPage);
+                    }, 3000);
                 } else {
                     $("#technicien").on("click", toHomeTech);
                     $("#linkToTech").on("click", toHomeTech);

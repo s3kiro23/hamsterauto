@@ -77,7 +77,7 @@ function allowCheckList() {
                 });
                 setTimeout(() => {
                     window.location.replace("/");
-                }, 1500); 
+                }, 2000); 
             } 
         },
         error: function () {

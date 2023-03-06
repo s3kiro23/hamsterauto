@@ -1,5 +1,10 @@
 # v1.2
 
+### fix_bug_accessControl
+
+- [UPD] changement priorité exec script js sur la page client-dash
+- [UPD] trasnfert setInterval des dt dans le success de la génération navbar
+- [UPD] design page 403
 
 # v1.1.1
 

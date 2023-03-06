@@ -4,9 +4,7 @@ function activateButtons() {
 	$(".deleteCar").on("click", deleteCar);
 }
 
-
 // START DataTables Cars //
-
 let dataTableCars = $("#tab-car").DataTable({
 	pageLength: 3,
 	paging: true,
@@ -287,11 +285,11 @@ let dataTableRdv = $("#tab-rdv").DataTable({
 				.DataTable()
 				.ajax.url(
 					"../src/Controller/DashboardClient/ClientRdvController.php?start=" +
-					(page == "next"
-					? nextPage
-					: page == "previous"
-					? previousPage
-					: page)
+						(page == "next"
+							? nextPage
+							: page == "previous"
+							? previousPage
+							: page)
 				)
 				.load();
 		});
