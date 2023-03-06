@@ -100,6 +100,7 @@ function clearIntervals() {
 function loadAdmin() {
 	sweetToast();
 	btnToTop();
+	$("#sessionEnding").on("click", sessionEnding);
 }
 //
 //
