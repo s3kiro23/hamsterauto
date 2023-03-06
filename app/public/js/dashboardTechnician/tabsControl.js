@@ -1,19 +1,20 @@
 $(function () {
 	generateNavbar();
 	displayCar();
-	let currentPageH =
-		$("#pagesHold").find(".active").children().html() == undefined
-			? 1
-			: $("#pagesHold").find(".active").children().html();
-	let currentPageP =
-		$("#pagesInProgress").find(".active").children().html() == undefined
-			? 1
-			: $("#pagesInProgress").find(".active").children().html();
-	let currentPageO =
-		$("#pagesOver").find(".active").children().html() == undefined
-			? 1
-			: $("#pagesOver").find(".active").children().html();
 	setInterval(() => {
+		let currentPageH =
+			$("#pagesHold").find(".active").children().html() == undefined
+				? 1
+				: $("#pagesHold").find(".active").children().html();
+		let currentPageP =
+			$("#pagesInProgress").find(".active").children().html() == undefined
+				? 1
+				: $("#pagesInProgress").find(".active").children().html();
+		let currentPageO =
+			$("#pagesOver").find(".active").children().html() == undefined
+				? 1
+				: $("#pagesOver").find(".active").children().html();
+		console.log(currentPageO);
 		loadAwaiting(currentPageH);
 		loadInProgress(currentPageP);
 		loadArchives(currentPageO);
@@ -97,7 +98,6 @@ let loadAwaiting = function (page) {
 			currentDate: $(".currentDate ").attr("id"),
 		},
 		success: function (response) {
-            console.log(response["count"]);
 			if (response["count"] === 0) {
 				$("#vehiculeAttente").html(response["htmlAwaiting"]);
 				$("#pagesHold").html("");

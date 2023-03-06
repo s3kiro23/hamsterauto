@@ -352,7 +352,7 @@ class LoadTechHTML
                                value=""
                                id="pedaleFrein">
                         <label class="form-check-label fs--2" for="pedaleFrein">
-                            Frein de service
+                            Système ABS
                         </label>
                     </div>
 
