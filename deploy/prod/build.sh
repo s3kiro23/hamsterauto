@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Set your AWS credentials (make sure you have the necessary AWS CLI installed and configured)
 AWS_REGION="eu-west-3"
 AWS_ACCOUNT_ID="057133510824"
@@ -7,6 +9,9 @@ APP_NAME="hamsterauto"
 APP_PATH="/opt/dev_custom/projects/$APP_NAME/"
 
 cd $APP_PATH
+
+# Add ssh key to authentication handler
+ssh-add
 
 git stash
 git checkout main
