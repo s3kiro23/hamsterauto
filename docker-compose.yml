@@ -4,4 +4,4 @@ services:
   hamsterauto:
     image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
     volumes:
-        - /var/www/hamsterauto:/opt/hamsterauto
+        - /opt/hamsterauto:/var/www/hamsterauto
