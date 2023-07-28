@@ -2,12 +2,8 @@ version: '3.9'
 
 services:
   hamsterauto:
-    #image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
-    restart: always
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
     volumes:
         - type: bind
-          source: /var/test/hamsterauto/
+          source: /var/www/hamsterauto/
           target: /opt/hamsterauto/
