@@ -1,5 +1,5 @@
 #Install PHP and required extensions
-FROM php:7.4
+FROM php:7.4-fpm
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
 
@@ -34,16 +34,16 @@ RUN apt-get update \
         gettext \
         mbstring \
         soap \
-		  common \
-		  curl \
-		  fpm \
-		  json \
-		  mysql \
-		  opcache \
-		  readline \
-		  xml \
-		  zip \
-		  imagick
+        common \
+        curl \
+        fpm \
+        json \
+        mysql \
+        opcache \
+        readline \
+        xml \
+        zip \
+        imagick
 
 # Clean
 RUN apt-get clean
