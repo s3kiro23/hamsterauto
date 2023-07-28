@@ -19,7 +19,7 @@ git pull origin master
 
 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
-VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME/app`
+VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' /opt/$APP_NAME/`
 TARGET_DIR=/var/www/$APP_NAME
 
 echo "Symlink : $VOLUME_DIR to $TARGET_DIR"
