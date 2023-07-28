@@ -42,7 +42,7 @@ ENV TZ Europe/Paris
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 #Set default project directory
-COPY ./app/ /opt/$APP_NAME
+COPY ./app /opt/$APP_NAME
 RUN chown -R www-data:www-data /opt/$APP_NAME
 WORKDIR /opt/$APP_NAME
 
