@@ -2,8 +2,8 @@
 FROM php:7.4-fpm
 
 ENV COMPOSER_ALLOW_SUPERUSER=1
+ENV APP_NAME="hamsterauto"
 
-ARG APP_NAME="hamsterauto"
 RUN mkdir -p /opt/$APP_NAME
 
 # Install required packages and extensions
@@ -37,7 +37,7 @@ RUN chown -R www-data:www-data /opt/$APP_NAME
 WORKDIR /opt/$APP_NAME
 
 #Install dependencies
-RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
+RUN composer install --no-scripts --no-dev --no-autoloader
 
 # Finish composer
 RUN composer dump-autoload --no-scripts --no-dev --optimize
