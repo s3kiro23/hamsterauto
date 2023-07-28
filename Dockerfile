@@ -20,31 +20,6 @@ ENV LC_ALL fr_FR.UTF-8
 ENV LANG fr_FR.UTF-8
 ENV LANGUAGE fr_FR.UTF-8
 
-# Install PHP Extensions
-RUN apt-get update \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-configure intl \
-    && docker-php-ext-install -j$(nproc) \
-        gd \
-        bz2 \
-        intl \
-        mysqli \
-        pdo \
-        pdo_mysql \
-        gettext \
-        mbstring \
-        soap \
-        common \
-        curl \
-        fpm \
-        json \
-        mysql \
-        opcache \
-        readline \
-        xml \
-        zip \
-        imagick
-
 # Clean
 RUN apt-get clean
 RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
