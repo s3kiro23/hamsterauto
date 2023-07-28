@@ -17,7 +17,7 @@ git stash
 git checkout master
 git pull origin master
 
-docker pull eu.gcr.io/$GOOGLE_PROJECT/$APP_NAME:latest 
+docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
 VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME/app`
 TARGET_DIR=/var/www/$APP_NAME
