@@ -37,7 +37,6 @@ RUN chown -R www-data:www-data /opt/$APP_NAME
 WORKDIR /opt/$APP_NAME
 
 #Install dependencies
-COPY composer.json composer.lock ./
 RUN composer install --prefer-dist --no-scripts --no-dev --no-autoloader
 
 # Finish composer
