@@ -4,3 +4,7 @@ services:
   hamsterauto:
     image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
     restart: always
+    volumes:
+        - type: bind
+          source: /var/www/hamsterauto/
+          target: /opt/hamsterauto/
