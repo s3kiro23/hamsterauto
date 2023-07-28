@@ -55,9 +55,7 @@ RUN apt-get update \
 
 # database
 RUN docker-php-ext-install -j$(nproc) \
-	mysqli \
-	pdo \
-	pdo_mysql
+	mysqli
 
 # strings
 RUN apt-get update \

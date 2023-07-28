@@ -1,6 +1,7 @@
 version: '3.9'
 
 services:
-    hamsterauto-app:
-        image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
+    -app:
+        #image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
+        container_name: test
         restart: always

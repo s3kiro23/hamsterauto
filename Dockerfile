@@ -13,7 +13,17 @@ RUN apt-get update -qq && \
     nano \
     locales  \
     locales-all \
-    curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+    libicu-dev \
+    unzip \
+    zip
+
+# Install php extensions
+RUN docker-php-ext-configure intl
+RUN docker-php-ext-configure mysqli
+RUN docker-php-ext-install intl mysqli
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Set Locale fr_FR
 ENV LC_ALL fr_FR.UTF-8
