@@ -10,9 +10,6 @@ APP_PATH="/opt/dev_custom/projects/$APP_NAME/"
 
 cd $APP_PATH
 
-# Add ssh key to authentication handler
-ssh-add
-
 git stash
 git checkout main
 git pull origin main
