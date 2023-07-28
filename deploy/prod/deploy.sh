@@ -14,8 +14,8 @@ cd deploy/prod
 ssh-add
 
 git stash
-git checkout master
-git pull origin master
+git checkout main
+git pull origin main
 
 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
