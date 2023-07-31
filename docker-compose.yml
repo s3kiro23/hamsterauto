@@ -6,7 +6,7 @@ services:
     volumes:
         - type: volume
           source: app
-          target: /opt/hamsterauto:delegated
+          target: /opt/hamsterauto
 
 volumes:
     app:
