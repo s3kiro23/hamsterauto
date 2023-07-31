@@ -3,7 +3,3 @@ version: '3.9'
 services:
   hamsterauto:
     image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
-    volumes:
-        - type: bind
-          source: /var/www/hamsterauto/
-          target: /opt/hamsterauto/

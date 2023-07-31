@@ -19,5 +19,17 @@ git pull origin master
 
 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
+VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME`
+TARGET_DIR='/var/www/'$APP_NAME
+
+echo "Symlink : $VOLUME_DIR to $TARGET_DIR"
+
+if [ -d $VOLUME_DIR ]; then
+    if [[ -L $TARGET_DIR ]]; then
+        rm $TARGET_DIR
+    fi
+    ln -s $VOLUME_DIR $TARGET_DIR
+fi
+
 docker-compose down -v
 docker-compose up -d
