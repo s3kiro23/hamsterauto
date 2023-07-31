@@ -16,6 +16,9 @@ git pull origin main
 
 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
+docker-compose down -v
+docker-compose up -d
+
 VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME'_app'`
 TARGET_DIR='/var/www/'$APP_NAME
 
@@ -27,6 +30,3 @@ if [ -d $VOLUME_DIR ]; then
     fi
     ln -s $VOLUME_DIR $TARGET_DIR
 fi
-
-docker-compose down -v
-docker-compose up -d
