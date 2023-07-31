@@ -4,8 +4,9 @@ services:
   hamsterauto:
     image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
     volumes:
-         source: app
-         target: /opt/hamsterauto
+        - type: volume
+          source: app
+          target: /opt/hamsterauto
 
 volumes:
     app:
