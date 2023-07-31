@@ -10,9 +10,6 @@ APP_PATH="/opt/dev_custom/projects/$APP_NAME/"
 
 cd $APP_PATH
 
-# Add ssh key to authentication handler
-ssh-add
-
 git stash
 git checkout main
 git pull origin main
@@ -24,12 +21,6 @@ aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --
 
 # Check if the repository exists; if not, create it
 aws ecr describe-repositories --repository-names $APP_NAME || aws ecr create-repository --repository-name $APP_NAME
-
-# Vérifier si l'image existe dans ECR
-if aws ecr describe-images --repository-name $APP_NAME --region $AWS_REGION --image-ids imageTag=$GIT_COMMIT &> /dev/null; then
-    # Si l'image existe, la supprimer de ECR
-      aws ecr batch-delete-image --repository-name $APP_NAME --region $AWS_REGION --image-ids imageTag=$GIT_COMMIT
-fi
 
 # Build your Docker image
 docker build --no-cache -t $APP_NAME:$GIT_COMMIT .

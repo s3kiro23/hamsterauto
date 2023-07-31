@@ -2,4 +2,16 @@ version: '3.9'
 
 services:
   hamsterauto:
-    image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
+    #image: 057133510824.dkr.ecr.eu-west-3.amazonaws.com/hamsterauto:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+       - type: volume
+         #source: /opt/dev_custom/projects/hamsterauto/
+         source: app
+         target: /opt/hamsterauto/
+
+volumes:
+    app:
+      name: hamsterauto_app

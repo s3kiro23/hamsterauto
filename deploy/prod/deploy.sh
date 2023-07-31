@@ -10,16 +10,13 @@ APP_PATH="/opt/dev_custom/projects/$APP_NAME/"
 cd $APP_PATH
 cd deploy/prod
 
-# Add ssh key to authentication handler
-ssh-add
-
 git stash
-git checkout master
-git pull origin master
+git checkout main
+git pull origin main
 
 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
-VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME`
+VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME'_app'`
 TARGET_DIR='/var/www/'$APP_NAME
 
 echo "Symlink : $VOLUME_DIR to $TARGET_DIR"
