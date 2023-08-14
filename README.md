@@ -12,8 +12,6 @@ Vérifier également que la version de PHP est présente dans les variables d'en
 
 ![Alt text](docs\env_var.PNG?raw=true "Screen var env")
 
-Créer le fichier .env_dev avec les credentials nécessaire pour faire tourner le docker en local
-
 ----------------
 
 ### **Config CRON pour l'envoi des mails et SMS automatique en Prod**
@@ -63,6 +61,10 @@ Puis taper en ligne de commande administrateur :
 #### Vérifier l'install des dépendences (./app) sinon lancer :
 
     composer install
+
+#### Créer le fichier /etc/environment/hamsterauto/config.ini et copier les variables d'env (Cf. O-D Hmsterauto):
+
+    touch /etc/environment/hamsterauto/config.ini
 
 #### Effectuer l'import de la DB + USERS :
 
