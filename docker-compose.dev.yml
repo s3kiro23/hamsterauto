@@ -14,11 +14,8 @@ services:
     volumes:
       - ./app:/var/www/hamsterauto/
       - ./app/var/log:/var/log/apache2/
-      #- ./conf/SSL/aflautocert.crt:/etc/ssl/certs/aflautocert.crt
-      #- ./conf/SSL/aflautocert.key:/etc/ssl/private/aflautocert.key
     ports:
       - "8001:80"
-      #- "8443:443"
     environment:
       TZ: Europe/Paris
     networks:
@@ -28,9 +25,6 @@ services:
     container_name: database_mysql
     image: mysql
     restart: always
-    volumes:
-      - ./app/migrations/hamsterauto_dump_SQL.sql:/docker-entrypoint-initdb.d/hamsterauto_dump_SQL.sql
-      - ./app/migrations/create-user.sql:/docker-entrypoint-initdb.d/create-user.sql
     environment:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE

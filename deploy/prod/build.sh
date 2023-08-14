@@ -1,8 +1,10 @@
 #!/bin/bash
 
+source /etc/environment/hamsterauto/config.ini
+
 # Set your AWS credentials (make sure you have the necessary AWS CLI installed and configured)
-AWS_REGION="eu-west-3"
-AWS_ACCOUNT_ID="057133510824"
+AWS_REGION=$AWS_REGION
+AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
 
 # Replace these values with your specific ones
 APP_NAME="hamsterauto"
