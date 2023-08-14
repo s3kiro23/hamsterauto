@@ -2,8 +2,8 @@
 
 source /etc/environment/hamsterauto/config.ini
 
-AWS_REGION=$AWS_REGION
-AWS_ACCOUNT_ID=$AWS_ACCOUNT_ID
+echo "AWS Region: $AWS_REGION"
+echo "AWS Account ID: $AWS_ACCOUNT_ID"
 
 # Replace these values with your specific ones
 APP_NAME="hamsterauto"
