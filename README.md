@@ -14,21 +14,6 @@ Vérifier également que la version de PHP est présente dans les variables d'en
 
 ----------------
 
-## **MAILING**
-
-#### GMAIL (backup)
-
-- user = shadow.s3kir0@gmail.com
-- pwd = @flaut0!@20
-- pwd appli (générer compte gmail) = qfujcjiaoxuuhqni
-
-#### OVH (prod)
-
-- user = contact@hamsterauto.com
-- pwd = pMEKZjEq3pnZMY@t
-
-----------------
-
 ### **Config CRON pour l'envoi des mails et SMS automatique en Prod**
 <br />
 
