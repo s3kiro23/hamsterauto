@@ -12,6 +12,8 @@ Vérifier également que la version de PHP est présente dans les variables d'en
 
 ![Alt text](docs\env_var.PNG?raw=true "Screen var env")
 
+Créer le fichier .env_dev avec les credentials nécessaire pour faire tourner le docker en local
+
 ----------------
 
 ### **Config CRON pour l'envoi des mails et SMS automatique en Prod**
@@ -55,12 +57,16 @@ Puis taper en ligne de commande administrateur :
 
 *cela aura pour effet de bind le dossier racine de l'application à celui du container pour avoir les changements en live sur le code. (sorte de --watch)*
 
-#### Puis lancer l'install des dépendences (./app) :
+### Accès au terminal du docker Apache :
+    docker exec -it srv_apache /bin/bash
+
+#### Vérifier l'install des dépendences (./app) sinon lancer :
 
     composer install
 
-#### Accès au terminal du docker Apache :
-    docker exec -it srv_apache /bin/bash
+#### Effectuer l'import de la DB + USERS :
+
+    Cf. O-D Hamsterauto
 
 ### URL d'accès au projet :
 

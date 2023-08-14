@@ -12,14 +12,14 @@ class Database
         $hostname = "localhost";
 
         if ($type == null) {
-            $user = "db";
-            $pwd = "Db123!@20";
+            $user = getenv('DB_USER');
+            $pwd = getenv('DB_PASSWORD');
         } else if ($type == 'api') {
-            $user = "api";
-            $pwd = "Db789!@50";
+            $user = getenv('API_USER');
+            $pwd = getenv('API_PASSWORD');
         } else if ($type == 'ban') {
-            $user = "ban";
-            $pwd = "Db123!@66";
+            $user = getenv('BAN_USER');
+            $pwd = getenv('BAN_PASSWORD');
         }
         
         if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {
