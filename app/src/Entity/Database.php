@@ -7,20 +7,19 @@ class Database
 
     public function __construct($type = null)
     {
-        $config = parse_ini_file('/etc/environment/hamsterauto/config.ini', true);
         $user = "";
         $pwd = "";
         $hostname = "localhost";
 
         if ($type == null) {
-            $user = $config['database']['DB_USER'];
-            $pwd = $config['database']['DB_PASSWORD'];
+            $user = getenv('DB_USER');
+            $pwd = getenv('DB_PASSWORD');
         } else if ($type == 'api') {
-            $user = $config['database']['API_USER'];
-            $pwd = $config['database']['API_PASSWORD'];
+            $user = getenv('API_USER');
+            $pwd = getenv('API_PASSWORD');
         } else if ($type == 'ban') {
-            $user = $config['database']['BAN_USER'];
-            $pwd = $config['database']['BAN_PASSWORD'];
+            $user = getenv('BAN_USER');
+            $pwd = getenv('BAN_PASSWORD');
         }
         
         if (isset($_SERVER['HTTP_HOST']) && $_SERVER['HTTP_HOST'] == 'hamsterauto.local:8001') {

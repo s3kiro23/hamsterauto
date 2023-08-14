@@ -39,12 +39,10 @@ class SMS
 
     public function send($data)
     {
-        $config = parse_ini_file('/etc/environment/hamsterauto/config.ini', true);
-
-        $endpoint = $config['sms']['SMS_ENDPOINT'];
-        $application_key = $config['sms']('APPLICATION_KEY');
-        $application_secret = $config['sms']('APPLICATION_SECRET');
-        $consumer_key = $config['sms']('CONSUMER_KEY');
+        $endpoint = getenv('SMS_ENDPOINT');
+        $application_key = getenv('APPLICATION_KEY');
+        $application_secret = getenv('APPLICATION_SECRET');
+        $consumer_key = getenv('CONSUMER_KEY');
 
         $conn = new Api($application_key,
             $application_secret,
