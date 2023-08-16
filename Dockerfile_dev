@@ -81,6 +81,11 @@ RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /var/cache/*
 RUN mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
 COPY tools/php.ini "$PHP_INI_DIR/php.ini"
 
+RUN mkdir /opt/hamsterauto
+WORKDIR /opt/hamsterauto
+RUN touch config.ini
+COPY ./.env config.ini
+
 #Apache config
 COPY tools/hamsterauto.conf /etc/apache2/sites-available/hamsterauto.conf
 RUN a2ensite hamsterauto.conf
