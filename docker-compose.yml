@@ -44,3 +44,7 @@ services:
       - database
     networks:
       - innerImage
+
+volumes:
+    app:
+      name: hamsterauto_app
