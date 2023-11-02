@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /opt/dev_custom/hamsterauto/config.ini
+source /opt/hamsterauto/config.ini
 
 # Set your AWS credentials (make sure you have the necessary AWS CLI installed and configured)
 echo "AWS Region: $AWS_REGION"
