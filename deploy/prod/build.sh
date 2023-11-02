@@ -12,9 +12,9 @@ APP_PATH="/opt/dev_custom/projects/$APP_NAME/"
 
 cd $APP_PATH
 
-git stash
-git checkout main
-git pull origin main
+#git stash
+#git checkout main
+#git pull origin main
 
 GIT_COMMIT=$(git rev-parse --short HEAD)
 

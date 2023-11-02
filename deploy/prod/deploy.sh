@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source /etc/environment/hamsterauto/config.ini
+source /opt/hamsterauto/config.ini
 
 echo "AWS Region: $AWS_REGION"
 echo "AWS Account ID: $AWS_ACCOUNT_ID"
@@ -12,9 +12,9 @@ APP_PATH="/opt/dev_custom/projects/$APP_NAME/"
 cd $APP_PATH
 cd deploy/prod
 
-git stash
-git checkout main
-git pull origin main
+#git stash
+#git checkout main
+#git pull origin main
 
 docker pull $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$APP_NAME:latest
 
