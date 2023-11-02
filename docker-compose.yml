@@ -1,5 +1,8 @@
 version: '3.9'
 
+networks:
+  innerImage:
+
 services:
   hamsterauto:
     container_name: hamsterauto_app
@@ -11,7 +14,8 @@ services:
     depends_on:
       - database
     networks:
-      - innerContainer
+      - innerImage
+
   database:
     container_name: hamsterauto_mysql
     image: mysql
@@ -25,7 +29,8 @@ services:
     ports:
       - "9906:3306"
     networks:
-      - innerContainer
+      - innerImage
+      
   phpmyadmin:
     container_name: hamsterauto_phpmyadmin
     image: phpmyadmin/phpmyadmin
@@ -38,8 +43,4 @@ services:
     depends_on:
       - database
     networks:
-      - innerContainer
-
-volumes:
-    app:
-      name: hamsterauto_app
+      - innerImage
