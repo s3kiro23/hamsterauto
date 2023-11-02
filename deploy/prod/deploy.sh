@@ -22,7 +22,7 @@ docker-compose down -v
 docker-compose up -d
 
 VOLUME_DIR=`docker volume inspect --format '{{ .Mountpoint }}' $APP_NAME'_app'`
-TARGET_DIR='/var/www/'$APP_NAME
+TARGET_DIR='/var/www/'$APP_NAME'_app'
 
 echo "Symlink : $VOLUME_DIR to $TARGET_DIR"
 
