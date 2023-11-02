@@ -11,7 +11,7 @@ services:
     depends_on:
       - database
     networks:
-      - hamsterauto
+      - innerContainer
   database:
     container_name: hamsterauto_mysql
     image: mysql
@@ -25,7 +25,7 @@ services:
     ports:
       - "9906:3306"
     networks:
-      - hamsterauto
+      - innerContainer
   phpmyadmin:
     container_name: hamsterauto_phpmyadmin
     image: phpmyadmin/phpmyadmin
@@ -38,7 +38,7 @@ services:
     depends_on:
       - database
     networks:
-      - hamsterauto
+      - innerContainer
 
 volumes:
     app:
